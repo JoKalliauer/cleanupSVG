@@ -32,5 +32,9 @@ This script is tested on<br/>
 -Windows with [Cygwin](https://cygwin.com/install.html)
 
 Similar scripts<br/>
--[SVGOMG](https://github.com/jakearchibald/svgomg)
+-[SVGOMG](https://github.com/jakearchibald/svgomg)<br/>
 -[svgo](https://github.com/svg/svgo)
+
+Some parts are from:<br/>
+-[SVGOMG](https://github.com/jakearchibald/svgomg)<br/>
+-[InkscapeBatchConverter](http://ge.tt/7C8JFmF1/v/0?c)
