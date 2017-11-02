@@ -5,6 +5,7 @@
 
 #Last Edits:
 #2017-10-29 13h14 new filename (by JoKalliauer)
+#2017-11-01 delte style in text, Doctype minior changes, Remove stroke-width in text, not adding lineforwards, english explantations (by JoKalliauer)
 
 for file in *.svg;do
 
@@ -12,14 +13,13 @@ export i=$file #will be overritan later
 export fileN=$(echo $file | cut -f1 -d" ")
 export tmp=$(echo $fileN | cut -f1 -d".")
 
-
+#If you want to overwrite the exisiting file, without any backup, delete the following three lines
 export i=${tmp}_.svg
 cp ./${file} ./$i
 mv ./${file} ./${tmp}bak1.xml
 
 echo 
 echo $i start:
-
 
 #Remove W3C-invalid elements
 sed -ri "s/ text-align=\"(end|center)\"//g"  ${i}
@@ -32,7 +32,6 @@ sed -i "s/<flowRegion/<g/g" $i
 sed -i "s/<\/flowRegion>/<\/g>/g" $i
 sed -i "s/<flowPara\/>//g" $i
 sed -ri "s/<flowPara>([[:alnum:]: \.,!\-\/]+)<\/flowPara>/<text>\1<\/text>/g" $i
-
 
 #remove useless elements
 sed -i "s/ letter-spacing=\"0\"//g" $i
@@ -53,18 +52,17 @@ fi
   if grep -qE "<svg ([[:lower:][:digit:]=\"\. -]*)version=\"1.0\"" $i; then
    sed -i -e ':a' -e 'N' -e '$!ba' -e 's/\?>[[:space:]]*<svg /\?>\n<\!DOCTYPE svg PUBLIC \"-\/\/W3C\/\/DTD SVG 1.0\/\/EN\" \"http:\/\/www.w3.org\/TR\/2001\/REC-SVG-20010904\/DTD\/svg10.dtd\">\n<svg /' $i
   else
-   sed -i -e ':a' -e 'N' -e '$!ba' -e 's/\?>[[:space:]]*<svg /\?>\n<\!DOCTYPE svg PUBLIC \"-\/\/W3C\/\/DTD SVG 1.1\/\/EN\" \"http:\/\/www.w3.org\/Graphics\/SVG\/1.1\/DTD\/svg11.dtd\">\n<svg /' $i
+   sed -i -e ':a' -e 'N' -e '$!ba' -e "s/\?>[[:space:]]*<svg /\?>\n<\!DOCTYPE svg PUBLIC \'-\/\/W3C\/\/DTD SVG 1.1\/\/EN\' \'http:\/\/www.w3.org\/Graphics\/SVG\/1.1\/DTD\/svg11.dtd\'>\n<svg /" $i
    sed -ri 's/<svg ([[:lower:]=\"[:digit:] \.-]+) version="1.2" ([[:alnum:]=\" \.\/:]+)>/<svg \1 \2>/' $i
   fi
  fi
 
 
-
-
 #Change spaces to , in stroke-dasharray (solves librsvg-Bug)
 sed -ri 's/stroke-dasharray=\"([[:digit:]\.]+) ([[:digit:]\.]+)\"/stroke-dasharray=\"\1,\2\"/g' $i
+
 #Change "'font name'" to 'font name'(solves librsvg-Bug)
-sed -ri "s/font-family=\"'([[:alpha:] ])'\"/font-family=\'\1\'/g" $i
+sed -ri "s/font-family=\"'([[:alpha:] ]*)'\"/font-family=\'\1\'/g" $i
 
 #Change to Wikis Fallbackfont to be compatible with https://meta.wikimedia.org/wiki/SVG_fonts
 sed -i 's/ font-family=\"Sans\"/ font-family=\"sans\"/g' $i #as automatic
@@ -78,8 +76,9 @@ sed -i 's/ font-family=\"Bitstream Vera Sans Mono\"/ font-family=\"DejaVu Sans M
 #simpifying text
 #sed -i -e ':a' -e 'N' -e '$!ba' -e "s/<tspan/\n<tspan/g" $i
 #sed -i -e ':a' -e 'N' -e '$!ba' -e "s/<\/tspan>/<\/tspan>\n/g" $i
-sed -ri "s/<text ([[:digit:]\.[:lower:]=\"\ \-]+) style=\"[[:lower:];%[:digit:]:\-]+\">/<text \1>/g" $i #Remove style in text
+sed -ri "s/<text ([[:alnum:]\.=\'\"\ \-]+) style=\"[[:lower:];%[:digit:]:\-]+\">/<text \1>/g" $i #Remove style in text
 sed -ri "s/<tspan ([[:alnum:]\.=\(\)\#\"\ \-]+) style=\"[[:lower:];%[:digit:]\.:\-]+\">/<tspan \1>/g" $i #Remove style in tspan
+sed -ri "s/<text ([-[:alnum:]\.=\" \']+)\" stroke-width=\"[[:digit:]]\"([-[:lower:][:digit:]=\"\:\;\%]*)>/<text \1\"\2>/g" $i #Remove stroke-width in text
 sed -ri "s/<tspan>([[:alnum:]= #,-\,\"\-\.\(\)]*)<\/tspan>/\1/g" $i #remove unnecesarry <tspan>...</tspan> without attributes
 sed -ri "s/<tspan x=\"([[:digit:]\.]+) ([[:digit:]\. ]+)\" y=\"([[:digit:]\. ]+)\"([[:alnum:]\.\"\#\ =-]*)>/<tspan x=\"\1\" y=\"\3\"\4>/g" $i # remove multipe x-koordinates in tspan (solves librsvg-Bug)
 #sed -ri "s/<tspan x=\"([[:digit:]\. ]+)\" y=\"([[:digit:]\.]+) ([[:digit:]\. ]+)\">/<tspan x=\"\1\" y=\"\2\">/g" $i
@@ -114,4 +113,3 @@ sed -ri "s/<path d=\"m([[:digit:]hlmvz \.-]+)\" ([[:alnum:]\"= \.\(\)\#-]*)\" cb
 echo $i finish
 
 done
-
