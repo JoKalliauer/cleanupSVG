@@ -25,7 +25,7 @@ echo $i start:
 sed -ri "s/ text-align=\"(end|center)\"//g"  ${i}
 sed -i "s/ aria-label=\"[[:digit:]]\"//g" $i
 
-#Fliestext aufloesen
+#dissolve FlowtingText
 sed -i "s/<flowRoot /<g /g" $i
 sed -i "s/<\/flowRoot>/<\/g>/g" $i
 sed -i "s/<flowRegion/<g/g" $i
@@ -61,13 +61,13 @@ fi
 
 
 
-#Change spaces to ,  (WikiRender-Bug)
+#Change spaces to , in stroke-dasharray (solves librsvg-Bug)
 sed -ri 's/stroke-dasharray=\"([[:digit:]\.]+) ([[:digit:]\.]+)\"/stroke-dasharray=\"\1,\2\"/g' $i
-#Change "'font name'" to 'font name'
+#Change "'font name'" to 'font name'(solves librsvg-Bug)
 sed -ri "s/font-family=\"'([[:alpha:] ])'\"/font-family=\'\1\'/g" $i
 
-#Change to Wikis Fallbackfont
-sed -i 's/ font-family=\"Sans\"/ font-family=\"sans\"/g' $i
+#Change to Wikis Fallbackfont to be compatible with https://meta.wikimedia.org/wiki/SVG_fonts
+sed -i 's/ font-family=\"Sans\"/ font-family=\"sans\"/g' $i #as automatic
 sed -i 's/ font-family=\"Arial\"/ font-family=\"Liberation Sans\"/g' $i #as automatic
 sed -i 's/ font-family=\"Bitstream Vera Serif\"/ DejaVu Serif\"/g' $i #as automatic
 sed -i 's/ font-family=\"Bitstream Vera Sans\"/ font-family=\"DejaVu Sans\"/g' $i #as automatic
@@ -76,34 +76,26 @@ sed -i 's/ font-family=\"Bitstream Vera Sans Mono\"/ font-family=\"DejaVu Sans M
 #sed -ri 's/ font-family=\"(Minion Pro|Times|Times New Roman|SVGTimes)\"/ font-family=\"Liberation Serif\"/g' $i #all Serif to Liberation
 
 #simpifying text
-#sed -i -e ':a' -e 'N' -e '$!ba' -e "s/\n<tspan/<tspan/g" $i
-sed -i -e ':a' -e 'N' -e '$!ba' -e "s/<tspan/\n<tspan/g" $i
-sed -i -e ':a' -e 'N' -e '$!ba' -e "s/<\/tspan>/<\/tspan>\n/g" $i
-#sed -ri "s/ style=\"[[:lower:];=%[:digit:]:\-]+\"//g"  $i
+#sed -i -e ':a' -e 'N' -e '$!ba' -e "s/<tspan/\n<tspan/g" $i
+#sed -i -e ':a' -e 'N' -e '$!ba' -e "s/<\/tspan>/<\/tspan>\n/g" $i
 sed -ri "s/<text ([[:digit:]\.[:lower:]=\"\ \-]+) style=\"[[:lower:];%[:digit:]:\-]+\">/<text \1>/g" $i #Remove style in text
 sed -ri "s/<tspan ([[:alnum:]\.=\(\)\#\"\ \-]+) style=\"[[:lower:];%[:digit:]\.:\-]+\">/<tspan \1>/g" $i #Remove style in tspan
-
-#sed -i "s/ fill=\"#000\"//g" $i
 sed -ri "s/<tspan>([[:alnum:]= #,-\,\"\-\.\(\)]*)<\/tspan>/\1/g" $i #remove unnecesarry <tspan>...</tspan> without attributes
-sed -ri "s/<tspan x=\"([[:digit:]\.]+) ([[:digit:]\. ]+)\" y=\"([[:digit:]\. ]+)\"([[:alnum:]\.\"\#\ =-]*)>/<tspan x=\"\1\" y=\"\3\"\4>/g" $i # remove multipe x-koordinates in tspan
+sed -ri "s/<tspan x=\"([[:digit:]\.]+) ([[:digit:]\. ]+)\" y=\"([[:digit:]\. ]+)\"([[:alnum:]\.\"\#\ =-]*)>/<tspan x=\"\1\" y=\"\3\"\4>/g" $i # remove multipe x-koordinates in tspan (solves librsvg-Bug)
 #sed -ri "s/<tspan x=\"([[:digit:]\. ]+)\" y=\"([[:digit:]\.]+) ([[:digit:]\. ]+)\">/<tspan x=\"\1\" y=\"\2\">/g" $i
-sed -ri "s/<text fill=\"\#[[:xdigit:]]{6}\" /<text /g" $i #remove fill in text
+sed -ri "s/<text fill=\"\#[[:xdigit:]]{3,6}\" /<text /g" $i #remove fill in text
 sed -ri "s/<text ([[:alnum:]= \"\.-]+) stroke-width=\"([[:digit:]\.]+)\">/<text \1>/g" $i #remove stroke-width in text
-sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<text([[:lower:][:digit:]= #,-\,\"\-\.\(\)]*)>[[:space:]]*<tspan/<text\1><tspan/g" $i #remove spaces and linebreaks
-#sed -r "s/<text([[:lower:][:digit:]= \"\-]*)>[[:space:]]*<tspan([[:alnum:]= \.\"\-]*)>(.*)<\/tspan><\/text>/<text\1><tspan\2>\3<\/tspan><\/text>/g" $i
-sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<\/tspan>[[:space:]]*<\/text>/<\/tspan><\/text>/g" $i #remove spaces
-sed -i -e ':a' -e 'N' -e '$!ba' -e "s/\n<tspan/<tspan/g" $i
-sed -i -e ':a' -e 'N' -e '$!ba' -e "s/\n<tspan/<tspan/g" $i
-sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<\/tspan>[[:space:]]+<tspan /<\/tspan> <tspan /g" $i
+sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<text([[:lower:][:digit:]= #,-\,\"\-\.\(\)]*)>[[:space:]]*<tspan/<text\1><tspan/g" $i #remove spaces and linebreaks between text and tspan
+sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<\/tspan>[[:space:]]*<\/text>/<\/tspan><\/text>/g" $i #remove spaces and linebreaks between text and tspan
+sed -i -e ':a' -e 'N' -e '$!ba' -e "s/\n<tspan/<tspan/g" $i #remove lineforward bevor tspan
+sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<\/tspan>[[:space:]]+<tspan /<\/tspan> <tspan /g" $i #reduces multiple spaces to one space
 
-#Doppelte Zeilenumbruche(zwei Lineforward) zu einefachen Zeilenumbruch (einfachen Lineforward)
+#two lineforward to one lineforward
 sed -i -e ':a' -e 'N' -e '$!ba' -e 's/\n\n/\n/g' $i
 
-#Remove CDATA
+#Remove CDATA by AdobeIllustrator
 sed -ri "s/ xmlns:i=\"([amp38;\#\&\])+ns_ai;\"/ xmlns:i=\"http:\/\/ns.adobe.com\/AdobeIllustrator\/10.0\/\"/" $i #Incskape doesnt handle Adobe Ilustrator xmlns right
 sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<\!\[CDATA\[([[:alnum:]=+\/\t\n[:space:]@:;\(\)\"\,\'\{\}\-])*\t\]\]>[[:space:]]*//g" $i #Remove CDATA
-#sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<\!\[CDATA\[([[:alnum:]=+\/\t\n[:space:]])*\t\]\]>[[:space:]]*<\/i:pgf>/<\/i:pgf>/g" $i #Remove CDATA
-#sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/([[:alnum:]=+\/\t\n])+[[:space:]]\t\]\]>[[:space:]]*<\/i:pgf>/\t\]\]><\/i:pgf>/g" $i #Remove CDATA
 sed -ri "s/<i:pgfRef xlink:href=\"#a([[:lower:]_]*)\"\/>//" $i #Remove AI-Elemtents for CDATA
 sed -i "s/<i:pgf id=\"a\"\/>//" $i #Remove AI-Elemtents for CDATA
 sed -ri -e ':a' -e 'N' -e "s/<i:pgf( ){1,2}id=\"a([[:lower:]_])*\">[[:space:]]*<\/i:pgf>//" $i #Remove AI-Elemtents for CDATA
@@ -112,11 +104,11 @@ sed -i "s/ i:extraneous=\"self\"//" $i #Remove AI-Elemtents
 #remove jpg im metadata
 sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<xapGImg:image>([[:alnum:][:space:]\/+])*={0,2}[[:space:]]*<\/xapGImg:image>//g" $i
 
-#Repair https://phabricator.wikimedia.org/T68672
+#Repair https://phabricator.wikimedia.org/T68672 (solves librsvg-Bug)
 sed -i "s/<style>/<style type=\"text\/css\">/" $i
 
-#ArcMap-problems
-sed -ri "s/<path d=\"m([[:digit:]hlmvz \.-]+)\" ([[:alnum:]\"= \.\(\)\#-]*)\" cbs=\"[[:digit:]GM]*\" gem=\"[[:alpha:]0 \.\(\)-]*\"\/>/<path d=\"m\1z\" \2\"\/>/g" $i
+#ArcMap-problems (made file valid, removes cbs= and gem=)
+sed -ri "s/<path d=\"m([[:digit:]hlmvz \.-]+)\" ([[:alnum:]\"= \.\(\)\#-]*)\" cbs=\"[[:digit:]GM]*\" gem=\"[[:alpha:]0 \.\(\)-]*\"\/>/<path d=\"m\1\" \2\"\/>/g" $i
 
 
 echo $i finish
