@@ -35,6 +35,9 @@ Similar scripts<br/>
 -[SVGOMG](https://github.com/jakearchibald/svgomg)<br/>
 -[svgo](https://github.com/svg/svgo)
 
+I am working on a grafical userinterface:<br/>
+https://jokalliauer.github.io/cleanupSVG/
+
 Some parts are from:<br/>
 -[SVGOMG](https://github.com/jakearchibald/svgomg)<br/>
 -[InkscapeBatchConverter](http://ge.tt/7C8JFmF1/v/0?c)
