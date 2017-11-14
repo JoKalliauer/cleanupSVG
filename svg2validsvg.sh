@@ -10,13 +10,13 @@
 for file in *.svg;do
 
 export i=$file #will be overritan later
-export fileN=$(echo $file | cut -f1 -d" ")
+export fileN=$(echo $file | cut -f1 -d" ") #remove spaces if exsiting (and everything after)
 export tmp=$(echo $fileN | cut -f1 -d".")
 
 #If you want to overwrite the exisiting file, without any backup, delete the following three lines
 export i=${tmp}_.svg
-cp ./${file} ./$i
-mv ./${file} ./${tmp}bak1.xml
+cp ./"${file}" ./$i
+mv ./"${file}" ./${tmp}bak1.xml
 
 echo 
 echo $i start:
@@ -33,12 +33,13 @@ sed -i "s/<\/flowRegion>/<\/g>/g" $i
 sed -i "s/<flowPara\/>//g" $i
 sed -ri "s/<flowPara>([[:alnum:]: \.,!\-\/]+)<\/flowPara>/<text>\1<\/text>/g" $i
 
-#remove useless elements
+#remove mostly useless elements
 sed -i "s/ letter-spacing=\"0\"//g" $i
 sed -i "s/ word-spacing=\"0\"//g" $i
 sed -i "s/ stroke-width=\"1\"//g" $i
-sed -i "s/ fill-rule=\"evenodd\"//g" $i
+#sed -i "s/ fill-rule=\"evenodd\"//g" $i
 sed -i "s/ stroke-linecap=\"square\"//g" $i 
+sed -i "s/ stroke-miterlimit=\"10\"//g" $i #Bug in IncscapePDFImport 
 
 #add DOCTYPE
 sed -i -e 's/<svg /\n<svg /' $i
@@ -47,7 +48,6 @@ if [ -z ${meta+x} ]; then
  echo Metadata kept, but DOCTYPE added
  meta=2 
 fi
-
  if [ $meta != 1 ]; then  
   if grep -qE "<svg ([[:lower:][:digit:]=\"\. -]*)version=\"1.0\"" $i; then
    sed -i -e ':a' -e 'N' -e '$!ba' -e 's/\?>[[:space:]]*<svg /\?>\n<\!DOCTYPE svg PUBLIC \"-\/\/W3C\/\/DTD SVG 1.0\/\/EN\" \"http:\/\/www.w3.org\/TR\/2001\/REC-SVG-20010904\/DTD\/svg10.dtd\">\n<svg /' $i
@@ -58,8 +58,9 @@ fi
  fi
 
 
-#Change spaces to , in stroke-dasharray (solves librsvg-Bug)
-sed -ri 's/stroke-dasharray=\"([[:digit:]\.]+) ([[:digit:]\.]+)\"/stroke-dasharray=\"\1,\2\"/g' $i
+#Change spaces to , in stroke-dasharray (solves librsvg-Bug https://phabricator.wikimedia.org/T32033 )
+sed -ri 's/stroke-dasharray=\"([[:digit:]\.,]+) ([[:digit:]\., ]+)\"/stroke-dasharray=\"\1,\2\"/g' $i
+sed -ri 's/stroke-dasharray=\"([[:digit:]\., ]+) ([[:digit:]\.,]+)\"/stroke-dasharray=\"\1,\2\"/g' $i
 
 #Change "'font name'" to 'font name'(solves librsvg-Bug)
 sed -ri "s/font-family=\"'([[:alpha:] ]*)'\"/font-family=\'\1\'/g" $i
@@ -70,7 +71,7 @@ sed -i 's/ font-family=\"Arial\"/ font-family=\"Liberation Sans\"/g' $i #as auto
 sed -i 's/ font-family=\"Bitstream Vera Serif\"/ DejaVu Serif\"/g' $i #as automatic
 sed -i 's/ font-family=\"Bitstream Vera Sans\"/ font-family=\"DejaVu Sans\"/g' $i #as automatic
 sed -i 's/ font-family=\"Bitstream Vera Sans Mono\"/ font-family=\"DejaVu Sans Mono\"/g' $i #as automatic
-#sed -ri 's/ font-family=\"(Arial|Myriad Pro)\"/ font-family=\"Liberation Sans\"/g' $i #all Sans to Liberation
+sed -ri 's/ font-family=\"(Arial|Myriad Pro|ArialNarrow)\"/ font-family=\"Liberation Sans\"/g' $i #all Sans to Liberation
 #sed -ri 's/ font-family=\"(Minion Pro|Times|Times New Roman|SVGTimes)\"/ font-family=\"Liberation Serif\"/g' $i #all Serif to Liberation
 
 #simpifying text
@@ -108,7 +109,6 @@ sed -i "s/<style>/<style type=\"text\/css\">/" $i
 
 #ArcMap-problems (made file valid, removes cbs= and gem=)
 sed -ri "s/<path d=\"m([[:digit:]hlmvz \.-]+)\" ([[:alnum:]\"= \.\(\)\#-]*)\" cbs=\"[[:digit:]GM]*\" gem=\"[[:alpha:]0 \.\(\)-]*\"\/>/<path d=\"m\1\" \2\"\/>/g" $i
-
 
 echo $i finish
 
