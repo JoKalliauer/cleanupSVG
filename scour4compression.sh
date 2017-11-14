@@ -10,8 +10,9 @@ if [ -z ${precisiondigits+x} ]; then
  precisiondigitsN=5
 else
  if [ $precisiondigits -le 0 ]; then
-  precisiondigitsN=1
- else
+  precisiondigits=1
+ fi
+ if [ -z ${precisiondigitsN+x} ]; then
   precisiondigitsN=$precisiondigits
  fi
  #echo precisiondigitsN is $precisiondigitsN
@@ -22,7 +23,7 @@ if [ -z ${minfilesize+x} ]; then
 fi 
 
 echo 
-echo scour ${file} to $i begin, dig=${precisiondigits}, min=${minfilesize}
+echo scour ${file} to $i begin, dig=${precisiondigits}, digN=${precisiondigitsN}, min=${minfilesize}
 
 if [ $minfilesize == 0 ]; then
  scour -i ${file} -o $i --enable-viewboxing --enable-id-stripping --enable-comment-stripping --shorten-ids --remove-titles --remove-descriptions --disable-embed-rasters --strip-xml-space  --set-precision=${precisiondigitsN} --set-c-precision=${precisiondigits} --remove-metadata --remove-descriptive-elements --create-groups
