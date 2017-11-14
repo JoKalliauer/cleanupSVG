@@ -7,6 +7,7 @@ export i=${tmp}s.svg
 
 if [ -z ${precisiondigits+x} ]; then
  precisiondigits=5
+ precisiondigitsN=5
 else
  if [ $precisiondigits -le 0 ]; then
   precisiondigitsN=1
@@ -21,22 +22,25 @@ if [ -z ${minfilesize+x} ]; then
 fi 
 
 echo 
-echo scour ${file} to $i begin, dig=${precisiondigits}, min=${minfilesize}, meta=${meta}
+echo scour ${file} to $i begin, dig=${precisiondigits}, min=${minfilesize}
 
 if [ $minfilesize == 0 ]; then
  scour -i ${file} -o $i --enable-viewboxing --enable-id-stripping --enable-comment-stripping --shorten-ids --remove-titles --remove-descriptions --disable-embed-rasters --strip-xml-space  --set-precision=${precisiondigitsN} --set-c-precision=${precisiondigits} --remove-metadata --remove-descriptive-elements --create-groups
  if [ -z ${meta+x} ]; then
+  meta=0
   echo Metadata keept
  else
   echo $meta
   if [ $meta == 0 ]; then  
    echo delete Metadata
-   scour -i ${i} -o ${i}.svg --enable-viewboxing --enable-id-stripping --enable-comment-stripping --shorten-ids --remove-titles --remove-descriptions --remove-metadata --remove-descriptive-elements --disable-embed-rasters --strip-xml-space --set-precision=1 --set-c-precision=0 --create-groups --set-precision=${precisiondigitsN} --set-c-precision=${precisiondigits}
+   scour -i ${i} -o ${i}.svg --enable-viewboxing --enable-id-stripping --enable-comment-stripping --shorten-ids --remove-titles --remove-descriptions --remove-metadata --remove-descriptive-elements --disable-embed-rasters --strip-xml-space  --set-precision=${precisiondigitsN} --set-c-precision=${precisiondigits} --create-groups
    mv -f ./${i}.svg ./${i}
   fi
  fi
 elif [ $minfilesize == 1 ] && [ $meta == 0 ]; then
   scour -i ${file} -o $i --enable-viewboxing --enable-id-stripping --enable-comment-stripping --shorten-ids --remove-titles --remove-descriptions --disable-embed-rasters --strip-xml-space  --set-precision=${precisiondigitsN} --set-c-precision=${precisiondigits} --remove-metadata --remove-descriptive-elements --create-groups --indent=none --no-line-breaks
+elif [ $minfilesize == 1 ] && [ $meta == 1 ]; then
+  scour -i ${file} -o $i --enable-viewboxing --enable-id-stripping --enable-comment-stripping --shorten-ids --remove-titles --remove-descriptions --disable-embed-rasters --strip-xml-space  --set-precision=${precisiondigitsN} --set-c-precision=${precisiondigits} --create-groups --indent=none --no-line-breaks
 else
  echo nothing done, please change input variables,current: dig=${precisiondigits}, min=${minfilesize}, meta=${meta}
 fi

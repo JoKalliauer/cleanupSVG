@@ -76,7 +76,7 @@ sed -i 's/ font-family=\"Bitstream Vera Sans Mono\"/ font-family=\"DejaVu Sans M
 #simpifying text
 #sed -i -e ':a' -e 'N' -e '$!ba' -e "s/<tspan/\n<tspan/g" $i
 #sed -i -e ':a' -e 'N' -e '$!ba' -e "s/<\/tspan>/<\/tspan>\n/g" $i
-sed -ri "s/<text ([[:alnum:]\.=\'\"\ \-]+) style=\"[[:lower:];%[:digit:]:\-]+\">/<text \1>/g" $i #Remove style in text
+sed -ri "s/<text ([[:alnum:]\.=\'\"\ \-]+) style=\"[[:lower:];%[:digit:]:\-]+\"([[:lower:] =\:\"]*)>/<text \1>/g" $i #Remove style in text
 sed -ri "s/<tspan ([[:alnum:]\.=\(\)\#\"\ \-]+) style=\"[[:lower:];%[:digit:]\.:\-]+\">/<tspan \1>/g" $i #Remove style in tspan
 sed -ri "s/<text ([-[:alnum:]\.=\" \']+)\" stroke-width=\"[[:digit:]]\"([-[:lower:][:digit:]=\"\:\;\%]*)>/<text \1\"\2>/g" $i #Remove stroke-width in text
 sed -ri "s/<tspan>([[:alnum:]= #,-\,\"\-\.\(\)]*)<\/tspan>/\1/g" $i #remove unnecesarry <tspan>...</tspan> without attributes

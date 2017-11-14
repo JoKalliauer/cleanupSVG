@@ -8,6 +8,14 @@
 #last Changes: (by Johannes Kalliauer)
 #2017-10-29 11h06 defined inkscape alias (Johannes Kalliauer)
 
+echo
+#needed if in the bashrc ist defined: export alias inkscape='/cygdrive/c/Program\ Files/Inkscape/inkscape.com'
+if [ -z ${inkscape+x} ]; then
+ echo not def
+else
+ echo $inkscape
+ alias inkscape=$inkscape
+fi
 
 #Input parameters:
 #alias inkscape='/cygdrive/c/Program\ Files/Inkscape/inkscape.com' #2017-10-29 11h06 (by Johannes Kalliauer)
@@ -26,7 +34,7 @@ validOutput3="png"
 validOutput4="svg"
 validOutput5="plain-svg"
 
-echo 
+
 #echo "This script allows you to convert all files in this folder from one file type to another."
 
 #valid=0
