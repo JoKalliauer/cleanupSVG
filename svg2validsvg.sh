@@ -6,6 +6,11 @@
 #Last Edits:
 #2017-10-29 13h14 new filename (by JoKalliauer)
 #2017-11-01 delte style in text, Doctype minior changes, Remove stroke-width in text, not adding lineforwards, english explantations (by JoKalliauer)
+#2017-11-20 dasharray due to stroke-dasharray="37.10, 37.10"
+#2017-11-22 xml:space="preserve" in simple text removed
+#2017-11-22 remove empty text;
+#13h21: Remove style in text with .
+#13h22: Remove stroke-width in text with .
 
 for file in *.svg;do
 
@@ -59,8 +64,11 @@ fi
 
 
 #Change spaces to , in stroke-dasharray (solves librsvg-Bug https://phabricator.wikimedia.org/T32033 )
-sed -ri 's/stroke-dasharray=\"([[:digit:]\.,]+) ([[:digit:]\., ]+)\"/stroke-dasharray=\"\1,\2\"/g' $i
-sed -ri 's/stroke-dasharray=\"([[:digit:]\., ]+) ([[:digit:]\.,]+)\"/stroke-dasharray=\"\1,\2\"/g' $i
+sed -ri 's/stroke-dasharray=\"([[:digit:]\.,]*)([[:digit:]\.]+) ([[:digit:]\., ]+)\"/stroke-dasharray=\"\1\2,\3\"/g' $i
+sed -ri 's/stroke-dasharray=\"([[:digit:]\., ]*)([[:digit:]\.]+) ([[:digit:]\.,]+)\"/stroke-dasharray=\"\1\2,\3\"/g' $i
+
+#sed -ri 's/stroke-dasharray=\"([[:digit:]\.,]+) ([[:digit:]\., ]+)\"/stroke-dasharray=\"\1,\2\"/g' $i
+#sed -ri 's/stroke-dasharray=\"([[:digit:]\., ]+) ([[:digit:]\.,]+)\"/stroke-dasharray=\"\1,\2\"/g' $i
 
 #Change "'font name'" to 'font name'(solves librsvg-Bug)
 sed -ri "s/font-family=\"'([[:alpha:] ]*)'\"/font-family=\'\1\'/g" $i
@@ -77,9 +85,9 @@ sed -ri 's/ font-family=\"(Arial|Myriad Pro|ArialNarrow)\"/ font-family=\"Libera
 #simpifying text
 #sed -i -e ':a' -e 'N' -e '$!ba' -e "s/<tspan/\n<tspan/g" $i
 #sed -i -e ':a' -e 'N' -e '$!ba' -e "s/<\/tspan>/<\/tspan>\n/g" $i
-sed -ri "s/<text ([[:alnum:]\.=\'\"\ \-]+) style=\"[[:lower:];%[:digit:]:\-]+\"([[:lower:] =\:\"]*)>/<text \1>/g" $i #Remove style in text
+sed -ri "s/<text ([[:alnum:]\.=\'\"\ \-]+) style=\"[[:lower:];%[:digit:]\.:\-]+\"([[:lower:] =\:\"]*)>/<text \1>/g" $i #Remove style in text
 sed -ri "s/<tspan ([[:alnum:]\.=\(\)\#\"\ \-]+) style=\"[[:lower:];%[:digit:]\.:\-]+\">/<tspan \1>/g" $i #Remove style in tspan
-sed -ri "s/<text ([-[:alnum:]\.=\" \']+)\" stroke-width=\"[[:digit:]]\"([-[:lower:][:digit:]=\"\:\;\%]*)>/<text \1\"\2>/g" $i #Remove stroke-width in text
+sed -ri "s/<text ([-[:alnum:]\.=\" \']+)\" stroke-width=\"[[:digit:]\.]\"([-[:lower:][:digit:]=\"\:\;\%]*)>/<text \1\"\2>/g" $i #Remove stroke-width in text
 sed -ri "s/<tspan>([[:alnum:]= #,-\,\"\-\.\(\)]*)<\/tspan>/\1/g" $i #remove unnecesarry <tspan>...</tspan> without attributes
 sed -ri "s/<tspan x=\"([[:digit:]\.]+) ([[:digit:]\. ]+)\" y=\"([[:digit:]\. ]+)\"([[:alnum:]\.\"\#\ =-]*)>/<tspan x=\"\1\" y=\"\3\"\4>/g" $i # remove multipe x-koordinates in tspan (solves librsvg-Bug)
 #sed -ri "s/<tspan x=\"([[:digit:]\. ]+)\" y=\"([[:digit:]\.]+) ([[:digit:]\. ]+)\">/<tspan x=\"\1\" y=\"\2\">/g" $i
@@ -89,6 +97,12 @@ sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<text([[:lower:][:digit:]= #,-\,\"\-\.\(\
 sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<\/tspan>[[:space:]]*<\/text>/<\/tspan><\/text>/g" $i #remove spaces and linebreaks between text and tspan
 sed -i -e ':a' -e 'N' -e '$!ba' -e "s/\n<tspan/<tspan/g" $i #remove lineforward bevor tspan
 sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<\/tspan>[[:space:]]+<tspan /<\/tspan> <tspan /g" $i #reduces multiple spaces to one space
+#<text x="6712.9556" y="3675.3625" xml:space="preserve">$2\Theta$</text>
+sed -ri 's/<text x="([[:digit:]\.]+)" y="([[:digit:]\.]+)" xml:space="preserve">([[:alnum:]\\\$]+)<\/text>/<text x="\1" y="\2">\3<\/text>/g' $i
+#<text x="6670" y="1080" xml:space="preserve"/>
+sed -ri 's/<text [[:lower:][:digit:]= \"\:\.]+\/>//g' $i
+#<text x="17.200001" y="7.0750122" style="line-height:13.22916698px">
+#sed -ri 's/<text x="([[:digit:]\.]+)" y="([[:digit:]\.]+)" style="line-height:([[:digit:]\.]+)px">//g'
 
 #two lineforward to one lineforward
 sed -i -e ':a' -e 'N' -e '$!ba' -e 's/\n\n/\n/g' $i
