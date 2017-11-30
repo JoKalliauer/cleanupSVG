@@ -66,21 +66,22 @@ fi
 #Change spaces to , in stroke-dasharray (solves librsvg-Bug https://phabricator.wikimedia.org/T32033 )
 sed -ri 's/stroke-dasharray=\"([[:digit:]\.,]*)([[:digit:]\.]+) ([[:digit:]\., ]+)\"/stroke-dasharray=\"\1\2,\3\"/g' $i
 sed -ri 's/stroke-dasharray=\"([[:digit:]\., ]*)([[:digit:]\.]+) ([[:digit:]\.,]+)\"/stroke-dasharray=\"\1\2,\3\"/g' $i
-
 #sed -ri 's/stroke-dasharray=\"([[:digit:]\.,]+) ([[:digit:]\., ]+)\"/stroke-dasharray=\"\1,\2\"/g' $i
 #sed -ri 's/stroke-dasharray=\"([[:digit:]\., ]+) ([[:digit:]\.,]+)\"/stroke-dasharray=\"\1,\2\"/g' $i
 
 #Change "'font name'" to 'font name'(solves librsvg-Bug)
-sed -ri "s/font-family=\"'([[:alpha:] ]*)'\"/font-family=\'\1\'/g" $i
+sed -ri "s/font-family=\"'([[:alnum:] ]*)'\"/font-family=\'\1\'/g" $i
 
-#Change to Wikis Fallbackfont to be compatible with https://meta.wikimedia.org/wiki/SVG_fonts
+#Change to Wikis Fallbackfont https://commons.wikimedia.org/wiki/Help:SVG#fallback to be compatible with https://meta.wikimedia.org/wiki/SVG_fonts
 sed -i 's/ font-family=\"Sans\"/ font-family=\"sans\"/g' $i #as automatic
 sed -i 's/ font-family=\"Arial\"/ font-family=\"Liberation Sans\"/g' $i #as automatic
 sed -i 's/ font-family=\"Bitstream Vera Serif\"/ DejaVu Serif\"/g' $i #as automatic
 sed -i 's/ font-family=\"Bitstream Vera Sans\"/ font-family=\"DejaVu Sans\"/g' $i #as automatic
 sed -i 's/ font-family=\"Bitstream Vera Sans Mono\"/ font-family=\"DejaVu Sans Mono\"/g' $i #as automatic
+sed -i 's/ font-family=\"Times New Roman\"/ font-family=\"Liberation Serif\"/g' $i #as automatic
+sed -i 's/ fill=\"#002060\" font-family=\"Swis721 BlkCn BT\" font-size=\"/ fill=\"#002060\" font-family=\"Liberation Sans\" font-weight=\"bold\" font-size=\"/g' $i #looks similar
 sed -ri 's/ font-family=\"(Arial|Myriad Pro|ArialNarrow)\"/ font-family=\"Liberation Sans\"/g' $i #all Sans to Liberation
-#sed -ri 's/ font-family=\"(Minion Pro|Times|Times New Roman|SVGTimes)\"/ font-family=\"Liberation Serif\"/g' $i #all Serif to Liberation
+sed -ri 's/ font-family=\"(Minion Pro|Times|Times New Roman|SVGTimes)\"/ font-family=\"Liberation Serif\"/g' $i #all Serif to Liberation
 
 #simpifying text
 #sed -i -e ':a' -e 'N' -e '$!ba' -e "s/<tspan/\n<tspan/g" $i
@@ -103,6 +104,7 @@ sed -ri 's/<text x="([[:digit:]\.]+)" y="([[:digit:]\.]+)" xml:space="preserve">
 sed -ri 's/<text [[:lower:][:digit:]= \"\:\.]+\/>//g' $i
 #<text x="17.200001" y="7.0750122" style="line-height:13.22916698px">
 #sed -ri 's/<text x="([[:digit:]\.]+)" y="([[:digit:]\.]+)" style="line-height:([[:digit:]\.]+)px">//g'
+sed -i "s/<tspan x=\"0\" y=\"0\">/<tspan>/g" $i
 
 #two lineforward to one lineforward
 sed -i -e ':a' -e 'N' -e '$!ba' -e 's/\n\n/\n/g' $i
@@ -120,6 +122,9 @@ sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<xapGImg:image>([[:alnum:][:space:]\/+])*
 
 #Repair https://phabricator.wikimedia.org/T68672 (solves librsvg-Bug)
 sed -i "s/<style>/<style type=\"text\/css\">/" $i
+
+#Repair WARNING in <mask> with id=ay: Mask element found with maskUnits set. It will not be rendered properly by Wikimedia's SVG renderer. See https://phabricator.wikimedia.org/T55899 for details
+sed -ri "s/<mask id=\"([[:lower:]]+)\" ([[:lower:] =\"[:digit:]]+) maskUnits=\"userSpaceOnUse\">/<mask id=\"\1\" \2>/g" $i
 
 #ArcMap-problems (made file valid, removes cbs= and gem=)
 sed -ri "s/<path d=\"m([[:digit:]hlmvz \.-]+)\" ([[:alnum:]\"= \.\(\)\#-]*)\" cbs=\"[[:digit:]GM]*\" gem=\"[[:alpha:]0 \.\(\)-]*\"\/>/<path d=\"m\1\" \2\"\/>/g" $i
