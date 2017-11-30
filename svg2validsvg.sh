@@ -9,8 +9,12 @@
 #2017-11-20 dasharray due to stroke-dasharray="37.10, 37.10"
 #2017-11-22 xml:space="preserve" in simple text removed
 #2017-11-22 remove empty text;
-#13h21: Remove style in text with .
-#13h22: Remove stroke-width in text with .
+#2017-11-22 Remove style in text with .
+#2017-11-22 Remove stroke-width in text with .
+#2017-11-27 remove style in text also if "[-\#\(\)]" is before
+#2017-11-27 remove fill in text if x="..." y="..." is before
+#2017-11-27 Remove stroke-width in text edited
+#2017-11-27 Remove stroke-width in tspan
 
 for file in *.svg;do
 
@@ -39,8 +43,8 @@ sed -i "s/<flowPara\/>//g" $i
 sed -ri "s/<flowPara>([[:alnum:]: \.,!\-\/]+)<\/flowPara>/<text>\1<\/text>/g" $i
 
 #remove mostly useless elements
-sed -i "s/ letter-spacing=\"0\"//g" $i
-sed -i "s/ word-spacing=\"0\"//g" $i
+sed -ri "s/ letter-spacing=\"0([px]*)\"//g" $i
+sed -ri "s/ word-spacing=\"0([px]*)\"//g" $i
 sed -i "s/ stroke-width=\"1\"//g" $i
 #sed -i "s/ fill-rule=\"evenodd\"//g" $i
 sed -i "s/ stroke-linecap=\"square\"//g" $i 
@@ -66,6 +70,7 @@ fi
 #Change spaces to , in stroke-dasharray (solves librsvg-Bug https://phabricator.wikimedia.org/T32033 )
 sed -ri 's/stroke-dasharray=\"([[:digit:]\.,]*)([[:digit:]\.]+) ([[:digit:]\., ]+)\"/stroke-dasharray=\"\1\2,\3\"/g' $i
 sed -ri 's/stroke-dasharray=\"([[:digit:]\., ]*)([[:digit:]\.]+) ([[:digit:]\.,]+)\"/stroke-dasharray=\"\1\2,\3\"/g' $i
+
 #sed -ri 's/stroke-dasharray=\"([[:digit:]\.,]+) ([[:digit:]\., ]+)\"/stroke-dasharray=\"\1,\2\"/g' $i
 #sed -ri 's/stroke-dasharray=\"([[:digit:]\., ]+) ([[:digit:]\.,]+)\"/stroke-dasharray=\"\1,\2\"/g' $i
 
@@ -86,13 +91,16 @@ sed -ri 's/ font-family=\"(Minion Pro|Times|Times New Roman|SVGTimes)\"/ font-fa
 #simpifying text
 #sed -i -e ':a' -e 'N' -e '$!ba' -e "s/<tspan/\n<tspan/g" $i
 #sed -i -e ':a' -e 'N' -e '$!ba' -e "s/<\/tspan>/<\/tspan>\n/g" $i
-sed -ri "s/<text ([[:alnum:]\.=\'\"\ \-]+) style=\"[[:lower:];%[:digit:]\.:\-]+\"([[:lower:] =\:\"]*)>/<text \1>/g" $i #Remove style in text
+sed -ri "s/<text ([-[:alnum:]\.=\'\"\ \-\#\(\)]+) style=\"[[:lower:];%[:digit:]\.:\-]+\"([[:lower:] =\:\"]*)>/<text \1>/g" $i #Remove style in text
 sed -ri "s/<tspan ([[:alnum:]\.=\(\)\#\"\ \-]+) style=\"[[:lower:];%[:digit:]\.:\-]+\">/<tspan \1>/g" $i #Remove style in tspan
-sed -ri "s/<text ([-[:alnum:]\.=\" \']+)\" stroke-width=\"[[:digit:]\.]\"([-[:lower:][:digit:]=\"\:\;\%]*)>/<text \1\"\2>/g" $i #Remove stroke-width in text
+sed -ri "s/<text ([-[:alnum:]\.=\" \']+)\" stroke-width=\"([[:digit:]\.]+)\"([-[:lower:][:digit:]=\"\:\;\%]*)>/<text \1\"\3>/g" $i #Remove stroke-width in text
+#sed -ri "s/<text ([[:alnum:]= \"\.\'-]+)\" stroke-width=\"([[:digit:]\.]+)\">/<text \1>/g" $i #remove stroke-width in text
+#<tspan x="45.451637" y="285.37723" stroke-width=".2646px">
+sed -ri "s/<tspan ([-[:alnum:]\.=\" ]+)\" stroke-width=\"([[:digit:]\.px]+)\"([-[:lower:]=\"\ \/]*)>/<tspan \1\"\3>/g" $i #Remove stroke-width in tspan
 sed -ri "s/<tspan>([[:alnum:]= #,-\,\"\-\.\(\)]*)<\/tspan>/\1/g" $i #remove unnecesarry <tspan>...</tspan> without attributes
 sed -ri "s/<tspan x=\"([[:digit:]\.]+) ([[:digit:]\. ]+)\" y=\"([[:digit:]\. ]+)\"([[:alnum:]\.\"\#\ =-]*)>/<tspan x=\"\1\" y=\"\3\"\4>/g" $i # remove multipe x-koordinates in tspan (solves librsvg-Bug)
-#sed -ri "s/<tspan x=\"([[:digit:]\. ]+)\" y=\"([[:digit:]\.]+) ([[:digit:]\. ]+)\">/<tspan x=\"\1\" y=\"\2\">/g" $i
-sed -ri "s/<text fill=\"\#[[:xdigit:]]{3,6}\" /<text /g" $i #remove fill in text
+#sed -ri "s/<tspan x=\"([[:digit:]\. ]+)\" y=\"([[:digit:]\.]+) ([[:digit:]\. ]+)\">/<tspan x=\"\1\" y=\"\2\">/g" $i #remove multiple y-koordinates
+sed -ri "s/<text([xy\ [:digit:]\"\.\=]*) fill=\"\#[[:xdigit:]]{3,6}\"/<text\1/g" $i #remove fill in text
 sed -ri "s/<text ([[:alnum:]= \"\.-]+) stroke-width=\"([[:digit:]\.]+)\">/<text \1>/g" $i #remove stroke-width in text
 sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<text([[:lower:][:digit:]= #,-\,\"\-\.\(\)]*)>[[:space:]]*<tspan/<text\1><tspan/g" $i #remove spaces and linebreaks between text and tspan
 sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<\/tspan>[[:space:]]*<\/text>/<\/tspan><\/text>/g" $i #remove spaces and linebreaks between text and tspan
@@ -101,10 +109,15 @@ sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<\/tspan>[[:space:]]+<tspan /<\/tspan> <t
 #<text x="6712.9556" y="3675.3625" xml:space="preserve">$2\Theta$</text>
 sed -ri 's/<text x="([[:digit:]\.]+)" y="([[:digit:]\.]+)" xml:space="preserve">([[:alnum:]\\\$]+)<\/text>/<text x="\1" y="\2">\3<\/text>/g' $i
 #<text x="6670" y="1080" xml:space="preserve"/>
-sed -ri 's/<text [[:lower:][:digit:]= \"\:\.]+\/>//g' $i
-#<text x="17.200001" y="7.0750122" style="line-height:13.22916698px">
-#sed -ri 's/<text x="([[:digit:]\.]+)" y="([[:digit:]\.]+)" style="line-height:([[:digit:]\.]+)px">//g'
+sed -ri 's/<text [-[:lower:][:digit:]= \"\:\.]+\/>//g' $i #remove empty text
+sed -ri 's/<tspan [-[:lower:][:digit:]= \"\.]+\/>//g' $i #remove empty tspan
+
+#<text x="140.22916" y="113.77085" fill="#000000">
 sed -i "s/<tspan x=\"0\" y=\"0\">/<tspan>/g" $i
+
+#<tspan>DMS$_{0^\circ}$</tspan>
+sed -ri "s/<tspan>([[:alnum:]\$\^\\\_\{\}]+)<\/tspan>([ ]*)/\1/g" $i
+
 
 #two lineforward to one lineforward
 sed -i -e ':a' -e 'N' -e '$!ba' -e 's/\n\n/\n/g' $i
@@ -125,7 +138,6 @@ sed -i "s/<style>/<style type=\"text\/css\">/" $i
 
 #Repair WARNING in <mask> with id=ay: Mask element found with maskUnits set. It will not be rendered properly by Wikimedia's SVG renderer. See https://phabricator.wikimedia.org/T55899 for details
 sed -ri "s/<mask id=\"([[:lower:]]+)\" ([[:lower:] =\"[:digit:]]+) maskUnits=\"userSpaceOnUse\">/<mask id=\"\1\" \2>/g" $i
-
 #ArcMap-problems (made file valid, removes cbs= and gem=)
 sed -ri "s/<path d=\"m([[:digit:]hlmvz \.-]+)\" ([[:alnum:]\"= \.\(\)\#-]*)\" cbs=\"[[:digit:]GM]*\" gem=\"[[:alpha:]0 \.\(\)-]*\"\/>/<path d=\"m\1\" \2\"\/>/g" $i
 
