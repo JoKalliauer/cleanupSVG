@@ -19,6 +19,7 @@ fi
 
 #Input parameters:
 #alias inkscape='/cygdrive/c/Program\ Files/Inkscape/inkscape.com' #2017-10-29 11h06 (by Johannes Kalliauer)
+#alias inkscape.exe='/cygdrive/c/Program\ Files/Inkscape/inkscape.exe'
 sourceType="svg"
 outputType="svg"
 valid=1
