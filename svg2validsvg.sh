@@ -32,7 +32,7 @@ echo $i start:
 
 #Define prepost equal to zero if not defined
 if [ -z ${prepost+x} ]; then
- prepost = 0
+ export prepost=0
 fi
 
 #Remove W3C-invalid elements
@@ -50,7 +50,15 @@ sed -i "s/<\/flowRegion>/<\/g>/g" $i
 sed -i "s/<flowPara\/>//g" $i
 sed -ri "s/<flowPara([-[:lower:][:digit:]=\" ]*)>([[:alnum:]: \.,!\-\/]+)<\/flowPara>/<text\1>\2<\/text>/g" $i
 sed -ri "s/<flowPara([-[:lower:][:digit:]=\" ]*)>([[:alnum:]: \.,!\-\/]+)<\/flowPara>/<tspan\1>\2<\/tspan>/g" $i
+
 END
+
+#betaphase: remove flow Text in svg
+#if prepost=2; then
+ sed -ri "s/<flowRoot([-[:alnum:].=\" \:\(\)\%\#]*)><flowRegion><rect x=\"([[:digit:]\. ]+)\" y=\"([-[:digit:]\. ]+)\"([[:lower:][:digit:]=\.\" ]+)\/><\/flowRegion><flowPara([-[:lower:][:digit:]\.=\" \:]+)>([[:alnum:] \{\}\ \ ]+)<\/flowPara><\/flowRoot>/<text x=\"\2\" y=\"\3\"\1><tspan x=\"\2\" y=\"\3\"><tspan x=\"\2\" y=\"\3\"\5>\6<\/tspan><\/tspan><\/text>/g" $i
+#fi
+
+#END
 
 #remove mostly useless elements
 sed -ri "s/ letter-spacing=\"0([px]*)\"//g" $i
@@ -59,6 +67,7 @@ sed -i "s/ stroke-width=\"1\"//g" $i
 #sed -i "s/ fill-rule=\"evenodd\"//g" $i
 sed -i "s/ stroke-linecap=\"square\"//g" $i 
 sed -i "s/ stroke-miterlimit=\"10\"//g" $i #Bug in IncscapePDFImport 
+sed -i "s/ transform=\"scale(1)\"//g" $i
 
 #add DOCTYPE
 sed -i -e 's/<svg /\n<svg /' $i
@@ -102,7 +111,7 @@ sed -i 's/ font-family=\"Bitstream Vera Sans Mono\"/ font-family=\"DejaVu Sans M
 sed -i 's/ font-family=\"Times New Roman\"/ font-family=\"Liberation Serif\"/g' $i #as automatic
 #sed -i 's/ fill=\"#002060\" font-family=\"Swis721 BlkCn BT\" font-size=\"/ fill=\"#002060\" font-family=\"Liberation Sans\" font-weight=\"bold\" font-size=\"/g' $i #looks similar
 #sed -ri 's/ font-family=\"(Arial|Myriad Pro|ArialNarrow)\"/ font-family=\"Liberation Sans\"/g' $i #all Sans to Liberation
-#sed -ri 's/ font-family=\"(Minion Pro|Times|Times New Roman|SVGTimes)\"/ font-family=\"Liberation Serif\"/g' $i #all Serif to Liberation
+sed -ri 's/ font-family=\"(Minion Pro|Times|Times New Roman|SVGTimes|Linux Libertine|Linux Biolinum)\"/ font-family=\"Liberation Serif\"/g' $i #all Serif to Liberation
 
 #simpifying text
 #sed -i -e ':a' -e 'N' -e '$!ba' -e "s/<tspan/\n<tspan/g" $i
@@ -148,8 +157,13 @@ sed -i "s/<style>/<style type=\"text\/css\">/" $i
 
 #Repair WARNING in <mask> with id=ay: Mask element found with maskUnits set. It will not be rendered properly by Wikimedia's SVG renderer. See https://phabricator.wikimedia.org/T55899 for details
 sed -ri "s/<mask id=\"([[:lower:]]+)\" ([[:lower:] =\"[:digit:]]+) maskUnits=\"userSpaceOnUse\">/<mask id=\"\1\" \2>/g" $i
+
 #ArcMap-problems (made file valid, removes cbs= and gem=)
 sed -ri "s/<path d=\"m([[:digit:]hlmvz \.-]+)\" ([[:alnum:]\"= \.\(\)\#-]*)\" cbs=\"[[:digit:]GM]*\" gem=\"[[:alpha:]0 \.\(\)-]*\"\/>/<path d=\"m\1\" \2\"\/>/g" $i
+
+#QGIS-Files (made file valid)
+sed -i "s/ vector-effect=\"non-scaling-stroke\"//g" $i
+sed -i "s/ solid-color=\"#000000\"//g" $i
 
 echo $i finish
 
