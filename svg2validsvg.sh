@@ -30,17 +30,27 @@ mv ./"${file}" ./${tmp}bak1.xml
 echo 
 echo $i start:
 
+#Define prepost equal to zero if not defined
+if [ -z ${prepost+x} ]; then
+ prepost = 0
+fi
+
 #Remove W3C-invalid elements
 sed -ri "s/ text-align=\"(end|center)\"//g"  ${i}
 sed -i "s/ aria-label=\"[[:digit:]]\"//g" $i
 
+: <<'END'
 #dissolve FlowtingText
-sed -i "s/<flowRoot /<g /g" $i
-sed -i "s/<\/flowRoot>/<\/g>/g" $i
+if prepost=2; then
+ #if it is postprocessing after scour do: (ensures that only one flowRoot is in one line)
+ sed -ri "s/<flowRoot([-[:lower:][:digit:].=\" :\(\)]*)><rect x=([[:lower:][:digit:]=\.\" ]+)\/>([-<>[:alnum:]\.=\" \/]+)<\/flowRoot>/<text\1><rect x=\2 fill=\"none\"\/>\3<\/text>/" $i
+fi
 sed -i "s/<flowRegion/<g/g" $i
 sed -i "s/<\/flowRegion>/<\/g>/g" $i
 sed -i "s/<flowPara\/>//g" $i
-sed -ri "s/<flowPara>([[:alnum:]: \.,!\-\/]+)<\/flowPara>/<text>\1<\/text>/g" $i
+sed -ri "s/<flowPara([-[:lower:][:digit:]=\" ]*)>([[:alnum:]: \.,!\-\/]+)<\/flowPara>/<text\1>\2<\/text>/g" $i
+sed -ri "s/<flowPara([-[:lower:][:digit:]=\" ]*)>([[:alnum:]: \.,!\-\/]+)<\/flowPara>/<tspan\1>\2<\/tspan>/g" $i
+END
 
 #remove mostly useless elements
 sed -ri "s/ letter-spacing=\"0([px]*)\"//g" $i
@@ -82,6 +92,9 @@ sed -ri "s/font-family=\"'([[:alnum:] ]*)'\"/font-family=\'\1\'/g" $i
 
 #Change to Wikis Fallbackfont https://commons.wikimedia.org/wiki/Help:SVG#fallback to be compatible with https://meta.wikimedia.org/wiki/SVG_fonts
 sed -i 's/ font-family=\"Sans\"/ font-family=\"sans\"/g' $i #as automatic
+sed -i 's/ font-family=\"Serif\"/ font-family=\"serif\"/g' $i #as automatic
+sed -i 's/ font-family=\"Sans-serif\"/ font-family=\"sans-serif\"/g' $i #as automatic
+sed -i 's/ font-family=\"Sans-Serif\"/ font-family=\"sans-serif\"/g' $i #as automatic
 sed -i 's/ font-family=\"Arial\"/ font-family=\"Liberation Sans\"/g' $i #as automatic
 sed -i 's/ font-family=\"Bitstream Vera Serif\"/ font-family=\"DejaVu Serif\"/g' $i #as automatic
 sed -i 's/ font-family=\"Bitstream Vera Sans\"/ font-family=\"DejaVu Sans\"/g' $i #as automatic
@@ -99,10 +112,10 @@ sed -ri "s/<tspan ([[:alnum:]\.=\(\)\#\"\ \-]+) style=\"[[:lower:];%[:digit:]\.:
 sed -ri "s/<text ([-[:alnum:]\.=\" \']+)\" stroke-width=\"([[:digit:]\.]+)\"([-[:lower:][:digit:]=\"\:\;\%]*)>/<text \1\"\3>/g" $i #Remove stroke-width in text
 #sed -ri "s/<text ([[:alnum:]= \"\.\'-]+)\" stroke-width=\"([[:digit:]\.]+)\">/<text \1>/g" $i #remove stroke-width in text
 sed -ri "s/<tspan ([-[:alnum:]\.=\" ]+)\" stroke-width=\"([[:digit:]\.px]+)\"([-[:lower:]=\"\ \/]*)>/<tspan \1\"\3>/g" $i #Remove stroke-width in tspan
-
-sed -ri "s/<tspan x=\"([[:digit:]\.]+) ([[:digit:]\. ]+)\" y=\"([[:digit:]\. ]+)\"([[:alnum:]\.\"\#\ =-]*)>/<tspan x=\"\1\" y=\"\3\"\4>/g" $i # remove multipe x-koordinates in tspan (solves librsvg-Bug)
-#sed -ri "s/<tspan x=\"([[:digit:]\. ]+)\" y=\"([[:digit:]\.]+) ([[:digit:]\. ]+)\">/<tspan x=\"\1\" y=\"\2\">/g" $i #remove multiple y-koordinates
-sed -ri "s/<text([xy\ [:digit:]\"\.\=]*) fill=\"\#[[:xdigit:]]{3,6}\"/<text\1/g" $i #remove fill in text
+sed -ri "s/<tspan x=\"([[:digit:]\.]+) ([[:digit:]\. ]+)\" y=\"([[:digit:]\. ]+)\"([-[:alnum:]\.\"\#\ =]*)>/<tspan x=\"\1\" y=\"\3\"\4>/g" $i # remove multipe x-koordinates in tspan (solves librsvg-Bug)
+#sed -ri "s/<text x=\"([[:digit:]\.]+) ([[:digit:]\. ]+)\" y=\"([[:digit:]\. ]+)\"([-[:alnum:]\.\"\#\ =]*)>/<text x=\"\1\" y=\"\3\"\4>/g" $i # remove multipe x-koordinates in text (solves librsvg-Bug)
+#sed -ri "s/<text x=\"([[:digit:]\. ]+)\" y=\"([[:digit:]\.]+) ([[:digit:]\. ]+)\"([-[:alnum:] =\"]*)>/<text x=\"\1\" y=\"\2\"\4>/g" $i #remove multiple y-koordinates in text
+#sed -ri "s/<text([xy\ [:digit:]\"\.\=]*) fill=\"\#[[:xdigit:]]{3,6}\"/<text\1/g" $i #remove fill in text
 sed -ri "s/<text ([[:alnum:]= \"\.-]+) stroke-width=\"([[:digit:]\.]+)\">/<text \1>/g" $i #remove stroke-width in text
 sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<text([[:lower:][:digit:]= #,-\,\"\-\.\(\)]*)>[[:space:]]*<tspan/<text\1><tspan/g" $i #remove spaces and linebreaks between text and tspan
 sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<\/tspan>[[:space:]]*<\/text>/<\/tspan><\/text>/g" $i #remove spaces and linebreaks between text and tspan

@@ -26,14 +26,14 @@ echo
 echo scour ${file} to $i begin, dig=${precisiondigits}, digN=${precisiondigitsN}, min=${minfilesize}
 
 if [ $minfilesize == 0 ]; then
- scour -i ${file} -o $i --enable-viewboxing --enable-id-stripping --enable-comment-stripping --shorten-ids --remove-titles --remove-descriptions --disable-embed-rasters --strip-xml-space  --set-precision=${precisiondigitsN} --set-c-precision=${precisiondigits} --remove-metadata --remove-descriptive-elements --create-groups
+ scour -i ${file} -o $i --enable-viewboxing --enable-id-stripping --enable-comment-stripping --shorten-ids --remove-titles --remove-descriptions --disable-embed-rasters --strip-xml-space  --set-precision=${precisiondigitsN} --set-c-precision=${precisiondigits} --create-groups
  if [ -z ${meta+x} ]; then
   meta=0
   echo Metadata keept
  else
   echo $meta
   if [ $meta == 0 ]; then  
-   echo delete Metadata
+   echo delete Metadata --remove-metadata and --remove-descriptive-elements
    scour -i ${i} -o ${i}.svg --enable-viewboxing --enable-id-stripping --enable-comment-stripping --shorten-ids --remove-titles --remove-descriptions --remove-metadata --remove-descriptive-elements --disable-embed-rasters --strip-xml-space  --set-precision=${precisiondigitsN} --set-c-precision=${precisiondigits} --create-groups
    mv -f ./${i}.svg ./${i}
   fi
