@@ -11,6 +11,7 @@ export prepost=1
 ./InkscapeBatchConverter.sh
 
 ./scour4compression.sh
+./cleaner4compression.sh #only tested on Windows
 
 if minfilesize==0; then
  export prepost=2 #Some Postprocessing needs linebreaks to work correctly

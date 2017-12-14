@@ -109,15 +109,17 @@ sed -i 's/ font-family=\"Bitstream Vera Serif\"/ font-family=\"DejaVu Serif\"/g'
 sed -i 's/ font-family=\"Bitstream Vera Sans\"/ font-family=\"DejaVu Sans\"/g' $i #as automatic
 sed -i 's/ font-family=\"Bitstream Vera Sans Mono\"/ font-family=\"DejaVu Sans Mono\"/g' $i #as automatic
 sed -i 's/ font-family=\"Times New Roman\"/ font-family=\"Liberation Serif\"/g' $i #as automatic
-#sed -i 's/ fill=\"#002060\" font-family=\"Swis721 BlkCn BT\" font-size=\"/ fill=\"#002060\" font-family=\"Liberation Sans\" font-weight=\"bold\" font-size=\"/g' $i #looks similar
+sed -ri "s/<(text|g)([-[:lower:][:digit:]\.=\"\ \#\(\)]*) font-family=\"DejaVu Sans Condensed\"([-[:lower:][:digit:]=\"\ \#]*)>/<\1\2 font-family=\"DejaVu Sans\" font-stretch=\"condensed\"\3>/g" $i # correct syntax
+sed -i 's/ fill=\"#002060\" font-family=\"Swis721 BlkCn BT\" font-size=\"/ fill=\"#002060\" font-family=\"Liberation Sans\" font-weight=\"bold\" font-size=\"/g' $i #looks similar https://www.dafontfree.net/freefonts-swis721-blkcn-bt-f61164.htm
+sed -i "s/ font-family=\"Blue Highway\"/ font-family=\"Padauk\"/g" $i #looks similar https://www.dafont.com/de/blue-highway.font
 #sed -ri 's/ font-family=\"(Arial|Myriad Pro|ArialNarrow)\"/ font-family=\"Liberation Sans\"/g' $i #all Sans to Liberation
-sed -ri 's/ font-family=\"(Minion Pro|Times|Times New Roman|SVGTimes|Linux Libertine|Linux Biolinum)\"/ font-family=\"Liberation Serif\"/g' $i #all Serif to Liberation
+#sed -ri 's/ font-family=\"(Minion Pro|Times|Times New Roman|SVGTimes)\"/ font-family=\"Liberation Serif\"/g' $i #all Serif to Liberation
 
 #simpifying text
 #sed -i -e ':a' -e 'N' -e '$!ba' -e "s/<tspan/\n<tspan/g" $i
 #sed -i -e ':a' -e 'N' -e '$!ba' -e "s/<\/tspan>/<\/tspan>\n/g" $i
-sed -ri "s/<text ([-[:alnum:]\.=\'\"\ \-\#\(\)]+) style=\"[[:lower:];%[:digit:]\.:\-]+\"([[:lower:] =\:\"]*)>/<text \1>/g" $i #Remove style in text
-sed -ri "s/<tspan ([[:alnum:]\.=\(\)\#\"\ \-]+) style=\"[[:lower:];%[:digit:]\.:\-]+\">/<tspan \1>/g" $i #Remove style in tspan
+sed -ri "s/<text ([-[:alnum:]\.=\'\"\ \#\(\)]+) style=\"[[:lower:];%[:digit:]\.:\-]+\"([[:lower:] =\:\"]*)>/<text \1>/g" $i #Remove style in text
+sed -ri "s/<tspan ([-[:alnum:]\.=\(\)\#\"\ ]+) style=\"[[:lower:];%[:digit:]\.:\-]+\">/<tspan \1>/g" $i #Remove style in tspan
 sed -ri "s/<text ([-[:alnum:]\.=\" \']+)\" stroke-width=\"([[:digit:]\.]+)\"([-[:lower:][:digit:]=\"\:\;\%]*)>/<text \1\"\3>/g" $i #Remove stroke-width in text
 #sed -ri "s/<text ([[:alnum:]= \"\.\'-]+)\" stroke-width=\"([[:digit:]\.]+)\">/<text \1>/g" $i #remove stroke-width in text
 sed -ri "s/<tspan ([-[:alnum:]\.=\" ]+)\" stroke-width=\"([[:digit:]\.px]+)\"([-[:lower:]=\"\ \/]*)>/<tspan \1\"\3>/g" $i #Remove stroke-width in tspan
@@ -134,8 +136,9 @@ sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<\/tspan>[[:space:]]*<\/text>/<\/tspan><\
 sed -ri 's/<text x="([[:digit:]\.]+)" y="([[:digit:]\.]+)" xml:space="preserve">([[:alnum:]\\\$]+)<\/text>/<text x="\1" y="\2">\3<\/text>/g' $i #remove xml:space="preserve" in text if unnecesarry
 sed -ri 's/<text [-[:lower:][:digit:]= \"\:\.]+\/>//g' $i #remove empty text
 sed -ri 's/<tspan [-[:lower:][:digit:]= \"\.]+\/>//g' $i #remove empty tspan
-sed -i "s/<tspan x=\"0\" y=\"0\">/<tspan>/g" $i #remove unnecesarry tspan
+sed -i "s/<tspan x=\"0\" y=\"0\">/<tspan>/g" $i #reduce options in tspan
 sed -ri "s/<tspan>([-[:alnum:]\$\^\\\_\{\}= #\,\"\.\(\)]*)<\/tspan>([ ]*)/\1/g" $i #remove unnecesarry <tspan>...</tspan> without attributes
+sed -ri "s/<tspan[-[:lower:][:digit:]= \"\.]+> <\/tspan>([ ]*)//g" $i #remove useless <tspan (...)> </tspan> without attributes
 
 
 #two lineforward to one lineforward
@@ -164,6 +167,12 @@ sed -ri "s/<path d=\"m([[:digit:]hlmvz \.-]+)\" ([[:alnum:]\"= \.\(\)\#-]*)\" cb
 #QGIS-Files (made file valid)
 sed -i "s/ vector-effect=\"non-scaling-stroke\"//g" $i
 sed -i "s/ solid-color=\"#000000\"//g" $i
+
+#suggestions from https://en.wikipedia.org/wiki/Wikipedia:SVG_help
+sed -i "s/Sans embedded/DejaVu Sans/g" $i
+sed -ri "s/font-size:([0-9]*);/font-size:\1px;/g" $i
+sed -ri "s/tspan x=\"([0-9]*) ([0-9 ]*)\"/tspan x=\"\1\"/g" $i
+sed -ri "s/<g style=\"stroke:none;fill:none\"><text>/<g style=\"stroke:none;fill:rgb(0,0,0)\"><text>/g" $i
 
 echo $i finish
 
