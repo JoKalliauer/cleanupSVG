@@ -10,22 +10,33 @@ Each of the files work independedly.
 
 **[scour4compression.sh](https://github.com/JoKalliauer/cleanupSVG/blob/master/scour4compression.sh)** uses [scour](https://github.com/scour-project/scour) for removing useless staff/metadata, enables viewbox, groups elemtents,...
 
+**[cleaner4compression.sh](https://github.com/JoKalliauer/cleanupSVG/blob/master/cleaner4compression.sh)++ uses [RazrFalcon/svgcleaner](https://github.com/RazrFalcon/svgcleaner)
+
+
 The following script can be run in shell-terminal:
 ```bash
 #!/bin/bash
 
-export minfilesize=0 #1..min file size
+export minfilesize=0 #1..min file size (1...no line breaks)
 export precisiondigits=2 #number of dicits for control points
 export precisiondigitsN=4 #number of dicits
 export meta=0 #0 removes metadata
 
+export prepost=1
 ./svg2validsvg.sh
 
 ./InkscapeBatchConverter.sh
 
 ./scour4compression.sh
+./cleaner4compression.sh #only tested on Windows
 
+if minfilesize==0; then
+ export prepost=2 #Some Postprocessing needs linebreaks to work correctly
+else
+ export prepost=0
+fi
 ./svg2validsvg.sh
+
 
 ```
 
