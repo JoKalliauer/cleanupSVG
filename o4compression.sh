@@ -3,7 +3,7 @@
 for file in *.svg;do
 export fileN=$(echo $file | cut -f1 -d" ")
 export tmp=$(echo $fileN | cut -f1 -d".")
-export i=${tmp}s.svg
+export i=${tmp}o.svg
 
 if [ -z ${precisiondigits+x} ]; then
  precisiondigits=5
@@ -30,29 +30,29 @@ echo #Add a empty line to split the output
 
 if [ $meta == 1 ]; then
  echo keep metadata
- export META= 
+ export META="--enable=removeDoctype --disable=removeMetadata"
 elif [ $meta == 0 ]; then
- export META="--remove-metadata --remove-descriptive-elements"
+ export META="--disable=removeDoctype --enable=removeMetadata"
  echo delete META=$META
 else
  echo imput not allowed meta is $meta
 fi
 
 if [ $minfilesize == 0 ]; then
- export INDENT= 
+ export INDENT="--pretty --indent=1"
 elif [ $minfilesize == 1 ]; then
  export INDENT="--indent=none --no-line-breaks"
 else
  echo some error minfilesize is $minfilesize
 fi
 
-echo scour ${file} to $i begin, dig=${precisiondigits}, digN=${precisiondigitsN}, min=${minfilesize}, meta=$meta, META= $META, INDENT=$INDENT
+echo svgo ${file} to $i begin, dig=${precisiondigits}, digN=${precisiondigitsN}, min=${minfilesize}, meta=$meta, META= $META, INDENT=$INDENT
 
-scour -i ${file} -o $i --enable-viewboxing --enable-id-stripping --enable-comment-stripping --shorten-ids --remove-titles --remove-descriptions --disable-embed-rasters --strip-xml-space  --set-precision=${precisiondigitsN} --set-c-precision=${precisiondigits} --create-groups $META $INDENT --renderer-workaround
+svgo -i ${file} -o $i -p $precisiondigitsN $META --enable=removeRasterImages --enable=removeScriptElement --enable=removeStyleElement --disable=removeXMLProcInst --disable=removeUnknownsAndDefaults --disable=mergePaths $INDENT
 
 
-echo mv ./${file} ./${tmp}3.xml
-mv ./${file} ./${tmp}3.xml
+echo mv ./${file} ./${tmp}5.xml
+mv ./${file} ./${tmp}5.xml
 
 echo scour $i finish
 

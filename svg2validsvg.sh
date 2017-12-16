@@ -25,7 +25,7 @@ export tmp=$(echo $fileN | cut -f1 -d".")
 #If you want to overwrite the exisiting file, without any backup, delete the following three lines
 export i=${tmp}_.svg
 cp ./"${file}" ./$i
-mv ./"${file}" ./${tmp}bak1.xml
+mv ./"${file}" ./${tmp}1.xml
 
 echo 
 echo $i start:
@@ -38,6 +38,9 @@ fi
 #Remove W3C-invalid elements
 sed -ri "s/ text-align=\"(end|center)\"//g"  ${i}
 sed -i "s/ aria-label=\"[[:digit:]]\"//g" $i
+sed -i "s/ stroke-linejoin=\"null\"//g" $i
+sed -i "s/ stroke-linecap=\"null\"//g" $i
+sed -i "s/ stroke-width=\"null\"//g" $i
 
 : <<'END'
 #dissolve FlowtingText
@@ -73,9 +76,11 @@ sed -i "s/ transform=\"scale(1)\"//g" $i
 sed -i -e 's/<svg /\n<svg /' $i
 
 if [ -z ${meta+x} ]; then
- echo Metadata kept, but DOCTYPE added
- meta=2 
+ echo Metadata kept, no DOCTYPE added
+ meta=1
 fi
+
+
  if [ $meta != 1 ]; then  
   if grep -qE "<svg ([[:lower:][:digit:]=\"\. -]*)version=\"1.0\"" $i; then
    sed -i -e ':a' -e 'N' -e '$!ba' -e 's/\?>[[:space:]]*<svg /\?>\n<\!DOCTYPE svg PUBLIC \"-\/\/W3C\/\/DTD SVG 1.0\/\/EN\" \"http:\/\/www.w3.org\/TR\/2001\/REC-SVG-20010904\/DTD\/svg10.dtd\">\n<svg /' $i
@@ -111,6 +116,7 @@ sed -i 's/ font-family=\"Bitstream Vera Sans Mono\"/ font-family=\"DejaVu Sans M
 sed -i 's/ font-family=\"Times New Roman\"/ font-family=\"Liberation Serif\"/g' $i #as automatic
 sed -ri "s/<(text|g)([-[:lower:][:digit:]\.=\"\ \#\(\)]*) font-family=\"DejaVu Sans Condensed\"([-[:lower:][:digit:]=\"\ \#]*)>/<\1\2 font-family=\"DejaVu Sans\" font-stretch=\"condensed\"\3>/g" $i # correct syntax
 sed -i 's/ fill=\"#002060\" font-family=\"Swis721 BlkCn BT\" font-size=\"/ fill=\"#002060\" font-family=\"Liberation Sans\" font-weight=\"bold\" font-size=\"/g' $i #looks similar https://www.dafontfree.net/freefonts-swis721-blkcn-bt-f61164.htm
+sed -i 's/ font-family=\"Helvetica\"/ font-family=\"Garuda\"/g' $i #looks similar
 sed -i "s/ font-family=\"Blue Highway\"/ font-family=\"Padauk\"/g" $i #looks similar https://www.dafont.com/de/blue-highway.font
 #sed -ri 's/ font-family=\"(Arial|Myriad Pro|ArialNarrow)\"/ font-family=\"Liberation Sans\"/g' $i #all Sans to Liberation
 #sed -ri 's/ font-family=\"(Minion Pro|Times|Times New Roman|SVGTimes)\"/ font-family=\"Liberation Serif\"/g' $i #all Serif to Liberation
@@ -159,7 +165,7 @@ sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<xapGImg:image>([[:alnum:][:space:]\/+])*
 sed -i "s/<style>/<style type=\"text\/css\">/" $i
 
 #Repair WARNING in <mask> with id=ay: Mask element found with maskUnits set. It will not be rendered properly by Wikimedia's SVG renderer. See https://phabricator.wikimedia.org/T55899 for details
-sed -ri "s/<mask id=\"([[:lower:]]+)\" ([[:lower:] =\"[:digit:]]+) maskUnits=\"userSpaceOnUse\">/<mask id=\"\1\" \2>/g" $i
+sed -ri "s/<mask id=\"([[:lower:]]+)\"([[:lower:] =\"[:digit:]]*) maskUnits=\"userSpaceOnUse\">/<mask id=\"\1\" \2>/g" $i
 
 #ArcMap-problems (made file valid, removes cbs= and gem=)
 sed -ri "s/<path d=\"m([[:digit:]hlmvz \.-]+)\" ([[:alnum:]\"= \.\(\)\#-]*)\" cbs=\"[[:digit:]GM]*\" gem=\"[[:alpha:]0 \.\(\)-]*\"\/>/<path d=\"m\1\" \2\"\/>/g" $i

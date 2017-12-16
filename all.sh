@@ -5,17 +5,13 @@ export precisiondigits=2 #number of dicits for control points
 export precisiondigitsN=4 #number of dicits
 export meta=0 #0 removes metadata
 
-export prepost=1
 ./svg2validsvg.sh
 
 ./InkscapeBatchConverter.sh
 
 ./scour4compression.sh
 ./cleaner4compression.sh #only tested on Windows
+./o4compression.sh #only tested on Windows
+./cleaner4compression.sh #it is fast and makes a good readable file
 
-if minfilesize==0; then
- export prepost=2 #Some Postprocessing needs linebreaks to work correctly
-else
- export prepost=0
-fi
 ./svg2validsvg.sh
