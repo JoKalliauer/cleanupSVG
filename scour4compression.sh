@@ -48,7 +48,7 @@ fi
 
 echo scour ${file} to $i begin, dig=${precisiondigits}, digN=${precisiondigitsN}, min=${minfilesize}, meta=$meta, META= $META, INDENT=$INDENT
 
-scour -i ${file} -o $i --enable-viewboxing --enable-id-stripping --enable-comment-stripping --shorten-ids --remove-titles --remove-descriptions --disable-embed-rasters --strip-xml-space  --set-precision=${precisiondigitsN} --set-c-precision=${precisiondigits} --create-groups $META $INDENT --renderer-workaround
+scour -i ${file} -o $i --enable-viewboxing --enable-comment-stripping --remove-titles --remove-descriptions --disable-embed-rasters --strip-xml-space  --set-precision=${precisiondigitsN} --set-c-precision=${precisiondigits} --create-groups $META $INDENT --renderer-workaround --keep-unreferenced-defs
 
 
 echo mv ./${file} ./${tmp}3.xml

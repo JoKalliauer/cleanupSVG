@@ -48,7 +48,7 @@ fi
 
 echo svgo ${file} to $i begin, dig=${precisiondigits}, digN=${precisiondigitsN}, min=${minfilesize}, meta=$meta, META= $META, INDENT=$INDENT
 
-svgo -i ${file} -o $i -p $precisiondigitsN $META --enable=removeRasterImages --enable=removeScriptElement --enable=removeStyleElement --disable=removeXMLProcInst --disable=removeUnknownsAndDefaults --disable=mergePaths $INDENT
+svgo -i ${file} -o $i -p $precisiondigitsN $META --enable=removeScriptElement --disable=removeXMLProcInst --disable=removeUnknownsAndDefaults --disable=mergePaths $INDENT
 
 
 echo mv ./${file} ./${tmp}5.xml

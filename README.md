@@ -12,6 +12,8 @@ Each of the files work independedly.
 
 **[cleaner4compression.sh](https://github.com/JoKalliauer/cleanupSVG/blob/master/cleaner4compression.sh)** uses [RazrFalcon/svgcleaner](https://github.com/RazrFalcon/svgcleaner)
 
+**[o4compression.sh](https://github.com/JoKalliauer/cleanupSVG/blob/master/o4compression.sh)** uses [svgo](https://github.com/svg/svgo))
+
 
 The following script can be run in shell-terminal:
 ```bash
@@ -22,19 +24,15 @@ export precisiondigits=2 #number of dicits for control points
 export precisiondigitsN=4 #number of dicits
 export meta=0 #0 removes metadata
 
-export prepost=1
 ./svg2validsvg.sh
 
 ./InkscapeBatchConverter.sh
 
 ./scour4compression.sh
 ./cleaner4compression.sh #only tested on Windows
+./o4compression.sh #only tested on Windows
+./cleaner4compression.sh #it is fast and makes a good readable file
 
-if minfilesize==0; then
- export prepost=2 #Some Postprocessing needs linebreaks to work correctly
-else
- export prepost=0
-fi
 ./svg2validsvg.sh
 
 
@@ -47,10 +45,6 @@ This script is tested on<br/>
 Similar scripts<br/>
 -[SVGOMG](https://github.com/jakearchibald/svgomg)<br/>
 -[svgo](https://github.com/svg/svgo)
+-[scour](https://github.com/scour-project/scour)
+-[svgcleaner](https://github.com/RazrFalcon/svgcleaner)
 
-I am working on a grafical userinterface:<br/>
-https://jokalliauer.github.io/cleanupSVG/
-
-Some parts are from:<br/>
--[SVGOMG](https://github.com/jakearchibald/svgomg)<br/>
--[InkscapeBatchConverter](http://ge.tt/7C8JFmF1/v/0?c)

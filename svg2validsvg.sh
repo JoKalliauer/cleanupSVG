@@ -42,26 +42,12 @@ sed -i "s/ stroke-linejoin=\"null\"//g" $i
 sed -i "s/ stroke-linecap=\"null\"//g" $i
 sed -i "s/ stroke-width=\"null\"//g" $i
 
-: <<'END'
-#dissolve FlowtingText
-if prepost=2; then
- #if it is postprocessing after scour do: (ensures that only one flowRoot is in one line)
- sed -ri "s/<flowRoot([-[:lower:][:digit:].=\" :\(\)]*)><rect x=([[:lower:][:digit:]=\.\" ]+)\/>([-<>[:alnum:]\.=\" \/]+)<\/flowRoot>/<text\1><rect x=\2 fill=\"none\"\/>\3<\/text>/" $i
-fi
-sed -i "s/<flowRegion/<g/g" $i
-sed -i "s/<\/flowRegion>/<\/g>/g" $i
-sed -i "s/<flowPara\/>//g" $i
-sed -ri "s/<flowPara([-[:lower:][:digit:]=\" ]*)>([[:alnum:]: \.,!\-\/]+)<\/flowPara>/<text\1>\2<\/text>/g" $i
-sed -ri "s/<flowPara([-[:lower:][:digit:]=\" ]*)>([[:alnum:]: \.,!\-\/]+)<\/flowPara>/<tspan\1>\2<\/tspan>/g" $i
-
-END
-
 #betaphase: remove flow Text in svg
-#if prepost=2; then
- sed -ri "s/<flowRoot([-[:alnum:].=\" \:\(\)\%\#]*)><flowRegion><rect x=\"([[:digit:]\. ]+)\" y=\"([-[:digit:]\. ]+)\"([[:lower:][:digit:]=\.\" ]+)\/><\/flowRegion><flowPara([-[:lower:][:digit:]\.=\" \:]+)>([[:alnum:] \{\}\ \ ]+)<\/flowPara><\/flowRoot>/<text x=\"\2\" y=\"\3\"\1><tspan x=\"\2\" y=\"\3\"><tspan x=\"\2\" y=\"\3\"\5>\6<\/tspan><\/tspan><\/text>/g" $i
-#fi
+sed -ri "s/<flowRoot([-[:alnum:]\.=\" \:\(\)\%\#\,]*)><flowRegion( id=\"flowRegion[[:digit:]]{4}\"|)><rect( id=\"rect[[:digit:]]{4}\"|) x=\"([[:digit:]\. ]+)\" y=\"([-[:digit:]\. ]+)\"([[:lower:][:digit:]=\.\" ]+)\/><\/flowRegion><flowPara([-[:alnum:]\.=\" \:]+)>([[:alnum:] \{\}\ \ ]+)<\/flowPara><\/flowRoot>/<text x=\"\4\" y=\"\5\"\1><tspan x=\"\4\" y=\"\5\"\7>\8<\/tspan><\/text>/g" $i
 
-#END
+
+
+
 
 #remove mostly useless elements
 sed -ri "s/ letter-spacing=\"0([px]*)\"//g" $i
@@ -110,6 +96,7 @@ sed -i 's/ font-family=\"Serif\"/ font-family=\"serif\"/g' $i #as automatic
 sed -i 's/ font-family=\"Sans-serif\"/ font-family=\"sans-serif\"/g' $i #as automatic
 sed -i 's/ font-family=\"Sans-Serif\"/ font-family=\"sans-serif\"/g' $i #as automatic
 sed -i 's/ font-family=\"Arial\"/ font-family=\"Liberation Sans\"/g' $i #as automatic
+sed -i 's/ font-family=\"Arial, sans-serif\"/ font-family=\"Liberation Sans, sans-serif\"/g' $i #as automatic
 sed -i 's/ font-family=\"Bitstream Vera Serif\"/ font-family=\"DejaVu Serif\"/g' $i #as automatic
 sed -i 's/ font-family=\"Bitstream Vera Sans\"/ font-family=\"DejaVu Sans\"/g' $i #as automatic
 sed -i 's/ font-family=\"Bitstream Vera Sans Mono\"/ font-family=\"DejaVu Sans Mono\"/g' $i #as automatic
@@ -118,7 +105,7 @@ sed -ri "s/<(text|g)([-[:lower:][:digit:]\.=\"\ \#\(\)]*) font-family=\"DejaVu S
 sed -i 's/ fill=\"#002060\" font-family=\"Swis721 BlkCn BT\" font-size=\"/ fill=\"#002060\" font-family=\"Liberation Sans\" font-weight=\"bold\" font-size=\"/g' $i #looks similar https://www.dafontfree.net/freefonts-swis721-blkcn-bt-f61164.htm
 sed -i 's/ font-family=\"Helvetica\"/ font-family=\"Garuda\"/g' $i #looks similar
 sed -i "s/ font-family=\"Blue Highway\"/ font-family=\"Padauk\"/g" $i #looks similar https://www.dafont.com/de/blue-highway.font
-#sed -ri 's/ font-family=\"(Arial|Myriad Pro|ArialNarrow)\"/ font-family=\"Liberation Sans\"/g' $i #all Sans to Liberation
+sed -ri 's/ font-family=\"(Arial|Myriad Pro|ArialNarrow|ArialMT)\"/ font-family=\"Liberation Sans\"/g' $i #all Sans to Liberation
 #sed -ri 's/ font-family=\"(Minion Pro|Times|Times New Roman|SVGTimes)\"/ font-family=\"Liberation Serif\"/g' $i #all Serif to Liberation
 
 #simpifying text
@@ -129,7 +116,7 @@ sed -ri "s/<tspan ([-[:alnum:]\.=\(\)\#\"\ ]+) style=\"[[:lower:];%[:digit:]\.:\
 sed -ri "s/<text ([-[:alnum:]\.=\" \']+)\" stroke-width=\"([[:digit:]\.]+)\"([-[:lower:][:digit:]=\"\:\;\%]*)>/<text \1\"\3>/g" $i #Remove stroke-width in text
 #sed -ri "s/<text ([[:alnum:]= \"\.\'-]+)\" stroke-width=\"([[:digit:]\.]+)\">/<text \1>/g" $i #remove stroke-width in text
 sed -ri "s/<tspan ([-[:alnum:]\.=\" ]+)\" stroke-width=\"([[:digit:]\.px]+)\"([-[:lower:]=\"\ \/]*)>/<tspan \1\"\3>/g" $i #Remove stroke-width in tspan
-sed -ri "s/<tspan x=\"([[:digit:]\.]+) ([[:digit:]\. ]+)\" y=\"([[:digit:]\. ]+)\"([-[:alnum:]\.\"\#\ =]*)>/<tspan x=\"\1\" y=\"\3\"\4>/g" $i # remove multipe x-koordinates in tspan (solves librsvg-Bug)
+sed -ri "s/<tspan([-[:alnum:]\.\"\#\ =]*) x=\"([[:digit:]\.]+) ([[:digit:]\. ]+)\" y=\"([[:digit:]\. ]+)\"([-[:alnum:]\.\"\#\ =]*)>/<tspan x=\"\2\" y=\"\4\"\1\5>/g" $i # remove multipe x-koordinates in tspan (solves librsvg-Bug)
 #sed -ri "s/<text x=\"([[:digit:]\.]+) ([[:digit:]\. ]+)\" y=\"([[:digit:]\. ]+)\"([-[:alnum:]\.\"\#\ =]*)>/<text x=\"\1\" y=\"\3\"\4>/g" $i # remove multipe x-koordinates in text (solves librsvg-Bug)
 #sed -ri "s/<text x=\"([[:digit:]\. ]+)\" y=\"([[:digit:]\.]+) ([[:digit:]\. ]+)\"([-[:alnum:] =\"]*)>/<text x=\"\1\" y=\"\2\"\4>/g" $i #remove multiple y-koordinates in text
 #sed -ri "s/<text([xy\ [:digit:]\"\.\=]*) fill=\"\#[[:xdigit:]]{3,6}\"/<text\1/g" $i #remove fill in text
@@ -165,7 +152,7 @@ sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<xapGImg:image>([[:alnum:][:space:]\/+])*
 sed -i "s/<style>/<style type=\"text\/css\">/" $i
 
 #Repair WARNING in <mask> with id=ay: Mask element found with maskUnits set. It will not be rendered properly by Wikimedia's SVG renderer. See https://phabricator.wikimedia.org/T55899 for details
-sed -ri "s/<mask id=\"([[:lower:]]+)\"([[:lower:] =\"[:digit:]]*) maskUnits=\"userSpaceOnUse\">/<mask id=\"\1\" \2>/g" $i
+sed -ri "s/<mask id=\"([[:alpha:]]+)\"([[:lower:] =\"[:digit:]]*) maskUnits=\"userSpaceOnUse\">/<mask id=\"\1\" \2>/g" $i
 
 #ArcMap-problems (made file valid, removes cbs= and gem=)
 sed -ri "s/<path d=\"m([[:digit:]hlmvz \.-]+)\" ([[:alnum:]\"= \.\(\)\#-]*)\" cbs=\"[[:digit:]GM]*\" gem=\"[[:alpha:]0 \.\(\)-]*\"\/>/<path d=\"m\1\" \2\"\/>/g" $i
