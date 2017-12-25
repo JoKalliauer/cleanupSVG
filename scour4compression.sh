@@ -48,7 +48,7 @@ fi
 
 echo scour ${file} to $i begin, dig=${precisiondigits}, digN=${precisiondigitsN}, min=${minfilesize}, meta=$meta, META= $META, INDENT=$INDENT
 
-scour -i ${file} -o $i --enable-viewboxing --enable-comment-stripping --remove-titles --remove-descriptions --disable-embed-rasters --strip-xml-space  --set-precision=${precisiondigitsN} --set-c-precision=${precisiondigits} --create-groups $META $INDENT --renderer-workaround --keep-unreferenced-defs
+scour -i ${file} -o $i --enable-viewboxing --enable-comment-stripping --remove-titles --remove-descriptions --disable-embed-rasters --strip-xml-space  --set-precision=${precisiondigitsN} --set-c-precision=${precisiondigits} --create-groups $META $INDENT --renderer-workaround #--keep-unreferenced-defs # --enable-id-stripping 
 
 
 echo mv ./${file} ./${tmp}3.xml
@@ -57,4 +57,10 @@ mv ./${file} ./${tmp}3.xml
 echo scour $i finish
 
 done
+
+DeactivateAll=<<END
+
+scour ${file} $i --disable-simplify-colors --disable-style-to-xml  --disable-group-collapsing --keep-editor-data --keep-unreferenced-defs --no-renderer-workaround 
+
+END
 

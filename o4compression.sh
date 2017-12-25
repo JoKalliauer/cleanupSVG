@@ -41,7 +41,7 @@ fi
 if [ $minfilesize == 0 ]; then
  export INDENT="--pretty --indent=1"
 elif [ $minfilesize == 1 ]; then
- export INDENT="--indent=none --no-line-breaks"
+ export INDENT="--indent=0"
 else
  echo some error minfilesize is $minfilesize
 fi
@@ -54,7 +54,7 @@ svgo -i ${file} -o $i -p $precisiondigitsN $META --enable=removeScriptElement --
 echo mv ./${file} ./${tmp}5.xml
 mv ./${file} ./${tmp}5.xml
 
-echo scour $i finish
+echo svgo $i finish
 
 done
 
