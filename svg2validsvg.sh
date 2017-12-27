@@ -18,13 +18,14 @@
 
 for file in *.svg;do
 
-export i=$file #will be overritan later
+export i=$file #i will be overritan later
 export fileN=$(echo $file | cut -f1 -d" ") #remove spaces if exsiting (and everything after)
 export tmp=$(echo $fileN | cut -f1 -d".")
 
+
 #If you want to overwrite the exisiting file, without any backup, delete the following three lines
-export i=${tmp}_.svg
-cp ./"${file}" ./$i
+export i=/dev/${tmp}_.svg
+cp ./"${file}" $i
 mv ./"${file}" ./${tmp}1.xml
 
 echo 
@@ -37,26 +38,21 @@ fi
 
 #Remove W3C-invalid elements
 sed -ri "s/ text-align=\"(end|center)\"//g"  ${i}
-sed -i "s/ aria-label=\"[[:digit:]]\"//g" $i
-sed -i "s/ stroke-linejoin=\"null\"//g" $i
-sed -i "s/ stroke-linecap=\"null\"//g" $i
-sed -i "s/ stroke-width=\"null\"//g" $i
+sed -i "s/ aria-label=\"[[:digit:]]\"//g;s/ stroke-linejoin=\"null\"//g;s/ stroke-linecap=\"null\"//g;s/ stroke-width=\"null\"//g" $i
+sed -i "s/ vector-effect=\"non-scaling-stroke\"//g;s/ solid-color=\"#000000\"//g" $i #QGIS-Files (made file valid)
+
 
 #betaphase: remove flow Text in svg
-sed -ri "s/<flowRoot([-[:alnum:]\.=\" \:\(\)\%\#\,]*)><flowRegion( id=\"flowRegion[[:digit:]]{4}\"|)><rect( id=\"rect[[:digit:]]{4}\"|) x=\"([[:digit:]\. ]+)\" y=\"([-[:digit:]\. ]+)\"([[:lower:][:digit:]=\.\" ]+)\/><\/flowRegion><flowPara([-[:alnum:]\.=\" \:]+)>([[:alnum:] \{\}\ \ ]+)<\/flowPara><\/flowRoot>/<text x=\"\4\" y=\"\5\"\1><tspan x=\"\4\" y=\"\5\"\7>\8<\/tspan><\/text>/g" $i
-
-
-
+sed -ri "s/<flowRoot([-[:alnum:]\.=\" \:\(\)\%\#\,\']*)><flowRegion( id=\"flowRegion[-[:digit:]]{4,7}\"|)><rect( id=\"rect[-[:digit:]]{4,7}\"|) x=\"([[:digit:]\. ]+)\" y=\"([-[:digit:]\. ]+)\"([[:lower:][:digit:]=\.\" \#]+)\/><\/flowRegion><flowPara([-[:alnum:]\.=\" \:\#]+)>([[:alnum:] \{\}\ \ ]+)<\/flowPara><\/flowRoot>/<text x=\"\4\" y=\"\5\"\1><tspan x=\"\4\" y=\"\5\"\7>\8<\/tspan><\/text>/g" $i
+sed -i -e ':a' -e 'N' -e '$!ba' -e "s/<flowRoot>[[:space:]]*<flowRegion\/>[[:space:]]*<flowDiv\/>[[:space:]]*<\/flowRoot>//g" $i #delete empty flowRoot
+sed -i -e ':a' -e 'N' -e '$!ba' -e "s/<flowRoot>[[:space:]]*<flowRegion>[[:space:]]*<path[-[:alnum:]\.=\"\ \#]*\/>[[:space:]]*<\/flowRegion>[[:space:]]*<flowPara\/>[[:space:]]*<\/flowRoot>//g" $i #delete empty flowRoot
 
 
 #remove mostly useless elements
 sed -ri "s/ letter-spacing=\"0([px]*)\"//g" $i
 sed -ri "s/ word-spacing=\"0([px]*)\"//g" $i
-sed -i "s/ stroke-width=\"1\"//g" $i
-#sed -i "s/ fill-rule=\"evenodd\"//g" $i
-sed -i "s/ stroke-linecap=\"square\"//g" $i 
+sed -i "s/ stroke-width=\"1\"//g;s/ stroke-linecap=\"square\"//g;s/ transform=\"scale(1)\"//g" $i
 sed -i "s/ stroke-miterlimit=\"10\"//g" $i #Bug in IncscapePDFImport 
-sed -i "s/ transform=\"scale(1)\"//g" $i
 
 #add DOCTYPE
 sed -i -e 's/<svg /\n<svg /' $i
@@ -93,31 +89,32 @@ sed -ri "s/font-family=\"'([[:alnum:] ]*)'\"/font-family=\'\1\'/g" $i
 #Change to Wikis Fallbackfont https://commons.wikimedia.org/wiki/Help:SVG#fallback to be compatible with https://meta.wikimedia.org/wiki/SVG_fonts
 sed -i 's/ font-family=\"Sans\"/ font-family=\"sans\"/g' $i #as automatic
 sed -i 's/ font-family=\"Serif\"/ font-family=\"serif\"/g' $i #as automatic
-sed -i 's/ font-family=\"Sans-serif\"/ font-family=\"sans-serif\"/g' $i #as automatic
-sed -i 's/ font-family=\"Sans-Serif\"/ font-family=\"sans-serif\"/g' $i #as automatic
+sed -ri 's/ font-family=\"Sans-(s|S)erif\"/ font-family=\"sans-serif\"/g' $i #as automatic
 sed -i 's/ font-family=\"Arial\"/ font-family=\"Liberation Sans\"/g' $i #as automatic
 sed -i 's/ font-family=\"Arial, sans-serif\"/ font-family=\"Liberation Sans, sans-serif\"/g' $i #as automatic
 sed -i 's/ font-family=\"Bitstream Vera Serif\"/ font-family=\"DejaVu Serif\"/g' $i #as automatic
-sed -i 's/ font-family=\"Bitstream Vera Sans\"/ font-family=\"DejaVu Sans\"/g' $i #as automatic
+sed -ri 's/ font-family=\"(Bitstream Vera Sans|DejaVuSans)\"/ font-family=\"DejaVu Sans\"/g' $i #as automatic
 sed -i 's/ font-family=\"Bitstream Vera Sans Mono\"/ font-family=\"DejaVu Sans Mono\"/g' $i #as automatic
 sed -i 's/ font-family=\"Times New Roman\"/ font-family=\"Liberation Serif\"/g' $i #as automatic
+#sed -i 's/ font-family=\"Albany embedded\"/ font-family=\"Loma\"/g' $i #as automatic
 sed -ri "s/<(text|g)([-[:lower:][:digit:]\.=\"\ \#\(\)]*) font-family=\"DejaVu Sans Condensed\"([-[:lower:][:digit:]=\"\ \#]*)>/<\1\2 font-family=\"DejaVu Sans\" font-stretch=\"condensed\"\3>/g" $i # correct syntax
 sed -i 's/ fill=\"#002060\" font-family=\"Swis721 BlkCn BT\" font-size=\"/ fill=\"#002060\" font-family=\"Liberation Sans\" font-weight=\"bold\" font-size=\"/g' $i #looks similar https://www.dafontfree.net/freefonts-swis721-blkcn-bt-f61164.htm
-sed -i 's/ font-family=\"Helvetica\"/ font-family=\"Garuda\"/g' $i #looks similar
+sed -i 's/ font-family=\"Helvetica\"/ font-family=\"Garuda\"/g' $i #looks similar https://commons.wikimedia.org/wiki/File_talk:Meta_SVG_fonts.svg
 sed -i "s/ font-family=\"Blue Highway\"/ font-family=\"Padauk\"/g" $i #looks similar https://www.dafont.com/de/blue-highway.font
-sed -ri 's/ font-family=\"(Arial|Myriad Pro|ArialNarrow|ArialMT)\"/ font-family=\"Liberation Sans\"/g' $i #all Sans to Liberation
-#sed -ri 's/ font-family=\"(Minion Pro|Times|Times New Roman|SVGTimes)\"/ font-family=\"Liberation Serif\"/g' $i #all Serif to Liberation
+sed -i "s/ font-family=\"Nimbus Mono L\"/ font-family=\"TlwgMono\"/g" $i #looks similar https://en.wikipedia.org/wiki/Nimbus_Mono_L
+#sed -ri 's/ font-family=\"(Arial|Myriad Pro|ArialNarrow|ArialMT)\"/ font-family=\"Liberation Sans\"/g' $i #all Sans to Liberation
+sed -ri 's/ font-family=\"(Minion Pro|Times|Times New Roman|SVGTimes)\"/ font-family=\"Liberation Serif\"/g' $i #all Serif to Liberation
 
 #simpifying text
 #sed -i -e ':a' -e 'N' -e '$!ba' -e "s/<tspan/\n<tspan/g" $i
 #sed -i -e ':a' -e 'N' -e '$!ba' -e "s/<\/tspan>/<\/tspan>\n/g" $i
-sed -ri "s/<text ([-[:alnum:]\.=\'\"\ \#\(\)]+) style=\"[[:lower:];%[:digit:]\.:\-]+\"([[:lower:] =\:\"]*)>/<text \1>/g" $i #Remove style in text
+sed -ri "s/<text ([-[:alnum:]\.=\'\"\ \#\(\)]+) style=\"[[:lower:];%[:digit:]\.:\-]+\"([[:lower:] =\:\"]*)>/<text \1\2>/g" $i #Remove style in text
 sed -ri "s/<tspan ([-[:alnum:]\.=\(\)\#\"\ ]+) style=\"[[:lower:];%[:digit:]\.:\-]+\">/<tspan \1>/g" $i #Remove style in tspan
 sed -ri "s/<text ([-[:alnum:]\.=\" \']+)\" stroke-width=\"([[:digit:]\.]+)\"([-[:lower:][:digit:]=\"\:\;\%]*)>/<text \1\"\3>/g" $i #Remove stroke-width in text
 #sed -ri "s/<text ([[:alnum:]= \"\.\'-]+)\" stroke-width=\"([[:digit:]\.]+)\">/<text \1>/g" $i #remove stroke-width in text
 sed -ri "s/<tspan ([-[:alnum:]\.=\" ]+)\" stroke-width=\"([[:digit:]\.px]+)\"([-[:lower:]=\"\ \/]*)>/<tspan \1\"\3>/g" $i #Remove stroke-width in tspan
-sed -ri "s/<tspan([-[:alnum:]\.\"\#\ =]*) x=\"([[:digit:]\.]+) ([[:digit:]\. ]+)\" y=\"([[:digit:]\. ]+)\"([-[:alnum:]\.\"\#\ =]*)>/<tspan x=\"\2\" y=\"\4\"\1\5>/g" $i # remove multipe x-koordinates in tspan (solves librsvg-Bug)
-#sed -ri "s/<text x=\"([[:digit:]\.]+) ([[:digit:]\. ]+)\" y=\"([[:digit:]\. ]+)\"([-[:alnum:]\.\"\#\ =]*)>/<text x=\"\1\" y=\"\3\"\4>/g" $i # remove multipe x-koordinates in text (solves librsvg-Bug)
+sed -ri "s/<tspan([-[:alnum:]\.\"\#\ =]*) x=\"([-[:digit:]\.]+)( |,)([-[:digit:]\. ,]+)\" y=\"([-[:digit:]\. ]+)\"([-[:alnum:]\.\"\#\ =]*)>/<tspan x=\"\2\" y=\"\5\"\1\6>/g" $i # remove multipe x-koordinates in tspan (solves librsvg-Bug)
+sed -ri "s/<text x=\"([-[:digit:]\.]+) ([-[:digit:]\. ]+)\" y=\"([-[:digit:]\. ]+)\"([-[:alnum:]\.\"\#\ =]*)>/<text x=\"\1\" y=\"\3\"\4>/g" $i # remove multipe x-koordinates in text (solves librsvg-Bug)
 #sed -ri "s/<text x=\"([[:digit:]\. ]+)\" y=\"([[:digit:]\.]+) ([[:digit:]\. ]+)\"([-[:alnum:] =\"]*)>/<text x=\"\1\" y=\"\2\"\4>/g" $i #remove multiple y-koordinates in text
 #sed -ri "s/<text([xy\ [:digit:]\"\.\=]*) fill=\"\#[[:xdigit:]]{3,6}\"/<text\1/g" $i #remove fill in text
 sed -ri "s/<text ([[:alnum:]= \"\.-]+) stroke-width=\"([[:digit:]\.]+)\">/<text \1>/g" $i #remove stroke-width in text
@@ -130,7 +127,7 @@ sed -ri 's/<text x="([[:digit:]\.]+)" y="([[:digit:]\.]+)" xml:space="preserve">
 sed -ri 's/<text [-[:lower:][:digit:]= \"\:\.]+\/>//g' $i #remove empty text
 sed -ri 's/<tspan [-[:lower:][:digit:]= \"\.]+\/>//g' $i #remove empty tspan
 sed -i "s/<tspan x=\"0\" y=\"0\">/<tspan>/g" $i #reduce options in tspan
-sed -ri "s/<tspan>([-[:alnum:]\$\^\\\_\{\}= #\,\"\.\(\)]*)<\/tspan>([ ]*)/\1/g" $i #remove unnecesarry <tspan>...</tspan> without attributes
+sed -ri "s/<tspan>([-[:alnum:]\$\^\\\_\{\}= #\,\"\.\(\)\’\&\;]*)<\/tspan>([ ]*)/\1/g" $i #remove unnecesarry <tspan>...</tspan> without attributes
 sed -ri "s/<tspan[-[:lower:][:digit:]= \"\.]+> <\/tspan>([ ]*)//g" $i #remove useless <tspan (...)> </tspan> without attributes
 
 
@@ -157,9 +154,6 @@ sed -ri "s/<mask id=\"([[:alpha:]]+)\"([[:lower:] =\"[:digit:]]*) maskUnits=\"us
 #ArcMap-problems (made file valid, removes cbs= and gem=)
 sed -ri "s/<path d=\"m([[:digit:]hlmvz \.-]+)\" ([[:alnum:]\"= \.\(\)\#-]*)\" cbs=\"[[:digit:]GM]*\" gem=\"[[:alpha:]0 \.\(\)-]*\"\/>/<path d=\"m\1\" \2\"\/>/g" $i
 
-#QGIS-Files (made file valid)
-sed -i "s/ vector-effect=\"non-scaling-stroke\"//g" $i
-sed -i "s/ solid-color=\"#000000\"//g" $i
 
 #suggestions from https://en.wikipedia.org/wiki/Wikipedia:SVG_help
 sed -i "s/Sans embedded/DejaVu Sans/g" $i
@@ -167,6 +161,51 @@ sed -ri "s/font-size:([0-9]*);/font-size:\1px;/g" $i
 sed -ri "s/tspan x=\"([0-9]*) ([0-9 ]*)\"/tspan x=\"\1\"/g" $i
 sed -ri "s/<g style=\"stroke:none;fill:none\"><text>/<g style=\"stroke:none;fill:rgb(0,0,0)\"><text>/g" $i
 
+mv $i ${tmp}_.svg
 echo $i finish
 
 done
+
+#works only after scour
+DeleteOnDemand=<< END
+#remove objects:
+sed -ri "s/ <rect( id=\"rect[-[:digit:]]{4,7}\"|) x=\"([-[:digit:]\. ]+)\" y=\"([-[:digit:]\. ]+)\"([-[:alnum:]=\.\" \#\(\)]+)\/>//g" $i #delete all Rectangles
+
+sed -ri "s/ <path( id=\"path[-[:digit:]]{4,7}\"|) ([-[:alnum:]=\.\" \#\(\)\;\:\,]+)\/>//g" $i #delete all Path
+
+sed -ri "s/ <circle [-[:lower:][:digit:]\"\.= #\(\)]*\/>//g" $i #delete circels
+
+sed -ri "s/ <ellipse [-[:lower:][:digit:]\"\.= #\(\)]*\/>//g" $i #delete ellipses
+
+#------------------------
+
+#textPath
+#sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/ <text>[[:space:]]*<textPath xlink:href=\"#[[:alpha:]]\">[[:space:]]*<tspan [-[:alnum:]´\.= \"]*\">[[:alnum:] ']*<\/tspan>[[:space:]]*<\/textPath>[[:space:]]*<\/text>//g" $i #delete al textPath
+
+#------------------------
+
+#delete text
+sed -ri "s/ <text ([-[:alnum:]=\.\" \#\(\)\;\:\%]+)>.*<\/text>//g" $i #delete all oneline-text
+
+sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/ <text ([-[:alnum:]=\.\" \#\(\)\;\:\%]+)>([-[:alnum:][:space:] \'\’\“\”\/\(\)\!]*|<tspan ([-[:alnum:]=\.\" \#\(\)\;\:\%]+)>|<\/tspan>)*<\/text>//g" $i
+
+#------------------------
+
+#flowText
+#sed -r "s/<flowRoot([-[:alnum:]\.=\" \:\(\)\%\#\,\']*)><flowRegion( id=\"flowRegion[-[:digit:]]{4,6}\"|)><rect( id=\"rect[-[:digit:]]{4,6}\"|) x=\"([[:digit:]\. ]+)\" y=\"([-[:digit:]\. ]+)\"([[:lower:][:digit:]=\.\" \#]+)\/><\/flowRegion><flowPara([-[:alnum:]\.=\" \:\#]+)>.*<\/flowPara><\/flowRoot>//g" $i  #delete all flowtext
+
+END
+
+TextImproveOnDemand=<< END
+#tspan in tspan
+sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<tspan([-[:alnum:]\,\.\"\=\:\ \#]*) x=\"([-[:digit:]\.\ ]+)\" y=\"([-[:digit:]\.\ ]+)\"([-[:alnum:]\,\.\"\=\:\ \#]*)>[[:space:]]*<tspan([-[:alnum:]\,\.\"\=\:\ \#]*) x=\"([-[:digit:]\.\ ]+)\" y=\"([-[:digit:]\.\ ]+)\"([-[:alnum:]\,\.\"\=\:\ \#]*)>([-[:alnum:]\.\ \,\(\)]*)<\/tspan>/<tspan x=\"\6\" y=\"\7\"\1\4\5\8>\9/g" $i
+
+#tspan to text
+sed -ri  -e ':a' -e 'N' -e '$!ba' -e "s/<text([-[:alnum:]\,\.\"\=\:\ \#\(\)]*) x=\"([-[:digit:]\.\ ]+)\" y=\"([-[:digit:]\.\ ]+)\"([-[:alnum:]\,\.\"\=\:\ \#\(\)]*)>[[:space:]]*<tspan([-[:alnum:]\,\.\"\=\:\ \#]*) x=\"([-[:digit:]\.\ ]+)\" y=\"([-[:digit:]\.\ ]+)\"([-[:alnum:]\,\.\"\=\:\ ]*)>([-–[:alnum:]\.\ \,]*)<\/tspan>/<text x=\"\6\" y=\"\7\"\1\4\5\8>\9/g" $i
+
+#tspan to text if text has no coordinates
+sed -ri  -e ':a' -e 'N' -e '$!ba' -e "s/<text([-[:alnum:]\,\.\"\=\:\ \#\(\)]*)>[[:space:]]*<tspan([-[:alnum:]\,\.\"\=\:\ \#]*) x=\"([-[:digit:]\.\ ]+)\" y=\"([-[:digit:]\.\ ]+)\"([-[:alnum:]\,\.\"\=\:\ ]*)>([-–[:alnum:]\.\ \,]*)<\/tspan>/<text x=\"\3\" y=\"\4\"\1\2\5>\6/g" $i
+
+END
+
+

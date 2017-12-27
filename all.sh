@@ -13,6 +13,6 @@ export meta=0 #0 removes metadata
 #./svg2validsvg.sh #to remove flow text
 ./cleaner4compression.sh #only tested on Windows
 ./o4compression.sh #only tested on Windows
-./cleaner4compression.sh #it is fast and makes a good readable file
+./scour4compression.sh #it is fast and makes a good readable file
 
 ./svg2validsvg.sh

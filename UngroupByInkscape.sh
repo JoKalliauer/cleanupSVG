@@ -63,16 +63,18 @@ do
 done
 
 for fileSource in *.$sourceType
+
 do
     if [ -f "$fileSource" ]; then    
         count=$((count+1))
         file=$(echo $fileSource | cut -d'.' -f1)
+		cp ./${fileSource} ./${file}2.xml
         echo $count". "$fileSource" -> "${file}u.$outputType
 		if [ "$outputType" = "png" ];then
 		 read -p "With what dpi should it be exported (e.g. 300)? " dpi
 		 inkscape $fileSource --export-$outputType=$file.$outputType --export-dpi=$dpi
 		elif [ "$outputType" = "svg" ];then
-		 inkscape --verb=EditSelectAll --verb=SelectionUnGroup --verb=FileSave --verb=FileClose $fileSource
+		 inkscape --without-gui --verb=EditSelectAll --verb=SelectionUnGroup --verb=FileSave --verb=FileClose $fileSource
 		else
 		 inkscape $fileSource --export-$outputType=$file.$outputType
 		fi
@@ -80,7 +82,7 @@ do
         echo "no file $fileSource found!"
     fi
 	
-	mv ./${fileSource} ./${file}2.xml
+	
 	
 done
 

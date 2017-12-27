@@ -48,13 +48,18 @@ fi
 
 echo svgo ${file} to $i begin, dig=${precisiondigits}, digN=${precisiondigitsN}, min=${minfilesize}, meta=$meta, META= $META, INDENT=$INDENT
 
-svgo -i ${file} -o $i -p $precisiondigitsN $META --enable=removeScriptElement --disable=removeXMLProcInst --disable=removeUnknownsAndDefaults --disable=mergePaths $INDENT
+svgo -i ${file} -o $i -p $precisiondigitsN $META --enable=removeScriptElement --disable=removeXMLProcInst --disable=removeUnknownsAndDefaults --disable=mergePaths $INDENT --disable=convertPathData
 
 
-echo mv ./${file} ./${tmp}5.xml
+#echo mv ./${file} ./${tmp}5.xml
 mv ./${file} ./${tmp}5.xml
 
-echo svgo $i finish
+#echo svgo $i finish
 
 done
 
+DeactivateEverything=<<END
+
+svgo -i $i -o output.svg --disable=addAttributesToSVGElement --disable=addClassesToSVGElement --disable=cleanupAttrs --disable=cleanupEnableBackground --disable=cleanupIDs --disable=cleanupListOfValues --disable=cleanupNumericValues --disable=collapseGroups --disable=convertColors --disable=convertPathData --disable=convertShapeToPath --disable=convertStyleToAttrs --disable=convertTransform --disable=inlineStyles --disable=mergePaths --disable=minifyStyles --disable=moveElemsAttrsToGroup --disable=moveGroupAttrsToElems --disable=prefixIds --disable=removeAttrs --disable=removeComments --disable=removeDesc --disable=removeDimensions --disable=removeDoctype --disable=removeEditorsNSData --disable=removeElementsByAttr --disable=removeEmptyAttrs --disable=removeEmptyContainers --disable=removeEmptyText --disable=removeHiddenElems --disable=removeMetadata --disable=removeNonInheritableGroupAttrs --disable=removeRasterImages --disable=removeScriptElement --disable=removeStyleElement --disable=removeTitle --disable=removeUnknownsAndDefaults --disable=removeUnusedNS --disable=removeUselessDefs --disable=removeUselessStrokeAndFill --disable=removeViewBox --disable=removeXMLNS --disable=removeXMLProcInst --disable=sortAttrs --pretty --indent=1
+
+END
