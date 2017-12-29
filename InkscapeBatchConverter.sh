@@ -11,7 +11,7 @@
 echo
 #needed if in the bashrc ist defined: export alias inkscape='/cygdrive/c/Program\ Files/Inkscape/inkscape.com'
 if [ -z ${inkscape+x} ]; then
- echo not def
+ echo $inkscape #inkscape not defined
 else
  echo $inkscape
  alias inkscape=$inkscape
@@ -21,7 +21,7 @@ fi
 #alias inkscape='/cygdrive/c/Program\ Files/Inkscape/inkscape.com' #2017-10-29 11h06 (by Johannes Kalliauer)
 #alias inkscape.exe='/cygdrive/c/Program\ Files/Inkscape/inkscape.exe'
 sourceType="svg"
-outputType="svg"
+#outputType="svg"
 valid=1
 
 
@@ -50,15 +50,18 @@ do
     fi
 done
 
-#valid=0
+if [ -z ${outputType+x} ]; then
+  valid=0 #ask it output is not defined
+fi
+
 while [ "$valid" != "1" ]
 do
-    echo "Allowed file types for output: $validOutput1, $validOutput2, $validOutput3"
+    echo "Allowed file types for output: $validOutput1, $validOutput2, $validOutput3, $validOutput4"
 	read -p "What file type do you want to convert to? " outputType
     if [ "$outputType" = "$validOutput1" ] || [ "$outputType" = "$validOutput2" ] || [ "$outputType" = "$validOutput3" ] || [ "$outputType" = "$validOutput4" ] || [ "$outputType" = "$validOutput5" ]; then
         valid=1
     else
-        echo "Invalid input! Please use one of the following: $validOutput1, $validOutput2, $validOutput3"
+        echo "Invalid input! Please use one of the following: $validOutput1, $validOutput2, $validOutput3, $validOutput4"
     fi
 done
 

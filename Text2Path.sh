@@ -21,7 +21,7 @@ fi
 #alias inkscape='/cygdrive/c/Program\ Files/Inkscape/inkscape.com' #2017-10-29 11h06 (by Johannes Kalliauer)
 #alias inkscape.exe='/cygdrive/c/Program\ Files/Inkscape/inkscape.exe'
 sourceType="svg"
-outputType="svg"
+outputType="ink-svg"
 valid=1
 
 
@@ -34,6 +34,7 @@ validOutput2="pdf"
 validOutput3="png"
 validOutput4="svg"
 validOutput5="plain-svg"
+validOutput6="ink-svg"
 
 
 #echo "This script allows you to convert all files in this folder from one file type to another."
@@ -55,7 +56,7 @@ while [ "$valid" != "1" ]
 do
     echo "Allowed file types for output: $validOutput1, $validOutput2, $validOutput3"
 	read -p "What file type do you want to convert to? " outputType
-    if [ "$outputType" = "$validOutput1" ] || [ "$outputType" = "$validOutput2" ] || [ "$outputType" = "$validOutput3" ] || [ "$outputType" = "$validOutput4" ] || [ "$outputType" = "$validOutput5" ]; then
+    if [ "$outputType" = "$validOutput1" ] || [ "$outputType" = "$validOutput2" ] || [ "$outputType" = "$validOutput3" ] || [ "$outputType" = "$validOutput4" ] || [ "$outputType" = "$validOutput5" ] || [ "$outputType" = "$validOutput6" ]; then
         valid=1
     else
         echo "Invalid input! Please use one of the following: $validOutput1, $validOutput2, $validOutput3"
@@ -72,15 +73,19 @@ do
 		 read -p "With what dpi should it be exported (e.g. 300)? " dpi
 		 inkscape $fileSource --export-$outputType=$file.$outputType --export-dpi=$dpi
 		elif [ "$outputType" = "svg" ];then
-		 inkscape $fileSource --export-plain-$outputType=${file}t.$outputType --export-text-to-path
+		 inkscape $fileSource --export-plain-$outputType=${file}t.$outputType --export-text-to-path --without-gui --verb=FileSave --verb=FileClose
 		else
-		 inkscape $fileSource --export-$outputType=$file.$outputType
+		 if [ "$outputType" = "ink-svg" ]; then
+		  inkscape $fileSource --export-text-to-path
+		 else
+		  inkscape $fileSource --export-$outputType=$file.$outputType
+		 fi
 		fi
     else
         echo "no file $fileSource found!"
     fi
 	
-	mv ./${fileSource} ./${file}2.xml
+	#mv ./${fileSource} ./${file}2.xml
 	
 done
 

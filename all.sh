@@ -4,6 +4,7 @@ export minfilesize=0 #1..min file size (1...no line breaks)
 export precisiondigits=2 #number of dicits for control points
 export precisiondigitsN=4 #number of dicits
 export meta=0 #0 removes metadata
+export outputType="svg" #just to not get asked by Inkscape
 
 ./svg2validsvg.sh
 
