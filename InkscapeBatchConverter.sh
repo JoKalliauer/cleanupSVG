@@ -83,7 +83,9 @@ do
         echo "no file $fileSource found!"
     fi
 	
-	mv ./${fileSource} ./${file}bak2.xml
+	if [ "$outputType" = "svg" ] || [ "$outputType" = "plain-svg" ] || [ "$outputType" = "ink-svg" ]; then
+	 mv ./${fileSource} ./${file}bak2.xml
+	fi
 	
 done
 

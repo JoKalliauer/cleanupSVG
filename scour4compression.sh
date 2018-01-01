@@ -6,8 +6,8 @@ export tmp=$(echo $fileN | cut -f1 -d".")
 export i=${tmp}s.svg
 
 if [ -z ${precisiondigits+x} ]; then
- precisiondigits=5
- precisiondigitsN=5
+ precisiondigits=3 # https://commons.wikimedia.org/wiki/File:LageplanStrasse.svg https://commons.wikimedia.org/wiki/File:Dojikko2.3.svg
+ precisiondigitsN=5 # https://commons.wikimedia.org/wiki/File:Porr_logo.svg
 else
  if [ $precisiondigits -le 0 ]; then
   precisiondigits=1
@@ -48,7 +48,7 @@ fi
 
 echo scour ${file} to $i begin, dig=${precisiondigits}, digN=${precisiondigitsN}, min=${minfilesize}, meta=$meta, META= $META, INDENT=$INDENT
 
-scour -i ${file} -o $i --enable-viewboxing --enable-comment-stripping --remove-titles --remove-descriptions --disable-embed-rasters --strip-xml-space  --set-precision=${precisiondigitsN} --set-c-precision=${precisiondigits} --create-groups $META $INDENT --renderer-workaround #--keep-unreferenced-defs # --enable-id-stripping 
+scour -i ${file} -o $i --enable-comment-stripping --remove-titles --remove-descriptions --disable-embed-rasters --strip-xml-space  --set-precision=${precisiondigitsN} --set-c-precision=${precisiondigits} --create-groups $META $INDENT --renderer-workaround # --enable-viewboxing #--keep-unreferenced-defs # --enable-id-stripping 
 
 
 echo mv ./${file} ./${tmp}3.xml
@@ -60,7 +60,7 @@ done
 
 DeactivateAll=<<END
 
-scour ${file} $i --disable-simplify-colors --disable-style-to-xml  --disable-group-collapsing --keep-editor-data --keep-unreferenced-defs --no-renderer-workaround 
+scour min.svg output.svg --disable-simplify-colors --disable-style-to-xml  --disable-group-collapsing --keep-editor-data --keep-unreferenced-defs --no-renderer-workaround 
 
 END
 
