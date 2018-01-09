@@ -39,7 +39,7 @@ else
 fi
 
 if [ $minfilesize == 0 ]; then
- export INDENT= 
+ export INDENT=" --indent=space --nindent=1"
 elif [ $minfilesize == 1 ]; then
  export INDENT="--indent=none --no-line-breaks"
 else
@@ -51,7 +51,7 @@ echo scour ${file} to $i begin, dig=${precisiondigits}, digN=${precisiondigitsN}
 scour -i ${file} -o $i --enable-comment-stripping --remove-titles --remove-descriptions --disable-embed-rasters --strip-xml-space  --set-precision=${precisiondigitsN} --set-c-precision=${precisiondigits} --create-groups $META $INDENT --renderer-workaround # --enable-viewboxing #--keep-unreferenced-defs # --enable-id-stripping 
 
 
-echo mv ./${file} ./${tmp}3.xml
+#echo mv ./${file} ./${tmp}3.xml
 mv ./${file} ./${tmp}3.xml
 
 echo scour $i finish
@@ -60,7 +60,13 @@ done
 
 DeactivateAll=<<END
 
-scour min.svg output.svg --disable-simplify-colors --disable-style-to-xml  --disable-group-collapsing --keep-editor-data --keep-unreferenced-defs --no-renderer-workaround 
+scour min.svg output.svg --disable-simplify-colors --disable-style-to-xml  --disable-group-collapsing --keep-editor-data --keep-unreferenced-defs --no-renderer-workaround --protect-ids-noninkscape 
+
+END
+
+ActivateAll=<<END
+
+scour min.svg output.svg --enable-comment-stripping --remove-titles --remove-descriptions --disable-embed-rasters --strip-xml-space  --create-groups --remove-metadata --remove-descriptive-elements --renderer-workaround  --enable-viewboxing --enable-id-stripping --shorten-ids 
 
 END
 
