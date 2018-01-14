@@ -72,8 +72,8 @@ do
         file=$(echo $fileSource | cut -d'.' -f1)
         echo $count". "$fileSource" -> "${file}n.$outputType
 		if [ "$outputType" = "png" ];then
-		 read -p "With what dpi should it be exported (e.g. 300)? " dpi
-		 inkscape $fileSource --export-$outputType=$file.$outputType --export-dpi=$dpi
+		 #read -p "With what dpi should it be exported (e.g. 300)? " dpi
+		 inkscape $fileSource --export-$outputType=$file.$outputType #--export-dpi=$dpi
 		elif [ "$outputType" = "svg" ];then
 		 inkscape $fileSource --export-plain-$outputType=${file}n.$outputType
 		else

@@ -42,16 +42,18 @@ sed -i "s/ aria-label=\"[[:digit:]]\"//g;s/ stroke-linejoin=\"null\"//g;s/ strok
 sed -i "s/ vector-effect=\"non-scaling-stroke\"//g;s/ solid-color=\"#000000\"//g" $i #QGIS-Files (made file valid)
 
 
-#betaphase: remove flow Text in svg
-sed -ri "s/<flowRoot([-[:alnum:]\.=\" \:\(\)\%\#\,\']*)><flowRegion( id=\"flowRegion[-[:digit:]]{4,7}\"|)><rect( id=\"rect[-[:digit:]]{4,7}\"|) x=\"([[:digit:]\. ]+)\" y=\"([-[:digit:]\. ]+)\"([[:lower:][:digit:]=\.\" \#]+)\/><\/flowRegion><flowPara([-[:alnum:]\.=\" \:\#]+)>([[:alnum:] \{\}\ \ ]+)<\/flowPara><\/flowRoot>/<text x=\"\4\" y=\"\5\"\1><tspan x=\"\4\" y=\"\5\"\7>\8<\/tspan><\/text>/g" $i
+#betaphase: remove flow Text in svg (works only with rect not with path)
+sed -i '/<flowPara\/>/d;/<flowRoot\/>/d' $i
+sed -ri "s/<flowRoot([-[:alnum:]\.=\" \:\(\)\%\#\,\';]*)><flowRegion([-[:alnum:]=:\" ]*)><rect( id=\"rect[-[:digit:]]{4,7}\"|) x=\"([[:digit:]\. ]+)\" y=\"([-[:digit:]\. ]+)\"([[:lower:][:digit:]=\.\" \#]+)\/><\/flowRegion><flowPara([-[:alnum:]\.=\" \:\#;]*)>([[:alnum:] \{\}\ \ ]+)<\/flowPara><\/flowRoot>/<text x=\"\4\" y=\"\5\"\1><tspan x=\"\4\" y=\"\5\"\7>\8<\/tspan><\/text>/g" $i
+#sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<flowRoot([-[:alnum:]\.=\" \:\(\)\%\#\,\']*)>[[:space:]]*<flowRegion( id=\"flowRegion[-[:digit:]]{4,7}\"|)>[[:space:]]*<rect( id=\"rect[-[:digit:]]{4,7}\"|) x=\"([[:digit:]\. ]+)\" y=\"([-[:digit:]\. ]+)\"([[:lower:][:digit:]=\.\" \#]+)\/>[[:space:]]*<\/flowRegion>[[:space:]]*<flowPara([-[:alnum:]\.=\" \:\#]+)>([[:alnum:] \{\}\ \ ]+)<\/flowPara>[[:space:]]*<\/flowRoot>/<text x=\"\4\" y=\"\5\"\1><tspan x=\"\4\" y=\"\5\"\7>\8<\/tspan><\/text>/g" $i
 sed -i -e ':a' -e 'N' -e '$!ba' -e "s/<flowRoot>[[:space:]]*<flowRegion\/>[[:space:]]*<flowDiv\/>[[:space:]]*<\/flowRoot>//g" $i #delete empty flowRoot
-sed -i -e ':a' -e 'N' -e '$!ba' -e "s/<flowRoot>[[:space:]]*<flowRegion>[[:space:]]*<path[-[:alnum:]\.=\"\ \#]*\/>[[:space:]]*<\/flowRegion>[[:space:]]*<flowPara\/>[[:space:]]*<\/flowRoot>//g" $i #delete empty flowRoot
+sed -i -e ':a' -e 'N' -e '$!ba' -e "s/<flowRoot>[[:space:]]*<flowRegion>[[:space:]]*<path[-[:alnum:]\.=\"\ \#]*\/>[[:space:]]*<\/flowRegion>[[:space:]]*<flowPara\/>[[:space:]]*<\/flowRoot>//g" $i ##delete flowRoot only containing spaces
 
 
 #remove mostly useless elements
 sed -ri "s/ letter-spacing=\"0([px]*)\"//g" $i
 sed -ri "s/ word-spacing=\"0([px]*)\"//g" $i
-sed -i "s/ stroke-width=\"1\"//g;s/ stroke-linecap=\"square\"//g;s/ transform=\"scale(1)\"//g" $i
+sed -i "s/ stroke-width=\"1\"//g;s/ transform=\"scale(1)\"//g" $i
 sed -i "s/ stroke-miterlimit=\"10\"//g" $i #Bug in IncscapePDFImport 
 
 #add DOCTYPE
@@ -108,7 +110,6 @@ sed -ri 's/ font-family=\"(Minion Pro|Times|Times New Roman|SVGTimes)\"/ font-fa
 #simpifying text
 #sed -i -e ':a' -e 'N' -e '$!ba' -e "s/<tspan/\n<tspan/g" $i
 #sed -i -e ':a' -e 'N' -e '$!ba' -e "s/<\/tspan>/<\/tspan>\n/g" $i
-sed -ri "s/<text ([-[:alnum:]\.=\'\"\ \#\(\)]+) style=\"[[:lower:];%[:digit:]\.:\-]+\"([[:lower:] =\:\"]*)>/<text \1\2>/g" $i #Remove style in text
 sed -ri "s/<tspan ([-[:alnum:]\.=\(\)\#\"\ ]+) style=\"[[:lower:];%[:digit:]\.:\-]+\">/<tspan \1>/g" $i #Remove style in tspan
 sed -ri "s/<text ([-[:alnum:]\.=\" \']+)\" stroke-width=\"([[:digit:]\.]+)\"([-[:lower:][:digit:]=\"\:\;\%]*)>/<text \1\"\3>/g" $i #Remove stroke-width in text
 #sed -ri "s/<text ([[:alnum:]= \"\.\'-]+)\" stroke-width=\"([[:digit:]\.]+)\">/<text \1>/g" $i #remove stroke-width in text
@@ -127,8 +128,8 @@ sed -ri 's/<text x="([[:digit:]\.]+)" y="([[:digit:]\.]+)" xml:space="preserve">
 sed -ri 's/<text [-[:lower:][:digit:]= \"\:\.]+\/>//g' $i #remove empty text
 sed -ri 's/<tspan [-[:lower:][:digit:]= \"\.]+\/>//g' $i #remove empty tspan
 sed -i "s/<tspan x=\"0\" y=\"0\">/<tspan>/g" $i #reduce options in tspan
-sed -ri "s/<tspan>([-−[:alnum:]\$\^\\\_\{\}= #\,\"\.\(\)\’\&\;]*)<\/tspan>([ ]*)/\1/g" $i #remove unnecesarry <tspan>...</tspan> without attributes
-sed -ri "s/<tspan[-[:lower:][:digit:]= \"\.]+> <\/tspan>([ ]*)//g" $i #remove useless <tspan (...)> </tspan> without attributes
+sed -ri "s/<tspan>([]-−\[[:alnum:]\$\^\\\_\{\}= #\,\"\.\(\)\’\&\;]*)<\/tspan>([ ]*)/\1/g" $i #remove unnecesarry <tspan>...</tspan> without attributes
+sed -ri "s/<tspan[-[:lower:][:digit:]= \"\.]+> <\/tspan>([ ]*)//g" $i #remove useless <tspan (...)> </tspan> without text
 
 
 #two lineforward to one lineforward
@@ -168,54 +169,4 @@ echo $i finish
 
 
 done
-
-#works only after scour
-DeleteOnDemand=<< END
-#remove objects:
-sed -ri "s/ <rect( id=\"rect[-[:digit:]]{4,7}\"|) x=\"([-[:digit:]\. ]+)\" y=\"([-[:digit:]\. ]+)\"([-[:alnum:]=\.\" \#\(\)]+)\/>//g" $i #delete all Rectangles
-
-sed -ri "s/ <path( id=\"path[-[:digit:]]{4,7}\"|) ([-[:alnum:]=\.\" \#\(\)\;\:\,]+)\/>//g" $i #delete all Path
-
-sed -ri "s/ <circle [-[:lower:][:digit:]\"\.= #\(\)]*\/>//g" $i #delete circels
-
-sed -ri "s/ <ellipse [-[:lower:][:digit:]\"\.= #\(\)]*\/>//g" $i #delete ellipses
-
-#------------------------
-
-#textPath
-#sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/ <text>[[:space:]]*<textPath xlink:href=\"#[[:alpha:]]\">[[:space:]]*<tspan [-[:alnum:]´\.= \"]*\">[[:alnum:] ']*<\/tspan>[[:space:]]*<\/textPath>[[:space:]]*<\/text>//g" $i #delete al textPath
-
-#------------------------
-
-#delete text
-sed -ri "s/ <text ([-[:alnum:]=\.\" \#\(\)\;\:\%\']+)>.*<\/text>//g" $i #delete all oneline-text
-
-sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/ <text ([-[:alnum:]=\.\" \#\(\)\;\:\%]+)>([-[:alnum:][:space:] \'\’\“\”\/\(\)\!]*|<tspan ([-[:alnum:]=\.\" \#\(\)\;\:\%]+)>|<\/tspan>)*<\/text>//g" $i
-
-#------------------------
-
-#flowText
-#sed -r "s/<flowRoot([-[:alnum:]\.=\" \:\(\)\%\#\,\']*)><flowRegion( id=\"flowRegion[-[:digit:]]{4,6}\"|)><rect( id=\"rect[-[:digit:]]{4,6}\"|) x=\"([[:digit:]\. ]+)\" y=\"([-[:digit:]\. ]+)\"([[:lower:][:digit:]=\.\" \#]+)\/><\/flowRegion><flowPara([-[:alnum:]\.=\" \:\#]+)>.*<\/flowPara><\/flowRoot>//g" $i  #delete all flowtext
-
-END
-
-TextImproveOnDemand=<< END
-#tspan in tspan
-sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<tspan([-[:alnum:]\,\.\"\=\:\ \#]*) x=\"([-[:digit:]\.\ ]+)\" y=\"([-[:digit:]\.\ ]+)\"([-[:alnum:]\,\.\"\=\:\ \#]*)>[[:space:]]*<tspan([-[:alnum:]\,\.\"\=\:\ \#]*) x=\"([-[:digit:]\.\ ]+)\" y=\"([-[:digit:]\.\ ]+)\"([-[:alnum:]\,\.\"\=\:\ \#]*)>([-[:alnum:]\.\ \,\(\)]*)<\/tspan>/<tspan x=\"\6\" y=\"\7\"\1\4\5\8>\9/g" $i
-
-#tspan to text
-sed -ri  -e ':a' -e 'N' -e '$!ba' -e "s/<text([-aeflmnorst0-79\,\.\"\=\:\ \#\(\)]*)( x=\"[-[:digit:]\.\ ]+\" y=\"[-[:digit:]\.\ ]+\")/<text\2\1/g" $i
-sed -ri  -e ':a' -e 'N' -e '$!ba' -e "s/<text( x=\"[-[:digit:]\.\ ]+\" y=\"[-[:digit:]\.\ ]+\"|)([-[:alnum:]\,\.\"\=\:\ \#\(\)\%\']*)>[[:space:]]*<tspan([-[:alnum:]\,\.\"\=\:\ \#]*) x=\"([-[:digit:]\.\ ]+)\" y=\"([-[:digit:]\.\ ]+)\"([-[:alnum:]\,\.\"\=\:\ #]*)>([-–[:alnum:]\.\ \,\{\(\)\♭\♯]*)<\/tspan>/<text x=\"\4\" y=\"\5\"\2\3\6>\7/g" $i
-
-#tspan to text if text has no coordinates (alt,obsolet)
-sed -ri  -e ':a' -e 'N' -e '$!ba' -e "s/<text([-[:alnum:]\,\.\"\=\:\ \#\(\)]*)( x=\"[-[:digit:]\.\ ]+\" y=\"[-[:digit:]\.\ ]+\"|)([-[:alnum:]\,\.\"\=\:\ \#\(\)\%\']*)>[[:space:]]*<tspan([-[:alnum:]\,\.\"\=\:\ \#]*) x=\"([-[:digit:]\.\ ]+)\" y=\"([-[:digit:]\.\ ]+)\"([-[:alnum:]\,\.\"\=\:\ #]*)>([-–[:alnum:]\.\ \,\{\(\)]*)<\/tspan>/<text x=\"\5\" y=\"\6\"\1\3\4\7>\8/g" $i
-
-#tspan to text if tspan has no coordinates
-sed -ri  -e ':a' -e 'N' -e '$!ba' -e "s/<text([-[:alnum:]\,\.\"\=\:\ \#\(\)]*) x=\"([-[:digit:]\.\ ]+)\" y=\"([-[:digit:]\.\ ]+)\"([-[:alnum:]\,\.\"\=\:\ \#\(\)\%\']*)>[[:space:]]*<tspan([-[:alnum:]\,\.\"\=\:\ \#\'\%]*)>([-–[:alnum:]\.\ \,\{\(\)]*)<\/tspan>/<text x=\"\2\" y=\"\3\"\1\4\5>\6/g" $i
-
-#remove spaces bevor tspan
-sed -ri -e ':a' -e 'N' -e '$!ba' -e  "s/[[:space:]]*<(\/|)tspan/<\1tspan/g" $i
-
-END
-
 
