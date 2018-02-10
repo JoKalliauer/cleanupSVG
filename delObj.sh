@@ -42,7 +42,7 @@ sed -ri "s/ <path( id=\"path[-[:digit:]]{4,7}\"|) ([-[:alnum:]=\.\" \#\(\)\;\:\,
 
 sed -ri "s/ <circle [-[:lower:][:digit:]\"\.= #\(\)]*\/>//g" $i #delete circels
 
-sed -ri "s/ <ellipse [-[:lower:][:digit:]\"\.= #\(\)]*\/>//g" $i #delete ellipses
+sed -ri "s/ <ellipse [-[:lower:][:digit:]\"\.= #\(\)\,]*\/>//g" $i #delete ellipses
 
 #mv $i ${tmp}d.svg
 echo $i finish
@@ -51,16 +51,10 @@ echo $i finish
 
 done
 
+i=delete.del
+
 #works only after scour
 DeleteOnDemand=<< END
-#remove objects:
-sed -ri "s/ <rect( id=\"rect[-[:digit:]]{4,7}\"|) x=\"([-[:digit:]\. ]+)\" y=\"([-[:digit:]\. ]+)\"([-[:alnum:]=\.\" \#\(\)]+)\/>//g" $i #delete all Rectangles
-
-sed -ri "s/ <path( id=\"path[-[:digit:]]{4,7}\"|) ([-[:alnum:]=\.\" \#\(\)\;\:\,]+)\/>//g" $i #delete all Path
-
-sed -ri "s/ <circle [-[:lower:][:digit:]\"\.= #\(\)]*\/>//g" $i #delete circels
-
-sed -ri "s/ <ellipse [-[:lower:][:digit:]\"\.= #\(\)]*\/>//g" $i #delete ellipses
 
 #------------------------
 
@@ -69,10 +63,15 @@ sed -ri "s/ <ellipse [-[:lower:][:digit:]\"\.= #\(\)]*\/>//g" $i #delete ellipse
 
 #------------------------
 
-#delete text
-sed -ri "s/ <text ([-[:alnum:]=\.\" \#\(\)\;\:\%\']+)>.*<\/text>//g" $i #delete all oneline-text
 
-sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/ <text ([-[:alnum:]=\.\" \#\(\)\;\:\%]+)>([-[:alnum:][:space:] \'\’\“\”\/\(\)\!]*|<tspan ([-[:alnum:]=\.\" \#\(\)\;\:\%]+)>|<\/tspan>)*<\/text>//g" $i
+
+#delete text
+# export i=min.svg
+
+sed -ri "s/ <text ([-[:alnum:]=\.\" \#\(\)\;\:\%\']+)>.*<\/text>//g" $i #delete all oneline-text
+sed -ri "s/<tspan>([]\[[:alnum:]\$\^\\\_\{\}= #\,\"\.\(\)\’\&\;−-]*)<\/tspan>([ ]*)/\1/g" $i #remove unnecesarry <tspan>...</tspan> without attributes
+
+sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/ <text ([-[:alnum:]=\.\" \#\(\)\;\:\%\']+)>([-[:alnum:][:space:] \'\’\“\”\/\(\)\!\,\:\#\.\=]*|<tspan ([-[:alnum:]=\.\" \#\(\)\;\:\%]+)>|<\/tspan>)*<\/text>//g" $i
 
 #------------------------
 

@@ -3,11 +3,7 @@
 for file in *.svg;do
 export fileN=$(echo $file | cut -f1 -d" ")
 export tmp=$(echo $fileN | cut -f1 -d".")
-export i=${tmp}c.svg
-
-if [ -z ${minfilesize+x} ]; then
- minfilesize=0
-fi
+export i=${tmp}C.svg
 
 if [ -z ${meta+x} ]; then
   meta=1 #if not specified kept meta to not make a copyright violation
@@ -24,22 +20,14 @@ else
  echo some error meta is $meta
 fi
 
-if [ $minfilesize == 0 ]; then
- export INDENT=1
-elif [ $minfilesize == 1 ]; then
- export INDENT=none
-else
- echo some error minfilesize is $minfilesize
-fi
-
 echo cleaner ${file} to $i begin, min=${minfilesize}, METAdelete=$META, INDENT=$INDENT
 
-svgcleaner $file $i --apply-transform-to-gradients yes --apply-transform-to-shapes yes --convert-shapes yes --group-by-style yes --indent $INDENT --join-arcto-flags no --join-style-attributes no --merge-gradients yes --regroup-gradient-stops yes --remove-comments yes --remove-declarations no --remove-default-attributes yes --remove-desc yes --remove-dupl-cmd-in-paths yes --remove-dupl-fegaussianblur yes --remove-dupl-lineargradient yes --remove-dupl-radialgradient yes --remove-gradient-attributes yes --remove-invalid-stops yes --remove-invisible-elements yes --remove-metadata $META --remove-needless-attributes yes --remove-nonsvg-attributes $META --remove-nonsvg-elements no --remove-text-attributes yes --remove-title yes --remove-unreferenced-ids yes --remove-unresolved-classes yes --remove-unused-coordinates yes --remove-unused-defs yes --remove-version yes --remove-xmlns-xlink-attribute yes --resolve-use yes --simplify-transforms yes --trim-colors yes --trim-ids yes --trim-paths yes --ungroup-defs yes --ungroup-groups yes --use-implicit-cmds yes --allow-bigger-file --list-separator comma --paths-to-relative yes --remove-unused-segments yes --convert-segments yes --coordinates-precision 2 --paths-coordinates-precision 2 --properties-precision 2 --transforms-precision 4 --apply-transform-to-paths yes # --copy-on-error #  --remove-unused-segments yes --convert-segments yes #
+svgcleaner $file $i  --allow-bigger-file --indent 1 --apply-transform-to-gradients yes --apply-transform-to-shapes yes --convert-shapes yes --group-by-style yes --join-arcto-flags yes --join-style-attributes no --merge-gradients yes --regroup-gradient-stops yes --remove-comments yes --remove-declarations no --remove-default-attributes yes --remove-desc yes --remove-dupl-cmd-in-paths yes --remove-dupl-fegaussianblur yes --remove-dupl-lineargradient yes --remove-dupl-radialgradient yes --remove-gradient-attributes yes --remove-invalid-stops yes --remove-invisible-elements yes --remove-metadata yes --remove-needless-attributes yes --remove-nonsvg-attributes yes --remove-nonsvg-elements yes --remove-text-attributes yes --remove-title yes --remove-unreferenced-ids yes --remove-unresolved-classes yes --remove-unused-coordinates yes --remove-unused-defs yes --remove-version yes --remove-xmlns-xlink-attribute yes --resolve-use yes --simplify-transforms yes --trim-colors yes --trim-ids yes --trim-paths yes --ungroup-defs yes --ungroup-groups yes --use-implicit-cmds yes --list-separator comma --paths-to-relative yes --remove-unused-segments yes --convert-segments yes --apply-transform-to-paths yes --coordinates-precision 2 --paths-coordinates-precision 2 --properties-precision 2 --transforms-precision 4
 
 #--properties-precision 2 # https://commons.wikimedia.org/wiki/File:Mn_coa_%C3%B6v%C3%B6rkhangai_aimag.svg
 #--transforms-precision 4 # https://commons.wikimedia.org/wiki/File:Mn_coa_%C3%B6v%C3%B6rkhangai_aimag.svg
 
-#--paths-to-relative no # https://github.com/RazrFalcon/svgcleaner/issues/124 (solved)
+#--paths-to-relative no # https://github.com/RazrFalcon/svgcleaner/issues/124
 # leads to --apply-transform-to-paths no
 # and to --remove-unused-segments yes
 # and to --convert-segments no

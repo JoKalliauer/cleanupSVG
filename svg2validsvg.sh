@@ -41,12 +41,11 @@ sed -ri "s/ text-align=\"(end|center)\"//g"  ${i}
 sed -i "s/ aria-label=\"[[:digit:]]\"//g;s/ stroke-linejoin=\"null\"//g;s/ stroke-linecap=\"null\"//g;s/ stroke-width=\"null\"//g" $i
 sed -i "s/ vector-effect=\"non-scaling-stroke\"//g;s/ solid-color=\"#000000\"//g" $i #QGIS-Files (made file valid)
 
-
 #betaphase: remove flow Text in svg (works only with rect not with path)
-sed -i '/<flowPara\/>/d;/<flowRoot\/>/d' $i
-sed -ri "s/<flowRoot([-[:alnum:]\.=\" \:\(\)\%\#\,\';]*)><flowRegion([-[:alnum:]=:\" ]*)><rect( id=\"rect[-[:digit:]]{4,7}\"|) x=\"([[:digit:]\. ]+)\" y=\"([-[:digit:]\. ]+)\"([[:lower:][:digit:]=\.\" \#]+)\/><\/flowRegion><flowPara([-[:alnum:]\.=\" \:\#;]*)>([[:alnum:] \{\}\ \ ]+)<\/flowPara><\/flowRoot>/<text x=\"\4\" y=\"\5\"\1><tspan x=\"\4\" y=\"\5\"\7>\8<\/tspan><\/text>/g" $i
+sed -i 's/<flowPara\/>//g;s/<flowRoot\/>//g' $i
+sed -ri "s/<flowRoot([-[:alnum:]\.=\" \:\(\)\%\#\,\';]*)><flowRegion([-[:alnum:]=:\" ]*)><rect( id=\"rect[-[:digit:]]{4,7}\"|) x=\"([[:digit:]\. ]+)\" y=\"([-[:digit:]\. ]+)\"([[:lower:][:digit:]=\.\" \#]+)\/><\/flowRegion><flowPara([-[:alnum:]\.=\" \:\#;]*)>([-[:alnum:] \{\}\ \ ]+)<\/flowPara><\/flowRoot>/<text x=\"\4\" y=\"\5\"\1><tspan x=\"\4\" y=\"\5\"\7>\8<\/tspan><\/text>/g" $i
 #sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<flowRoot([-[:alnum:]\.=\" \:\(\)\%\#\,\']*)>[[:space:]]*<flowRegion( id=\"flowRegion[-[:digit:]]{4,7}\"|)>[[:space:]]*<rect( id=\"rect[-[:digit:]]{4,7}\"|) x=\"([[:digit:]\. ]+)\" y=\"([-[:digit:]\. ]+)\"([[:lower:][:digit:]=\.\" \#]+)\/>[[:space:]]*<\/flowRegion>[[:space:]]*<flowPara([-[:alnum:]\.=\" \:\#]+)>([[:alnum:] \{\}\ \ ]+)<\/flowPara>[[:space:]]*<\/flowRoot>/<text x=\"\4\" y=\"\5\"\1><tspan x=\"\4\" y=\"\5\"\7>\8<\/tspan><\/text>/g" $i
-sed -i -e ':a' -e 'N' -e '$!ba' -e "s/<flowRoot>[[:space:]]*<flowRegion\/>[[:space:]]*<flowDiv\/>[[:space:]]*<\/flowRoot>//g" $i #delete empty flowRoot
+sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<flowRoot>[[:space:]]*<flowRegion(\/|>[[:space:]]*<path d=\"[-[:digit:]hmvz\. ]*\"\/>[[:space:]]*<\/flowRegion)>[[:space:]]*(<flowDiv\/>|)[[:space:]]*<\/flowRoot>//g" $i #delete empty flowRoot
 sed -i -e ':a' -e 'N' -e '$!ba' -e "s/<flowRoot>[[:space:]]*<flowRegion>[[:space:]]*<path[-[:alnum:]\.=\"\ \#]*\/>[[:space:]]*<\/flowRegion>[[:space:]]*<flowPara\/>[[:space:]]*<\/flowRoot>//g" $i ##delete flowRoot only containing spaces
 
 
@@ -100,17 +99,21 @@ sed -i 's/ font-family=\"Bitstream Vera Sans Mono\"/ font-family=\"DejaVu Sans M
 sed -i 's/ font-family=\"Times New Roman\"/ font-family=\"Liberation Serif\"/g' $i #as automatic
 #sed -i 's/ font-family=\"Albany embedded\"/ font-family=\"Loma\"/g' $i #as automatic
 sed -ri "s/<(text|g)([-[:lower:][:digit:]\.=\"\ \#\(\)]*) font-family=\"DejaVu Sans Condensed\"([-[:lower:][:digit:]=\"\ \#]*)>/<\1\2 font-family=\"DejaVu Sans\" font-stretch=\"condensed\"\3>/g" $i # correct syntax
-sed -i 's/ fill=\"#002060\" font-family=\"Swis721 BlkCn BT\" font-size=\"/ fill=\"#002060\" font-family=\"Liberation Sans\" font-weight=\"bold\" font-size=\"/g' $i #looks similar https://www.dafontfree.net/freefonts-swis721-blkcn-bt-f61164.htm
 sed -i 's/ font-family=\"Helvetica\"/ font-family=\"Garuda\"/g' $i #looks similar https://commons.wikimedia.org/wiki/File_talk:Meta_SVG_fonts.svg
-sed -i "s/ font-family=\"Blue Highway\"/ font-family=\"Padauk\"/g" $i #looks similar https://www.dafont.com/de/blue-highway.font
-sed -i "s/ font-family=\"Nimbus Mono L\"/ font-family=\"TlwgMono\"/g" $i #looks similar https://en.wikipedia.org/wiki/Nimbus_Mono_L
-#sed -ri 's/ font-family=\"(Arial|Myriad Pro|ArialNarrow|ArialMT)\"/ font-family=\"Liberation Sans\"/g' $i #all Sans to Liberation
+#sed -i 's/ fill=\"#002060\" font-family=\"Swis721 BlkCn BT\" font-size=\"/ fill=\"#002060\" font-family=\"Liberation Sans\" font-weight=\"bold\" font-size=\"/g' $i #looks similar https://www.dafontfree.net/freefonts-swis721-blkcn-bt-f61164.htm
+#sed -i "s/ font-family=\"Blue Highway\"/ font-family=\"Padauk\"/g" $i #looks similar https://www.dafont.com/de/blue-highway.font
+#sed -i "s/ font-family=\"Nimbus Mono L\"/ font-family=\"TlwgMono\"/g" $i #looks similar https://en.wikipedia.org/wiki/Nimbus_Mono_L
+sed -ri 's/ font-family=\"Benguiat\"/ font-family=\"Tibetan Machine Uni\"/g' $i #looks similar # http://www.fontpalace.com/font-details/Benguiat+Bold/
+sed -ri 's/ font-family=\"Sanvito\"/ font-family=\"Purisa\"/g' $i #looks similar # https://www.myfonts.com/fonts/adobe/sanvito/
+sed -ri 's/ font-family=\"Tiepolo\"/ font-family=\"Norasi\"/g' $i #looks similar # https://www.myfonts.com/fonts/itc/tiepolo/
+sed -ri 's/ font-family=\"(Arial|Myriad Pro|ArialNarrow|ArialMT)\"/ font-family=\"Liberation Sans\"/g' $i #all Sans to Liberation
 sed -ri 's/ font-family=\"(Minion Pro|Times|Times New Roman|SVGTimes)\"/ font-family=\"Liberation Serif\"/g' $i #all Serif to Liberation
+#sed -ri 's/ font-family=\"Dialog\"/ font-family=\"DejaVu Sans\"/g' $i #unknown fonts to DejaVu Sans
+
 
 #simpifying text
 #sed -i -e ':a' -e 'N' -e '$!ba' -e "s/<tspan/\n<tspan/g" $i
 #sed -i -e ':a' -e 'N' -e '$!ba' -e "s/<\/tspan>/<\/tspan>\n/g" $i
-sed -ri "s/<tspan ([-[:alnum:]\.=\(\)\#\"\ ]+) style=\"[[:lower:];%[:digit:]\.:\-]+\">/<tspan \1>/g" $i #Remove style in tspan
 sed -ri "s/<text ([-[:alnum:]\.=\" \']+)\" stroke-width=\"([[:digit:]\.]+)\"([-[:lower:][:digit:]=\"\:\;\%]*)>/<text \1\"\3>/g" $i #Remove stroke-width in text
 #sed -ri "s/<text ([[:alnum:]= \"\.\'-]+)\" stroke-width=\"([[:digit:]\.]+)\">/<text \1>/g" $i #remove stroke-width in text
 sed -ri "s/<tspan ([-[:alnum:]\.=\" ]+)\" stroke-width=\"([[:digit:]\.px]+)\"([-[:lower:]=\"\ \/]*)>/<tspan \1\"\3>/g" $i #Remove stroke-width in tspan
@@ -128,15 +131,28 @@ sed -ri 's/<text x="([[:digit:]\.]+)" y="([[:digit:]\.]+)" xml:space="preserve">
 sed -ri 's/<text [-[:lower:][:digit:]= \"\:\.]+\/>//g' $i #remove empty text
 sed -ri 's/<tspan [-[:lower:][:digit:]= \"\.]+\/>//g' $i #remove empty tspan
 sed -i "s/<tspan x=\"0\" y=\"0\">/<tspan>/g" $i #reduce options in tspan
-sed -ri "s/<tspan>([]-−\[[:alnum:]\$\^\\\_\{\}= #\,\"\.\(\)\’\&\;]*)<\/tspan>([ ]*)/\1/g" $i #remove unnecesarry <tspan>...</tspan> without attributes
+sed -ri "s/<tspan>([]\[[:alnum:]\$\^\\\_\{\}= #\,\"\.\(\)\’\&\;−-]*)<\/tspan>([ ]*)/\1/g" $i #remove unnecesarry <tspan>...</tspan> without attributes
 sed -ri "s/<tspan[-[:lower:][:digit:]= \"\.]+> <\/tspan>([ ]*)//g" $i #remove useless <tspan (...)> </tspan> without text
 
 
 #two lineforward to one lineforward
 sed -i -e ':a' -e 'N' -e '$!ba' -e 's/\n\n/\n/g' $i
 
-#Remove CDATA by AdobeIllustrator
+#Incskape doesnt handle Adobe Ilustrator xmlns right
+sed -ri "s/=\"([amp38;\#\&\])+ns_flows;\"/=\"http:\/\/ns.adobe.com\/Flows\/1.0\/\"/g" $i 
+sed -ri "s/ xmlns:x=\"([amp38;\#\&\])+ns_extend;\"/ xmlns:x=\"http:\/\/ns.adobe.com\/Extensibility\/1.0\/\"/" $i #Incskape doesnt handle Adobe Ilustrator xmlns right
 sed -ri "s/ xmlns:i=\"([amp38;\#\&\])+ns_ai;\"/ xmlns:i=\"http:\/\/ns.adobe.com\/AdobeIllustrator\/10.0\/\"/" $i #Incskape doesnt handle Adobe Ilustrator xmlns right
+sed -ri "s/ xmlns:graph=\"([amp38;\#\&\])+ns_graphs;\"/ xmlns:graph=\"http:\/\/ns.adobe.com\/Graphs\/1.0\/\"/" $i #Incskape doesnt handle Adobe Ilustrator xmlns right
+sed -ri "s/ =\"([amp38;\#\&\])+ns_vars;\"/ =\"http:\/\/ns.adobe.com\/Variables\/1.0\/\"/g" $i #Incskape doesnt handle Adobe Ilustrator xmlns right
+#	<!ENTITY ns_imrep "http://ns.adobe.com/ImageReplacement/1.0/">
+sed -ri "s/ xmlns=\"([amp38;\#\&\])+ns_sfw;\"/ xmlns=\"http:\/\/ns.adobe.com\/SaveForWeb\/1.0\/\"/" $i #Incskape doesnt handle Adobe Ilustrator xmlns right
+sed -ri "s/ xmlns=\"([amp38;\#\&\])+ns_custom;\"/ xmlns=\"http:\/\/ns.adobe.com\/GenericCustomNamespace\/1.0\/\"/" $i
+#	<!ENTITY ns_adobe_xpath "http://ns.adobe.com/XPath/1.0/">
+sed -ri "s/ xmlns=\"([amp38;\#\&\])+ns_svg;\"/ xmlns=\"http:\/\/www.w3.org\/2000\/svg\"/" $i
+sed -ri "s/ xmlns:xlink=\"([amp38;\#\&\])+ns_xlink;\"/ xmlns:xlink=\"http:\/\/www.w3.org\/1999\/xlink\"/" $i
+
+
+#Remove CDATA by AdobeIllustrator
 sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<\!\[CDATA\[([[:alnum:]=+\/\t\n[:space:]@:;\(\)\"\,\'\{\}\-])*\t\]\]>[[:space:]]*//g" $i #Remove CDATA
 sed -ri "s/<i:pgfRef xlink:href=\"#a([[:lower:]_]*)\"\/>//" $i #Remove AI-Elemtents for CDATA
 sed -i "s/<i:pgf id=\"a\"\/>//" $i #Remove AI-Elemtents for CDATA

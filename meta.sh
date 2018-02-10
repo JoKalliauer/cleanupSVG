@@ -1,8 +1,6 @@
 #!/bin/bash
 
 export minfilesize=0 #1..min file size (1...no line breaks)
-export precisiondigits=3 #number of dicits for control points
-export precisiondigitsN=5 #number of dicits
 export meta=1 #1 keeps metadata
 export outputType="svg" #just to not get asked by Inkscape
 
