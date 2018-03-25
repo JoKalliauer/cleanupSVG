@@ -10,7 +10,6 @@ export i=min.svg # just used for debugging
 
 ./InkscapeBatchConverter.sh
 ./scour4compression.sh
-#./svg2validsvg.sh #to remove flow text
 ./cleaner4compression.sh #only tested on Windows
 ./o4compression.sh #only tested on Windows
 ./scour4compression.sh #handles metadata without problems

@@ -78,7 +78,7 @@ do
    #cp ./${file}Cu.svg ./${file}C.xml
    cp ./${fileSource} ./${file}f.svg
    mv ./${fileSource} ./${file}.xml
-   inkscape --verb=EditSelectAll --verb=ObjectFlowtextToText --verb=FileSave --verb=FileClose ./${file}f.svg --verb=FileQuit
+   inkscape ./${file}f.svg --verb=EditSelectAll --verb=ObjectFlowtextToText --verb=FileSave --verb=FileClose --verb=FileQuit
    #svgcleaner ./${file}Cu.svg ./${file}CuC.svg --join-style-attributes all --join-arcto-flags no --remove-declarations no --remove-nonsvg-elements no --paths-to-relative no --remove-unused-segments no --convert-segments no  --allow-bigger-file --indent 1 --remove-metadata no --remove-nonsvg-attributes no
    scour -i ./${file}f.svg -o ./${file}fs.svg --disable-style-to-xml --keep-unreferenced-defs --indent=space --nindent=1
    mv ./${file}f.svg ./${file}f.xml

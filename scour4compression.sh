@@ -35,23 +35,23 @@ fi
 
 echo scour ${file} to $i begin, min=${minfilesize}, meta=$meta, META= $META, INDENT=$INDENT
 
-scour -i ${file} -o $i --enable-comment-stripping --remove-titles --remove-descriptions --disable-embed-rasters --strip-xml-space  --set-precision=5 --set-c-precision=3 --create-groups $META $INDENT --renderer-workaround --disable-style-to-xml #--enable-viewboxing #--keep-unreferenced-defs #  
+scour -i ${file} -o $i --enable-comment-stripping --remove-titles --remove-descriptions --disable-embed-rasters --strip-xml-space  --set-precision=5 --set-c-precision=4 --create-groups $META $INDENT --renderer-workaround --disable-style-to-xml --keep-unreferenced-defs #--enable-viewboxing #  
 
 #--keep-unreferenced-defs
 ## if referenced-defs are deleted: https://github.com/scour-project/scour/issues/155
-## error if keept: https://github.com/scour-project/scour/issues/156
 
 #--enable-viewboxing
 ##Changes size of view
 ##can create Hairline-cracks f.e in https://commons.wikimedia.org/wiki/File:Mn_coa_zavkhan_aimag.svg
 
-#--disable-style-to-xml #https://commons.wikimedia.org/wiki/File:2016_Angola_and_DR_Congo_yellow_fever_outbreak.svg
+#--disable-style-to-xml #https://github.com/scour-project/scour/issues/176
 
 
 # --enable-id-stripping #https://github.com/scour-project/scour/issues/164
 
 #--set-precision=5 # https://commons.wikimedia.org/wiki/File:Porr_logo.svg
 #--set-c-precision=3 # https://commons.wikimedia.org/wiki/File:LageplanStrasse.svg https://commons.wikimedia.org/wiki/File:Dojikko2.3.svg
+#--set-c-precision=4 # https://commons.wikimedia.org/wiki/File:Flower_soft.svg
 
 #echo mv ./${file} ./${tmp}3.xml
 mv ./${file} ./${tmp}3.xml
