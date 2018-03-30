@@ -72,5 +72,5 @@ Similar scripts<br/>
 4a)Install node.js: https://nodejs.org/  (Don't forget to choose your language)<br/>
 4b)cmd.exe: ```npm install -g svgo```<br/>
 5)Cygwin<br/>
-5a)Download&Install (32bit or 64bit) https://cygwin.com/install.html
+5a)Download&Install (32bit or 64bit) https://cygwin.com/install.html (in some cases you have to deactivate Avast)
 
