@@ -45,14 +45,14 @@ This script is tested on<br/>
 Similar scripts<br/>
 -[SVGOMG](https://github.com/jakearchibald/svgomg)<br/>
 -[svgo](https://github.com/svg/svgo)<br/>
--[scour](https://github.com/scour-project/scour)c
+-[scour](https://github.com/scour-project/scour)<br/>
 -[svgcleaner](https://github.com/RazrFalcon/svgcleaner)
 
 ## Installation on Windows:
 
 1)Inkscape<br/>
 1a)Download&Install https://inkscape.org/release/0.92.3/ (Don't forget to choose your language)<br/>
-2)Scour<br/>
+2)[scour](https://github.com/scour-project/scour)<br/>
 2a)Download&Install Python 2.7: https://www.python.org/downloads/<br/>
 2b)Add "C:\Python27" and "C:\Python27\Scripts" to enviroment variable %Path%<br/>
  -(Option-i)Run cmd.exe; type ```set PYTHONPATH=C:\Python27``` and ```set PATH=%PATH%;%PYTHONPATH%;C:\Python27\Scripts```<br/>
@@ -60,14 +60,15 @@ Similar scripts<br/>
 2c)Run cmd.exe<br/>
 2c,i)```python -m pip install --upgrade pip```<br/>
 2c,ii)```pip install https://github.com/codedread/scour/archive/master.zip```<br/>
-3)svgcleaner<br/>
+3)[svgcleaner](https://github.com/RazrFalcon/svgcleaner)<br/>
 3a)Download "Visual Studio Community 2017" https://www.visualstudio.com/downloads/ (Don't forget to choose your language)<br/>
-3b)Download&Install https://www.rust-lang.org/ (Don't forget to choose your language)<br/>
-3c)Add "%USERPROFILE%\.cargo\bin" to enviroment variable %Path%<br/>
+3b)Add `Desktop development with C++`, see https://github.com/rust-lang/rust/issues/49519#issuecomment-377569726
+3c)Download&Install https://www.rust-lang.org/ (Don't forget to choose your language)<br/>
+3d)Add "%USERPROFILE%\.cargo\bin" to enviroment variable %Path%<br/>
  -(Option-i)Run cmd.exe; type ```set PATH=%PATH%;%USERPROFILE%\.cargo\bin```<br/>
- -(Option-ii)Run Sysdm.cpl; to to the advanced-Tab; Environemt variables...; click Path, click Edit; add ```C:\Users\jkalliau\.cargo\bin```<br/>
-3b)cmd.exe: ```cargo install svgcleaner```<br/>
-4)SVGOptimizer<br/>
+ -(Option-ii)Run Sysdm.cpl; to to the advanced-Tab; Environemt variables...; click Path, click Edit; add ```%USERPROFILE%\.cargo\bin```<br/>
+3e)cmd.exe: ```cargo install svgcleaner```<br/>
+4)[svgo](https://github.com/svg/svgo)<br/>
 4a)Install node.js: https://nodejs.org/  (Don't forget to choose your language)<br/>
 4b)cmd.exe: ```npm install -g svgo```<br/>
 5)Cygwin<br/>
