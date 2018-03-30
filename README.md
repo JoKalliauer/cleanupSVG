@@ -45,7 +45,7 @@ This script is tested on<br/>
 Similar scripts<br/>
 -[SVGOMG](https://github.com/jakearchibald/svgomg)<br/>
 -[svgo](https://github.com/svg/svgo)<br/>
--[scour](https://github.com/scour-project/scour)<br/>
+-[scour](https://github.com/scour-project/scour)c
 -[svgcleaner](https://github.com/RazrFalcon/svgcleaner)
 
 ## Installation on Windows:
@@ -69,6 +69,7 @@ Similar scripts<br/>
 3b)cmd.exe: ```cargo install svgcleaner```<br/>
 4)SVGOptimizer<br/>
 4a)Install node.js: https://nodejs.org/  (Don't forget to choose your language)<br/>
-4b)cmd.exe: ```npm install -g svgo```
-
+4b)cmd.exe: ```npm install -g svgo```<br/>
+5)Cygwin<br/>
+5a)Download&Install (32bit or 64bit) https://cygwin.com/install.html
 
