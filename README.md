@@ -59,7 +59,7 @@ Similar scripts<br/>
  -(Option-ii)Run Sysdm.cpl; to to the advanced-Tab; Environemt variables...; click Path, click Edit; add ```C:\Python27``` and ```C:\Python27\Scripts```<br/>
 2c)Run cmd.exe<br/>
 2c,i)```python -m pip install --upgrade pip```<br/>
-2c,ii)```pip install https://github.com/codedread/scour/archive/master.zip```<br/>
+2c,ii)```pip install --upgrade https://github.com/codedread/scour/archive/master.zip```<br/>
 3)[svgcleaner](https://github.com/RazrFalcon/svgcleaner)<br/>
 3a)Download "Visual Studio Community 2017" https://www.visualstudio.com/downloads/ (Don't forget to choose your language)<br/>
 3b)Add `Desktop development with C++`, see https://github.com/rust-lang/rust/issues/49519#issuecomment-377569726
