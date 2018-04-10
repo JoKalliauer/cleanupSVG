@@ -67,7 +67,7 @@ Similar scripts<br/>
 3d)Add "%USERPROFILE%\.cargo\bin" to enviroment variable %Path%<br/>
  -(Option-i)Run cmd.exe; type ```set PATH=%PATH%;%USERPROFILE%\.cargo\bin```<br/>
  -(Option-ii)Run Sysdm.cpl; to to the advanced-Tab; Environemt variables...; click Path, click Edit; add ```%USERPROFILE%\.cargo\bin```<br/>
-3e)cmd.exe: ```cargo install svgcleaner```<br/>
+3e)cmd.exe: ```cargo install svgcleaner --force --git https://github.com/RazrFalcon/svgcleaner```<br/>
 4)[svgo](https://github.com/svg/svgo)<br/>
 4a)Install node.js: https://nodejs.org/  (Don't forget to choose your language)<br/>
 4b)cmd.exe: ```npm install -g svgo```<br/>
