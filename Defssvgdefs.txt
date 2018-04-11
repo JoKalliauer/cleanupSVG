@@ -31,4 +31,17 @@
    xmlns:ns="http://ns.adobe.com/Variables/1.0/"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:odm="http://product.corel.com/CGS/11/cddns/"
+   xmlns:corel-charset="http://product.corel.com/CGS/11/cddns/"
    >
+   
+ </svg>
+ 
+ <!--Minimal version-->
+ <?xml version="1.0" encoding="UTF-8">
+ <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"[
+	<!ENTITY ns_sfw "http://ns.adobe.com/SaveForWeb/1.0/">
+	<!ENTITY ns_flows "http://ns.adobe.com/Flows/1.0/">
+	<!ENTITY ns_imrep "http://ns.adobe.com/ImageReplacement/1.0/">
+]>
+<svg xmlns:xlink="http://www.w3.org/1999/xlink"></svg>

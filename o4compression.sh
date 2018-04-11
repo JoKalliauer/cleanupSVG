@@ -26,7 +26,7 @@ else
 fi
 
 if [ $minfilesize == 0 ]; then
- export INDENT="" #"--pretty --indent=1" #deactivated because of https://github.com/svg/svgo/issues/878
+ export INDENT="--pretty --indent=1" #"--pretty --indent=1" #deactivated because of https://github.com/svg/svgo/issues/878
 elif [ $minfilesize == 1 ]; then
  export INDENT="--indent=0"
 else
@@ -35,7 +35,7 @@ fi
 
 echo optizer ${file} to $i begin, min=${minfilesize}, meta=$meta, META= $META, INDENT=$INDENT
 
-svgo -i ${file} -o $i -p 3 $META --enable=removeScriptElement --disable=removeXMLProcInst --disable=removeUnknownsAndDefaults --disable=mergePaths $INDENT --disable=convertPathData --disable=convertStyleToAttrs --enable=cleanupAttrs --enable=cleanupEnableBackground --enable=cleanupIDs --enable=cleanupNumericValues --enable=collapseGroups --enable=convertColors --enable=convertShapeToPath --enable=convertTransform --enable=inlineStyles  --enable=minifyStyles --enable=moveElemsAttrsToGroup --enable=moveGroupAttrsToElems  --enable=removeAttrs --enable=removeComments --enable=removeDesc --enable=removeEditorsNSData --enable=removeElementsByAttr --enable=removeEmptyAttrs --enable=removeEmptyContainers --enable=removeEmptyText --enable=removeHiddenElems --enable=removeNonInheritableGroupAttrs --disable=removeRasterImages  --enable=removeStyleElement --enable=removeTitle --enable=removeUnusedNS --enable=removeUselessDefs --enable=removeUselessStrokeAndFill --enable=removeViewBox --enable=sortAttrs # --enable=cleanupListOfValues
+svgo -i ${file} -o $i $INDENT -p 3 $META --enable=removeScriptElement --disable=removeXMLProcInst --disable=removeUnknownsAndDefaults --disable=mergePaths --disable=convertPathData --disable=convertStyleToAttrs --enable=cleanupAttrs --enable=cleanupEnableBackground --enable=cleanupIDs --enable=cleanupNumericValues --enable=collapseGroups --enable=convertColors --enable=convertShapeToPath --enable=convertTransform --enable=inlineStyles  --enable=minifyStyles --enable=moveElemsAttrsToGroup --enable=moveGroupAttrsToElems  --enable=removeAttrs --enable=removeComments --enable=removeDesc --enable=removeEditorsNSData --enable=removeEmptyAttrs --enable=removeEmptyContainers --enable=removeEmptyText --enable=removeHiddenElems --enable=removeNonInheritableGroupAttrs --disable=removeRasterImages --enable=removeTitle --enable=removeUnusedNS --enable=removeUselessDefs --enable=removeUselessStrokeAndFill --enable=removeViewBox --enable=sortAttrs # --enable=cleanupListOfValues
 
 # --disable=mergePaths # https://github.com/svg/svgo/issues/872
 
@@ -51,10 +51,10 @@ svgo -i ${file} -o $i -p 3 $META --enable=removeScriptElement --disable=removeXM
 #  --disable=convertStyleToAttrs #https://commons.wikimedia.org/wiki/File:2016_Angola_and_DR_Congo_yellow_fever_outbreak.svg
 
 # do not define: --enable=prefixIds #Standard_time_zones_of_the_world
-
 #--enable=cleanupListOfValues  https://github.com/svg/svgo/issues/923
-
 #--enable=convertPathData # https://github.com/svg/svgo/issues/880
+# --enable=removeElementsByAttr # https://github.com/svg/svgo/issues/945
+# --enable=removeStyleElement # https://github.com/svg/svgo/issues/946
 
 #echo mv ./${file} ./${tmp}5.xml
 mv ./${file} ./${tmp}5.xml

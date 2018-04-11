@@ -6,12 +6,16 @@ export outputType="svg" #just to not get asked by Inkscape
 export file=min.svg # just used for debugging
 export i=min.svg # just used for debugging
 
-./svg2validsvg.sh
-
-./InkscapeBatchConverter.sh
+./all.sh
+./ScourFull.sh
+./ScourFull.sh
 ./scour4compression.sh
-./cleaner4compression.sh #only tested on Windows
-./o4compression.sh #only tested on Windows
-./scour4compression.sh
-
-./svg2validsvg.sh
+./CleanerFull.sh
+./CleanerFull.sh
+./cleaner4compression.sh
+./o4compression.sh
+./OptimizerFull.sh
+./OptimizerFull.sh
+./OptimizerFull.sh
+./o4compression.sh
+./all.sh

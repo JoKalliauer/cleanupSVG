@@ -27,8 +27,8 @@ for file in *.svg;do
  #If you want to overwrite the exisiting file, without any backup, delete the following three lines
  export i=${tmp}T.svg
  export j=${tmp}Obj.svg
- cp ./"${file}" $i
- #cp ./"${file}" $j
+ #cp ./"${file}" $i
+ cp ./"${file}" $j
  mv ./"${file}" ./${tmp}1.xml
  
  echo 
@@ -38,25 +38,25 @@ for file in *.svg;do
  #sed -ri  -e ':a' -e 'N' -e '$!ba' -e "s/<text([-[:alnum:]\,\.\"\=\:\ \#\(\)]*)( x=\"[-[:digit:]\.\ ]+\" y=\"[-[:digit:]\.\ ]+\"|   )([-[:alnum:]\,\.\"\=\:\ \#\(\)\%\']*)>[[:space:]]*<tspan([-[:alnum:]\,\.\"\=\:\ \#]*) x=\"([-[:digit:]\.\ ]+)\" y=\"([-[:digit:]\.\ ]+)\"([-[:alnum:]\,\.\"\=\:\ #]*)>([-–[:alnum:]\.\ \,\{\(\)]*)<\/tspan>/<text x=\"\5\" y=\"\6\"\1\3\4\7>\8/g" $i
  
  #remove objects:
- #  <rect id="rect13901" y="-2.0665e-5" width="708.66" height="708.66" fill="#fff" fill-rule="evenodd"/>
- sed -ri "s/ <rect ([-[:alnum:]=\.\" \#\(\)]+)\/>//g" $i #delete all Rectangles
+
+ #sed -ri "s/ <rect ([-[:alnum:]=\.\" \#\(\)]+)\/>//g" $i #delete all Rectangles
  
- sed -ri "s/<path ([-[:alnum:]=\.\" \#\(\)\;\:\,]+)\/>//g" $i #delete all Path
+ #sed -ri "s/<path ([-[:alnum:]=\.\" \#\(\)\;\:\,]+)\/>//g" $i #delete all Path
  
- sed -ri "s/ <circle [-[:lower:][:digit:]\"\.= #\(\)]*\/>//g" $i #delete circels
+ #sed -ri "s/ <circle [-[:lower:][:digit:]\"\.= #\(\)]*\/>//g" $i #delete circels
  
- sed -ri "s/ <ellipse [-[:lower:][:digit:]\"\.= #\(\)\,]*\/>//g" $i #delete ellipses
+ #sed -ri "s/ <ellipse [-[:lower:][:digit:]\"\.= #\(\)\,]*\/>//g" $i #delete ellipses
  
- sed -ri "s/<polyline points=\"[[:digit:]\. ]+\"\/>//g" $i #delete polylines
+ #sed -ri "s/<polyline points=\"[[:digit:]\. ]+\"\/>//g" $i #delete polylines
  
  #mv $i ${tmp}d.svg
- echo $i finish
+ #echo $i finish
  
- #sed -ri "s/ <text ([-[:alnum:]=\.\" \#\(\)\;\:\%\']+)>.*<\/text>//g" $j #delete all oneline-text
+ sed -ri "s/ <text ([-[:alnum:]=\.\" \#\(\)\;\:\%\']+)>.*<\/text>//g" $j #delete all oneline-text
  
- #sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/ <text ([-[:alnum:]=\.\" \#\(\)\;\:\%\']+)>([]\[[:alnum:][:space:]\$\^\\\_\{\} \'\’\“\”\/\(\)\!\,\:#\.=,\"\&\;−-]*|<tspan ([-[:alnum:]=\.\" \#\(\)\;\:\%\,]+)>|<\/tspan>)*<\/text>//g" $j
+ sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/ <text ([-[:alnum:]=\.\" \#\(\)\;\:\%\']+)>([]\[[:alnum:][:space:]\$\^\\\_\{\} \'\’\“\”\/\(\)\!\,\:#\.=,\"\&\;−-]*|<tspan ([-[:alnum:]=\.\" \#\(\)\;\:\%\,]+)>|<\/tspan>)*<\/text>//g" $j
  
- #echo $j finish
+ echo $j finish
  
 done
 
