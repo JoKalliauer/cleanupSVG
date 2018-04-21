@@ -74,3 +74,11 @@ Similar scripts<br/>
 5)Cygwin<br/>
 5a)Download&Install (32bit or 64bit) https://cygwin.com/install.html (in some cases you have to deactivate Avast)
 
+
+## Update
+
+```python -m pip install --upgrade pip
+pip install --upgrade https://github.com/codedread/scour/archive/master.zip
+cargo install svgcleaner --force --git https://github.com/RazrFalcon/svgcleaner
+npm install -g svgo
+```
