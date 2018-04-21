@@ -6,25 +6,16 @@ export outputType="svg" #just to not get asked by Inkscape
 export file=min.svg # just used for debugging
 export i=min.svg # just used for debugging
 
+# how to correct Files by Thomas Steifer https://commons.wikimedia.org/w/index.php?title=Special:ListFiles&offset=20061221023005&limit=500&user=Steifer&ilshowall=1
+
 ./svg2validsvg.sh
 ./InkscapeBatchConverter.sh
 ./scour4compression.sh
-./cleaner4compression.sh
+./cleaner4compression.sh #only tested on Windows
 ./o4compression.sh
-
-./UngroupByInkscape.sh
 ./ResizeByInkscape.sh
-./Flow2TextByInkscape.sh
-
 ./ScourFull.sh
-./ScourFull.sh
-#./scour4compression.sh
-./CleanerFull.sh
-./cleaner4compression.sh
-./o4compression.sh
 ./OptimizerFull.sh
-./o4compression.sh
-
-./cleaner4compression.sh
+./CleanerFull.sh
 ./scour4compression.sh
 ./svg2validsvg.sh

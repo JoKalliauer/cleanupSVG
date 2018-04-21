@@ -32,7 +32,7 @@ for file in *.svg;do
  mv ./"${file}" ./${tmp}1.xml
  
  echo 
- echo $i start:
+ echo $j start:
  
  #tspan to text
  #sed -ri  -e ':a' -e 'N' -e '$!ba' -e "s/<text([-[:alnum:]\,\.\"\=\:\ \#\(\)]*)( x=\"[-[:digit:]\.\ ]+\" y=\"[-[:digit:]\.\ ]+\"|   )([-[:alnum:]\,\.\"\=\:\ \#\(\)\%\']*)>[[:space:]]*<tspan([-[:alnum:]\,\.\"\=\:\ \#]*) x=\"([-[:digit:]\.\ ]+)\" y=\"([-[:digit:]\.\ ]+)\"([-[:alnum:]\,\.\"\=\:\ #]*)>([-–[:alnum:]\.\ \,\{\(\)]*)<\/tspan>/<text x=\"\5\" y=\"\6\"\1\3\4\7>\8/g" $i
@@ -52,9 +52,11 @@ for file in *.svg;do
  #mv $i ${tmp}d.svg
  #echo $i finish
  
- sed -ri "s/ <text ([-[:alnum:]=\.\" \#\(\)\;\:\%\']+)>.*<\/text>//g" $j #delete all oneline-text
+ #sed -ri "s/ <text ([-[:alnum:]=\.\" \#\(\)\;\:\%\']+)>.*<\/text>//g" $j #delete all oneline-text
  
- sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/ <text ([-[:alnum:]=\.\" \#\(\)\;\:\%\']+)>([]\[[:alnum:][:space:]\$\^\\\_\{\} \'\’\“\”\/\(\)\!\,\:#\.=,\"\&\;−-]*|<tspan ([-[:alnum:]=\.\" \#\(\)\;\:\%\,]+)>|<\/tspan>)*<\/text>//g" $j
+ #sed -ri "s/<tspan ([-[:alnum:]=\.\" \#\(\)\;\:\%\'\/\%]+)>([]\[[:alnum:][:space:]\$\^\\\_\{\} \'\’\“\”\/\(\)\!\,\:#\.=,\"\&\;−-]*|<tspan ([-[:alnum:]=\.\" \#\(\)\;\:\%\,]+)>|<\/tspan>)*<\/tspan>//g" $j
+ 
+ sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<text ([-[:alnum:]=\.\" \#\(\)\;\:\%\'\/\%\,]+)>([]\[[:alnum:][:space:]\$\^\\\_\{\} \'\’\“\”\/\(\)\!\,\:#\.=,\"\&\;−-]*|<tspan ([-[:alnum:]=\.\" \#\(\)\;\:\%\,]+)>|<\/tspan>)*<\/text>//g" $j
  
  echo $j finish
  
@@ -70,7 +72,10 @@ DeleteOnDemand=<< END
 #------------------------
 
 #textPath
-#sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/ <text>[[:space:]]*<textPath xlink:href=\"#[[:alpha:]]\">[[:space:]]*<tspan [-[:alnum:]´\.= \"]*\">[[:alnum:] ']*<\/tspan>[[:space:]]*<\/textPath>[[:space:]]*<\/text>//g" $i #delete al textPath
+
+#sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<textPath xlink:href=\"#[[:alnum:]]*\"(| id=\" [[:alnum:]]*\")>[[:space:]]*(<tspan [-[:alnum:]´\.= \"]*\">|[[:alnum:] ']*|<\/tspan>)*[[:space:]]*<\/textPath>//g" $i #delete just textPath
+
+#sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/ <text ([-[:alnum:]=\.\" \#\(\)\;\:\%\'\/\%\,]+)>[[:space:]]*<textPath xlink:href=\"#[[:alpha:]]\">[[:space:]]*<tspan [-[:alnum:]´\.= \"]*\">[[:alnum:] ']*<\/tspan>[[:space:]]*<\/textPath>[[:space:]]*<\/text>//g" $i #delete al textPath
 
 #------------------------
 
