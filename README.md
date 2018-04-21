@@ -77,7 +77,8 @@ Similar scripts<br/>
 
 ## Update
 
-```python -m pip install --upgrade pip
+```cmd
+python -m pip install --upgrade pip
 pip install --upgrade https://github.com/codedread/scour/archive/master.zip
 cargo install svgcleaner --force --git https://github.com/RazrFalcon/svgcleaner
 npm install -g svgo
