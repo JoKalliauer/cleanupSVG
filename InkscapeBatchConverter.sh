@@ -20,9 +20,9 @@ fi
 #Input parameters:
 #alias inkscape='/cygdrive/c/Program\ Files/Inkscape/inkscape.com' #2017-10-29 11h06 (by Johannes Kalliauer)
 #alias inkscape.exe='/cygdrive/c/Program\ Files/Inkscape/inkscape.exe'
-sourceType="svg"
+sourceType="svg"; valid=1
 #outputType="svg"
-valid=1
+
 
 
 count=0
@@ -39,16 +39,18 @@ validOutput5="plain-svg"
 #echo "This script allows you to convert all files in this folder from one file type to another."
 
 #valid=0
-while [ "$valid" != "1" ]
-do
-    echo "Allowed file types for source: $validInput1, $validInput2, $validInput3"
-	read -p "What file type do you want to use as a source? " sourceType
-    if [ "$sourceType" = "$validInput1" ] || [ "$sourceType" = "$validInput2" ] || [ "$sourceType" = "$validInput3" ]; then
-        valid=1
-    else
-        echo "Invalid input! Please use one of the following: $validInput1, $validInput2, $validInput3"
-    fi
-done
+if [ -z $sourceType ]; then
+ while [ "$valid" != "1" ]
+ do
+     echo "Allowed file types for source: $validInput1, $validInput2, $validInput3"
+ 	read -p "What file type do you want to use as a source? " sourceType
+     if [ "$sourceType" = "$validInput1" ] || [ "$sourceType" = "$validInput2" ] || [ "$sourceType" = "$validInput3" ]; then
+         valid=1
+     else
+         echo "Invalid input! Please use one of the following: $validInput1, $validInput2, $validInput3"
+     fi
+ done
+fi
 
 if [ -z ${outputType+x} ]; then
   valid=0 #ask it output is not defined
@@ -73,7 +75,7 @@ do
  export tmp=$(echo $fileN | cut -f1 -d".")
 
  #If you want to overwrite the exisiting file, without any backup, delete the following three lines
- export i=${tmp}.svg
+ export i=${tmp}.$sourceType
  if [ -f "$i" ]; then
   echo no renaming
  else

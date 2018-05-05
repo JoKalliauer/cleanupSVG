@@ -1,5 +1,6 @@
 #!/bin/bash
 
+export sourceType="svg" #for convertin in InkscapeBatchConverter
 export minfilesize=0 #1..min file size (1...no line breaks)
 export meta=0 #0 removes metadata
 export outputType="svg" #just to not get asked by Inkscape

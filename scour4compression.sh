@@ -1,6 +1,7 @@
 #!/bin/bash
 
 for file in *.svg;do
+#export file=min.svg
 export fileN=$(echo $file | cut -f1 -d" ")
 export tmp=$(echo $fileN | cut -f1 -d".")
 export i=${tmp}s.svg
@@ -35,7 +36,7 @@ fi
 
 echo scour ${file} to $i begin, min=${minfilesize}, meta=$meta, META= $META, INDENT=$INDENT
 
-scour -i ${file} -o $i --enable-comment-stripping --remove-titles --remove-descriptions --disable-embed-rasters --strip-xml-space  --set-precision=5 --set-c-precision=4 --create-groups $META $INDENT --renderer-workaround --disable-style-to-xml --keep-unreferenced-defs #--enable-viewboxing #  
+scour -i ${file} -o $i --keep-unreferenced-defs --enable-comment-stripping --remove-titles --remove-descriptions --disable-embed-rasters --strip-xml-space  --set-precision=5 --set-c-precision=4 $META $INDENT --renderer-workaround --disable-style-to-xml #--create-groups #--enable-viewboxing #  
 
 #--keep-unreferenced-defs
 ## if referenced-defs are deleted: https://github.com/scour-project/scour/issues/155
@@ -46,6 +47,7 @@ scour -i ${file} -o $i --enable-comment-stripping --remove-titles --remove-descr
 
 #--disable-style-to-xml #https://github.com/scour-project/scour/issues/176
 
+ #--create-groups #https://commons.wikimedia.org/wiki/File:CIA_WorldFactBook-Political_world.svg
 
 # --enable-id-stripping #https://github.com/scour-project/scour/issues/164
 

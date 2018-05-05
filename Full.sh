@@ -12,8 +12,8 @@ export i=min.svg # just used for debugging
 ./cleaner4compression.sh
 ./o4compression.sh
 
-./UngroupByInkscape.sh
-./ResizeByInkscape.sh
+#./UngroupByInkscape.sh
+#./ResizeByInkscape.sh
 ./Flow2TextByInkscape.sh
 
 ./ScourFull.sh
