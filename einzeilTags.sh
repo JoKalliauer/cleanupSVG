@@ -41,7 +41,7 @@ for file in *.svg;do
  
  sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/[[:space:]]+/ /g" $i #reduce to one space
  
- sed -ri 's/[[:space:]]*<(g|path|text|svg) /\n<\1 /g' $i
+ sed -ri 's/[[:space:]]*<(g|path|text|svg|rect) /\n<\1 /g' $i
  
  #sed -ri "s/ <circle [-[:lower:][:digit:]\"\.= #\(\)]*\/>//g" $i #delete circels
  

@@ -17,24 +17,21 @@
 #2017-11-27 Remove stroke-width in tspan
 #2018-04-07 10h17 put no-filebreakc after definiton of $new, deleted the removement of spaces
 #2018-04-28 not remove stroke-width in text
+#2018-05-05 restructured
 
 for file in *.svg;do
 
 echo $file
 
+## == Remove scecial characters in filename ==
+
 #export i=$file #i will be overritan later, just for debugging
-
 export new="${file//[^abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\.\_]/}"
-
 if [ $new == '*.svg' ]; then #new has to be controlled because it might have "-" which confuses bash
  echo "no file, (or filename does not contain any default latin character (a-z) )"
  break
 fi
-
-
-#export fileN=$(echo $new | cut -f1 -d" ") #remove spaces if exsiting (and everything after)
 export tmp=$(echo $new | cut -f1 -d".")
-
 
 #If you want to overwrite the exisiting file, without any backup, delete the following three lines
 export i=${tmp}_.svg
@@ -44,10 +41,12 @@ mv ./"${file}" ./${tmp}1.xml
 echo 
 echo $i start:
 
-#Define prepost equal to zero if not defined
-if [ -z ${prepost+x} ]; then
- export prepost=0
-fi
+# #Define prepost equal to zero if not defined
+# if [ -z ${prepost+x} ]; then
+#  export prepost=0
+# fi
+
+
 
 #Remove W3C-invalid elements
 sed -ri "s/ text-align=\"(end|center)\"//g"  ${i}
@@ -98,20 +97,11 @@ fi
   sed -ri 's/<svg/<svg xmlns:xlink="http:\/\/www.w3.org\/1999\/xlink"/' $i
  fi
 
-
-#Change spaces to , in stroke-dasharray (solves librsvg-Bug https://phabricator.wikimedia.org/T32033 )
-sed -ri 's/stroke-dasharray=\"([[:digit:]\.,]*)([[:digit:]\.]+) ([[:digit:]\., ]+)\"/stroke-dasharray=\"\1\2,\3\"/g' $i
-sed -ri 's/stroke-dasharray=\"([[:digit:]\., ]*)([[:digit:]\.]+) ([[:digit:]\.,]+)\"/stroke-dasharray=\"\1\2,\3\"/g' $i
-
-#sed -ri 's/stroke-dasharray=\"([[:digit:]\.,]+) ([[:digit:]\., ]+)\"/stroke-dasharray=\"\1,\2\"/g' $i
-#sed -ri 's/stroke-dasharray=\"([[:digit:]\., ]+) ([[:digit:]\.,]+)\"/stroke-dasharray=\"\1,\2\"/g' $i
-
-#Change "'font name'" to 'font name'(solves librsvg-Bug) https://commons.wikimedia.org/wiki/File:T184369.svg
-sed -ri "s/font-family=\"'([-[:alnum:] ]*)'(|,[-[:lower:]]+)\"/font-family=\'\1\'/g" $i
-
+## ==Change Fonts to WikiFonts ==
 
 #Change to Wikis Fallbackfont https://commons.wikimedia.org/wiki/Help:SVG#fallback to be compatible with https://meta.wikimedia.org/wiki/SVG_fonts
-sed -ri 's/ font-family=\"(s|S)ans\"/ font-family=\"DejaVu Sans\"/g' $i #as automatic
+#sed -ri 's/ font-family=\"(s|S)ans\"/ font-family=\"DejaVu Sans\"/g' $i #as automatic
+sed -ri 's/ font-family=\"(s|S)ans\"/ font-family=\"Liberation Sans\"/g' $i
 sed -ri 's/ font-family=\"(s|S)erif\"/ font-family=\"DejaVu Serif\"/g' $i #as automatic
 sed -ri 's/ font-family=\"(s|S)ans-(s|S)erif\"/ font-family=\"DejaVu Sans\"/g' $i #as automatic
 sed -i 's/ font-family=\"Arial\"/ font-family=\"Liberation Sans\"/g' $i #as automatic
@@ -121,7 +111,6 @@ sed -ri 's/ font-family=\"(Bitstream Vera Sans|DejaVuSans)\"/ font-family=\"Deja
 sed -i 's/ font-family=\"Bitstream Vera Sans Mono\"/ font-family=\"DejaVu Sans Mono\"/g' $i #as automatic
 sed -i 's/ font-family=\"Times New Roman\"/ font-family=\"Liberation Serif\"/g' $i #as automatic
 #sed -i 's/ font-family=\"Albany embedded\"/ font-family=\"Loma\"/g' $i #as automatic
-sed -ri "s/<(text|g)([-[:lower:][:digit:]\.=\"\ \#\(\)]*) font-family=\"DejaVu Sans Condensed\"([-[:lower:][:digit:]=\"\ \#]*)>/<\1\2 font-family=\"DejaVu Sans\" font-stretch=\"condensed\"\3>/g" $i # correct syntax
 sed -i 's/ font-family=\"Helvetica\"/ font-family=\"Garuda\"/g' $i #looks similar https://commons.wikimedia.org/wiki/File_talk:Meta_SVG_fonts.svg
 #sed -i 's/ fill=\"#002060\" font-family=\"Swis721 BlkCn BT\" font-size=\"/ fill=\"#002060\" font-family=\"Liberation Sans\" font-weight=\"bold\" font-size=\"/g' $i #looks similar https://www.dafontfree.net/freefonts-swis721-blkcn-bt-f61164.htm
 #sed -i "s/ font-family=\"Blue Highway\"/ font-family=\"Padauk\"/g" $i #looks similar https://www.dafont.com/de/blue-highway.font
@@ -135,10 +124,11 @@ sed -i 's/ font-family=\"Helvetica\"/ font-family=\"Garuda\"/g' $i #looks simila
 #sed -i "s/ font-family=\"Helvetica-BoldOblique\"/ font-family=\"Garuda\" font-weight=\"bold\" font-style=\"oblique\"/g" $i
 #sed -i "s/ font-family=\"BenguiatStd-BookItalic\"/ font-family=\"Garuda\" font-style=\"italic\"/g" $i
 #sed -i "s/ font-family=\"TiepoloStd-Book\"/ font-family=\"Garuda\"/g" $i
-sed -i "s/ font-family=\"Tiepolo\"/ font-family=\"Liberation Sans\"/g" $i
-sed -i "s/ font-family=\"Benguiat\"/ font-family=\"Liberation Sans\"/g" $i
-sed -i "s/ font-family=\"Sanvito\"/ font-family=\"Liberation Sans\"/g" $i
-sed -i "s/ font-family=\"Helvetica\"/ font-family=\"Liberation Sans\"/g" $i
+#sed -i "s/ font-family=\"Tiepolo\"/ font-family=\"Liberation Sans\"/g" $i
+#sed -i "s/ font-family=\"Benguiat\"/ font-family=\"Liberation Sans\"/g" $i
+#sed -i "s/ font-family=\"Sanvito\"/ font-family=\"Liberation Sans\"/g" $i
+#sed -i "s/ font-family=\"Helvetica\"/ font-family=\"Liberation Sans\"/g" $i
+#sed -i "s/ font-family=\"DejaVu Sans Condensed\"/ font-family=\"DejaVu Sans\" font-stretch=\"condensed\"/g" $i
 
 #sed -i "s/ font-family=\"Nimbus Mono L\"/ font-family=\"TlwgMono\"/g" $i #looks similar https://en.wikipedia.org/wiki/Nimbus_Mono_L
 #sed -ri 's/ font-family=\"Benguiat\"/ font-family=\"Tibetan Machine Uni\"/g' $i #looks similar # http://www.fontpalace.com/font-details/Benguiat+Bold/
@@ -152,20 +142,11 @@ sed -ri 's/ font-family=\"(Minion Pro|Times|Times New Roman|SVGTimes)\"/ font-fa
 
 
 #simpifying text
-#sed -i -e ':a' -e 'N' -e '$!ba' -e "s/<tspan/\n<tspan/g" $i
-#sed -i -e ':a' -e 'N' -e '$!ba' -e "s/<\/tspan>/<\/tspan>\n/g" $i
-sed -ri "s/<tspan([-[:alnum:]\.\"\#\ =]*) x=\"([-[:digit:]\.]+)( |,)([-[:digit:]\. ,]+)\" y=\"([-[:digit:]\. ]+)\"([-[:alnum:]\.\"\#\ =]*)>/<tspan x=\"\2\" y=\"\5\"\1\6>/g" $i # remove multipe x-koordinates in tspan (solves librsvg-Bug)
-sed -ri "s/<text x=\"([-[:digit:]\.]+) ([-[:digit:]\. ]+)\" y=\"([-[:digit:]\. ]+)\"([-[:alnum:]\.\"\#\ =]*)>/<text x=\"\1\" y=\"\3\"\4>/g" $i # remove multipe x-koordinates in text (solves librsvg-Bug)
-#sed -ri "s/<text x=\"([[:digit:]\. ]+)\" y=\"([[:digit:]\.]+) ([[:digit:]\. ]+)\"([-[:alnum:] =\"]*)>/<text x=\"\1\" y=\"\2\"\4>/g" $i #remove multiple y-koordinates in text
-#sed -ri "s/<text([xy\ [:digit:]\"\.\=]*) fill=\"\#[[:xdigit:]]{3,6}\"/<text\1/g" $i #remove fill in text
 sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<text([[:lower:][:digit:]= #,-\,\"\-\.\(\)]*)>[[:space:]]*<tspan/<text\1><tspan/g" $i #remove spaces and linebreaks between text and tspan
 sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<\/tspan>[[:space:]]*<\/text>/<\/tspan><\/text>/g" $i #remove spaces and linebreaks between text and tspan
-#sed -i -e ':a' -e 'N' -e '$!ba' -e "s/\n<tspan/<tspan/g" $i #remove lineforward before tspan
-#sed -i -e ':a' -e 'N' -e '$!ba' -e "s/<tspan/\n<tspan/g" $i #add lineforward before tspan
-#sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<\/tspan>[[:space:]]+<tspan /<\/tspan> <tspan /g" $i #reduces multiple spaces to one space
 sed -ri "s/<text ([-[:lower:][:digit:].,\"= ]+) xml:space=\"preserve\">([-[:alnum:]\\\$\']+)<\/text>/<text \1>\2<\/text>/g" $i #remove xml:space="preserve" in text if unnecesarry
 sed -ri 's/<text [-[:lower:][:digit:]= \"\:\.]+\/>//g' $i #remove empty text
-sed -ri 's/<tspan [-[:lower:][:digit:]= \"\.]+\/>//g' $i #remove empty tspan
+sed -ri 's/<tspan [-[:lower:][:digit:]= \"\.\:]+\/>//g' $i #remove selfclosing tspan
 sed -i "s/<tspan x=\"0\" y=\"0\">/<tspan>/g" $i #reduce options in tspan
 sed -ri "s/<tspan>([]\[[:alnum:]\$\^\\\_\{\}= #\,\"\.\(\)\’\&\;\/Επιβάτες¸−-]*)<\/tspan>([ ]*)/\1/g" $i #remove unnecesarry <tspan>...</tspan> without attributes
 sed -ri "s/<tspan[-[:lower:][:digit:]= \"\.]+> <\/tspan>([ ]*)//g" $i #remove useless <tspan (...)> </tspan> without text
@@ -203,8 +184,7 @@ sed -i "s/ i:extraneous=\"self\"//" $i #Remove AI-Elemtents
 #remove jpg im metadata
 sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<xapGImg:image>([[:alnum:][:space:]\/+])*={0,2}[[:space:]]*<\/xapGImg:image>//g" $i
 
-#Repair https://phabricator.wikimedia.org/T68672 (solves librsvg-Bug)
-sed -i "s/<style>/<style type=\"text\/css\">/" $i
+
 
 #Repair WARNING in <mask> with id=ay: Mask element found with maskUnits set. It will not be rendered properly by Wikimedia's SVG renderer. See https://phabricator.wikimedia.org/T55899 for details
 sed -ri "s/<mask id=\"([[:alpha:]]+)\"([[:lower:] =\"[:digit:]]*) maskUnits=\"userSpaceOnUse\">/<mask id=\"\1\" \2>/g" $i
@@ -226,8 +206,26 @@ sed -ri "s/<g style=\"stroke:none;fill:none\"><text>/<g style=\"stroke:none;fill
 sed -ri "s/font-family:&quot;([-[:alnum:] ]*)&quot;/font-family:\"\1\"/g" $i
 sed -ri "s/font-family:&apos;([-[:alnum:] ]*)&apos;/font-family:'\1'/g" $i
 
+## == Workarounds for Librsvg ==
 
-#mv $i ${tmp}_.svg
+#Change spaces to , in stroke-dasharray (solves librsvg-Bug https://phabricator.wikimedia.org/T32033 )
+sed -ri 's/stroke-dasharray=\"([[:digit:]\.,]*)([[:digit:]\.]+) ([[:digit:]\., ]+)\"/stroke-dasharray=\"\1\2,\3\"/g' $i
+sed -ri 's/stroke-dasharray=\"([[:digit:]\., ]*)([[:digit:]\.]+) ([[:digit:]\.,]+)\"/stroke-dasharray=\"\1\2,\3\"/g' $i
+
+#Change "'font name'" to 'font name'(solves librsvg-Bug) https://commons.wikimedia.org/wiki/File:T184369.svg
+sed -ri "s/font-family=\"'([-[:alnum:] ]*)'(|,[-[:lower:]]+)\"/font-family=\'\1\'/g" $i
+
+# multiple x-koordinates https://phabricator.wikimedia.org/T35245
+sed -ri "s/<tspan([-[:alnum:]\.\"\#\ =]*) x=\"([-[:digit:]\.]+)( |,)([-[:digit:]\. ,]+)\" y=\"([-[:digit:]\. ]+)\"([-[:alnum:]\.\"\#\ =]*)>/<tspan x=\"\2\" y=\"\5\"\1\6>/g" $i # remove multipe x-koordinates in tspan (solves librsvg-Bug)
+sed -ri "s/<text x=\"([-[:digit:]\.]+) ([-[:digit:]\. ]+)\" y=\"([-[:digit:]\. ]+)\"([-[:alnum:]\.\"\#\ =]*)>/<text x=\"\1\" y=\"\3\"\4>/g" $i # remove multipe x-koordinates in text (solves librsvg-Bug)
+
+#Repair https://phabricator.wikimedia.org/T68672 (solves librsvg-Bug)
+sed -i "s/<style>/<style type=\"text\/css\">/" $i
+
+#solved librsvg-Bug T193929 https://phabricator.wikimedia.org/T193929
+sed -i "s/ xlink:href=\"data:image\/jpg;base64,/ xlink:href=\"data:image\/jpeg;base64,/" $i
+
+
 echo $i finish
 
 

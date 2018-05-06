@@ -39,7 +39,7 @@ for file in *.svg;do
  
  #remove objects:
  #  <rect id="rect13901" y="-2.0665e-5" width="708.66" height="708.66" fill="#fff" fill-rule="evenodd"/>
- sed -ri "s/ <rect ([-[:alnum:]=\.\" \#\(\)]+)\/>//g" $i #delete all Rectangles
+ sed -ri "s/ <rect ([-[:alnum:]=\.\" \#\(\)\;\:\,]+)\/>//g" $i #delete all Rectangles
  
  sed -ri "s/<path ([-[:alnum:]=\.\" \#\(\)\;\:\%\,]+)\/>//g" $i #delete all Path
  

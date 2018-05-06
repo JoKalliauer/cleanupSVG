@@ -36,7 +36,7 @@ fi
 
 echo scour ${file} to $i begin, min=${minfilesize}, meta=$meta, META= $META, INDENT=$INDENT
 
-scour -i ${file} -o $i --keep-unreferenced-defs --enable-comment-stripping --remove-titles --remove-descriptions --disable-embed-rasters --strip-xml-space  --set-precision=5 --set-c-precision=4 $META $INDENT --renderer-workaround --disable-style-to-xml #--create-groups #--enable-viewboxing #  
+scour -i ${file} -o $i --keep-unreferenced-defs --enable-comment-stripping --remove-titles --remove-descriptions --disable-embed-rasters --strip-xml-space  --set-precision=5 --set-c-precision=4 $META $INDENT --renderer-workaround --disable-style-to-xml --create-groups #--enable-viewboxing #  
 
 #--keep-unreferenced-defs
 ## if referenced-defs are deleted: https://github.com/scour-project/scour/issues/155
@@ -50,6 +50,8 @@ scour -i ${file} -o $i --keep-unreferenced-defs --enable-comment-stripping --rem
  #--create-groups #https://commons.wikimedia.org/wiki/File:CIA_WorldFactBook-Political_world.svg
 
 # --enable-id-stripping #https://github.com/scour-project/scour/issues/164
+
+# --create-groups # https://github.com/scour-project/scour/issues/196 (but it is 
 
 #--set-precision=5 # https://commons.wikimedia.org/wiki/File:Porr_logo.svg
 #--set-c-precision=3 # https://commons.wikimedia.org/wiki/File:LageplanStrasse.svg https://commons.wikimedia.org/wiki/File:Dojikko2.3.svg
