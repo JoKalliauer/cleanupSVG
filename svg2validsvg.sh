@@ -53,14 +53,15 @@ sed -ri "s/ text-align=\"(end|center)\"//g"  ${i}
 sed -i "s/ aria-label=\"[[:digit:]]\"//g;s/ stroke-linejoin=\"null\"//g;s/ stroke-linecap=\"null\"//g;s/ stroke-width=\"null\"//g" $i
 sed -i "s/ vector-effect=\"non-scaling-stroke\"//g;s/ solid-color=\"#000000\"//g" $i #QGIS-Files (made file valid)
 
+# <flowPara font-family="Liberation Sans" font-size="55.071px" style="line-height:125%"/>
+
+# <flowRoot id="flowRoot30525" transform="matrix(.25512 0 0 .31748 3644.9 1338.4)" style="fill:#000000;font-family:Bitstream Vera Sans;font-size:140.55px;font-weight:bold" xml:space="preserve"><flowRegion id="flowRegion30527"><rect id="rect30529" x="-1619.1" y="2986.3" width="699.29" height="198.95" style="fill:#000"/></flowRegion></flowRoot>
+
 #remove empty flow Text in svg (everything else will be done by https://github.com/JoKalliauer/cleanupSVG/blob/master/Flow2TextByInkscape.sh )
-sed -i 's/<flowPara\/>//g;s/<flowRoot\/>//g' $i
-sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<flowRoot>[[:space:]]*<flowRegion(\/|>[[:space:]]*<path d=\"[-[:digit:]hmvz\. ]*\"\/>[[:space:]]*<\/flowRegion)>[[:space:]]*(<flowDiv\/>|)[[:space:]]*<\/flowRoot>//g" $i #delete empty flowRoot
-sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<flowRoot([-[:alnum:]\.=\" \:\(\)\%\#\,\';]*)>[[:space:]]*<flowRegion([-[:alnum:]=:\" ]*)>[[:space:]]*(<path[-[:alnum:]\.=\"\ \#]*\/>|<rect( id=\"rect[-[:digit:]]{2,7}\"|) x=\"([[:digit:]\. ]+)\" y=\"([-[:digit:]\. ]+)\"([[:lower:][:digit:]=\.\" \#]+)\/>)[[:space:]]*<\/flowRegion>[[:space:]]*(<flowPara\/>|<flowPara([-[:alnum:]\.=\" \:\#; ]*)>([[:space:] ]*)<\/flowPara>)[[:space:]]*<\/flowRoot>//g" $i ##delete flowRoot only containing spaces
-
-#sed -ri "s/<flowRoot([-[:alnum:]\.=\" \:\(\)\%\#\,\';]*)><flowRegion([-[:alnum:]=:\" ]*)><rect( id=\"rect[-[:digit:]]{4,7}\"|) x=\"([[:digit:]\. ]+)\" y=\"([-[:digit:]\. ]+)\"([-[:lower:][:digit:]=\.\" \#]+)\/><\/flowRegion><flowPara([-[:alnum:]\.=\" \:\#;]*)>([-−[:alnum:] \{\}\+\ \ ]+)<\/flowPara><\/flowRoot>/<text x=\"\4\" y=\"\5\"\1><tspan x=\"\4\" y=\"\5\"\7>\8<\/tspan><\/text>/g" $i
-
-
+sed -ri 's/<flowPara([-[:alnum:]\" \.\:\%\=\;#]*)\/>//g;s/<flowRoot\/>//g' $i
+sed -i 's/<flowSpan[-[:alnum:]=\":;\. ]*>[[:space:]]*<\/flowSpan>//g' $i
+sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<flowRoot([-[:alnum:]\.=\" \:\(\)\%\#\,\';]*)>[[:space:]]*<flowRegion(\/|[[:alnum:]\"= ]*>[[:space:]]*<(path|rect) [-[:alnum:]\. \"\=]*\/>[[:space:]]*<\/flowRegion)>[[:space:]]*(<flowDiv\/>|)[[:space:]]*<\/flowRoot>//g" $i #delete empty flowRoot
+sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<flowRoot([-[:alnum:]\.=\" \:\(\)\%\#\,\';]*)>[[:space:]]*<flowRegion([-[:alnum:]=:\" ]*)>[[:space:]]*(<path[-[:alnum:]\.=\"\ \#]*\/>|<rect( id=\"[-[:alnum:]]*\"|) x=\"([-[:digit:]\. ]+)\" y=\"([-[:digit:]\. ]+)\"([[:lower:][:digit:]=\.\" \#:]+)\/>)[[:space:]]*<\/flowRegion>[[:space:]]*(|<flowPara([-[:alnum:]\.=\" \:\#;% ]*)>([[:space:] ]*)<\/flowPara>)[[:space:]]*<\/flowRoot>//g" $i ##delete flowRoot only containing spaces
 
 
 #remove mostly useless elements
@@ -93,63 +94,34 @@ fi
   #echo no DOCTYPE added
  fi
  
- if ! grep -qE "xmlns:xlink=" $i; then
-  sed -ri 's/<svg/<svg xmlns:xlink="http:\/\/www.w3.org\/1999\/xlink"/' $i
- fi
+# if ! grep -qE "xmlns:xlink=" $i; then
+#  sed -ri 's/<svg/<svg xmlns:xlink="http:\/\/www.w3.org\/1999\/xlink"/' $i
+# fi
 
 ## ==Change Fonts to WikiFonts ==
 
 #Change to Wikis Fallbackfont https://commons.wikimedia.org/wiki/Help:SVG#fallback to be compatible with https://meta.wikimedia.org/wiki/SVG_fonts
-#sed -ri 's/ font-family=\"(s|S)ans\"/ font-family=\"DejaVu Sans\"/g' $i #as automatic
+sed -ri 's/ font-family=\"(s|S)ans\"/ font-family=\"DejaVu Sans\"/g' $i #as automatic
 sed -ri 's/ font-family=\"(s|S)ans\"/ font-family=\"Liberation Sans\"/g' $i
 sed -ri 's/ font-family=\"(s|S)erif\"/ font-family=\"DejaVu Serif\"/g' $i #as automatic
 sed -ri 's/ font-family=\"(s|S)ans-(s|S)erif\"/ font-family=\"DejaVu Sans\"/g' $i #as automatic
-sed -i 's/ font-family=\"Arial\"/ font-family=\"Liberation Sans\"/g' $i #as automatic
-sed -i 's/ font-family=\"Arial,/ font-family=\"Liberation Sans,/g' $i #as automatic
+sed -i 's/ font-family=\"Arial\"/ font-family=\"Liberation Sans,Arial\"/g' $i #as automatic
+sed -i 's/ font-family=\"Arial,/ font-family=\"Liberation Sans,Arial,/g' $i #as automatic
 sed -i 's/ font-family=\"Bitstream Vera Serif\"/ font-family=\"DejaVu Serif\"/g' $i #as automatic
-sed -ri 's/ font-family=\"(Bitstream Vera Sans|DejaVuSans)\"/ font-family=\"DejaVu Sans\"/g' $i #as automatic
+sed -ri 's/ font-family=\"DejaVuSans\"/ font-family=\"DejaVu Sans\"/g' $i #as automatic
 sed -i 's/ font-family=\"Bitstream Vera Sans Mono\"/ font-family=\"DejaVu Sans Mono\"/g' $i #as automatic
 sed -i 's/ font-family=\"Times New Roman\"/ font-family=\"Liberation Serif\"/g' $i #as automatic
-#sed -i 's/ font-family=\"Albany embedded\"/ font-family=\"Loma\"/g' $i #as automatic
-sed -i 's/ font-family=\"Helvetica\"/ font-family=\"Garuda\"/g' $i #looks similar https://commons.wikimedia.org/wiki/File_talk:Meta_SVG_fonts.svg
-#sed -i 's/ fill=\"#002060\" font-family=\"Swis721 BlkCn BT\" font-size=\"/ fill=\"#002060\" font-family=\"Liberation Sans\" font-weight=\"bold\" font-size=\"/g' $i #looks similar https://www.dafontfree.net/freefonts-swis721-blkcn-bt-f61164.htm
-#sed -i "s/ font-family=\"Blue Highway\"/ font-family=\"Padauk\"/g" $i #looks similar https://www.dafont.com/de/blue-highway.font
-#sed -i "s/ font-family=\"Blue Highway Condensed\"/ font-family=\"Padauk\" font-stretch=\"condensed\"/g" $i
-#sed -i "s/ font-family=\"Blue Highway D Type\"/ font-family=\"Padauk\" text-transform=\"uppercase\"/g" $i
-#sed -i "s/ font-family=\"TiepoloStd-BookItalic\"/ font-family=\"Garuda\" font-style=\"italic\"/g" $i
-#sed -i "s/ font-family=\"BenguiatStd-Book\"/ font-family=\"Garuda\"/g" $i
-#sed -i "s/ font-family=\"TiepoloStd-Bold\"/ font-family=\"Garuda\" font-weight=\"bold\"/g" $i
-#sed -i "s/ font-family=\"TiepoloStd-BoldItalic\"/ font-family=\"Garuda\" font-weight=\"bold\" font-style=\"italic\"/g" $i
-#sed -i "s/ font-family=\"SanvitoPro-Regular\"/ font-family=\"Garuda\"/g" $i
-#sed -i "s/ font-family=\"Helvetica-BoldOblique\"/ font-family=\"Garuda\" font-weight=\"bold\" font-style=\"oblique\"/g" $i
-#sed -i "s/ font-family=\"BenguiatStd-BookItalic\"/ font-family=\"Garuda\" font-style=\"italic\"/g" $i
-#sed -i "s/ font-family=\"TiepoloStd-Book\"/ font-family=\"Garuda\"/g" $i
-#sed -i "s/ font-family=\"Tiepolo\"/ font-family=\"Liberation Sans\"/g" $i
-#sed -i "s/ font-family=\"Benguiat\"/ font-family=\"Liberation Sans\"/g" $i
-#sed -i "s/ font-family=\"Sanvito\"/ font-family=\"Liberation Sans\"/g" $i
-#sed -i "s/ font-family=\"Helvetica\"/ font-family=\"Liberation Sans\"/g" $i
-#sed -i "s/ font-family=\"DejaVu Sans Condensed\"/ font-family=\"DejaVu Sans\" font-stretch=\"condensed\"/g" $i
-
-#sed -i "s/ font-family=\"Nimbus Mono L\"/ font-family=\"TlwgMono\"/g" $i #looks similar https://en.wikipedia.org/wiki/Nimbus_Mono_L
-#sed -ri 's/ font-family=\"Benguiat\"/ font-family=\"Tibetan Machine Uni\"/g' $i #looks similar # http://www.fontpalace.com/font-details/Benguiat+Bold/
-#sed -ri 's/ font-family=\"Sanvito\"/ font-family=\"Purisa\"/g' $i #looks similar # https://www.myfonts.com/fonts/adobe/sanvito/
-#sed -ri 's/ font-family=\"Tiepolo\"/ font-family=\"Norasi\"/g' $i #looks similar # https://www.myfonts.com/fonts/itc/tiepolo/
-sed -ri 's/ font-family=\"DejaVu Sans Bold\"/ font-family=\"DejaVu Sans\" font-weight=\"bold\"/g' $i
-sed -ri 's/ font-family=\"(Arial|Myriad Pro|ArialNarrow|ArialMT)\"/ font-family=\"Liberation Sans\"/g' $i #all Sans to Liberation
-sed -ri 's/ font-family=\"(Minion Pro|Times|Times New Roman|SVGTimes)\"/ font-family=\"Liberation Serif\"/g' $i #all Serif to Liberation
-#sed -ri 's/ font-family=\"Dialog\"/ font-family=\"DejaVu Sans\"/g' $i #unknown fonts to DejaVu Sans
-
 
 
 #simpifying text
 sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<text([[:lower:][:digit:]= #,-\,\"\-\.\(\)]*)>[[:space:]]*<tspan/<text\1><tspan/g" $i #remove spaces and linebreaks between text and tspan
 sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<\/tspan>[[:space:]]*<\/text>/<\/tspan><\/text>/g" $i #remove spaces and linebreaks between text and tspan
 sed -ri "s/<text ([-[:lower:][:digit:].,\"= ]+) xml:space=\"preserve\">([-[:alnum:]\\\$\']+)<\/text>/<text \1>\2<\/text>/g" $i #remove xml:space="preserve" in text if unnecesarry
-sed -ri 's/<text [-[:lower:][:digit:]= \"\:\.]+\/>//g' $i #remove empty text
-sed -ri 's/<tspan [-[:lower:][:digit:]= \"\.\:]+\/>//g' $i #remove selfclosing tspan
+sed -ri 's/<text [-[:lower:][:digit:]= \"\:\.\(\)]+\/>//g' $i #remove selfclosing text
+sed -ri 's/<tspan [-[:lower:][:digit:]= \"\.\:\;\%]+\/>//g' $i #remove selfclosing tspan
 sed -i "s/<tspan x=\"0\" y=\"0\">/<tspan>/g" $i #reduce options in tspan
-sed -ri "s/<tspan>([]\[[:alnum:]\$\^\\\_\{\}= #\,\"\.\(\)\’\&\;\/Επιβάτες¸−-]*)<\/tspan>([ ]*)/\1/g" $i #remove unnecesarry <tspan>...</tspan> without attributes
-sed -ri "s/<tspan[-[:lower:][:digit:]= \"\.]+> <\/tspan>([ ]*)//g" $i #remove useless <tspan (...)> </tspan> without text
+sed -ri "s/<tspan>([]\[[:alnum:]\$\^\\\_\{\}= #\,\"\.\(\)\’\&\;\/Επιβάτες¸\°\'\"\@\:−-]*)<\/tspan>([ ]*)/\1/g" $i #remove unnecesarry <tspan>...</tspan> without attributes
+sed -ri "s/<tspan[-[:lower:][:digit:]= \"\.]+> <\/tspan>([ ]*)//g" $i #remove useless,empty <tspan (...)> </tspan> without text
 
 
 #two lineforward to one lineforward
@@ -190,17 +162,19 @@ sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<xapGImg:image>([[:alnum:][:space:]\/+])*
 sed -ri "s/<mask id=\"([[:alpha:]]+)\"([[:lower:] =\"[:digit:]]*) maskUnits=\"userSpaceOnUse\">/<mask id=\"\1\" \2>/g" $i
 
 #ArcMap-problems (made file valid, removes cbs= and gem=)
-sed -ri "s/<path d=\"m([[:digit:]hlmvz \.-]+)\" ([[:alnum:]\"= \.\(\)\#-]*)\" cbs=\"[[:digit:]GM]*\" gem=\"[[:alpha:]0 \.\(\)-]*\"\/>/<path d=\"m\1\" \2\"\/>/g" $i
+#sed -ri "s/<path d=\"m([[:digit:]hlmvz \.-]+)\" ([[:alnum:]\"= \.\(\)\#-]*)\" cbs=\"[[:digit:]GM]*\" gem=\"[[:alpha:]0 \.\(\)-]*\"\/>/<path d=\"m\1\" \2\"\/>/g" $i
 
 
 #suggestions from https://en.wikipedia.org/wiki/Wikipedia:SVG_help
 sed -i "s/Sans embedded/DejaVu Sans/g" $i
-#sed -ri "s/font-size:([0-9]*);/font-size:\1px;/g" $i
 sed -ri "s/tspan x=\"([0-9]*) ([0-9 ]*)\"/tspan x=\"\1\"/g" $i
 sed -ri "s/<g style=\"stroke:none;fill:none\"><text>/<g style=\"stroke:none;fill:rgb(0,0,0)\"><text>/g" $i
 
+## == Workaround for inkscape bug ==
+ sed -ri "s/inkscape:version=\"0.4[\. r[:digit:]]+\"//g" $i # https://bugs.launchpad.net/inkscape/+bug/1763190
+ sed -ri "s/sodipodi:role=\"line\"//g" $i # https://bugs.launchpad.net/inkscape/+bug/1763190
 
-#font-face{font-family:&quot;Liberation Serif&quot;;
+## == Repair after svgo ==
 
 #svgo to cleaner
 sed -ri "s/font-family:&quot;([-[:alnum:] ]*)&quot;/font-family:\"\1\"/g" $i
@@ -216,14 +190,17 @@ sed -ri 's/stroke-dasharray=\"([[:digit:]\., ]*)([[:digit:]\.]+) ([[:digit:]\.,]
 sed -ri "s/font-family=\"'([-[:alnum:] ]*)'(|,[-[:lower:]]+)\"/font-family=\'\1\'/g" $i
 
 # multiple x-koordinates https://phabricator.wikimedia.org/T35245
-sed -ri "s/<tspan([-[:alnum:]\.\"\#\ =]*) x=\"([-[:digit:]\.]+)( |,)([-[:digit:]\. ,]+)\" y=\"([-[:digit:]\. ]+)\"([-[:alnum:]\.\"\#\ =]*)>/<tspan x=\"\2\" y=\"\5\"\1\6>/g" $i # remove multipe x-koordinates in tspan (solves librsvg-Bug)
-sed -ri "s/<text x=\"([-[:digit:]\.]+) ([-[:digit:]\. ]+)\" y=\"([-[:digit:]\. ]+)\"([-[:alnum:]\.\"\#\ =]*)>/<text x=\"\1\" y=\"\3\"\4>/g" $i # remove multipe x-koordinates in text (solves librsvg-Bug)
+sed -ri "s/<tspan([-[:alnum:]\.\"\#\ =]*) x=\"([-[:digit:]\.]+)( |,)([-[:digit:]\. ,]+)\"([-[:alnum:]\.\"\#\ =]*)>/<tspan x=\"\2\" \1 \5>/g" $i # remove multipe x-koordinates in tspan (solves librsvg-Bug)
+sed -ri "s/<text([-[:alnum:]\.\"\#\ =\(\)]*) x=\"([-[:digit:]\.]+)( |,)([-[:digit:]\. ,]+)\"([-[:alnum:]\.\"\#\ =\,]*)>/<text x=\"\2\"\1\5>/g" $i # remove multipe x-koordinates in text (solves librsvg-Bug)
+sed -ri "s/<text([-[:alnum:]\.\"\#\ =\(\)]*) y=\"([-[:digit:]\.]+)( |,)([-[:digit:]\. ,]+)\"([-[:alnum:]\.\"\#\ =\,]*)>/<text y=\"\2\"\1\5>/g" $i # remove multipe x-koordinates in text (solves librsvg-Bug)
 
 #Repair https://phabricator.wikimedia.org/T68672 (solves librsvg-Bug)
 sed -i "s/<style>/<style type=\"text\/css\">/" $i
 
 #solved librsvg-Bug T193929 https://phabricator.wikimedia.org/T193929
-sed -i "s/ xlink:href=\"data:image\/jpg;base64,/ xlink:href=\"data:image\/jpeg;base64,/" $i
+sed -i "s/ xlink:href=\"data:image\/jpg;base64,/ xlink:href=\"data:image\/jpeg;base64,/g" $i
+sed -i "s/ xlink:href=\"data:;base64,\/9j\/4AAQSkZJRgABAgAAZABkAAD\/7AARRHVja3kAAQAEAAAAHgAA/ xlink:href=\"data:image\/jpeg;base64,\/9j\/4AAQSkZJRgABAgAAZABkAAD\/7AARRHVja3kAAQAEAAAAHgAA/" $i
+sed -ri "s/ xlink:href=\"data:;base64,( |)iVBORw0KGgoAAAANSUhEUgAAB/ xlink:href=\"data:image\/png;base64,iVBORw0KGgoAAAANSUhEUgAAB/" $i
 
 
 echo $i finish

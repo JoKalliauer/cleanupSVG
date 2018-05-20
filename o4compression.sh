@@ -1,6 +1,7 @@
 #!/bin/bash
 
 for file in *.svg;do
+# export file=min.svg
 export fileN=$(echo $file | cut -f1 -d" ")
 export tmp=$(echo $fileN | cut -f1 -d".")
 export i=${tmp}o.svg
@@ -33,15 +34,15 @@ else
  echo some error minfilesize is $minfilesize
 fi
 
-echo optizer ${file} to $i begin, min=${minfilesize}, meta=$meta, META= $META, INDENT=$INDENT
+#echo optizer ${file} to $i begin, min=${minfilesize}, meta=$meta, META= $META, INDENT=$INDENT
 
-svgo -i ${file} -o $i $INDENT -p 3 $META --enable=removeScriptElement --disable=removeXMLProcInst --disable=removeUnknownsAndDefaults --disable=mergePaths --disable=convertStyleToAttrs --enable=cleanupAttrs --enable=cleanupEnableBackground --enable=cleanupIDs --enable=cleanupNumericValues --enable=collapseGroups --enable=convertColors --enable=convertShapeToPath --enable=convertTransform --enable=inlineStyles  --enable=minifyStyles --enable=moveElemsAttrsToGroup --enable=moveGroupAttrsToElems  --enable=removeAttrs --enable=removeComments --enable=removeDesc --enable=removeEditorsNSData --enable=removeEmptyAttrs --enable=removeEmptyContainers --enable=removeEmptyText --enable=removeHiddenElems --enable=removeNonInheritableGroupAttrs --disable=removeRasterImages --enable=removeTitle --enable=removeUnusedNS --enable=removeUselessDefs --enable=removeUselessStrokeAndFill --enable=removeViewBox --enable=sortAttrs  --disable=convertPathData # --enable=cleanupListOfValues
+svgo -i ${file} -o $i $INDENT -p 3 $META --disable=convertPathData --enable=removeScriptElement --disable=removeXMLProcInst --disable=removeUnknownsAndDefaults --disable=mergePaths --disable=convertStyleToAttrs --enable=cleanupAttrs --enable=cleanupEnableBackground --enable=cleanupIDs --enable=cleanupNumericValues --enable=collapseGroups --enable=convertColors --disable=convertShapeToPath --enable=convertTransform --enable=inlineStyles  --enable=minifyStyles --enable=moveElemsAttrsToGroup --enable=moveGroupAttrsToElems  --enable=removeAttrs --enable=removeComments --enable=removeDesc --enable=removeEditorsNSData --enable=removeEmptyAttrs --enable=removeEmptyContainers --enable=removeEmptyText --enable=removeHiddenElems --enable=removeNonInheritableGroupAttrs --disable=removeRasterImages --enable=removeTitle --enable=removeUnusedNS --enable=removeUselessDefs --enable=removeUselessStrokeAndFill --enable=removeViewBox --enable=sortAttrs  # --enable=cleanupListOfValues
 
-# --disable=mergePaths # https://github.com/svg/svgo/issues/872
+# --disable=mergePaths # https://github.com/svg/svgo/issues/872 # https://github.com/svg/svgo/issues/958
 
 #--disable=removeXMLProcInst # valid (Warning)
 
-#--disable=removeUnknownsAndDefaults # removes Flowtext
+#--disable=removeUnknownsAndDefaults # removes Flowtext # https://github.com/svg/svgo/issues/959
 
 # -p 3 #https://commons.wikimedia.org/wiki/File:Decoy_Receptor_Figure.svg
 
@@ -49,6 +50,8 @@ svgo -i ${file} -o $i $INDENT -p 3 $META --enable=removeScriptElement --disable=
 
 # --enable=removeDimensions
 ##Changes size of view
+
+ # --disable=convertShapeToPath ##can be problematic for flowtext
 
 #  --disable=convertStyleToAttrs #https://commons.wikimedia.org/wiki/File:2016_Angola_and_DR_Congo_yellow_fever_outbreak.svg
 

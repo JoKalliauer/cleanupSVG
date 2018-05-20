@@ -33,6 +33,9 @@
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:odm="http://product.corel.com/CGS/11/cddns/"
    xmlns:corel-charset="http://product.corel.com/CGS/11/cddns/"
+   xmlns:osb="http://www.openswatchbook.org/uri/2009/osb"
+   xmlns:ev="http://www.w3.org/2001/xml-events"
+   xmlns:v="http://schemas.microsoft.com/visio/2003/SVGExtensions/"
    >
    
  </svg>

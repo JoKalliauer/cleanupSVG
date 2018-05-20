@@ -36,7 +36,7 @@ fi
 
 echo scour ${file} to $i begin, min=${minfilesize}, meta=$meta, META= $META, INDENT=$INDENT
 
-scour -i ${file} -o $i --keep-unreferenced-defs --enable-comment-stripping --remove-titles --remove-descriptions --disable-embed-rasters --strip-xml-space  --set-precision=5 --set-c-precision=4 $META $INDENT --renderer-workaround --disable-style-to-xml --create-groups #--enable-viewboxing #  
+scour -i ${file} -o $i --keep-unreferenced-defs --enable-comment-stripping --remove-titles --remove-descriptions --strip-xml-space  --set-precision=5 --set-c-precision=4 $META $INDENT --renderer-workaround --disable-style-to-xml --create-groups #--enable-viewboxing #  
 
 #--keep-unreferenced-defs
 ## if referenced-defs are deleted: https://github.com/scour-project/scour/issues/155
@@ -45,10 +45,11 @@ scour -i ${file} -o $i --keep-unreferenced-defs --enable-comment-stripping --rem
 ##Changes size of view
 ##can create Hairline-cracks f.e in https://commons.wikimedia.org/wiki/File:Mn_coa_zavkhan_aimag.svg
 
-#--disable-style-to-xml #https://github.com/scour-project/scour/issues/176
+#--disable-style-to-xml #https://github.com/scour-project/scour/issues/176 #https://github.com/scour-project/scour/issues/174
 
  #--create-groups #https://commons.wikimedia.org/wiki/File:CIA_WorldFactBook-Political_world.svg
 
+ #--shorten-ids # https://github.com/scour-project/scour/issues/164
 # --enable-id-stripping #https://github.com/scour-project/scour/issues/164
 
 # --create-groups # https://github.com/scour-project/scour/issues/196 (but it is 
@@ -66,13 +67,13 @@ done
 
 DeactivateAll=<<END
 
-scour min.svg output.svg --disable-simplify-colors --disable-style-to-xml  --disable-group-collapsing --keep-editor-data --keep-unreferenced-defs --no-renderer-workaround --protect-ids-noninkscape 
+scour min.svg output.svg --disable-simplify-colors --disable-style-to-xml  --disable-group-collapsing --keep-editor-data --keep-unreferenced-defs --no-renderer-workaround --protect-ids-noninkscape  --disable-embed-rasters
 
 END
 
 ActivateAll=<<END
 
-scour min.svg output.svg --enable-comment-stripping --remove-titles --remove-descriptions --disable-embed-rasters --strip-xml-space  --create-groups --remove-metadata --remove-descriptive-elements --renderer-workaround  --enable-viewboxing --enable-id-stripping --shorten-ids 
+scour min.svg output.svg --enable-comment-stripping --remove-titles --remove-descriptions --strip-xml-space  --create-groups --remove-metadata --remove-descriptive-elements --renderer-workaround  --enable-viewboxing --enable-id-stripping --shorten-ids 
 
 END
 

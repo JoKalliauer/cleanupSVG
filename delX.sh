@@ -49,12 +49,14 @@ for file in *.svg;do
  
  sed -ri "s/<polyline points=\"[[:digit:]\. ]+\"\/>//g" $i #delete polylines
  
+ sed -ri "s/<image ([-[:alnum:]=\,´.\" \:\/\;\+\,]*)>//g" $i # delete images
+ 
  #mv $i ${tmp}d.svg
  echo $i finish
  
- sed -ri "s/ <text ([-[:alnum:]=\.\" \#\(\)\;\:\%\']+)>.*<\/text>//g" $j #delete all oneline-text
+ #sed -ri "s/ <text ([-[:alnum:]=\.\" \#\(\)\;\:\%\'\%]+)>.*<\/text>//g" $j #delete all oneline-text
  
- sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/ <text ([-[:alnum:]=\.\" \#\(\)\;\:\%\']+)>([]\[[:alnum:][:space:]\$\^\\\_\{\} \'\’\“\”\/\(\)\!\,\:#\.=,\"\&\;\¯\¸\°−-]*|<tspan([-[:alnum:]=\.\" \#\(\)\;\:\%\,]*)>|<\/tspan>)*<\/text>//g" $j
+ sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/ <text ([-[:alnum:]=\.\" \#\(\)\;\:\%\'\/\,\*]+)>([]\[[:alnum:][:space:]\$\^\\\_\{\} \'\’\“\”\/\(\)\!\,\:#\.=,\"\&\;\¯\¸\°\*\+\´·˚­−-]*|<tspan([-[:alnum:]=\.\" \#\(\)\;\:\%\,]*)>|<\/tspan>)*<\/text>//g" $j
  
  echo $j finish
  

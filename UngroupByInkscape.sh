@@ -80,7 +80,7 @@ do
    mv ./${fileSource} ./${file}.xml
    inkscape --verb=EditSelectAll --verb=SelectionUnGroup --verb=SelectionUnGroup --verb=SelectionUnGroup --verb=SelectionUnGroup --verb=SelectionUnGroup --verb=FileSave --verb=FileClose ./${file}u.svg --verb=FileQuit
    #svgcleaner ./${file}Cu.svg ./${file}CuC.svg --join-style-attributes all --join-arcto-flags no --remove-declarations no --remove-nonsvg-elements no --paths-to-relative no --remove-unused-segments no --convert-segments no  --allow-bigger-file --indent 1 --remove-metadata no --remove-nonsvg-attributes no
-   scour -i ./${file}u.svg -o ./${file}us.svg --disable-style-to-xml --keep-unreferenced-defs --indent=space --nindent=1
+   scour -i ./${file}u.svg -o ./${file}us.svg --disable-style-to-xml --keep-unreferenced-defs --disable-embed-rasters --indent=space --nindent=1
    mv ./${file}u.svg ./${file}u.xml
   else
    inkscape $fileSource --export-$outputType=$file.$outputType

@@ -34,29 +34,10 @@ for file in *.svg;do
  echo 
  echo $j start:
  
- #tspan to text
- #sed -ri  -e ':a' -e 'N' -e '$!ba' -e "s/<text([-[:alnum:]\,\.\"\=\:\ \#\(\)]*)( x=\"[-[:digit:]\.\ ]+\" y=\"[-[:digit:]\.\ ]+\"|   )([-[:alnum:]\,\.\"\=\:\ \#\(\)\%\']*)>[[:space:]]*<tspan([-[:alnum:]\,\.\"\=\:\ \#]*) x=\"([-[:digit:]\.\ ]+)\" y=\"([-[:digit:]\.\ ]+)\"([-[:alnum:]\,\.\"\=\:\ #]*)>([-–[:alnum:]\.\ \,\{\(\)]*)<\/tspan>/<text x=\"\5\" y=\"\6\"\1\3\4\7>\8/g" $i
- 
- #remove objects:
 
- #sed -ri "s/ <rect ([-[:alnum:]=\.\" \#\(\)]+)\/>//g" $i #delete all Rectangles
+ sed -ri 's/<tspan [-[:lower:][:digit:]= \"\.\:\;\%]+\/>//g' $j #remove selfclosing tspan (svg2validsvg)
  
- #sed -ri "s/<path ([-[:alnum:]=\.\" \#\(\)\;\:\,]+)\/>//g" $i #delete all Path
- 
- #sed -ri "s/ <circle [-[:lower:][:digit:]\"\.= #\(\)]*\/>//g" $i #delete circels
- 
- #sed -ri "s/ <ellipse [-[:lower:][:digit:]\"\.= #\(\)\,]*\/>//g" $i #delete ellipses
- 
- #sed -ri "s/<polyline points=\"[[:digit:]\. ]+\"\/>//g" $i #delete polylines
- 
- #mv $i ${tmp}d.svg
- #echo $i finish
- 
- #sed -ri "s/ <text ([-[:alnum:]=\.\" \#\(\)\;\:\%\']+)>.*<\/text>//g" $j #delete all oneline-text
- 
- #sed -ri "s/<tspan ([-[:alnum:]=\.\" \#\(\)\;\:\%\'\/\%]+)>([]\[[:alnum:][:space:]\$\^\\\_\{\} \'\’\“\”\/\(\)\!\,\:#\.=,\"\&\;−-]*|<tspan ([-[:alnum:]=\.\" \#\(\)\;\:\%\,]+)>|<\/tspan>)*<\/tspan>//g" $j
- 
- sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<text ([-[:alnum:]=\.\" \#\(\)\;\:\%\'\/\,]+)>([]\[[:alnum:][:space:]\$\^\\\_\{\} \'\’\“\”\/\(\)\!\,\:#\.=,\"\&\;\¯\°\¸−-]*|<tspan([-[:alnum:]=\.\" \#\(\)\;\:\%\,]*)>|<\/tspan>)*<\/text>//g" $j
+ sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<text ([-[:alnum:]=\.\" \#\(\)\;\:\%\'\/\,]+)>([]\[[:alnum:][:space:]\$\^\\\_\{\} \'\’\“\”\/\(\)\!\,\:#\.=,\"\&\;\¯\°\¸üä\*\+-­−-]*|<tspan([-[:alnum:]=\.\" \#\(\)\;\:\%\,\']*)>|<\/tspan>)*<\/text>//g" $j
  
  echo $j finish
  

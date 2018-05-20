@@ -41,7 +41,12 @@ for file in *.svg;do
  
  sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/[[:space:]]+/ /g" $i #reduce to one space
  
- sed -ri 's/[[:space:]]*<(g|path|text|svg|rect) /\n<\1 /g' $i
+ sed -ri 's/[[:space:]]*<(g|path|svg) /\n<\1 /g' $i
+# sed -ri 's/[[:space:]]*<text /\n<text /g' $i #deactivated for PosibilityUngroup
+#  sed -ri 's/[[:space:]]*<rect /\n<rect /g' $i #deactivated for Flow2TextBySed
+
+
+ sed -ri 's/<\/(g|flowRoot)>/<\/\1>\n/g' $i
  
  #sed -ri "s/ <circle [-[:lower:][:digit:]\"\.= #\(\)]*\/>//g" $i #delete circels
  

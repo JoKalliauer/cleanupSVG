@@ -34,6 +34,10 @@ validOutput2="pdf"
 validOutput3="png"
 validOutput4="svg"
 validOutput5="plain-svg"
+validOutput6="inkscape-svg"
+validOutput7="inkscapesvg"
+validOutput8="ink-svg"
+validOutput9="png96"
 
 
 #echo "This script allows you to convert all files in this folder from one file type to another."
@@ -58,9 +62,9 @@ fi
 
 while [ "$valid" != "1" ]
 do
-    echo "Allowed file types for output: $validOutput1, $validOutput2, $validOutput3, $validOutput4"
+    echo "Allowed file types for output: $validOutput1, $validOutput2, $validOutput3, $validOutput4, $validOutput5, $validOutput6, $validOutput7"
 	read -p "What file type do you want to convert to? " outputType
-    if [ "$outputType" = "$validOutput1" ] || [ "$outputType" = "$validOutput2" ] || [ "$outputType" = "$validOutput3" ] || [ "$outputType" = "$validOutput4" ] || [ "$outputType" = "$validOutput5" ]; then
+    if [ "$outputType" = "$validOutput1" ] || [ "$outputType" = "$validOutput2" ] || [ "$outputType" = "$validOutput3" ] || [ "$outputType" = "$validOutput4" ] || [ "$outputType" = "$validOutput5" ] || [ "$outputType" = "$validOutput6" ] || [ "$outputType" = "$validOutput7" ] || [ "$outputType" = "$validOutput8" ] || [ "$outputType" = "$validOutput9" ]; then
         valid=1
     else
         echo "Invalid input! Please use one of the following: $validOutput1, $validOutput2, $validOutput3, $validOutput4"
@@ -94,6 +98,12 @@ do
 		 inkscape $i --export-$outputType=$file.$outputType --export-dpi=$dpi
 		elif [ "$outputType" = "svg" ];then
 		 inkscape $i --export-plain-$outputType=${file}n.$outputType
+		elif [ "$outputType" = "$validOutput6" ] || [ "$outputType" = "$validOutput7" ] || [ "$outputType" = "$validOutput8" ]; then
+		  cp ./${fileSource} ./${file}Ink.svg
+		  mv ./${fileSource} ./${file}.xml
+		 inkscape ./${file}Ink.svg --no-convert-text-baseline-spacing --verb=FileSave --verb=FileClose --verb=FileQuit
+		elif  [ "$outputType" = "$validOutput9" ];then
+		 inkscape $i --export-png=$file.png
 		else
 		 inkscape $i --export-$outputType=$file.$outputType
 		fi

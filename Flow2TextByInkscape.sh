@@ -70,14 +70,19 @@ do
    file=$(echo $fileSource | cut -d'.' -f1)
    echo $count". "$fileSource" -> "${file}f.$outputType
   if [ "$outputType" = "png" ];then
-   read -p "With what dpi should it be exported (e.g. 300)? " dpi
-   inkscape $fileSource --export-$outputType=$file.$outputType --export-dpi=$dpi
+   break
   elif [ "$outputType" = "svg" ];then
    #svgcleaner ${fileSource} ./${file}Cu.svg --join-style-attributes all --join-arcto-flags no --remove-declarations no --remove-nonsvg-elements no --paths-to-relative no --remove-unused-segments no --convert-segments no  --allow-bigger-file --indent 1 --remove-metadata no --remove-nonsvg-attributes no
    #mv ./${fileSource} ./${file}4.xml
    #cp ./${file}Cu.svg ./${file}C.xml
    cp ./${fileSource} ./${file}f.svg
    mv ./${fileSource} ./${file}.xml
+   
+   sed -i 's/<flowPara\/>//g;s/<flowRoot\/>//g' ${file}f.svg
+   sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<flowRoot>[[:space:]]*<flowRegion(\/|>[[:space:]]*<path d=\"[-[:digit:]hmvz\. ]*\"\/>[[:space:]]*<\/flowRegion)>[[:space:]]*(<flowDiv\/>|)[[:space:]]*<\/flowRoot>//g" ${file}f.svg #delete empty flowRoot
+   sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<flowRoot([-[:alnum:]\.=\" \:\(\)\%\#\,\';]*)>[[:space:]]*<flowRegion([-[:alnum:]=:\" ]*)>[[:space:]]*(<path[-[:alnum:]\.=\"\ \#]*\/>|<rect( id=\"rect[-[:digit:]]{2,7}\"|) x=\"([[:digit:]\. ]+)\" y=\"([-[:digit:]\. ]+)\"([[:lower:][:digit:]=\.\" \#]+)\/>)[[:space:]]*<\/flowRegion>[[:space:]]*(<flowPara\/>|<flowPara([-[:alnum:]\.=\" \:\#; ]*)>([[:space:] ]*)<\/flowPara>)[[:space:]]*<\/flowRoot>//g" ${file}f.svg ##delete flowRoot only containing spaces
+   #sed -ri "s/<flowRoot([-[:alnum:]\.=\" \:\(\)\%\#\,\';]*)><flowRegion([-[:alnum:]=:\" ]*)><rect( id=\"rect[-[:digit:]]{4,7}\"|) x=\"([[:digit:]\. ]+)\" y=\"([-[:digit:]\. ]+)\"([-[:lower:][:digit:]=\.\" \#]+)\/><\/flowRegion><flowPara([-[:alnum:]\.=\" \:\#;]*)>([-−[:alnum:] \{\}\+\ \ ]+)<\/flowPara><\/flowRoot>/<text x=\"\4\" y=\"\5\"\1><tspan x=\"\4\" y=\"\5\"\7>\8<\/tspan><\/text>/g" $i
+   
    inkscape ./${file}f.svg --verb=EditSelectAll --verb=ObjectFlowtextToText --verb=FileSave --verb=FileClose --verb=FileQuit
    #svgcleaner ./${file}Cu.svg ./${file}CuC.svg --join-style-attributes all --join-arcto-flags no --remove-declarations no --remove-nonsvg-elements no --paths-to-relative no --remove-unused-segments no --convert-segments no  --allow-bigger-file --indent 1 --remove-metadata no --remove-nonsvg-attributes no
    scour -i ./${file}f.svg -o ./${file}fs.svg --disable-style-to-xml --keep-unreferenced-defs --indent=space --nindent=1
