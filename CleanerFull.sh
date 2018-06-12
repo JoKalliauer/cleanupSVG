@@ -1,6 +1,7 @@
 #!/bin/bash
 
 for file in *.svg;do
+# export file=min.svg
 export fileN=$(echo $file | cut -f1 -d" ")
 export tmp=$(echo $fileN | cut -f1 -d".")
 export i=${tmp}C.svg
@@ -9,12 +10,11 @@ echo #Add a empty line to split the output
 
 echo cleaner ${file} to $i begin
 
-svgcleaner $file $i  --allow-bigger-file --indent 1 --apply-transform-to-gradients yes --apply-transform-to-shapes yes --convert-shapes yes --group-by-style yes --join-arcto-flags no --join-style-attributes no --merge-gradients yes --regroup-gradient-stops yes --remove-comments yes --remove-declarations no --remove-default-attributes yes --remove-desc yes --remove-dupl-cmd-in-paths yes --remove-dupl-fegaussianblur yes --remove-dupl-lineargradient yes --remove-dupl-radialgradient yes --remove-gradient-attributes yes --remove-invalid-stops yes --remove-invisible-elements yes --remove-metadata yes --remove-needless-attributes yes --remove-nonsvg-attributes yes --remove-nonsvg-elements yes --remove-text-attributes yes --remove-title yes --remove-unreferenced-ids yes --remove-unresolved-classes yes --remove-unused-coordinates yes --remove-unused-defs yes --remove-version yes --remove-xmlns-xlink-attribute yes --resolve-use yes --simplify-transforms yes --trim-colors yes --trim-ids yes --trim-paths yes --ungroup-defs yes --ungroup-groups yes --use-implicit-cmds yes --list-separator comma --paths-to-relative yes --convert-segments yes --apply-transform-to-paths yes --coordinates-precision 2 --paths-coordinates-precision 4 --properties-precision 2 --transforms-precision 4 --remove-unused-segments yes --multipass
+svgcleaner $file $i  --allow-bigger-file --indent 1 --apply-transform-to-gradients yes --apply-transform-to-shapes yes --convert-shapes yes --group-by-style yes --join-arcto-flags no --join-style-attributes no --merge-gradients yes --regroup-gradient-stops yes --remove-comments yes --remove-declarations no --remove-default-attributes yes --remove-desc yes --remove-dupl-cmd-in-paths yes --remove-dupl-fegaussianblur yes --remove-dupl-lineargradient yes --remove-dupl-radialgradient yes --remove-gradient-attributes yes --remove-invalid-stops yes --remove-invisible-elements yes --remove-metadata yes --remove-needless-attributes yes --remove-nonsvg-attributes yes --remove-nonsvg-elements yes --remove-text-attributes yes --remove-title yes --remove-unreferenced-ids yes --remove-unresolved-classes yes --remove-unused-coordinates yes --remove-unused-defs yes --remove-version yes --remove-xmlns-xlink-attribute yes --resolve-use yes --simplify-transforms yes --trim-colors yes --trim-ids yes --trim-paths yes --ungroup-defs yes --ungroup-groups yes --use-implicit-cmds yes --list-separator comma --paths-to-relative yes --convert-segments yes --apply-transform-to-paths yes --coordinates-precision 2 --paths-coordinates-precision 3 --properties-precision 2 --transforms-precision 4 --remove-unused-segments yes --multipass
 
 #--properties-precision 2 # https://commons.wikimedia.org/wiki/File:Mn_coa_%C3%B6v%C3%B6rkhangai_aimag.svg
 #--transforms-precision 4 # https://commons.wikimedia.org/wiki/File:Mn_coa_%C3%B6v%C3%B6rkhangai_aimag.svg
-# --paths-coordinates-precision 3 # https://commons.wikimedia.org/wiki/File:Flag_of_Budapest_(1873-2011).svg
-# --paths-coordinates-precision 4 https://commons.wikimedia.org/wiki/File:FlagOfYorkshire.svg
+#--paths-coordinates-precision 3(max für SVG Checker) # https://commons.wikimedia.org/wiki/File:Oxygen480-mimetypes-text-x-pascal.svg # --paths-coordinates-precision 3(min) # https://commons.wikimedia.org/wiki/File:Flag_of_Budapest_(1873-2011).svg # --paths-coordinates-precision 4(min) https://commons.wikimedia.org/wiki/File:FlagOfYorkshire.svg
 
 #--paths-to-relative no # https://github.com/RazrFalcon/svgcleaner/issues/124
 # leads to --apply-transform-to-paths no

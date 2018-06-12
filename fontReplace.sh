@@ -65,22 +65,18 @@ sed -ri 's/ font-family=\"DejaVuSans\"/ font-family=\"DejaVu Sans\"/g' $i #as au
 sed -i 's/ font-family=\"Bitstream Vera Sans Mono\"/ font-family=\"DejaVu Sans Mono\"/g' $i #as automatic
 sed -i 's/ font-family=\"Times New Roman\"/ font-family=\"Liberation Serif\"/g' $i #as automatic
 #sed -i 's/ font-family=\"Albany embedded\"/ font-family=\"Loma\"/g' $i #as automatic
-sed -i 's/ font-family=\"Helvetica\"/ font-family=\"Garuda\"/g' $i #looks similar https://commons.wikimedia.org/wiki/File_talk:Meta_SVG_fonts.svg
+sed -i 's/ font-family=\"Courier New\"/ font-family=\"Liberation Mono\"/g' $i #as automatic
+sed -i 's/ font-family=\"Helvetica\"/ font-family=\"Nimbus Sans L\"/g' $i #looks similar https://commons.wikimedia.org/wiki/File_talk:Meta_SVG_fonts.svg
 #sed -i 's/ fill=\"#002060\" font-family=\"Swis721 BlkCn BT\" font-size=\"/ fill=\"#002060\" font-family=\"Liberation Sans\" font-weight=\"bold\" font-size=\"/g' $i #looks similar https://www.dafontfree.net/freefonts-swis721-blkcn-bt-f61164.htm
 sed -ri "s/ font-family=\"Blue( |)Highway\"/ font-family=\"Padauk\"/g" $i #looks similar https://www.dafont.com/de/blue-highway.font
 #sed -i "s/ font-family=\"Blue Highway Condensed\"/ font-family=\"Padauk\" font-stretch=\"condensed\"/g" $i
 sed -ri "s/ font-family=\"(Blue Highway D Type|BlueHighwayDType)\"/ font-family=\"Padauk\" text-transform=\"uppercase\"/g" $i
-#sed -i "s/ font-family=\"Helvetica-BoldOblique\"/ font-family=\"Garuda\" font-weight=\"bold\" font-style=\"oblique\"/g" $i
-#sed -i "s/ font-family=\"Helvetica\"/ font-family=\"Liberation Sans\"/g" $i
 sed -i "s/ font-family=\"DejaVu Sans Condensed\"/ font-family=\"DejaVu Sans\" font-stretch=\"condensed\"/g" $i
-
-#sed -i "s/ font-family=\"Nimbus Mono L\"/ font-family=\"TlwgMono\"/g" $i #looks similar https://en.wikipedia.org/wiki/Nimbus_Mono_L
-
 
 sed -ri 's/ font-family=\"DejaVu Sans Bold\"/ font-family=\"DejaVu Sans\" font-weight=\"bold\"/g' $i
 sed -ri 's/ font-family=\"(Arial|Myriad Pro|ArialNarrow|ArialMT)\"/ font-family=\"Liberation Sans\"/g' $i #all Sans to Liberation
 sed -ri 's/ font-family=\"(Minion Pro|Times|Times New Roman|SVGTimes)\"/ font-family=\"Liberation Serif\"/g' $i #all Serif to Liberation
-#sed -ri 's/ font-family=\"Dialog\"/ font-family=\"DejaVu Sans\"/g' $i #unknown fonts to DejaVu Sans
+sed -ri 's/ font-family=\"(Bitstream Vera Sans|Dialog)\"/ font-family=\"DejaVu Sans\"/g' $i #unknown fonts to DejaVu Sans
 
 sed -ri 's/ font-family=\"(Benguiat|BenguiatStd-Book|Benguiat-Book)\"/ font-family=\"Tibetan Machine Uni,Garuda,Liberation Sans,Liberation Serif\"/g' $i #looks similar # http://www.fontpalace.com/font-details/Benguiat+Bold/
 sed -ri 's/ font-family=\"(Sanvito|Sanvito-Roman|SanvitoPro-Regular)\"/ font-family=\"Purisa,Garuda,Liberation Sans,Liberation Serif\"/g' $i #looks similar # https://www.myfonts.com/fonts/adobe/sanvito/

@@ -51,6 +51,9 @@ for file in *.svg;do
  
  sed -ri "s/<image ([-[:alnum:]=\,´.\" \:\/\;\+\,]*)>//g" $i # delete images
  
+  sed -ri "s/<use [-[:alnum:]=\,\.\" \:\;#]\/>//g" $i
+
+ 
  #mv $i ${tmp}d.svg
  echo $i finish
  

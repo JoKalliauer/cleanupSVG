@@ -11,8 +11,9 @@ export i=min.svg # just used for debugging
 
 ./InkscapeBatchConverter.sh
 ./scour4compression.sh
-./cleaner4compression.sh #only tested on Windows
-./o4compression.sh #only tested on Windows
+#./cleaner4compression.sh
+./o4compression.sh
+./validBycleaner.sh
 ./scour4compression.sh
 
 ./svg2validsvg.sh

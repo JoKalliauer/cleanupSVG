@@ -41,18 +41,14 @@ mv ./"${file}" ./${tmp}1.xml
 echo 
 echo $i start:
 
-#<flowPara font-family="Liberation Sans" font-size="55.071px" style="line-height:125%"/>
-
 #remove empty flow Text in svg (everything else will be done by https://github.com/JoKalliauer/cleanupSVG/blob/master/Flow2TextByInkscape.sh )
 sed -ri 's/<flowPara([-[:alnum:]\" \.\:\%\=]*)\/>//g;s/<flowRoot\/>//g' $i
 sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<flowRoot([-[:alnum:]\.=\" \:\(\)\%\#\,\';]*)>[[:space:]]*<flowRegion(\/|>[[:space:]]*<(path|rect) [-[:digit:]deghimtvwxyz\. \"\=]*\/>[[:space:]]*<\/flowRegion)>[[:space:]]*(<flowDiv\/>|)[[:space:]]*<\/flowRoot>//g" $i #delete empty flowRoot
 sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<flowRoot([-[:alnum:]\.=\" \:\(\)\%\#\,\';]*)>[[:space:]]*<flowRegion([-[:alnum:]=:\" ]*)>[[:space:]]*(<path[-[:alnum:]\.=\"\ \#]*\/>|<rect( id=\"rect[-[:digit:]]{2,7}\"|) x=\"([[:digit:]\. ]+)\" y=\"([-[:digit:]\. ]+)\"([[:lower:][:digit:]=\.\" \#]+)\/>)[[:space:]]*<\/flowRegion>[[:space:]]*(<flowPara([-[:alnum:]\" \.\%])\/>|<flowPara([-[:alnum:]\" \.\:\%\=]*)>([[:space:] ]*)<\/flowPara>)[[:space:]]*<\/flowRoot>//g" $i ##delete flowRoot only containing spaces
 
 
-#  <flowRoot transform="matrix(.25422 0 0 .25422 185.43 187.37)" fill="#000000" font-family="Liberation Serif" font-size="40px" style="line-height:125%" xml:space="preserve"><flowRegion><rect x="-156.35" y="767.85" width="189.09" height="54.942"/></flowRegion><flowPara font-family="Liberation Sans" font-size="55.071px" style="line-height:125%">Köln</flowPara></flowRoot>
-#<flowRoot transform="translate(-36.065 19.526) scale(.87854)" font-size="10" style="fill:#3d434a;font-family:'DejaVu Sans';font-size:10px;line-height:125%"> <flowRegion> <rect x="22" y="3" width="27" height="15" style="fill-opacity:.268;fill:red"/> </flowRegion> <flowPara font-size="10" style="font-size:10px">Plasm</flowPara> </flowRoot>
 
-sed -ri "s/<flowRoot([-[:alnum:]\.=\" \:\(\)\%\#\,\';]*)>[[:space:]]*<flowRegion([-[:alnum:]=:\" ]*)>[[:space:]]*<rect( id=\"rect[-[:digit:]]*\"|) x=\"([-[:digit:]\. ]+)\" y=\"([-[:digit:]\. ]+)\"([-[:lower:][:digit:]=\.\" \#]+)\/>[[:space:]]*<\/flowRegion>[[:space:]]*<flowPara([-[:alnum:]\.=\" \:\#;\%]*)>([-−[:alnum:] \{\}\+\ \ ]+)<\/flowPara>[[:space:]]*<\/flowRoot>/<text x=\"\4\" y=\"\5\"\1><tspan x=\"\4\" y=\"\5\"\7>\8<\/tspan><\/text>/g" $i
+sed -ri "s/<flowRoot([-[:alnum:]\.=\" \:\(\)\%\#\,\';]*)>[[:space:]]*<flowRegion([-[:alnum:]=:\" ]*)>[[:space:]]*<rect([-[:lower:][:digit:]\"= \.]*) x=\"([-[:digit:]\. ]+)\" y=\"([-[:digit:]\. ]+)\"([-[:lower:][:digit:]=\.\" \#:]*)\/>[[:space:]]*<\/flowRegion>[[:space:]]*<flowPara([-[:alnum:]\.=\" \:\#;\%]*)>([-−[:alnum:] \{\}\(\)\+\ \ ]+)<\/flowPara>[[:space:]]*<\/flowRoot>/<text x=\"\4\" y=\"\5\"\1><tspan x=\"\4\" y=\"\5\"\7>\8<\/tspan><\/text>/g" $i
 
 echo $i finish
 

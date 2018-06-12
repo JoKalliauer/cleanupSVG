@@ -22,7 +22,7 @@ export outputType="svg" #just to not get asked by Inkscape
 ./OptimizerFull.sh
 ./o4compression.sh
 
-./cleaner4compression.sh
+./validBycleaner.sh
 ./scour4compression.sh
 ./svg2validsvg.sh
 

@@ -7,4 +7,4 @@
 #last Changes: (by Johannes Kalliauer)
 #2018
 
-for n in *.svg; do inkscape --file="$n" --vacuum-defs --verb=EditSelectAll --verb=SelectionSimplify --verb=FileSave --verb=FileClose; done
+for n in *.svg; do inkscape --file="$n" --with-gui --vacuum-defs --verb=EditSelectAll --verb=SelectionSimplify --verb=FileSave --verb=FileClose; done

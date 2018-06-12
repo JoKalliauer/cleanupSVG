@@ -51,6 +51,8 @@ for file in *.svg;do
  
  sed -ri "s/<image ([-[:alnum:]=\,´.\" \:\/\;\+\,]*)>//g" $i # delete images
 
+ sed -ri "s/<use [-[:alnum:]=\,\.\" \:\;#\(\)]*\/>//g" $i
+ 
  sed -ri -e ':a' -e 'N' -e '$!ba' -e  "s/<g[-[:lower:][:digit:]\"\.= #\(\)\:\,\;]*>[[:space:]]*<\/g>//g" $i #delete empty groups
  
  sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/\n[[:space:]]*/\n/g" $i #reduce to one space
