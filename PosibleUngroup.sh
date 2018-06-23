@@ -60,7 +60,7 @@ sed -ri "s/<text transform=\"matrix\(([[:digit:]\.]+) 0 0 ([[:digit:]\.]+) ([[:d
 
 #<g font-size="6.11">
 
-#sed -ri "s/<g([-[:alnum:]\(\)\. ,;:=\"#]*) font-size=\"([[:digit:]\.]*)\"([-[:alnum:]\(\)\. ,;:=\"#]*)>((<text|[[:alnum:]\$\^\\\_\{\}= #\,\"\.\(\)\’\&\;\/\'\"\@\:−-]*|>|<\/text>|<tspan|<\/tspan>)*)<text/<g \1 font-size=\"\2\" \3>\4<text font-size=\"\2\"/g" $i
+sed -ri "s/<g([-[:alnum:]\(\)\. ,;:=\"#]*) font-size=\"([[:digit:]\.]*)\"([-[:alnum:]\(\)\. ,;:=\"#]*)>((<text|[[:alnum:]\$\^\\\_\{\}= #\,\"\.\(\)\’\&\;\/\'\"\@\:−-]*|>|<\/text>|<tspan|<\/tspan>)*)<text/<g \1 font-size=\"\2\" \3>\4<text font-size=\"\2\"/g" $i
 
 
 #  if grep -qE "<g([-[:alnum:]\(\)\. ,;:=\"#]*) font-size=" $i; then
@@ -75,9 +75,20 @@ sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<tspan([-[:alnum:]\,\.\"\=\:\ \#]*) x=\"(
 sed -ri  -e ':a' -e 'N' -e '$!ba' -e "s/<text([-[:alnum:]\,\.\"\=\:\ \#\(\)]*)( x=\"[-[:digit:]\.\ ]+\" y=\"[-[:digit:]\.\ ]+\")/<text\2\1/g" $i # that x ist at the beginning (otherwise the next line would not work)
 sed -ri  -e ':a' -e 'N' -e '$!ba' -e "s/<text( x=\"[-[:digit:]\.\ ]+\" y=\"[-[:digit:]\.\ ]+\"|)([-[:alnum:]\,\.\"\=\:\ \#\(\)\%\']*)>[[:space:]]*<tspan([-[:alnum:]\,\.\"\=\:\ \#\']*) x=\"([-[:digit:]\.\ ]+)\" y=\"([-[:digit:]\.\ ]+)\"([-[:alnum:]\,\.\"\=\:\ #]*)>([-–[:alnum:]\.\ \,\{\(\)\♭\♯\/]*)<\/tspan>/<text x=\"\4\" y=\"\5\"\2\3\6>\7/g" $i #removes the first tspan of a text element
 
-sed -ri "s/(<g[-[:alnum:]\(\)\. ,;:=\"#]*>)[[:space:]]*<text([-[:alnum:]= #\,\"\.\(\)\;\'\"\:]*)>([-[:alnum:]\,\.\(\) ]*)<\/text>/\1<text\2>\3<\/text><\/g>\1/g" $i
-sed -ri "s/(<g[-[:alnum:]\(\)\. ,;:=\"#]*>)[[:space:]]*<text([-[:alnum:]= #\,\"\.\(\)\;\'\"\:]*)>([-[:alnum:]\,\.\(\) ]*)<\/text>/\1<text\2>\3<\/text><\/g>\1/g" $i
 
+
+#put every text in its own group
+sed -ri "s/(<g[-[:alnum:]\(\)\. ,;:=\"#]*>)[[:space:]]*<text([-[:alnum:]= #\,\"\.\(\)\;\'\"\:]*)>([-[:alnum:]\,\.\(\) =]*)<\/text>/\1<text\2>\3<\/text><\/g>\1/g" $i
+sed -ri "s/(<g[-[:alnum:]\(\)\. ,;:=\"#]*>)[[:space:]]*<text([-[:alnum:]= #\,\"\.\(\)\;\'\"\:]*)>([-[:alnum:]\,\.\(\) =]*)<\/text>/\1<text\2>\3<\/text><\/g>\1/g" $i
+sed -ri "s/(<g[-[:alnum:]\(\)\. ,;:=\"#]*>)[[:space:]]*<text([-[:alnum:]= #\,\"\.\(\)\;\'\"\:]*)>([-[:alnum:]\,\.\(\) =]*)<\/text>/\1<text\2>\3<\/text><\/g>\1/g" $i
+
+#<g font-size="3.75"><text transform="matrix(0 -1 1 0 101.63 17.39)">13</text></g>
+#sed -ri "s/<g([-[:alnum:]\(\)\. ,;:=\"#]*)( font-size=\"[-[:digit:]\.\ ]+\")([-[:alnum:]\(\)\. ,;:=\"#]*)><text([-[:alnum:]= #\,\"\.\(\)\;\'\"\:]*)>([-[:alnum:]\,\.\(\) =]*)<\/text><\/g>/<g\1\2\3><text\2\4>\5<\/text><\/g>/g" $i
+
+#<text  font-size="3.75"      font-size="3.75" transform="matrix(0 -1 1 0 101.63 17.39)">13</text>
+
+#remove two font-size
+sed -ri "s/<text([-[:alnum:]\,\.\"\=\:\ \#\(\)\']*)( font-size=\"[-[:digit:]\.\ ]+\" )([-[:alnum:]\,\.\"\=\:\ \#\(\)\']*)font-size=\"([-[:digit:]\.\ ]+)\"/<text \1 \3 font-size=\"\4\"/g" $i
 sed -ri "s/<text([-[:alnum:]\,\.\"\=\:\ \#\(\)\']*)( font-size=\"[-[:digit:]\.\ ]+\" )([-[:alnum:]\,\.\"\=\:\ \#\(\)\']*)font-size=\"([-[:digit:]\.\ ]+)\"/<text \1 \3 font-size=\"\4\"/g" $i
 
 echo $i finish

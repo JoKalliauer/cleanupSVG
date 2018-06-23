@@ -16,15 +16,6 @@ fi
 
 echo #Add a empty line to split the output
 
-if [ $meta == 1 ]; then
- echo keep metadata
- export META="--disable=removeMetadata"
-elif [ $meta == 0 ]; then
- export META="--enable=removeMetadata"
- echo delete META=$META
-else
- echo imput not allowed meta is $meta
-fi
 
 if [ $minfilesize == 0 ]; then
  export INDENT="--pretty --indent=1" #"--pretty --indent=1" #deactivated because of https://github.com/svg/svgo/issues/878
@@ -36,7 +27,7 @@ fi
 
 #echo optizer ${file} to $i begin, min=${minfilesize}, meta=$meta, META= $META, INDENT=$INDENT
 
-svgo -i ${file} -o $i $INDENT -p 3 $META --disable=convertTransform --disable=convertPathData --disable=mergePaths --enable=removeScriptElement --disable=removeXMLProcInst --disable=removeUnknownsAndDefaults --disable=convertStyleToAttrs --enable=cleanupAttrs --enable=cleanupEnableBackground --enable=cleanupIDs --enable=cleanupNumericValues --enable=collapseGroups --enable=convertColors --disable=convertShapeToPath --enable=inlineStyles  --enable=minifyStyles --enable=moveElemsAttrsToGroup --enable=moveGroupAttrsToElems  --enable=removeAttrs --enable=removeComments --enable=removeDesc --enable=removeEditorsNSData --enable=removeEmptyAttrs --enable=removeEmptyContainers --enable=removeEmptyText --enable=removeHiddenElems --enable=removeNonInheritableGroupAttrs --disable=removeRasterImages --enable=removeTitle --enable=removeUnusedNS --enable=removeUselessDefs --enable=removeUselessStrokeAndFill --enable=removeViewBox --enable=sortAttrs --disable=removeDoctype --enable={addAttributesToSVGElement}
+svgo -i ${file} -o $i $INDENT --disable=removeMetadata --disable=convertTransform --disable=convertPathData --disable=mergePaths --disable=removeXMLProcInst --disable=removeUnknownsAndDefaults --disable=convertStyleToAttrs --disable=convertShapeToPath --disable=removeRasterImages --disable=removeDoctype -p 10 --disable=collapseGroups --disable=addAttributesToSVGElement --disable=addClassesToSVGElement --disable=cleanupAttrs --disable=cleanupEnableBackground --disable=cleanupIDs --disable=cleanupListOfValues --disable=cleanupNumericValues --disable=convertColors  --disable=inlineStyles -- --disable=minifyStyles --disable=moveElemsAttrsToGroup --disable=moveGroupAttrsToElems --disable=prefixIds --disable=removeAttrs --disable=removeComments --disable=removeDesc --disable=removeDimensions --disable=removeEditorsNSData --disable=removeElementsByAttr --disable=removeEmptyAttrs --disable=removeEmptyContainers --disable=removeEmptyText --disable=removeHiddenElems --disable=removeMetadata --disable=removeNonInheritableGroupAttrs --disable=removeScriptElement --disable=removeStyleElement --disable=removeTitle --disable=removeUnusedNS --disable=removeUselessDefs --disable=removeUselessStrokeAndFill --disable=removeViewBox --disable=removeXMLNS --disable=sortAttrs
 
 # --disable=mergePaths # https://github.com/svg/svgo/issues/872 # https://github.com/svg/svgo/issues/958 # sometimes Chrome-displaybug
 
@@ -45,6 +36,8 @@ svgo -i ${file} -o $i $INDENT -p 3 $META --disable=convertTransform --disable=co
 #--disable=removeUnknownsAndDefaults # removes Flowtext # https://github.com/svg/svgo/issues/959
 
 # -p 3 #https://commons.wikimedia.org/wiki/File:Decoy_Receptor_Figure.svg
+
+# --disable=convertPathData # https://github.com/svg/svgo/issues/949
 
 # --disable=convertShapeToPath ##can be problematic for flowtext
 
@@ -55,7 +48,7 @@ svgo -i ${file} -o $i $INDENT -p 3 $META --disable=convertTransform --disable=co
 # do not define: --enable=prefixIds #Extends the filename to the ID
 #--enable=cleanupListOfValues  https://github.com/svg/svgo/issues/923
 #--enable=convertPathData # https://github.com/svg/svgo/issues/880
-# --enable=removeElementsByAttr # https://github.com/svg/svgo/issues/945 (option does not make sence)
+# --enable=removeElementsByAttr # https://github.com/svg/svgo/issues/945
 # --enable=removeStyleElement # https://github.com/svg/svgo/issues/946
 # --enable=removeDimensions ##Changes size of view
 # --enable=removeXMLNS ## not valid 

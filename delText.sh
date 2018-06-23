@@ -37,7 +37,7 @@ for file in *.svg;do
 
  sed -ri 's/<tspan [-[:lower:][:digit:]= \"\.\:\;\%]+\/>//g' $j #remove selfclosing tspan (svg2validsvg)
  
- sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<text ([-[:alnum:]=\.\" \#\(\)\;\:\%\'\/\,]+)>([]\[[:alnum:][:space:]\$\^\\\_\{\} \'\’\“\”\/\(\)\!\,\:#\.=,\"\&\;\¯\°\¸üä\*\+-­−-]*|<tspan([-[:alnum:]=\.\" \#\(\)\;\:\%\,\']*)>|<\/tspan>)*<\/text>//g" $j
+ sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<text([-[:alnum:]=\.\" \#\(\)\;\:\%\'\/\,]*)>([]\[[:alnum:][:space:]\$\^\\\_\{\} \'\’\“\”\/\(\)\!\,\:#\.=,\"\&\;\¯\°\¸üä\*\+«»—-­−-]*|<tspan([-[:alnum:]=\.\" \#\(\)\;\:\%\,\']*)>|<\/tspan>)*<\/text>//g" $j
  
  echo $j finish
  

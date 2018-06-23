@@ -27,10 +27,9 @@ svgcleaner $file $i  --allow-bigger-file --indent 1 --apply-transform-to-gradien
 
 #--remove-nonsvg-elements  # removes flowtext
 
-#debugging
-#--join-arcto-flags no # https://commons.wikimedia.org/wiki/File:2016_Angola_and_DR_Congo_yellow_fever_outbreak.svg
+#--join-arcto-flags no # https://github.com/svg/svgo/issues/949
 
-
+# --resolve-use no # https://github.com/RazrFalcon/svgcleaner/issues/159
 
 
 #echo mv ./${file} ./${tmp}4.xml

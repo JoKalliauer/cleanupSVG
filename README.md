@@ -79,7 +79,9 @@ Similar scripts<br/>
 
 ```cmd
 python -m pip install --upgrade pip
-pip install --upgrade https://github.com/codedread/scour/archive/master.zip
+#pip install --upgrade https://github.com/codedread/scour/archive/master.zip
+pip3 install --upgrade https://github.com/codedread/scour/archive/master.zip
+#cargo install svgcleaner --force
 cargo install svgcleaner --force --git https://github.com/RazrFalcon/svgcleaner
 npm install -g svgo
 ```

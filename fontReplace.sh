@@ -58,7 +58,7 @@ sed -ri 's/ font-family="([[:alnum:] ]*)( |-)Bold"/ font-family="\1" font-weight
 
 sed -ri 's/ font-family="([[:alnum:] ]*)( |-)"/ font-family="\1"/g' $i
 
-sed -i 's/ font-family=\"Arial\"/ font-family=\"Liberation Sans\"/g' $i #as automatic
+sed -ri 's/ font-family=\"(Liberation Sans,|)Arial\"/ font-family=\"Liberation Sans\"/g' $i #as automatic
 sed -i 's/ font-family=\"Arial,/ font-family=\"Liberation Sans,/g' $i #as automatic
 sed -i 's/ font-family=\"Bitstream Vera Serif\"/ font-family=\"DejaVu Serif\"/g' $i #as automatic
 sed -ri 's/ font-family=\"DejaVuSans\"/ font-family=\"DejaVu Sans\"/g' $i #as automatic
@@ -72,6 +72,7 @@ sed -ri "s/ font-family=\"Blue( |)Highway\"/ font-family=\"Padauk\"/g" $i #looks
 #sed -i "s/ font-family=\"Blue Highway Condensed\"/ font-family=\"Padauk\" font-stretch=\"condensed\"/g" $i
 sed -ri "s/ font-family=\"(Blue Highway D Type|BlueHighwayDType)\"/ font-family=\"Padauk\" text-transform=\"uppercase\"/g" $i
 sed -i "s/ font-family=\"DejaVu Sans Condensed\"/ font-family=\"DejaVu Sans\" font-stretch=\"condensed\"/g" $i
+sed -i "s/ font-family=\"Arial Narrow\"/ font-family=\"Liberation Sans Narrow\"/g" $i
 
 sed -ri 's/ font-family=\"DejaVu Sans Bold\"/ font-family=\"DejaVu Sans\" font-weight=\"bold\"/g' $i
 sed -ri 's/ font-family=\"(Arial|Myriad Pro|ArialNarrow|ArialMT)\"/ font-family=\"Liberation Sans\"/g' $i #all Sans to Liberation
