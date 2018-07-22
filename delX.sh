@@ -39,17 +39,17 @@ for file in *.svg;do
  
  #remove objects:
 
- sed -ri "s/ <rect ([-[:alnum:]=\.\" \#\(\)\;\:\,]+)\/>//g" $i #delete all Rectangles
+ sed -ri "s/ <rect ([-[:alnum:]=\.\" \#\(\)\;\:\,_]+)\/>//g" $i #delete all Rectangles
  
- sed -ri "s/<path ([-[:alnum:]=\.\" \#\(\)\;\:\,]+)\/>//g" $i #delete all Path
- 
- sed -ri "s/ <circle [-[:lower:][:digit:]\"\.= #\(\)]*\/>//g" $i #delete circels
+ sed -ri "s/<path ([-[:alnum:]=\.\" \#\(\)\;\:\,_]+)\/>//g" $i #delete all Path
+
+ sed -ri "s/ <circle [-[:alnum:]\"\.= \#\(\)\,\;\:]*\/>//g" $i #delete circels
  
  sed -ri "s/ <ellipse [-[:lower:][:digit:]\"\.= #\(\)\,]*\/>//g" $i #delete ellipses
  
  sed -ri "s/<polyline points=\"[[:digit:]\. ]+\"\/>//g" $i #delete polylines
  
- sed -ri "s/<image ([-[:alnum:]=\,´.\" \:\/\;\+\,]*)>//g" $i # delete images
+ sed -ri "s/<image ([-[:alnum:]=\,´.\" \:\/\;\+\,#\(\)]*)>//g" $i # delete images
  
   sed -ri "s/<use [-[:alnum:]=\,\.\" \:\;#]\/>//g" $i
 
@@ -59,7 +59,7 @@ for file in *.svg;do
  
  #sed -ri "s/ <text ([-[:alnum:]=\.\" \#\(\)\;\:\%\'\%]+)>.*<\/text>//g" $j #delete all oneline-text
  
- sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<text([-—[:alnum:]=\.\" \#\(\)\;\:\%\'\/\,\*]*)>([]\[[:alnum:][:space:]\$\^\\\_\{\} \'\’\“\”\/\(\)\!\,\:#\.=,\"\&\;\¯\¸\°\*\+\´·˚«»—­−-]*|<tspan([-[:alnum:]=\.\" \#\(\)\;\:\%\,]*)>|<\/tspan>)*<\/text>//g" $j
+ sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<text([-—[:alnum:]=\.\" \#\(\)\;\:\%\'\/\,\*]*)>([]\[[:alnum:][:space:]\$\^\\\_\{\} \'\’\“\”\/\(\)\!\,\:#\.=,\"\&\;\¯\¸\°\*\+\´·˚«»%@—­−-]*|<tspan([-[:alnum:]=\.\" \#\(\)\;\:\%\,]*)>|<\/tspan>)*<\/text>//g" $j
  
  echo $j finish
  

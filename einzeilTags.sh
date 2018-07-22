@@ -21,7 +21,8 @@ for file in *.svg;do
  
  export i=$file #i will be overritan later
  export fileN=$(echo $file | cut -f1 -d" ") #remove spaces if exsiting (and everything after)
- export tmp=$(echo $fileN | cut -f1 -d".")
+ #export tmp=$(echo $fileN | cut -f1 -d".")
+ export tmp=${fileN%.svg}
  
  
  #If you want to overwrite the exisiting file, without any backup, delete the following three lines
@@ -39,29 +40,16 @@ for file in *.svg;do
 
  #sed -ri "s/ <rect ([-[:alnum:]=\.\" \#\(\)]+)\/>//g" $i #delete all Rectangles
  
- sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/[[:space:]]+/ /g" $i #reduce to one space
+ sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/\n[[:space:]]+/ /g" $i #reduce to one space
+ sed -ri "s/<mask([[:alnum:] =\"]*) maskUnits=\"userSpaceOnUse\"( id=\"[[:alnum:]_]+\"|)>/<mask\1\2>/g" $i
  
- sed -ri 's/[[:space:]]*<(g|path|svg|flowRoot) /\n<\1 /g' $i
+ sed -ri 's/[[:space:]]*<(g|path|svg|flowRoot|defs|clipPath|radialGradient|linearGradient|filter|mask|pattern) /\n<\1 /g' $i
 # sed -ri 's/[[:space:]]*<text /\n<text /g' $i #deactivated for PosibilityUngroup
+#sed -ri 's/[[:space:]]*<tspan /\n<tspan /g' $i #ruins text
 #  sed -ri 's/[[:space:]]*<rect /\n<rect /g' $i #deactivated for Flow2TextBySed
 
 
  sed -ri 's/<\/(g|flowRoot)>/<\/\1>\n/g' $i
- 
- #sed -ri "s/ <circle [-[:lower:][:digit:]\"\.= #\(\)]*\/>//g" $i #delete circels
- 
- #sed -ri "s/ <ellipse [-[:lower:][:digit:]\"\.= #\(\)\,]*\/>//g" $i #delete ellipses
- 
- #sed -ri "s/<polyline points=\"[[:digit:]\. ]+\"\/>//g" $i #delete polylines
- 
- #mv $i ${tmp}d.svg
- #echo $i finish
- 
- #sed -ri "s/ <text ([-[:alnum:]=\.\" \#\(\)\;\:\%\']+)>.*<\/text>//g" $j #delete all oneline-text
- 
- #sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/ <text ([-[:alnum:]=\.\" \#\(\)\;\:\%\']+)>([]\[[:alnum:][:space:]\$\^\\\_\{\} \'\’\“\”\/\(\)\!\,\:#\.=,\"\&\;−-]*|<tspan ([-[:alnum:]=\.\" \#\(\)\;\:\%\,]+)>|<\/tspan>)*<\/text>//g" $j
- 
- #echo $j finish
  
 done
 

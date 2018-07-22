@@ -39,17 +39,17 @@ for file in *.svg;do
  
  #remove objects:
  #  <rect id="rect13901" y="-2.0665e-5" width="708.66" height="708.66" fill="#fff" fill-rule="evenodd"/>
- sed -ri "s/<rect ([-[:alnum:]=\.\" \#\(\)\;\:\,]+)\/>//g" $i #delete all Rectangles
+ sed -ri "s/<rect ([-[:alnum:]=\.\" \#\(\)\;\:\,_]+)\/>//g" $i #delete all Rectangles
  
- sed -ri "s/<path ([-[:alnum:]=\.\" \#\(\)\;\:\%\,]+)\/>//g" $i #delete all Path
+ sed -ri "s/<path ([-[:alnum:]=\.\" \#\(\)\;\:\%\,_]+)\/>//g" $i #delete all Path
  
- sed -ri "s/ <circle [-[:lower:][:digit:]\"\.= #\(\)]*\/>//g" $i #delete circels
+ sed -ri "s/ <circle [-[:lower:][:digit:]\"\.= #\(\),;:]*\/>//g" $i #delete circels
  
  sed -ri "s/ <ellipse [-[:lower:][:digit:]\"\.= #\(\)\,]*\/>//g" $i #delete ellipses
  
  sed -ri "s/<polyline points=\"[[:digit:]\. ]+\"\/>//g" $i #delete polylines
  
- sed -ri "s/<image ([-[:alnum:]=\,´.\" \:\/\;\+\,]*)>//g" $i # delete images
+ sed -ri "s/<image ([-[:alnum:]=\,´.\" \:\/\;\+\,#\(\)]*)>//g" $i # delete images
 
  sed -ri "s/<use [-[:alnum:]=\,\.\" \:\;#\(\)]*\/>//g" $i
  

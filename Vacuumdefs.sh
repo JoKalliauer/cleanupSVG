@@ -21,17 +21,14 @@ fi
 #alias inkscape='/cygdrive/c/Program\ Files/Inkscape/inkscape.com' #2017-10-29 11h06 (by Johannes Kalliauer)
 #alias inkscape.exe='/cygdrive/c/Program\ Files/Inkscape/inkscape.exe'
 sourceType="svg"; valid=1
-#outputType="svg"
+outputType="svg"
 
 
 
 count=0
 validInput1="svg"
-validInput1a="xml"
-validInput1b="txt"
 validInput2="pdf"
 validInput3="eps"
-
 validOutput1="eps"
 validOutput2="pdf"
 validOutput3="png"
@@ -43,7 +40,6 @@ validOutput8="ink-svg"
 validOutput9="png96"
 
 
-
 #echo "This script allows you to convert all files in this folder from one file type to another."
 
 #valid=0
@@ -52,7 +48,7 @@ if [ -z $sourceType ]; then
  do
      echo "Allowed file types for source: $validInput1, $validInput2, $validInput3"
  	read -p "What file type do you want to use as a source? " sourceType
-     if [ "$sourceType" = "$validInput1" ] || [ "$sourceType" = "$validInput1a" ] || [ "$sourceType" = "$validInput1b" ] || [ "$sourceType" = "$validInput2" ] || [ "$sourceType" = "$validInput3" ]; then
+     if [ "$sourceType" = "$validInput1" ] || [ "$sourceType" = "$validInput2" ] || [ "$sourceType" = "$validInput3" ]; then
          valid=1
      else
          echo "Invalid input! Please use one of the following: $validInput1, $validInput2, $validInput3"
@@ -66,7 +62,7 @@ fi
 
 while [ "$valid" != "1" ]
 do
-    echo "Allowed file types for output: $validOutput1, $validOutput2, $validOutput3, $validOutput4 (plain), $validOutput5, $validOutput8"
+    echo "Allowed file types for output: $validOutput1, $validOutput2, $validOutput3, $validOutput4, $validOutput5, $validOutput6, $validOutput7"
 	read -p "What file type do you want to convert to? " outputType
     if [ "$outputType" = "$validOutput1" ] || [ "$outputType" = "$validOutput2" ] || [ "$outputType" = "$validOutput3" ] || [ "$outputType" = "$validOutput4" ] || [ "$outputType" = "$validOutput5" ] || [ "$outputType" = "$validOutput6" ] || [ "$outputType" = "$validOutput7" ] || [ "$outputType" = "$validOutput8" ] || [ "$outputType" = "$validOutput9" ]; then
         valid=1
@@ -101,17 +97,17 @@ do
 		
 		if [ "$outputType" = "png" ];then #png
 		 read -p "With what dpi should it be exported (e.g. 300, default: 96)? " dpi
-		 inkscape $i --export-$outputType=$file.$outputType --export-dpi=$dpi
+		 inkscape $i --vacuum-defs --export-$outputType=$file.$outputType --export-dpi=$dpi
 		elif [ "$outputType" = "svg" ];then #  svg
-		 inkscape $i --export-plain-$outputType=${file}n.$outputType
+		 inkscape $i --vacuum-defs --export-plain-$outputType=${file}n.$outputType
 		elif [ "$outputType" = "$validOutput6" ] || [ "$outputType" = "$validOutput7" ] || [ "$outputType" = "$validOutput8" ]; then #inkscape-svg
 		  cp ./${fileSource} ./${file}Ink.svg
 		  mv ./${fileSource} ./${file}.xml
-		 inkscape ./${file}Ink.svg --no-convert-text-baseline-spacing --verb=FileSave --verb=FileClose --verb=FileQuit
+		 inkscape ./${file}Ink.svg --vacuum-defs --no-convert-text-baseline-spacing --verb=FileSave --verb=FileClose --verb=FileQuit
 		elif  [ "$outputType" = "$validOutput9" ];then #png96
-		 inkscape $i --export-png=$file.png
+		 inkscape $i --vacuum-defs --export-png=$file.png
 		else #eps, pdf, plain-svg and others
-		 inkscape $i --export-$outputType=$file.$outputType
+		 inkscape $i --vacuum-defs --export-$outputType=$file.$outputType
 		fi
     else
         echo "no file $i found!"
