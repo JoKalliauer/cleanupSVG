@@ -45,7 +45,7 @@ for file in *.svg;do
  
  sed -ri "s/ <circle [-[:lower:][:digit:]\"\.= #\(\),;:]*\/>//g" $i #delete circels
  
- sed -ri "s/ <ellipse [-[:lower:][:digit:]\"\.= #\(\)\,]*\/>//g" $i #delete ellipses
+ sed -ri "s/ <ellipse [-[:lower:][:digit:]\"\.= #\(\)\,:]*\/>//g" $i #delete ellipses
  
  sed -ri "s/<polyline points=\"[[:digit:]\. ]+\"\/>//g" $i #delete polylines
  

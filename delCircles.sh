@@ -27,30 +27,42 @@ for file in *.svg;do
  #If you want to overwrite the exisiting file, without any backup, delete the following three lines
  export i=${tmp}T.svg
  export j=${tmp}Obj.svg
- #cp ./"${file}" $i
- cp ./"${file}" $j
+ cp ./"${file}" $i
+ #cp ./"${file}" $j
  mv ./"${file}" ./${tmp}1.xml
  
  echo 
- echo $j start:
+ echo $i start:
+  
+ #remove objects:
+# sed -ri "s/<rect ([-[:alnum:]=\.\" \#\(\)\;\:\,_]+)\/>//g" $i #delete all Rectangles
  
+# sed -ri "s/<path ([-[:alnum:]=\.\" \#\(\)\;\:\%\,_]+)\/>//g" $i #delete all Path
+ 
+ sed -ri "s/ <circle [-[:lower:][:digit:]\"\.= #\(\),;:]*\/>//g" $i #delete circels
+ 
+# sed -ri "s/ <ellipse [-[:lower:][:digit:]\"\.= #\(\)\,:]*\/>//g" $i #delete ellipses
+ 
+# sed -ri "s/<polyline points=\"[[:digit:]\. ]+\"\/>//g" $i #delete polylines
+ 
+ #sed -ri "s/<image ([-[:alnum:]=\,´.\" \:\/\;\+\,#\(\)]*)>//g" $i # delete images
 
- sed -ri 's/<tspan [-[:lower:][:digit:]= \"\.\:\;\%]+\/>//g' $j #remove selfclosing tspan (svg2validsvg)
+# sed -ri "s/<use [-[:alnum:]=\,\.\" \:\;#\(\)]*\/>//g" $i
  
- sed -ri "s/<tspan([-[:alnum:]=\.\" \#\(\)\;\:\%\,\']*)>|<\/tspan>//g" $j #remove tspans
+# sed -ri -e ':a' -e 'N' -e '$!ba' -e  "s/<g[-[:lower:][:digit:]\"\.= #\(\)\:\,\;]*>[[:space:]]*<\/g>//g" $i #delete empty groups
  
- sed -ri "s/>[]\[[:alnum:][:space:]\$\^\\\_\{\} \'\’\“\”\/\(\)\!\,\:#\.=,\"\&\;\¯\°\¸üä\*\+«»–—­−-]*/>/g" $j #Remove everything after tags
+# sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/\n[[:space:]]*/\n/g" $i #reduce to one space
  
-  sed -ri "s/[]\[[:alnum:][:space:]\$\^\\\_\{\} \'\’\“\”\/\(\)\!\,\:#\.=,\"\&\;\¯\°\¸üä\*\+«»–—­−-]*</</g" $j #Remove everything before in tags
+# sed -ri -e ':a' -e 'N' -e '$!ba' -e  "s/<g[-[:lower:][:digit:]\"\.= #\(\)\:\,\;]*>[[:space:]]*<\/g>//g" $i #delete empty groups
  
- sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<text([-[:alnum:]=\.\" \#\(\)\;\:\%\'\/\,]*)>([]\[[:alnum:][:space:]\$\^\\\_\{\} \'\’\“\”\/\(\)\!\,\:#\.=,\"\&\;\¯\°\¸üä\*\+«»²³⁺⁻–—­−-]*|<tspan([-[:alnum:]=\.\" \#\(\)\;\:\%\,\']*)>|<\/tspan>)*<\/text>//g" $j
+ #mv $i ${tmp}d.svg
+ echo $i finish
  
+ #sed -ri "s/ <text ([-[:alnum:]=\.\" \#\(\)\;\:\%\']+)>.*<\/text>//g" $j #delete all oneline-text
  
- #just for debugging
- #sed -ri "s/
+ #sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/ <text ([-[:alnum:]=\.\" \#\(\)\;\:\%\']+)>([]\[[:alnum:][:space:]\$\^\\\_\{\} \'\’\“\”\/\(\)\!\,\:#\.=,\"\&\;−-]*|<tspan ([-[:alnum:]=\.\" \#\(\)\;\:\%\,]+)>|<\/tspan>)*<\/text>//g" $j
  
- 
- echo $j finish
+ #echo $j finish
  
 done
 
@@ -64,10 +76,7 @@ DeleteOnDemand=<< END
 #------------------------
 
 #textPath
-
-#sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<textPath xlink:href=\"#[[:alnum:]]*\"(| id=\" [[:alnum:]]*\")>[[:space:]]*(<tspan [-[:alnum:]´\.= \"]*\">|[[:alnum:] ']*|<\/tspan>)*[[:space:]]*<\/textPath>//g" $i #delete just textPath
-
-#sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/ <text ([-[:alnum:]=\.\" \#\(\)\;\:\%\'\/\%\,]+)>[[:space:]]*<textPath xlink:href=\"#[[:alpha:]]\">[[:space:]]*<tspan [-[:alnum:]´\.= \"]*\">[[:alnum:] ']*<\/tspan>[[:space:]]*<\/textPath>[[:space:]]*<\/text>//g" $i #delete al textPath
+#sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/ <text>[[:space:]]*<textPath xlink:href=\"#[[:alpha:]]\">[[:space:]]*<tspan [-[:alnum:]´\.= \"]*\">[[:alnum:] ']*<\/tspan>[[:space:]]*<\/textPath>[[:space:]]*<\/text>//g" $i #delete al textPath
 
 #------------------------
 

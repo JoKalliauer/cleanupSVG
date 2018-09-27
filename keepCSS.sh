@@ -9,11 +9,11 @@ export i=min.svg # just used for debugging
 
 ./svg2validsvg.sh
 
-#./InkscapeBatchConverter.sh
+./InkscapeBatchConverter.sh
 ./scour4compression.sh
-./cleaner4compression.sh
-./o4compression.sh
-./validBycleaner.sh
-./scour4compression.sh
+#./cleaner4compression.sh
+./mino4compression.sh # --disable=inlineStyles --disable=minifyStyles
+#./validBycleaner.sh
+./validByScour.sh
 
 ./svg2validsvg.sh

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 for file in *.svg;do
-#export file=min.svg
+# export file=min.svg
 export fileN=$(echo $file | cut -f1 -d" ")
 export tmp=${fileN%.svg}
 export i=${tmp}s.svg
@@ -36,10 +36,10 @@ fi
 
 echo scour ${file} to $i begin, min=${minfilesize}, meta=$meta, META= $META, INDENT=$INDENT
 
-scour -i ${file} -o $i --keep-unreferenced-defs --enable-comment-stripping --remove-titles --remove-descriptions --strip-xml-space  --set-precision=5 $META $INDENT --renderer-workaround --disable-style-to-xml --create-groups  --set-c-precision=4 #--enable-viewboxing #  
+scour -i ${file} -o $i --keep-unreferenced-defs --enable-comment-stripping --remove-titles --remove-descriptions --strip-xml-space  --set-precision=5 $META $INDENT --renderer-workaround --disable-style-to-xml --create-groups  --set-c-precision=5 #--enable-viewboxing #  
 
 #--keep-unreferenced-defs
-## if referenced-defs are deleted: https://github.com/scour-project/scour/issues/155
+## if referenced-defs are deleted: https://github.com/scour-project/scour/issues/155 --> https://github.com/scour-project/scour/issues/174
 
 #--enable-viewboxing
 ##Changes size of view
@@ -49,14 +49,16 @@ scour -i ${file} -o $i --keep-unreferenced-defs --enable-comment-stripping --rem
 
  #--create-groups #https://commons.wikimedia.org/wiki/File:CIA_WorldFactBook-Political_world.svg
 
- #--shorten-ids # https://github.com/scour-project/scour/issues/164
+# keep ID-Names: no #--shorten-ids and no # --enable-id-stripping
+#--shorten-ids # https://github.com/scour-project/scour/issues/164
 # --enable-id-stripping #https://github.com/scour-project/scour/issues/164
 
-# --create-groups # https://github.com/scour-project/scour/issues/196 (but it is 
+# --create-groups # https://github.com/scour-project/scour/issues/196 (but it Seems to be a chrome and a firefox-bug not a scour-bug
 
 #--set-precision=5 # https://commons.wikimedia.org/wiki/File:Porr_logo.svg
 #--set-c-precision=3 # https://commons.wikimedia.org/wiki/File:LageplanStrasse.svg https://commons.wikimedia.org/wiki/File:Dojikko2.3.svg
 #--set-c-precision=4 # https://commons.wikimedia.org/wiki/File:Flower_soft.svg
+#--set-c-precision=5 #https://commons.wikimedia.org/wiki/File:Anatomy_of_Human_Ear_with_Cochlear_Frequency_Mapping.svg
 
 #echo mv ./${file} ./${tmp}3.xml
 mv ./${file} ./${tmp}3.xml

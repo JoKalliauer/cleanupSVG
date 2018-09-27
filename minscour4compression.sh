@@ -20,7 +20,7 @@ if [ $meta == 1 ]; then
  echo keep metadata
  export META= 
 elif [ $meta == 0 ]; then
- export META="--remove-metadata --remove-descriptive-elements"
+ export META="--remove-metadata" # --remove-descriptive-elements
  echo delete META=$META
 else
  echo imput not allowed meta is $meta
@@ -36,7 +36,7 @@ fi
 
 echo scour ${file} to $i begin, min=${minfilesize}, meta=$meta, META= $META, INDENT=$INDENT
 
-scour -i ${file} -o $i --keep-unreferenced-defs --enable-comment-stripping --remove-titles --remove-descriptions --strip-xml-space  --set-precision=5 $META $INDENT --renderer-workaround --disable-style-to-xml --create-groups  --set-c-precision=5 --keep-editor-data #--enable-viewboxing #  
+scour -i ${file} -o $i --keep-unreferenced-defs --enable-comment-stripping --remove-descriptions --strip-xml-space  --set-precision=5 $META $INDENT --renderer-workaround --disable-style-to-xml  --set-c-precision=4 # --create-groups # --remove-titles #--enable-viewboxing #  
 
 #--keep-unreferenced-defs
 ## if referenced-defs are deleted: https://github.com/scour-project/scour/issues/155
@@ -57,9 +57,6 @@ scour -i ${file} -o $i --keep-unreferenced-defs --enable-comment-stripping --rem
 #--set-precision=5 # https://commons.wikimedia.org/wiki/File:Porr_logo.svg
 #--set-c-precision=3 # https://commons.wikimedia.org/wiki/File:LageplanStrasse.svg https://commons.wikimedia.org/wiki/File:Dojikko2.3.svg
 #--set-c-precision=4 # https://commons.wikimedia.org/wiki/File:Flower_soft.svg
-#--set-c-precision=5 #https://commons.wikimedia.org/wiki/File:Anatomy_of_Human_Ear_with_Cochlear_Frequency_Mapping.svg
-
-#--keep-editor-data for sodipodi:guide
 
 #echo mv ./${file} ./${tmp}3.xml
 mv ./${file} ./${tmp}3.xml

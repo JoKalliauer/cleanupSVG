@@ -56,7 +56,8 @@ sed -i "s/ aria-label=\"[[:digit:]]\"//g;s/ stroke-linejoin=\"null\"//g;s/ strok
 # <flowPara id="flowPara10507" style="fill:url(#linearGradient11781)"/>
 
 #remove empty flow Text in svg (everything else will be done by https://github.com/JoKalliauer/cleanupSVG/blob/master/Flow2TextByInkscape.sh )
-sed -ri 's/<flowPara([-[:alnum:]\" \.\:\%\=\;#\(\)]*)\/>//g;s/<flowRoot\/>//g' $i
+#    <flowRoot id="flowRoot3750" style="fill:black;font-family:Linux Libertine;font-size:64;line-height:100%;text-align:center;text-anchor:middle;writing-mode:lr" xml:space="preserve"/>
+sed -ri 's/<flowPara([-[:alnum:]\" \.\:\%\=\;#\(\)]*)\/>//g;s/<flowRoot([-[:alnum:]" \.:%=;]*)\/>//g' $i
 sed -i 's/<flowSpan[-[:alnum:]=\":;\. ]*>[[:space:]]*<\/flowSpan>//g' $i
 sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<flowRoot([-[:alnum:]\.=\" \:\(\)\%\#\,\';]*)>[[:space:]]*<flowRegion(\/|[[:alnum:]\"= ]*>[[:space:]]*<(path|rect) [-[:alnum:]\. \"\=:]*\/>[[:space:]]*<\/flowRegion)>[[:space:]]*(<flowDiv\/>|)[[:space:]]*<\/flowRoot>//g" $i #delete empty flowRoot
 sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<flowRoot([-[:alnum:]\.=\" \:\(\)\%\#\,\';]*)>[[:space:]]*<flowRegion([-[:alnum:]=:\" ]*)>[[:space:]]*(<path[-[:alnum:]\.=\"\ \#]*\/>|<rect( id=\"[-[:alnum:]]*\"|) x=\"([-[:digit:]\. ]+)\" y=\"([-[:digit:]\. ]+)\"([[:lower:][:digit:]=\.\" \#:]+)\/>)[[:space:]]*<\/flowRegion>[[:space:]]*(|<flowPara([-[:alnum:]\.=\" \:\#;% ]*)>([[:space:] ]*)<\/flowPara>)[[:space:]]*<\/flowRoot>//g" $i ##delete flowRoot only containing spaces
@@ -128,7 +129,7 @@ sed -i "s/<g[-[:alnum:]=\"\(\)\.,_ :]*\/>/ /g" $i
 #two lineforward to one lineforward
 sed -i -e ':a' -e 'N' -e '$!ba' -e 's/\n\n/\n/g' $i
 
-#Incskape doesnt handle Adobe Ilustrator xmlns right
+#Inkscape doesnt handle Adobe Ilustrator xmlns right
 sed -ri "s/=\"([amp38;\#\&\])+ns_flows;\"/=\"http:\/\/ns.adobe.com\/Flows\/1.0\/\"/g" $i 
 sed -ri "s/ xmlns:x=\"([amp38;\#\&\])+ns_extend;\"/ xmlns:x=\"http:\/\/ns.adobe.com\/Extensibility\/1.0\/\"/" $i #Incskape doesnt handle Adobe Ilustrator xmlns right
 sed -ri "s/=\"([amp38;\#\&\])+ns_ai;\"/=\"http:\/\/ns.adobe.com\/AdobeIllustrator\/10.0\/\"/" $i #Incskape doesnt handle Adobe Ilustrator xmlns right
@@ -157,14 +158,23 @@ sed -i "s/ i:extraneous=\"self\"//" $i #Remove AI-Elemtents
 #remove jpg im metadata
 sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<xapGImg:image>([[:alnum:][:space:]\/+])*={0,2}[[:space:]]*<\/xapGImg:image>//g" $i
 
-# font-weight="630"
-sed -i "s/ font-weight=\"630\"/ font-weight=\"bold\"/g" $i
+# == make file valid ==
 
-#Repair WARNING in <mask> with id=ay: Mask element found with maskUnits set. It will not be rendered properly by Wikimedia's SVG renderer. See https://phabricator.wikimedia.org/T55899 for details
-sed -ri "s/<mask([[:alnum:] =\"]*) maskUnits=\"userSpaceOnUse\"( id=\"[[:alnum:]_]+\"|)>/<mask\1\2>/g" $i
+# font-weight="630"
+#sed -i "s/ font-weight=\"630\"/ font-weight=\"bold\"/g" $i
 
 #ArcMap-problems (made file valid, removes cbs= and gem=)
 #sed -ri "s/<path d=\"m([[:digit:]hlmvz \.-]+)\" ([[:alnum:]\"= \.\(\)\#-]*)\" cbs=\"[[:digit:]GM]*\" gem=\"[[:alpha:]0 \.\(\)-]*\"\/>/<path d=\"m\1\" \2\"\/>/g" $i
+
+#invalid id-names
+sed -ri "s/ <(g|path) id=\"([-[:alnum:]:_\.]*)( |'|\(|\)|&|#|,)([-[:alnum:] \':_|\(|\)|&.,]+)\"/ <\1 id=\"\2_\4\"/" $i #replaces spaces and commas with underlines
+sed -ri "s/ <(g|path) id=\"([-[:alnum:]:_\.]+)( |'|\(|\)|&|#|,)([-[:alnum:] \':_|\(|\)|&.,]+)\"/ <\1 id=\"\2_\4\"/" $i #replaces spaces with underlines
+sed -ri "s/ <(g|path) id=\"([-[:alnum:]:_\.]+)( |'|\(|\)|&|#|,)([-[:alnum:] \':_|\(|\)|&.,]+)\"/ <\1 id=\"\2_\4\"/" $i #replaces spaces with underlines
+sed -ri "s/ <(g|path) id=\"([-[:alnum:]:_\.]+)( |'|\(|\)|&|#|,)([-[:alnum:] \':_|\(|\)|&.,]+)\"/ <\1 id=\"\2_\4\"/" $i #replaces spaces with underlines
+# do not use this line # sed -ri "s/ <(g|path) id=\"([[:digit:]]+)\"/ <\1 id=\"FIPS_\2\"/" $i #valid id names must not start with a number
+
+# there is no attribute "data-name" (SVG 2.0)
+sed -ri "s/<(svg|symbol|path|use|g)([[:alnum:]=\"\.\/ -:]*) data-name=\"[[:alnum:] ]+\"/<\1\2/" $i
 
 
 #suggestions from https://en.wikipedia.org/wiki/Wikipedia:SVG_help
@@ -173,7 +183,7 @@ sed -ri "s/tspan x=\"([0-9]*) ([0-9 ]*)\"/tspan x=\"\1\"/g" $i
 sed -ri "s/<g style=\"stroke:none;fill:none\"><text>/<g style=\"stroke:none;fill:rgb(0,0,0)\"><text>/g" $i
 
 ## == Workaround for inkscape bug ==
- sed -ri "s/inkscape:version=\"0.4[\. r[:digit:]]+\"//g" $i # https://bugs.launchpad.net/inkscape/+bug/1763190
+ sed -ri "s/inkscape:version=\"0.(4[\. r[:digit:]]|91 r13725)+\"//g" $i # https://bugs.launchpad.net/inkscape/+bug/1763190
  sed -ri "s/sodipodi:role=\"line\"//g" $i # https://bugs.launchpad.net/inkscape/+bug/1763190
 
 ## == Repair after svgo ==
@@ -183,6 +193,10 @@ sed -ri "s/font-family:&quot;([-[:alnum:] ]*)&quot;/font-family:\"\1\"/g" $i
 sed -ri "s/font-family:&apos;([-[:alnum:] ]*)&apos;/font-family:'\1'/g" $i
 
 ## == Workarounds for Librsvg ==
+
+#Repair WARNING in <mask> with id=ay: Mask element found with maskUnits set. It will not be rendered properly by Wikimedia's SVG renderer. See https://phabricator.wikimedia.org/T55899 for details
+sed -ri "s/<mask([[:alnum:] =\"]*) maskUnits=\"userSpaceOnUse\"( id=\"[[:alnum:]_]+\"|)>/<mask\1\2>/g" $i
+
 
 #Change spaces to , in stroke-dasharray (solves librsvg-Bug https://phabricator.wikimedia.org/T32033 )
 sed -ri 's/stroke-dasharray=\"([[:digit:]\.,]*)([[:digit:]\.]+) ([[:digit:]\., ]+)\"/stroke-dasharray=\"\1\2,\3\"/g' $i

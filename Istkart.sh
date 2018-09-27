@@ -6,34 +6,17 @@ export outputType="svg" #just to not get asked by Inkscape
 export file=min.svg # just used for debugging
 export i=min.svg # just used for debugging
 
-#./einzeilTags.sh
+# how to correct Files by Thomas Steifer https://commons.wikimedia.org/w/index.php?title=Special:ListFiles&offset=20061221023005&limit=500&user=Steifer&ilshowall=1
+
 ./svg2validsvg.sh
 ./InkscapeBatchConverter.sh
-./Vacuumdefs.sh
 ./scour4compression.sh
 ./cleaner4compression.sh
 ./o4compression.sh
-
-#./ResizeByInkscape.sh
-#./einzeilTags.sh
-#./PosibleUngroup.sh
-#./UngroupByInkscape.sh
-#./Flow2TextByInkscape.sh
-##./FFlow2TextBySed.sh
-##./Text2Path.sh
-#./SimplifyByInkscape.sh
-#./viewBox.sh
-
-./validByScour.sh
+./ResizeByInkscape.sh
 ./ScourFull.sh
-#./scour4compression.sh
-./CleanerFull.sh
-#./cleaner4compression.sh
-#./o4compression.sh
 ./OptimizerFull.sh
-./o4compression.sh
-
-./validBycleaner.sh
+./CleanerFull.sh
+./cleaner4compression.sh
 ./scour4compression.sh
-./fontReplace.sh
 ./svg2validsvg.sh

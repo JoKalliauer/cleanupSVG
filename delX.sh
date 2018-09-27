@@ -45,7 +45,7 @@ for file in *.svg;do
 
  sed -ri "s/ <circle [-[:alnum:]\"\.= \#\(\)\,\;\:]*\/>//g" $i #delete circels
  
- sed -ri "s/ <ellipse [-[:lower:][:digit:]\"\.= #\(\)\,]*\/>//g" $i #delete ellipses
+ sed -ri "s/ <ellipse [-[:lower:][:digit:]\"\.= #\(\)\,:]*\/>//g" $i #delete ellipses
  
  sed -ri "s/<polyline points=\"[[:digit:]\. ]+\"\/>//g" $i #delete polylines
  
@@ -59,7 +59,7 @@ for file in *.svg;do
  
  #sed -ri "s/ <text ([-[:alnum:]=\.\" \#\(\)\;\:\%\'\%]+)>.*<\/text>//g" $j #delete all oneline-text
  
- sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<text([-—[:alnum:]=\.\" \#\(\)\;\:\%\'\/\,\*]*)>([]\[[:alnum:][:space:]\$\^\\\_\{\} \'\’\“\”\/\(\)\!\,\:#\.=,\"\&\;\¯\¸\°\*\+\´·˚«»%@—­−-]*|<tspan([-[:alnum:]=\.\" \#\(\)\;\:\%\,]*)>|<\/tspan>)*<\/text>//g" $j
+ sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<text([-—[:alnum:]=\.\" \#\(\)\;\:\%\'\/\,\*]*)>([]\[[:alnum:][:space:]\$\^\\\_\{\} \'\’\“\”\/\(\)\!\,\:#\.=,\"\&\;\¯\¸\°\*\+\´·˚«»%@²³⁺⁻–—­−-]*|<tspan([-[:alnum:]=\.\" \#\(\)\;\:\%\,]*)>|<\/tspan>)*<\/text>//g" $j
  
  echo $j finish
  
