@@ -57,7 +57,7 @@ svgcleaner $file $i --allow-bigger-file --indent $INDENT --resolve-use no --appl
 
  # --resolve-use no # https://github.com/RazrFalcon/svgcleaner/issues/159
  
-## == keep id-names == #--remove-unreferenced-ids no --trim-ids no
+## == keep id-names == #--remove-unreferenced-ids no --trim-ids no --ungroup-groups no 
 
 
 # == old ==
@@ -66,7 +66,7 @@ svgcleaner $file $i --allow-bigger-file --indent $INDENT --resolve-use no --appl
 # and to --remove-unused-segments yes
 # and to --convert-segments no
 
-# keep id names: --remove-unreferenced-ids no --trim-ids no --ungroup-groups no 
+
 
 #echo mv ./${file} ./${tmp}4.xml
 mv ./${file} ./${tmp}4.xml

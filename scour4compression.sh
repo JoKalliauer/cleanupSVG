@@ -47,8 +47,6 @@ scour -i ${file} -o $i --keep-unreferenced-defs --enable-comment-stripping --rem
 
 #--disable-style-to-xml #https://github.com/scour-project/scour/issues/176 #https://github.com/scour-project/scour/issues/174
 
- #--create-groups #https://commons.wikimedia.org/wiki/File:CIA_WorldFactBook-Political_world.svg
-
 # keep ID-Names: no #--shorten-ids and no # --enable-id-stripping
 #--shorten-ids # https://github.com/scour-project/scour/issues/164
 # --enable-id-stripping #https://github.com/scour-project/scour/issues/164

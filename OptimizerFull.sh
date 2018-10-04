@@ -22,6 +22,8 @@ svgo -i ${file} -o $i -p 4 --pretty --indent=1  --enable=convertTransform --enab
 
 # --enable=prefixIds leads to mistakes
 
+## == keep id-names == # --disable=cleanupIDs
+
 #echo mv ./${file} ./${tmp}5.xml
 mv ./${file} ./${tmp}5.xml
 

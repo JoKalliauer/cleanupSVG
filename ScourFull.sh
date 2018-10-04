@@ -27,6 +27,10 @@ scour -i ${file} -o $i --enable-comment-stripping --strip-xml-space --remove-met
 
 #--set-c-precision=5 #https://commons.wikimedia.org/wiki/File:Anatomy_of_Human_Ear_with_Cochlear_Frequency_Mapping.svg
 
+# keep ID-Names: no #--shorten-ids and no # --enable-id-stripping
+#--shorten-ids # https://github.com/scour-project/scour/issues/164
+# --enable-id-stripping #https://github.com/scour-project/scour/issues/164
+
 #echo mv ./${file} ./${tmp}3.xml
 mv ./${file} ./${tmp}3.xml
 

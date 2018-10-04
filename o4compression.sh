@@ -62,9 +62,6 @@ svgo -i ${file} -o $i $INDENT -p 3 $META --disable=convertPathData --disable=mer
 #--disable=removeUnknownsAndDefaults # removes Flowtext # https://github.com/svg/svgo/issues/959 (closed)
 
 
-#=== old ===
-#keep id-names --disable=cleanupIDs
-
 #=== closed ====
 # --disable=convertTransform #https://github.com/svg/svgo/issues/986 (closed)
 #--disable=collapseGroups #https://github.com/svg/svgo/issues/1020 (closed)

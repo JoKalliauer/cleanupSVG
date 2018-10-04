@@ -167,10 +167,10 @@ sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<xapGImg:image>([[:alnum:][:space:]\/+])*
 #sed -ri "s/<path d=\"m([[:digit:]hlmvz \.-]+)\" ([[:alnum:]\"= \.\(\)\#-]*)\" cbs=\"[[:digit:]GM]*\" gem=\"[[:alpha:]0 \.\(\)-]*\"\/>/<path d=\"m\1\" \2\"\/>/g" $i
 
 #invalid id-names
-sed -ri "s/ <(g|path) id=\"([-[:alnum:]:_\.]*)( |'|\(|\)|&|#|,)([-[:alnum:] \':_|\(|\)|&.,]+)\"/ <\1 id=\"\2_\4\"/" $i #replaces spaces and commas with underlines
-sed -ri "s/ <(g|path) id=\"([-[:alnum:]:_\.]+)( |'|\(|\)|&|#|,)([-[:alnum:] \':_|\(|\)|&.,]+)\"/ <\1 id=\"\2_\4\"/" $i #replaces spaces with underlines
-sed -ri "s/ <(g|path) id=\"([-[:alnum:]:_\.]+)( |'|\(|\)|&|#|,)([-[:alnum:] \':_|\(|\)|&.,]+)\"/ <\1 id=\"\2_\4\"/" $i #replaces spaces with underlines
-sed -ri "s/ <(g|path) id=\"([-[:alnum:]:_\.]+)( |'|\(|\)|&|#|,)([-[:alnum:] \':_|\(|\)|&.,]+)\"/ <\1 id=\"\2_\4\"/" $i #replaces spaces with underlines
+sed -ri "s/ <(g|path) id=\"([-[:alnum:]:_\.]*)( |'|\(|\)|&|#|,|\/)([-[:alnum:] \':_|\(|\)|&.,\/]+)\"/ <\1 id=\"\2_\4\"/" $i #replaces (spaces and commas and /) with underlines
+sed -ri "s/ <(g|path) id=\"([-[:alnum:]:_\.]+)( |'|\(|\)|&|#|,|\/)([-[:alnum:] \':_|\(|\)|&.,|\/]+)\"/ <\1 id=\"\2_\4\"/" $i #replaces spaces with underlines
+sed -ri "s/ <(g|path) id=\"([-[:alnum:]:_\.]+)( |'|\(|\)|&|#|,|\/)([-[:alnum:] \':_|\(|\)|&.,|\/]+)\"/ <\1 id=\"\2_\4\"/" $i #replaces spaces with underlines
+sed -ri "s/ <(g|path) id=\"([-[:alnum:]:_\.]+)( |'|\(|\)|&|#|,|\/)([-[:alnum:] \':_|\(|\)|&.,|\/]+)\"/ <\1 id=\"\2_\4\"/" $i #replaces spaces with underlines
 # do not use this line # sed -ri "s/ <(g|path) id=\"([[:digit:]]+)\"/ <\1 id=\"FIPS_\2\"/" $i #valid id names must not start with a number
 
 # there is no attribute "data-name" (SVG 2.0)
