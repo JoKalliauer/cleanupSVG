@@ -9,7 +9,7 @@ echo #Add a empty line to split the output
 
 echo cleaner ${file} to $i begin, min=${minfilesize}, METAdelete=$META, INDENT=$INDENT
 
-svgcleaner $file $i --allow-bigger-file --indent 1 --coordinates-precision 1 --paths-coordinates-precision 1 --properties-precision 1 --transforms-precision 1
+svgcleaner $file $i --allow-bigger-file --indent 1
 
 mv ./${file} ./${tmp}4.xml
 

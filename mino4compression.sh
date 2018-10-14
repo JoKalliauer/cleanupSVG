@@ -36,7 +36,10 @@ fi
 
 #echo optizer ${file} to $i begin, min=${minfilesize}, meta=$meta, META= $META, INDENT=$INDENT
 
-svgo -i ${file} -o $i $INDENT -p 3 $META --disable=removeUnknownsAndDefaults --disable=convertTransform --disable=convertPathData --disable=mergePaths --enable=removeScriptElement --disable=removeXMLProcInst --disable=convertStyleToAttrs --enable=cleanupAttrs --enable=cleanupEnableBackground --disable=cleanupIDs --enable=cleanupNumericValues --enable=convertColors --disable=convertShapeToPath --disable=inlineStyles  --disable=minifyStyles --enable=moveElemsAttrsToGroup --enable=moveGroupAttrsToElems  --enable=removeAttrs --enable=removeComments --enable=removeDesc --enable=removeEditorsNSData --enable=removeEmptyAttrs --enable=removeEmptyContainers --enable=removeEmptyText --enable=removeHiddenElems --enable=removeNonInheritableGroupAttrs --disable=removeRasterImages --disable=removeTitle --enable=removeUnusedNS --enable=removeUselessDefs --enable=removeUselessStrokeAndFill --enable=removeViewBox --enable=sortAttrs --disable=removeDoctype --enable={addAttributesToSVGElement}  --disable=collapseGroups
+svgo -i ${file} -o $i $INDENT -p 3 $META --disable=removeUnknownsAndDefaults --disable=convertTransform --disable=convertPathData --disable=mergePaths --enable=removeScriptElement --disable=removeXMLProcInst --disable=convertStyleToAttrs --enable=cleanupAttrs --enable=cleanupEnableBackground --disable=cleanupIDs --enable=cleanupNumericValues --enable=convertColors --disable=convertShapeToPath --disable=inlineStyles  --disable=minifyStyles --enable=moveElemsAttrsToGroup --enable=moveGroupAttrsToElems  --enable=removeAttrs --disable=removeComments --enable=removeDesc --enable=removeEditorsNSData --enable=removeEmptyAttrs --enable=removeEmptyContainers --enable=removeEmptyText --enable=removeHiddenElems --enable=removeNonInheritableGroupAttrs --disable=removeRasterImages --disable=removeTitle --enable=removeUnusedNS --enable=removeUselessDefs --enable=removeUselessStrokeAndFill --enable=removeViewBox --enable=sortAttrs --disable=removeDoctype --enable={addAttributesToSVGElement}  --disable=collapseGroups
+
+# == min ==
+#  --disable=removeComments #keep Comments
 
 # --disable=mergePaths # https://github.com/svg/svgo/issues/872 # https://github.com/svg/svgo/issues/958 # sometimes Chrome-displaybug
 

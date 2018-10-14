@@ -23,7 +23,9 @@ mv ./"${file}" ./${tmp}1.xml
 echo 
 echo $i start:
 
- sed -ri "s/ transform=\"scale\(.999(8|9)[[:digit:]]*( |,)1.000(1|2)[[:digit:]]*\)\"/ transform=\"scale\(1,1.000\)\"/g" $i
+
+ sed -ri "s/ transform=\"scale\((0|).999(8|9)[[:digit:]]*( |,)1.000(0|1|2)[[:digit:]]*\)\"/ transform=\"scale\(1,1.000\)\"/g" $i
+ sed -ri "s/ transform=\"scale\(1.000(0|1|2)[[:digit:]]*( |,)(0|).999(8|9)[[:digit:]]*\)\"/ transform=\"scale\(1.000,1\)\"/g" $i
 
 echo $i finish
 

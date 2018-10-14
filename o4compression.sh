@@ -52,7 +52,7 @@ svgo -i ${file} -o $i $INDENT -p 3 $META --disable=convertPathData --disable=mer
 
 # do not define: --enable=prefixIds #Extends the filename to the ID
 #--enable=cleanupListOfValues  https://github.com/svg/svgo/issues/923
-#--enable=convertPathData # https://github.com/svg/svgo/issues/880
+#--enable=convertPathData # https://github.com/svg/svgo/issues/880 and https://github.com/svg/svgo/issues/1053
 # --enable=removeElementsByAttr # https://github.com/svg/svgo/issues/945 (option does not make sence)
 # --enable=removeStyleElement # https://github.com/svg/svgo/issues/946
 # --enable=removeDimensions ##Changes size of view

@@ -9,8 +9,7 @@ export i=min.svg # just used for debugging
 
 ./svg2validsvg.sh
 
-./InkscapeBatchConverter.sh
-./Vacuumdefs.sh
+#./Vacuumdefs.sh # this might add ids
 ./minscour4compression.sh
 ./mincleaner4compression.sh #deactivate if CSS
 ./mino4compression.sh

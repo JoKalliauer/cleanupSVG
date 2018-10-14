@@ -77,6 +77,7 @@ Similar scripts<br/>
 
 ## Update
 
+Windows:
 ```cmd
 python -m pip install --upgrade pip
 #pip install --upgrade https://github.com/codedread/scour/archive/master.zip
@@ -84,4 +85,19 @@ pip3 install --upgrade https://github.com/codedread/scour/archive/master.zip
 #cargo install svgcleaner --force
 cargo install svgcleaner --force --git https://github.com/RazrFalcon/svgcleaner
 npm install -g svgo
+```
+
+----
+
+Linux:
+```bash
+#python -m pip install --upgrade pip
+#sudo python3 -m pip install --upgrade pip
+python3 -m pip install --upgrade pip --user
+#pip install --upgrade https://github.com/codedread/scour/archive/master.zip
+#sudo pip3 install --upgrade https://github.com/codedread/scour/archive/master.zip
+pip3 install --upgrade https://github.com/codedread/scour/archive/master.zip --user
+cargo install svgcleaner --force --git https://github.com/RazrFalcon/svgcleaner
+sudo npm i -g npm 
+sudo npm install -g svgo
 ```

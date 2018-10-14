@@ -28,15 +28,16 @@ mv ./"${file}" ./${tmp}1.xml
 
 echo 
 echo $i start:
-
+  
+  #scale everything by a factor 10 up
   sed -ri 's/<svg ([[:alnum:]=\" \.\/:-]+) viewBox="0 0 ([[:digit:]]+).([[:digit:]])([[:digit:]]*) ([[:digit:]]+).([[:digit:]])([[:digit:]]*)"([[:alnum:]=\" \.\/:-]+)>/<svg \1 viewBox="0 0 \2\3.\40 \5\6.\70"\8><g transform="scale(10)">/' $i
-   
-   sed -ri 's/<\/svg>/<\/g><\/svg>/' $i
+  sed -ri 's/<\/svg>/<\/g><\/svg>/' $i
 
+ #add constant font-size
  sed -ri "s/<text([-—[:alnum:]=\.\" \#\(\)\;\:\%\'\/\,\*]*)>/<text font-size=\"1\" \1>/g" $i
  sed -ri "s/<tspan([-[:alnum:]=\.\" \#\(\)\;\:\%\,]*)>/<tspan font-size=\"1\" \1>/g" $i
  
- sed -ri "s/ unicode-bidi=\"embed\"//g" $i
+ #sed -ri "s/ unicode-bidi=\"embed\"//g" $i
 
 echo $i finish
 

@@ -21,6 +21,8 @@
 
 for file in *.svg;do
 
+mv "$file" `echo ${file} | tr ' ' '_'` ;
+
 ## == Remove scecial characters in filename ==
 
 #export i=$file #i will be overritan later, just for debugging
@@ -206,9 +208,9 @@ sed -ri 's/stroke-dasharray=\"([[:digit:]\., ]*)([[:digit:]\.]+) ([[:digit:]\.,]
 sed -ri "s/font-family=\"'([-[:alnum:] ]*)'(|,[-[:lower:]]+)\"/font-family=\'\1\'/g" $i
 
 # multiple x-koordinates https://phabricator.wikimedia.org/T35245
-sed -ri "s/<tspan([-[:alnum:]\.\"\#\ =]*) x=\"([-[:digit:]\.]+)( |,)([-[:digit:]\. ,]+)\"([-[:alnum:]\.\"\#\ =]*)>/<tspan x=\"\2\" \1 \5>/g" $i # remove multipe x-koordinates in tspan (solves librsvg-Bug)
+sed -ri "s/<tspan([-[:alnum:]\.\"\#\ =]*) x=\"([-[:digit:]\.]+)( |,)([-[:digit:]\. ,]+)\"([-[:alnum:]\.\"\#\ =]*)>([[:alnum:]])/<tspan x=\"\2\" \1 \5>\6<\/tspan><tspan x=\"\4\" \1 \5>/g" $i # remove multipe x-koordinates in tspan (solves librsvg-Bug)
 sed -ri "s/<text([-[:alnum:]\.\"\#\ =\(\)]*) x=\"([-[:digit:]\.]+)( |,)([-[:digit:]\. ,]+)\"([-[:alnum:]\.\"\#\ =\,]*)>/<text x=\"\2\"\1\5>/g" $i # remove multipe x-koordinates in text (solves librsvg-Bug)
-sed -ri "s/<text([-[:alnum:]\.\"\#\ =\(\)]*) y=\"([-[:digit:]\.]+)( |,)([-[:digit:]\. ,]+)\"([-[:alnum:]\.\"\#\ =\,]*)>/<text y=\"\2\"\1\5>/g" $i # remove multipe x-koordinates in text (solves librsvg-Bug)
+sed -ri "s/<text([-[:alnum:]\.\"\#\ =\(\)]*) y=\"([-[:digit:]\.]+)( |,)([-[:digit:]\. ,]+)\"([-[:alnum:]\.\"\#\ =\,]*)>/<text y=\"\2\"\1\5>/g" $i # remove multipe y-koordinates in text (solves librsvg-Bug)
 
 #Repair https://phabricator.wikimedia.org/T68672 (solves librsvg-Bug)
 sed -i "s/<style>/<style type=\"text\/css\">/" $i

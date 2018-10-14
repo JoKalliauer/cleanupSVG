@@ -43,7 +43,7 @@ for file in *.svg;do
  
  sed -ri "s/<path ([-[:alnum:]=\.\" \#\(\)\;\:\%\,_]+)\/>//g" $i #delete all Path
  
- sed -ri "s/ <circle [-[:lower:][:digit:]\"\.= #\(\),;:]*\/>//g" $i #delete circels
+ sed -ri "s/ <circle [-[:lower:][:digit:]\"\.= #\(\),;:_]*\/>//g" $i #delete circels
  
  sed -ri "s/ <ellipse [-[:lower:][:digit:]\"\.= #\(\)\,:]*\/>//g" $i #delete ellipses
  
