@@ -146,8 +146,8 @@ sed -ri "s/ xmlns:xlink=\"([amp38;\#\&\])+ns_xlink;\"/ xmlns:xlink=\"http:\/\/ww
 
 sed -i "s/<?xpacket begin='﻿' id='/<?xpacket begin='ZeichenEingefuegtVonKalliauer' id='/g" $i
 
-#CorelDraw-Problem
-sed -i "s/ href=\"#id/ xlink:href=\"#id/g" $i
+#CorelDraw-Problem (not very common)
+#sed -i "s/ href=\"#id/ xlink:href=\"#id/g" $i
 
 
 #Remove CDATA by AdobeIllustrator
