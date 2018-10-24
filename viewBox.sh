@@ -20,53 +20,45 @@ echo #Add a empty line to split the output
 
 
 if [ $minfilesize == 0 ]; then
- export INDENT=" --indent=space --nindent=1"
+ export INDENTs=" --indent=space --nindent=1"
+ export INDENTo="--pretty --indent=1" #"--pretty --indent=1" #deactivated because of https://github.com/svg/svgo/issues/878
 elif [ $minfilesize == 1 ]; then
- export INDENT="--indent=none --no-line-breaks"
+ export INDENTs="--indent=none --no-line-breaks"
+ export INDENTo="--indent=0"
 else
  echo some error minfilesize is $minfilesize
 fi
 
-echo scour ${file} to $i begin, min=${minfilesize}, meta=$meta, META= $META, INDENT=$INDENT
+echo scour ${file} to $i begin, min=${minfilesize}, meta=$meta, META= $META, INDENT=$INDENTs
 
-scour -i ${file} -o $i --keep-unreferenced-defs --enable-comment-stripping --remove-titles --remove-descriptions --strip-xml-space  --set-precision=5 $META $INDENT --renderer-workaround --disable-style-to-xml --create-groups  --set-c-precision=4 --enable-viewboxing #  
+scour -i ${file} -o $i --keep-unreferenced-defs --enable-comment-stripping --remove-titles --remove-descriptions --strip-xml-space  --set-precision=5 $META $INDENTs --renderer-workaround --disable-style-to-xml --create-groups  --set-c-precision=4 --enable-viewboxing #  
 
-#--keep-unreferenced-defs
-## if referenced-defs are deleted: https://github.com/scour-project/scour/issues/155
-
-#--enable-viewboxing
-##Changes size of view
-##can create Hairline-cracks f.e in https://commons.wikimedia.org/wiki/File:Mn_coa_zavkhan_aimag.svg
-
-#--disable-style-to-xml #https://github.com/scour-project/scour/issues/176 #https://github.com/scour-project/scour/issues/174
-
- #--create-groups #https://commons.wikimedia.org/wiki/File:CIA_WorldFactBook-Political_world.svg
-
- #--shorten-ids # https://github.com/scour-project/scour/issues/164
-# --enable-id-stripping #https://github.com/scour-project/scour/issues/164
-
-# --create-groups # https://github.com/scour-project/scour/issues/196 (but it is 
-
-#--set-precision=5 # https://commons.wikimedia.org/wiki/File:Porr_logo.svg
-#--set-c-precision=3 # https://commons.wikimedia.org/wiki/File:LageplanStrasse.svg https://commons.wikimedia.org/wiki/File:Dojikko2.3.svg
-#--set-c-precision=4 # https://commons.wikimedia.org/wiki/File:Flower_soft.svg
-
-#echo mv ./${file} ./${tmp}3.xml
 mv ./${file} ./${tmp}3.xml
 
 echo scour $i finish
 
+# export file=min.svg
+export fileN=$(echo $i | cut -f1 -d" ")
+export tmp=${fileN%.svg}
+export i=${tmp}o.svg
+
+echo #Add a empty line to split the output
+
+if [ $meta == 1 ]; then
+ echo keep metadata
+ export META="--disable=removeMetadata"
+elif [ $meta == 0 ]; then
+ export META="--enable=removeMetadata"
+ echo delete META=$META
+else
+ echo imput not allowed meta is $meta
+fi
+
+svgo -i ${file} -o $i $INDENTo -p 3 $META --disable=convertPathData --disable=mergePaths --enable=removeScriptElement --disable=removeXMLProcInst --enable=cleanupAttrs --enable=cleanupEnableBackground --enable=cleanupIDs --enable=cleanupNumericValues --enable=convertColors --enable=inlineStyles  --enable=minifyStyles --enable=moveElemsAttrsToGroup --enable=moveGroupAttrsToElems  --enable=removeAttrs --enable=removeComments --enable=removeDesc --enable=removeEditorsNSData --enable=removeEmptyAttrs --enable=removeEmptyContainers --enable=removeEmptyText --enable=removeHiddenElems --enable=removeNonInheritableGroupAttrs --disable=removeRasterImages --enable=removeTitle --enable=removeUnusedNS --enable=removeUselessDefs --enable=removeUselessStrokeAndFill --enable=removeViewBox --enable=sortAttrs --disable=removeDoctype --enable={addAttributesToSVGElement}  --disable=removeStyleElement   --enable=removeUnknownsAndDefaults --enable=convertShapeToPath --enable=convertTransform  --enable=convertStyleToAttrs --enable=collapseGroups --enable=removeDimensions
+
+
+mv ./${file} ./${tmp}5.xml
+
+
 done
-
-DeactivateAll=<<END
-
-scour min.svg output.svg --disable-simplify-colors --disable-style-to-xml  --disable-group-collapsing --keep-editor-data --keep-unreferenced-defs --no-renderer-workaround --protect-ids-noninkscape  --disable-embed-rasters
-
-END
-
-ActivateAll=<<END
-
-scour min.svg output.svg --enable-comment-stripping --remove-titles --remove-descriptions --strip-xml-space  --create-groups --remove-metadata --remove-descriptive-elements --renderer-workaround  --enable-viewboxing --enable-id-stripping --shorten-ids 
-
-END
 

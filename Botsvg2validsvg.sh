@@ -66,5 +66,8 @@ sed -ri "s/ xlink:href=\"data:;base64,( |)iVBORw0KGgoAAAANSUhEUgAA/ xlink:href=\
 #solved librsvg-Bug T194192 https://phabricator.wikimedia.org/T194192
 sed -ri "s/<svg([-[:alnum:]=\" ]*) viewBox=\"0,0,([[:digit:]\.]*),([[:digit:]\.]*)\"/<svg\1 viewBox=\"0 0 \2 \3\"/g" $i
 
+#librsvgbug https://phabricator.wikimedia.org/phab:T207506 (<code>font-weight="normal"</code> ignored)
+sed -ri "s/font-weight=\"normal\"/font-weight=\"400\"/g" $i
+
 done
 

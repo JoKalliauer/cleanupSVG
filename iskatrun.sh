@@ -48,7 +48,7 @@ done
 ./CleanerFull.sh #wegen Inkscape-Bug
 
 #./PosibleUngroup.sh
-#./UngroupByInkscape.sh #for removing the groups and increasing font-size
+./UngroupByInkscape.sh #for removing the groups and increasing font-size
 #./einzeilTags.sh
 ./Rounding.sh #for removing rounding errors
 

@@ -8,7 +8,7 @@ export i=${tmp}O.svg
 
 echo optizer ${file} to $i begin
 
-svgo -i ${file} -o $i -p 4 --pretty --indent=1  --enable=convertTransform --enable=convertPathData --enable=mergePaths --enable=cleanupAttrs --enable=cleanupEnableBackground --enable=cleanupIDs --enable=cleanupListOfValues --enable=cleanupNumericValues --enable=collapseGroups --enable=convertColors --enable=convertShapeToPath --enable=convertStyleToAttrs --enable=inlineStyles --enable=minifyStyles --enable=moveElemsAttrsToGroup --enable=moveGroupAttrsToElems  --enable=removeAttrs --enable=removeComments --enable=removeDesc --enable=removeDimensions --enable=removeDoctype --enable=removeEditorsNSData --enable=removeEmptyAttrs --enable=removeEmptyContainers --enable=removeEmptyText --enable=removeHiddenElems --enable=removeMetadata --enable=removeNonInheritableGroupAttrs --enable=removeScriptElement --enable=removeTitle --enable=removeUnknownsAndDefaults --enable=removeUnusedNS --enable=removeUselessDefs --enable=removeUselessStrokeAndFill --enable=removeViewBox --disable=removeXMLProcInst --enable=sortAttrs --disable=removeXMLNS    --enable={addAttributesToSVGElement} --enable=removeRasterImages  --multipass --enable=removeStyleElement ## --enable=removeElementsByAttr
+svgo -i ${file} -o $i -p 4 --pretty --indent=1  --enable=convertTransform --enable=convertPathData --enable=mergePaths --enable=cleanupAttrs --enable=cleanupEnableBackground --enable=cleanupIDs --enable=cleanupListOfValues --enable=cleanupNumericValues --enable=collapseGroups --enable=convertColors --enable=convertShapeToPath --enable=convertStyleToAttrs --enable=inlineStyles --enable=minifyStyles --enable=moveElemsAttrsToGroup --enable=moveGroupAttrsToElems  --enable=removeAttrs --enable=removeComments --enable=removeDesc --enable=removeDoctype --enable=removeEditorsNSData --enable=removeEmptyAttrs --enable=removeEmptyContainers --enable=removeEmptyText --enable=removeHiddenElems --enable=removeMetadata --enable=removeNonInheritableGroupAttrs --enable=removeScriptElement --enable=removeTitle --enable=removeUnknownsAndDefaults --enable=removeUnusedNS --enable=removeUselessDefs --enable=removeUselessStrokeAndFill --enable=removeViewBox --disable=removeXMLProcInst --enable=sortAttrs --disable=removeXMLNS    --enable={addAttributesToSVGElement} --enable=removeRasterImages  --multipass --enable=removeStyleElement ## --enable=removeElementsByAttr
 
 # --enable=removeElementsByAttr  # https://github.com/svg/svgo/issues/945 (option does not make sence)
 
@@ -23,6 +23,16 @@ svgo -i ${file} -o $i -p 4 --pretty --indent=1  --enable=convertTransform --enab
 # --enable=prefixIds leads to mistakes
 
 ## == keep id-names == # --disable=cleanupIDs
+
+# do not define: --enable=prefixIds #Extends the filename to the ID
+#--enable=cleanupListOfValues  https://github.com/svg/svgo/issues/923
+#--enable=convertPathData # https://github.com/svg/svgo/issues/880 and https://github.com/svg/svgo/issues/1053
+# --enable=removeElementsByAttr # https://github.com/svg/svgo/issues/945 (option does not make sence)
+# --enable=removeStyleElement # https://github.com/svg/svgo/issues/946
+# --enable=removeDimensions ##Changes size of view
+# --enable=removeXMLNS ## not valid 
+# --enable=addClassesToSVGElement ## i think i dont need to add any classes
+#--disable=removeUnknownsAndDefaults # removes Flowtext # https://github.com/svg/svgo/issues/959 (closed)
 
 #echo mv ./${file} ./${tmp}5.xml
 mv ./${file} ./${tmp}5.xml
