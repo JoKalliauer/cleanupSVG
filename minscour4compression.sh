@@ -36,27 +36,29 @@ fi
 
 echo scour ${file} to $i begin, min=${minfilesize}, meta=$meta, META= $META, INDENT=$INDENT
 
-scour -i ${file} -o $i --keep-unreferenced-defs --remove-descriptions --strip-xml-space  --set-precision=5 $META $INDENT --renderer-workaround --disable-style-to-xml  --set-c-precision=4 # --enable-comment-stripping --create-groups # --remove-titles #--enable-viewboxing #  
+scour -i ${file} -o $i --keep-unreferenced-defs --remove-descriptions --strip-xml-space  --set-precision=6 $META $INDENT --renderer-workaround --disable-style-to-xml  --set-c-precision=4 --protect-ids-noninkscape  --disable-simplify-colors  --keep-editor-data # --enable-comment-stripping --create-groups # --remove-titles #--enable-viewboxing #  
 
-# == min ==
+# == min == 
 # --enable-comment-stripping # keep comments
 
-#--keep-unreferenced-defs
-## if referenced-defs are deleted: https://github.com/scour-project/scour/issues/155
+### === CSS ===
+# --keep-unreferenced-defs # https://github.com/scour-project/scour/issues/155
+# --disable-style-to-xml # https://github.com/scour-project/scour/issues/176
+# --disable-simplify-colors # https://github.com/scour-project/scour/issues/221
+# not #--enable-id-stripping # https://github.com/scour-project/scour/issues/164
+# not #--shorten-ids # https://github.com/scour-project/scour/issues/164
+
+## == Bug ==
 
 #--enable-viewboxing
 ##Changes size of view
 ##can create Hairline-cracks f.e in https://commons.wikimedia.org/wiki/File:Mn_coa_zavkhan_aimag.svg
 
-#--disable-style-to-xml #https://github.com/scour-project/scour/issues/176 #https://github.com/scour-project/scour/issues/174
-
- #--create-groups #https://commons.wikimedia.org/wiki/File:CIA_WorldFactBook-Political_world.svg
-
- #--shorten-ids # https://github.com/scour-project/scour/issues/164
-# --enable-id-stripping #https://github.com/scour-project/scour/issues/164
+#--create-groups #https://commons.wikimedia.org/wiki/File:CIA_WorldFactBook-Political_world.svg
 
 # --create-groups # https://github.com/scour-project/scour/issues/196 (but it is 
 
+# --set-precision=6 #https://github.com/scour-project/scour/issues/219
 #--set-precision=5 # https://commons.wikimedia.org/wiki/File:Porr_logo.svg
 #--set-c-precision=3 # https://commons.wikimedia.org/wiki/File:LageplanStrasse.svg https://commons.wikimedia.org/wiki/File:Dojikko2.3.svg
 #--set-c-precision=4 # https://commons.wikimedia.org/wiki/File:Flower_soft.svg

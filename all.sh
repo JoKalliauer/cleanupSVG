@@ -10,11 +10,12 @@ export i=min.svg # just used for debugging
 #./einzeilTags.sh
 ./svg2validsvg.sh
 
-#./InkscapeBatchConverter.sh
+./InkscapeBatchConverter.sh
 ./scour4compression.sh
 ./cleaner4compression.sh
-./o4compression.sh
+#./o4compression.sh
+./validByo4compression.sh
 ./validBycleaner.sh
-./scour4compression.sh
+./validByscour.sh
 
 ./svg2validsvg.sh

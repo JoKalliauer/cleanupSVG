@@ -36,7 +36,7 @@ fi
 
 echo scour ${file} to $i begin, min=${minfilesize}, meta=$meta, META= $META, INDENT=$INDENT
 
-scour -i ${file} -o $i --keep-unreferenced-defs --enable-comment-stripping --remove-titles --remove-descriptions --strip-xml-space  --set-precision=5 $META $INDENT --renderer-workaround --disable-style-to-xml --create-groups  --set-c-precision=5 #--enable-viewboxing #  
+scour -i ${file} -o $i --keep-unreferenced-defs --enable-comment-stripping --remove-titles --remove-descriptions --strip-xml-space  --set-precision=5 $META $INDENT --renderer-workaround --disable-style-to-xml  --set-c-precision=5  --disable-simplify-colors #--enable-viewboxing #  
 
 #--keep-unreferenced-defs
 ## if referenced-defs are deleted: https://github.com/scour-project/scour/issues/155 --> https://github.com/scour-project/scour/issues/174
@@ -45,7 +45,10 @@ scour -i ${file} -o $i --keep-unreferenced-defs --enable-comment-stripping --rem
 ##Changes size of view
 ##can create Hairline-cracks f.e in https://commons.wikimedia.org/wiki/File:Mn_coa_zavkhan_aimag.svg
 
+## == Bugs ==
 #--disable-style-to-xml #https://github.com/scour-project/scour/issues/176 #https://github.com/scour-project/scour/issues/174
+#--disable-simplify-colors #https://github.com/scour-project/scour/issues/221
+# --create-groups # Problems related to https://github.com/RazrFalcon/svgcleaner/issues/182 and https://bugs.launchpad.net/inkscape/+bug/1733651
 
 # keep ID-Names: no #--shorten-ids and no # --enable-id-stripping
 #--shorten-ids # https://github.com/scour-project/scour/issues/164

@@ -26,14 +26,14 @@ fi
 
 echo cleaner ${file} to $i begin, min=${minfilesize}, METAdelete=$META, INDENT=$INDENT
 
-svgcleaner $file $i --allow-bigger-file --indent $INDENT --apply-transform-to-gradients no --apply-transform-to-shapes no --convert-shapes no --group-by-style no --join-arcto-flags no --join-style-attributes no --merge-gradients no --regroup-gradient-stops no --remove-comments no --remove-declarations no --remove-default-attributes no --remove-desc no --remove-dupl-cmd-in-paths no --remove-dupl-fegaussianblur no --remove-dupl-lineargradient no --remove-dupl-radialgradient no --remove-gradient-attributes no --remove-invalid-stops no --remove-invisible-elements no --remove-metadata $META --remove-needless-attributes no --remove-nonsvg-attributes no --remove-nonsvg-elements no --remove-text-attributes no --remove-title no --remove-unreferenced-ids no --remove-unresolved-classes no --remove-unused-coordinates no --remove-unused-defs no --remove-version no --remove-xmlns-xlink-attribute no --resolve-use no --simplify-transforms no --trim-colors no --trim-ids no --trim-paths no --ungroup-defs no --ungroup-groups no --use-implicit-cmds no --list-separator comma --paths-to-relative no --remove-unused-segments no --convert-segments no --coordinates-precision 2 --paths-coordinates-precision 4 --properties-precision 2 --transforms-precision 7 --apply-transform-to-paths no # --multipass # --copy-on-error # 
+svgcleaner $file $i --allow-bigger-file --indent 1 --no-defaults --apply-transform-to-gradients no --apply-transform-to-shapes no --convert-shapes no --group-by-style no --join-arcto-flags no --join-style-attributes all --merge-gradients no --regroup-gradient-stops no --remove-comments no --remove-declarations no --remove-default-attributes no --remove-desc no --remove-dupl-cmd-in-paths no --remove-dupl-fegaussianblur no --remove-dupl-lineargradient no --remove-dupl-radialgradient no --remove-gradient-attributes no --remove-invalid-stops no --remove-invisible-elements no --remove-metadata $META --remove-needless-attributes no --remove-nonsvg-attributes no --remove-nonsvg-elements no --remove-text-attributes no --remove-title no --remove-unreferenced-ids no --remove-unresolved-classes no --remove-unused-coordinates no --remove-unused-defs no --remove-version no --remove-xmlns-xlink-attribute no --resolve-use no --simplify-transforms no --trim-colors no --trim-ids no --trim-paths no --ungroup-defs no --ungroup-groups no --use-implicit-cmds no --list-separator comma --paths-to-relative no --remove-unused-segments no --convert-segments no --coordinates-precision 2 --paths-coordinates-precision 4 --properties-precision 2 --transforms-precision 7 --apply-transform-to-paths no # --multipass # --copy-on-error # 
 
 #--properties-precision 2 # https://commons.wikimedia.org/wiki/File:Mn_coa_%C3%B6v%C3%B6rkhangai_aimag.svg
  #--transforms-precision 7 # Philippines_orthographic_projection #--transforms-precision 4 # https://commons.wikimedia.org/wiki/File:Mn_coa_%C3%B6v%C3%B6rkhangai_aimag.svg
 ## outdated # --paths-coordinates-precision 3 # https://commons.wikimedia.org/wiki/File:Flag_of_Budapest_(1873-2011).svg
 # --paths-coordinates-precision 4 https://commons.wikimedia.org/wiki/File:FlagOfYorkshire.svg
 
-#--join-style-attributes no # I prefer font-size="20px" than style="font-size:20px;"
+#--join-style-attributes all # https://github.com/RazrFalcon/svgcleaner/issues/182
 
 #--remove-declarations no #valid-warning
 
@@ -42,7 +42,7 @@ svgcleaner $file $i --allow-bigger-file --indent $INDENT --apply-transform-to-gr
 
 #--remove-text-attributes no #keeps xml:space="preserve" for a workaround for https://github.com/scour-project/scour/issues/160
 
-#--join-arcto-flags no # https://github.com/svg/svgo/issues/949
+#--join-arcto-flags no # librsvgbug ?
 
 #--remove-unused-segments no # https://github.com/RazrFalcon/svgcleaner/issues/146
 

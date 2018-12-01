@@ -44,47 +44,33 @@ echo $i start:
 ## ==Change Fonts to WikiFonts ==
 
 #Change to Wikis Fallbackfont https://commons.wikimedia.org/wiki/Help:SVG#fallback to be compatible with https://meta.wikimedia.org/wiki/SVG_fonts
-sed -ri 's/ font-family=\"(s|S)ans\"/ font-family=\"DejaVu Sans\"/g' $i #as automatic
-sed -ri 's/ font-family=\"(s|S)ans\"/ font-family=\"Liberation Sans\"/g' $i
-sed -ri 's/ font-family=\"(s|S)erif\"/ font-family=\"DejaVu Serif\"/g' $i #as automatic
-sed -ri 's/ font-family=\"(s|S)ans-(s|S)erif\"/ font-family=\"DejaVu Sans\"/g' $i #as automatic
+sed -ri 's/ font-family=\"(s|S)ans\"/ font-family=\"DejaVu Sans,sans-serif,Sans\"/g' $i #as automatic
+sed -ri 's/ font-family=\"(s|S)erif\"/ font-family=\"DejaVu Serif,serif\"/g' $i #as automatic
+sed -ri 's/ font-family=\"(s|S)ans-(s|S)erif\"/ font-family=\"DejaVu Sans,sans-serif\"/g' $i #as automatic
 
 
-#sed -ri 's/ font-family="([[:alnum:] ]*)Oblique"/ font-family="\1" font-style=\"oblique\"/g' $i
 sed -ri 's/ font-family="([-[:alnum:] ]*)Oblique"/ font-family="\1" font-style=\"oblique\"/g' $i
-#sed -ri 's/ font-family="([[:alnum:] ]*)Italic"/ font-family="\1" font-style=\"italic\"/g' $i
 sed -ri 's/ font-family="([-[:alnum:] ]*)Italic"/ font-family="\1" font-style=\"italic\"/g' $i
 sed -ri 's/ font-family="([[:alnum:] ]*)( |-)Bold"/ font-family="\1" font-weight=\"bold\"/g' $i
-
 sed -ri 's/ font-family="([[:alnum:] ]*)( |-)"/ font-family="\1"/g' $i
-
-sed -ri 's/ font-family=\"(Liberation Sans,|)Arial\"/ font-family=\"Liberation Sans\"/g' $i #as automatic
-sed -i 's/ font-family=\"Arial,/ font-family=\"Liberation Sans,/g' $i #as automatic
-sed -i 's/ font-family=\"Bitstream Vera Serif\"/ font-family=\"DejaVu Serif\"/g' $i #as automatic
-sed -ri 's/ font-family=\"DejaVuSans\"/ font-family=\"DejaVu Sans\"/g' $i #as automatic
-sed -i 's/ font-family=\"Bitstream Vera Sans Mono\"/ font-family=\"DejaVu Sans Mono\"/g' $i #as automatic
-sed -ri 's/ font-family=\"(Times New Roman|Times-Roman)\"/ font-family=\"Liberation Serif\"/g' $i #as automatic
-#sed -i 's/ font-family=\"Albany embedded\"/ font-family=\"Loma\"/g' $i #as automatic
-sed -i 's/ font-family=\"Courier New\"/ font-family=\"Liberation Mono\"/g' $i #as automatic
-sed -i 's/ font-family=\"Helvetica\"/ font-family=\"Nimbus Sans L\"/g' $i #looks similar https://commons.wikimedia.org/wiki/File_talk:Meta_SVG_fonts.svg #https://meta.wikimedia.org/wiki/File:SVG_Text_Font_Test.svg
-sed -i 's/ font-family=\"Nimbus Sans L\"/ font-family=\"Liberation Sans\"/g' $i 
-#sed -i 's/ fill=\"#002060\" font-family=\"Swis721 BlkCn BT\" font-size=\"/ fill=\"#002060\" font-family=\"Liberation Sans\" font-weight=\"bold\" font-size=\"/g' $i #looks similar https://www.dafontfree.net/freefonts-swis721-blkcn-bt-f61164.htm
-sed -ri "s/ font-family=\"Blue( |)Highway\"/ font-family=\"Padauk\"/g" $i #looks similar https://www.dafont.com/de/blue-highway.font
-#sed -i "s/ font-family=\"Blue Highway Condensed\"/ font-family=\"Padauk\" font-stretch=\"condensed\"/g" $i
-sed -ri "s/ font-family=\"(Blue Highway D Type|BlueHighwayDType)\"/ font-family=\"Padauk\" text-transform=\"uppercase\"/g" $i
 sed -i "s/ font-family=\"DejaVu Sans Condensed\"/ font-family=\"DejaVu Sans\" font-stretch=\"condensed\"/g" $i
-sed -i "s/ font-family=\"Arial Narrow\"/ font-family=\"Liberation Sans Narrow\"/g" $i
 
-sed -ri 's/ font-family=\"DejaVu Sans Bold\"/ font-family=\"DejaVu Sans\" font-weight=\"bold\"/g' $i
-sed -ri 's/ font-family=\"(Arial|Myriad Pro|ArialNarrow|ArialMT)\"/ font-family=\"Liberation Sans\"/g' $i #all Sans to Liberation
-sed -ri 's/ font-family=\"(Minion Pro|Times|Times New Roman|SVGTimes)\"/ font-family=\"Liberation Serif\"/g' $i #all Serif to Liberation
-sed -ri 's/ font-family=\"(Bitstream Vera Sans|Dialog)\"/ font-family=\"DejaVu Sans\"/g' $i #unknown fonts to DejaVu Sans
+#Sans
+sed -ri 's/ font-family=\"Arial/ font-family=\"Liberation Sans,Arial/g' $i #as automatic
+sed -ri 's/ font-family=\"DejaVuSans\"/ font-family=\"DejaVu Sans\"/g' $i #as automatic
+sed -i 's/ font-family=\"Helvetica\"/ font-family=\"Nimbus Sans L,Liberation Sans,Helvetica\"/g' $i #looks similar https://commons.wikimedia.org/wiki/File_talk:Meta_SVG_fonts.svg #https://meta.wikimedia.org/wiki/File:SVG_Text_Font_Test.svg
+sed -i "s/ font-family=\"Arial Narrow\"/ font-family=\"Liberation Sans Narrow,Arial Narrow\"/g" $i
+sed -ri 's/ font-family=\"(Bitstream Vera Sans|Dialog)\"/ font-family=\"DejaVu Sans,\1\"/g' $i #unknown fonts to DejaVu Sans
 
-sed -ri 's/ font-family=\"(Benguiat|BenguiatStd-Book|Benguiat-Book)\"/ font-family=\"Tibetan Machine Uni,Garuda,Liberation Sans,Liberation Serif\"/g' $i #looks similar # http://www.fontpalace.com/font-details/Benguiat+Bold/
-sed -ri 's/ font-family=\"(Sanvito|Sanvito-Roman|SanvitoPro-Regular)\"/ font-family=\"Purisa,Garuda,Liberation Sans,Liberation Serif\"/g' $i #looks similar # https://www.myfonts.com/fonts/adobe/sanvito/
-sed -ri 's/ font-family=\"(Tiepolo|TiepoloStd-Book|Tiepolo-Black|Tiepolo-Book)\"/ font-family=\"Norasi,Garuda,Liberation Sans,Liberation Serif\"/g' $i #looks similar # https://www.myfonts.com/fonts/itc/tiepolo/
-sed -i "s/ font-family=\"Myriad-Roman\"/ font-family=\"UnBom,Liberation Sans\"/g" $i #looks similar https://de.wikipedia.org/wiki/Myriad_(Schriftart)
+sed -ri "s/ font-family=\"GOST type B\"/ font-family=\"Bandal,GOST type B,DejaVu Sans,Bitstream Vera Sans\"/g" $i
 
+#Serif
+sed -i 's/ font-family=\"Bitstream Vera Serif\"/ font-family=\"DejaVu Serif,Bitstream Vera Serif\"/g' $i #as automatic
+sed -ri 's/ font-family=\"(Times New Roman|Times-Roman)\"/ font-family=\"Liberation Serif,\1\"/g' $i #as automatic
+
+#monospace
+sed -i 's/ font-family=\"Bitstream Vera Sans Mono\"/ font-family=\"DejaVu Sans Mono,Bitstream Vera Sans Mono\"/g' $i #as automatic
+sed -i 's/ font-family=\"Courier New\"/ font-family=\"Liberation Mono,Courier New,Courier,monospace\"/g' $i #as automatic
 
 #simpifying text
 sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<text([[:lower:][:digit:]= #,-\,\"\-\.\(\)]*)>[[:space:]]*<tspan/<text\1><tspan/g" $i #remove spaces and linebreaks between text and tspan
@@ -102,10 +88,6 @@ sed -ri "s/<tspan[-[:lower:][:digit:]= \"\.]+> <\/tspan>([ ]*)//g" $i #remove u
 #Change "'font name'" to 'font name'(solves librsvg-Bug) https://commons.wikimedia.org/wiki/File:T184369.svg
 sed -ri "s/font-family=\"'([-[:alnum:] ]*)'(|,[-[:lower:]]+)\"/font-family=\'\1\'/g" $i
 
-# multiple x-koordinates https://phabricator.wikimedia.org/T35245
-sed -ri "s/<tspan([-[:alnum:]\.\"\#\ =]*) x=\"([-[:digit:]\.]+)( |,)([-[:digit:]\. ,]+)\" y=\"([-[:digit:]\. ]+)\"([-[:alnum:]\.\"\#\ =]*)>/<tspan x=\"\2\" y=\"\5\"\1\6>/g" $i # remove multipe x-koordinates in tspan (solves librsvg-Bug)
-sed -ri "s/<text([-[:alnum:]\.\"\#\ =\(\)]*) x=\"([-[:digit:]\.]+)( |,)([-[:digit:]\. ,]+)\"([-[:alnum:]\.\"\#\ =\,]*)>/<text x=\"\2\"\1\5>/g" $i # remove multipe x-koordinates in text (solves librsvg-Bug)
-sed -ri "s/<text([-[:alnum:]\.\"\#\ =\(\)]*) y=\"([-[:digit:]\.]+)( |,)([-[:digit:]\. ,]+)\"([-[:alnum:]\.\"\#\ =\,]*)>/<text y=\"\2\"\1\5>/g" $i # remove multipe x-koordinates in text (solves librsvg-Bug)
 
 echo $i finish
 
@@ -113,3 +95,23 @@ echo $i finish
 
 done
 
+#Arial           -> Liberation Sans,Arial,Nimbus Sans L,Helvetica,sans-serif
+#Times New Roman -> Liberation Serif,Times New Roman,Times,Times-Roman,serif
+#Helvetica       -> Nimbus Sans L,Liberation Sans,Helvetica,Arial,sans-serif
+#Courier New     -> Liberation Mono,Courier New,Courier,monospace
+
+
+#sed -i 's/ font-family=\"Albany embedded\"/ font-family=\"Loma\"/g' $i #as automatic
+#sed -i 's/ fill=\"#002060\" font-family=\"Swis721 BlkCn BT\" font-size=\"/ fill=\"#002060\" font-family=\"Liberation Sans\" font-weight=\"bold\" font-size=\"/g' $i #looks similar https://www.dafontfree.net/freefonts-swis721-blkcn-bt-f61164.htm
+#sed -i "s/ font-family=\"Blue Highway Condensed\"/ font-family=\"Padauk\" font-stretch=\"condensed\"/g" $i
+#sed -i 's/ font-family=\"Nimbus Sans L\"/ font-family=\"Liberation Sans\"/g' $i 
+#sed -ri 's/ font-family=\"(Arial|Myriad Pro|ArialNarrow|ArialMT)\"/ font-family=\"Liberation Sans\"/g' $i #all Sans to Liberation
+#sed -ri 's/ font-family=\"(Minion Pro|Times|Times New Roman|SVGTimes)\"/ font-family=\"Liberation Serif\"/g' $i #all Serif to Liberation
+#sed -ri 's/ font-family=\"(Benguiat|BenguiatStd-Book|Benguiat-Book)\"/ font-family=\"Tibetan Machine Uni,Garuda,Liberation Sans,Liberation Serif\"/g' $i #looks similar # http://www.fontpalace.com/font-details/Benguiat+Bold/
+#sed -ri 's/ font-family=\"(Sanvito|Sanvito-Roman|SanvitoPro-Regular)\"/ font-family=\"Purisa,Garuda,Liberation Sans,Liberation Serif\"/g' $i #looks similar # https://www.myfonts.com/fonts/adobe/sanvito/
+#sed -ri 's/ font-family=\"(Tiepolo|TiepoloStd-Book|Tiepolo-Black|Tiepolo-Book)\"/ font-family=\"Norasi,Garuda,Liberation Sans,Liberation Serif\"/g' $i #looks similar # https://www.myfonts.com/fonts/itc/tiepolo/
+#sed -i "s/ font-family=\"Myriad-Roman\"/ font-family=\"UnBom,Liberation Sans\"/g" $i #looks similar https://de.wikipedia.org/wiki/Myriad_(Schriftart)
+#sed -ri "s/ font-family=\"Blue( |)Highway\"/ font-family=\"Padauk\"/g" $i #looks similar https://www.dafont.com/de/blue-highway.font
+#sed -ri "s/ font-family=\"(Blue Highway D Type|BlueHighwayDType)\"/ font-family=\"Padauk\" text-transform=\"uppercase\"/g" $i
+#sed -ri 's/ font-family=\"DejaVu Sans Bold\"/ font-family=\"DejaVu Sans\" font-weight=\"bold\"/g' $i
+#sed -ri "s/ font-family=\"GOST type B\"/ font-family=\"Bandal,GOST type B\"/g" $i

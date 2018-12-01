@@ -105,14 +105,11 @@ fi
 ## ==Change Fonts to WikiFonts ==
 
 #Change to Wikis Fallbackfont https://commons.wikimedia.org/wiki/Help:SVG#fallback to be compatible with https://meta.wikimedia.org/wiki/SVG_fonts
-sed -ri 's/ font-family=\"(s|S)ans\"/ font-family=\"DejaVu Sans\"/g' $i #as automatic
-sed -ri 's/ font-family=\"(s|S)ans\"/ font-family=\"Liberation Sans\"/g' $i
-sed -ri 's/ font-family=\"(s|S)erif\"/ font-family=\"DejaVu Serif\"/g' $i #as automatic
-sed -ri 's/ font-family=\"(s|S)ans-(s|S)erif\"/ font-family=\"DejaVu Sans\"/g' $i #as automatic
-sed -i 's/ font-family=\"Arial\"/ font-family=\"Liberation Sans,Arial\"/g' $i #as automatic
-sed -i 's/ font-family=\"Arial,/ font-family=\"Liberation Sans,Arial,/g' $i #as automatic
-sed -ri 's/ font-family=\"DejaVuSans\"/ font-family=\"DejaVu Sans\"/g' $i #as automatic
-sed -i 's/ font-family=\"Times New Roman\"/ font-family=\"Liberation Serif\"/g' $i #as automatic
+sed -ri 's/ font-family=\"(s|S)ans\"/ font-family=\"DejaVu Sans,sans-serif,Sans\"/g' $i #as automatic
+sed -ri 's/ font-family=\"(s|S)erif\"/ font-family=\"DejaVu Serif,serif\"/g' $i #as automatic
+sed -ri 's/ font-family=\"(s|S)ans-(s|S)erif\"/ font-family=\"DejaVu Sans,sans-serif\"/g' $i #as automatic
+sed -i 's/ font-family=\"Arial/ font-family=\"Liberation Sans,Arial/g' $i #as automatic
+sed -i 's/ font-family=\"Times New Roman\"/ font-family=\"Liberation Serif,Times New Roman\"/g' $i #as automatic
 
 
 #simpifying text
@@ -169,10 +166,10 @@ sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<xapGImg:image>([[:alnum:][:space:]\/+])*
 #sed -ri "s/<path d=\"m([[:digit:]hlmvz \.-]+)\" ([[:alnum:]\"= \.\(\)\#-]*)\" cbs=\"[[:digit:]GM]*\" gem=\"[[:alpha:]0 \.\(\)-]*\"\/>/<path d=\"m\1\" \2\"\/>/g" $i
 
 #invalid id-names
-sed -ri "s/ <(g|path) id=\"([-[:alnum:]:_\.]*)( |'|\(|\)|&|#|,|\/)([-[:alnum:] \':_|\(|\)|&.,\/]+)\"/ <\1 id=\"\2_\4\"/" $i #replaces (spaces and commas and /) with underlines
-sed -ri "s/ <(g|path) id=\"([-[:alnum:]:_\.]+)( |'|\(|\)|&|#|,|\/)([-[:alnum:] \':_|\(|\)|&.,|\/]+)\"/ <\1 id=\"\2_\4\"/" $i #replaces spaces with underlines
-sed -ri "s/ <(g|path) id=\"([-[:alnum:]:_\.]+)( |'|\(|\)|&|#|,|\/)([-[:alnum:] \':_|\(|\)|&.,|\/]+)\"/ <\1 id=\"\2_\4\"/" $i #replaces spaces with underlines
-sed -ri "s/ <(g|path) id=\"([-[:alnum:]:_\.]+)( |'|\(|\)|&|#|,|\/)([-[:alnum:] \':_|\(|\)|&.,|\/]+)\"/ <\1 id=\"\2_\4\"/" $i #replaces spaces with underlines
+#sed -ri "s/ <(g|path|text) id=\"([-[:alnum:]:_\.]*)( |'|\(|\)|&|#|,|\/)([-[:alnum:] \':_|\(|\)|&.,\/]+)\"/ <\1 id=\"\2_\4\"/" $i #replaces (spaces and commas and /) with underlines
+#sed -ri "s/ <(g|path|text) id=\"([-[:alnum:]:_\.]+)( |'|\(|\)|&|#|,|\/)([-[:alnum:] \':_|\(|\)|&.,\/]+)\"/ <\1 id=\"\2_\4\"/" $i #replaces spaces with underlines
+#sed -ri "s/ <(g|path|text) id=\"([-[:alnum:]:_\.]+)( |'|\(|\)|&|#|,|\/)([-[:alnum:] \':_|\(|\)|&.,\/]+)\"/ <\1 id=\"\2_\4\"/" $i #replaces spaces with underlines
+#sed -ri "s/ <(g|path|text) id=\"([-[:alnum:]:_\.]+)( |'|\(|\)|&|#|,|\/)([-[:alnum:] \':_|\(|\)|&.,\/]*)\"/ <\1 id=\"\2_\4\"/" $i #replaces spaces with underlines
 # do not use this line # sed -ri "s/ <(g|path) id=\"([[:digit:]]+)\"/ <\1 id=\"FIPS_\2\"/" $i #valid id names must not start with a number
 
 # there is no attribute "data-name" (SVG 2.0)

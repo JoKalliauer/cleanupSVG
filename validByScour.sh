@@ -20,7 +20,7 @@ if [ $meta == 1 ]; then
  echo keep metadata
  export META= 
 elif [ $meta == 0 ]; then
- export META="--remove-metadata --remove-descriptive-elements"
+ export META="--remove-descriptive-elements"
  echo delete META=$META
 else
  echo imput not allowed meta is $meta
@@ -36,10 +36,11 @@ fi
 
 echo scour ${file} to $i begin, min=${minfilesize}, meta=$meta, META= $META, INDENT=$INDENT
 
-scour -i ${file} -o $i --enable-comment-stripping --remove-titles --remove-descriptions --strip-xml-space  --set-precision=5 $META $INDENT --renderer-workaround --disable-style-to-xml --create-groups  --set-c-precision=5  --shorten-ids --enable-id-stripping #--enable-viewboxing #  
+scour -i ${file} -o $i --remove-metadata --shorten-ids --enable-comment-stripping --remove-descriptions --strip-xml-space  --set-precision=5 $META $INDENT --renderer-workaround --disable-style-to-xml  --set-c-precision=5  --enable-id-stripping #--enable-viewboxing #  
 
 #== make file valid:
 #  --shorten-ids
+# --remove-metadata #Warning: #This validator does not validate RDF. RDF subtrees go unchecked.
 
 #--keep-unreferenced-defs
 ## if referenced-defs are deleted: https://github.com/scour-project/scour/issues/155

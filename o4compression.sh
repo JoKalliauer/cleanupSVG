@@ -36,9 +36,10 @@ fi
 
 #echo optizer ${file} to $i begin, min=${minfilesize}, meta=$meta, META= $META, INDENT=$INDENT
 
-svgo -i ${file} -o $i $INDENT -p 3 $META --disable=convertPathData --disable=mergePaths --enable=removeScriptElement --disable=removeXMLProcInst --enable=cleanupAttrs --enable=cleanupEnableBackground --enable=cleanupIDs --enable=cleanupNumericValues --enable=convertColors --enable=inlineStyles  --enable=minifyStyles --enable=moveElemsAttrsToGroup --enable=moveGroupAttrsToElems  --enable=removeAttrs --enable=removeComments --enable=removeDesc --enable=removeEditorsNSData --enable=removeEmptyAttrs --enable=removeEmptyContainers --enable=removeEmptyText --enable=removeHiddenElems --enable=removeNonInheritableGroupAttrs --disable=removeRasterImages --enable=removeTitle --enable=removeUnusedNS --enable=removeUselessDefs --enable=removeUselessStrokeAndFill --enable=removeViewBox --enable=sortAttrs --disable=removeDoctype --enable={addAttributesToSVGElement}  --disable=removeStyleElement   --enable=removeUnknownsAndDefaults --enable=convertShapeToPath --enable=convertTransform  --enable=convertStyleToAttrs --enable=collapseGroups
+svgo -i ${file} -o $i $INDENT -p 3 $META --disable=removeUnknownsAndDefaults --disable=convertPathData --disable=mergePaths --enable=removeScriptElement --disable=removeXMLProcInst --enable=cleanupAttrs --enable=cleanupEnableBackground --enable=cleanupIDs --enable=cleanupNumericValues --enable=convertColors --enable=inlineStyles  --enable=minifyStyles --enable=moveElemsAttrsToGroup --enable=moveGroupAttrsToElems  --enable=removeAttrs --enable=removeComments --enable=removeDesc --enable=removeEditorsNSData --enable=removeEmptyAttrs --enable=removeEmptyContainers --enable=removeEmptyText --enable=removeHiddenElems --enable=removeNonInheritableGroupAttrs --disable=removeRasterImages --enable=removeTitle --enable=removeUnusedNS --enable=removeUselessDefs --enable=removeUselessStrokeAndFill --enable=removeViewBox --enable=sortAttrs --disable=removeDoctype --enable={addAttributesToSVGElement}  --disable=removeStyleElement --enable=convertShapeToPath --enable=convertTransform  --disable=convertStyleToAttrs 
 
-# --disable=mergePaths # https://github.com/svg/svgo/issues/872 # https://github.com/svg/svgo/issues/958 # sometimes Chrome-displaybug
+## == Bugs ==
+# --disable=mergePaths # https://github.com/svg/svgo/issues/872 # https://github.com/svg/svgo/issues/958 # https://github.com/svg/svgo/issues/1048 # sometimes Chrome-displaybug
 
 #--disable=removeXMLProcInst # valid (Warning)
 
@@ -47,6 +48,8 @@ svgo -i ${file} -o $i $INDENT -p 3 $META --disable=convertPathData --disable=mer
 # --disable=convertShapeToPath ##can be problematic for flowtext
 
 #  --disable=convertStyleToAttrs  #https://github.com/svg/svgo/issues/1040 #https://commons.wikimedia.org/wiki/File:2016_Angola_and_DR_Congo_yellow_fever_outbreak.svg
+
+#--disable=removeUnknownsAndDefaults # removes Flowtext # removes meshgradient
 
 ## == keep id-names == # --disable=cleanupIDs
 
@@ -59,7 +62,7 @@ svgo -i ${file} -o $i $INDENT -p 3 $META --disable=convertPathData --disable=mer
 # --enable=removeXMLNS ## not valid 
 # --enable=addClassesToSVGElement ## i think i dont need to add any classes
 # --enable=addClassesToSVGElement #strange warning
-#--disable=removeUnknownsAndDefaults # removes Flowtext # https://github.com/svg/svgo/issues/959 (closed)
+#--disable=collapseGroups (not defined) # child-svgs # https://github.com/svg/svgo/issues/1057
 
 
 #=== closed ====

@@ -8,12 +8,13 @@ export i=min.svg # just used for debugging
 
 #./einzeilTags.sh
 ./svg2validsvg.sh
-./InkscapeBatchConverter.sh
+#./InkscapeBatchConverter.sh
 ./Vacuumdefs.sh
 ./scour4compression.sh
 ./cleaner4compression.sh
 ./o4compression.sh
 
+./Rounding.sh
 #./ResizeByInkscape.sh
 #./einzeilTags.sh
 #./PosibleUngroup.sh
@@ -22,7 +23,9 @@ export i=min.svg # just used for debugging
 ##./FFlow2TextBySed.sh
 ##./Text2Path.sh
 #./SimplifyByInkscape.sh
-#./viewBox.sh
+
+# ./viewBox.sh
+
 
 ./validByScour.sh
 ./ScourFull.sh
@@ -31,9 +34,10 @@ export i=min.svg # just used for debugging
 #./cleaner4compression.sh
 #./o4compression.sh
 ./OptimizerFull.sh
-./o4compression.sh
 
+./validByo4compression.sh
 ./validBycleaner.sh
-./scour4compression.sh
+./validByscour.sh
+./validBySed.sh
 ./fontReplace.sh
 ./svg2validsvg.sh

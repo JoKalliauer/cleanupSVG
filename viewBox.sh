@@ -37,7 +37,7 @@ mv ./${file} ./${tmp}3.xml
 
 echo scour $i finish
 
-# export file=min.svg
+export file=$i
 export fileN=$(echo $i | cut -f1 -d" ")
 export tmp=${fileN%.svg}
 export i=${tmp}o.svg

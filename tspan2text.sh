@@ -34,7 +34,7 @@ fi
 export tmp=$(echo $new | cut -f1 -d".")
 
 #If you want to overwrite the exisiting file, without any backup, delete the following three lines
-export i=${tmp}P.svg
+export i=${tmp}t.svg
 cp ./"${file}" $i
 mv ./"${file}" ./${tmp}1.xml
 
@@ -72,14 +72,14 @@ sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<tspan([-[:alnum:]\,\.\"\=\:\ #]*) x=\"([
 
 #tspan to text
 sed -ri  -e ':a' -e 'N' -e '$!ba' -e "s/<text([-[:alnum:]\,\.\"\=\:\ #\(\)]*)( x=\"[-[:digit:]\.\ ]+\" y=\"[-[:digit:]\.\ ]+\")/<text\2\1/g" $i # that x ist at the beginning (otherwise the next line would not work)
-#sed -ri  -e ':a' -e 'N' -e '$!ba' -e "s/<text( x=\"[-[:digit:]\.\ ]+\" y=\"[-[:digit:]\.\ ]+\"|)([-[:alnum:]\,\.\"\=\:\ \#\(\)\%\']*)>[[:space:]]*<tspan([-[:alnum:]\,\.\"\=\:\ \#\']*) x=\"([-[:digit:]\.\ ]+)\" y=\"([-[:digit:]\.\ ]+)\"([-[:alnum:]\,\.\"\=\:\ #]*)>([-–[:alnum:]\.\ \,\{\(\)\♭\♯\/]*)<\/tspan>/<text x=\"\4\" y=\"\5\"\2\3\6>\7/g" $i #removes the first tspan of a text element
+sed -ri  -e ':a' -e 'N' -e '$!ba' -e "s/<text( x=\"[-[:digit:]\.\ ]+\" y=\"[-[:digit:]\.\ ]+\"|)([-[:alnum:]\,\.\"\=\:\ \#\(\)\%\']*)>[[:space:]]*<tspan([-[:alnum:]\,\.\"\=\:\ \#\']*) x=\"([-[:digit:]\.\ ]+)\" y=\"([-[:digit:]\.\ ]+)\"([-[:alnum:]\,\.\"\=\:\ #]*)>([-–[:alnum:]\.\ \,\{\(\)\'\♭\♯\/%]*)<\/tspan>/<text x=\"\4\" y=\"\5\"\2\3\6>\7/g" $i #removes the first tspan of a text element
 
 
 
 #put every text in its own group
-sed -ri "s/(<g[-[:alnum:]\(\)\. ,;:=\"#]*>)[[:space:]]*((<text[-[:alnum:]= #\,\"\.\(\)\;\'\"\:]*>|<tspan[- [:alnum:]=\.\"]*>|<\/tspan>|[-[:alnum:]\,\.\(\) =%]*)*)<\/text>/\1\2<\/text><\/g>\1/g" $i
-sed -ri "s/(<g[-[:alnum:]\(\)\. ,;:=\"#]*>)[[:space:]]*((<text[-[:alnum:]= #\,\"\.\(\)\;\'\"\:]*>|<tspan[- [:alnum:]=\.\"]*>|<\/tspan>|[-[:alnum:]\,\.\(\) =%]*)*)<\/text>/\1\2<\/text><\/g>\1/g" $i
-sed -ri "s/(<g[-[:alnum:]\(\)\. ,;:=\"#]*>)[[:space:]]*((<text[-[:alnum:]= #\,\"\.\(\)\;\'\"\:]*>|<tspan[- [:alnum:]=\.\"]*>|<\/tspan>|[-[:alnum:]\,\.\(\) =%]*)*)<\/text>/\1\2<\/text><\/g>\1/g" $i
+sed -ri "s/(<g[-[:alnum:]\(\)\. ,;:=\"#]*>)[[:space:]]*((<text[-[:alnum:]= #\,\"\.\(\)\;\'\"\:]*>|<tspan[- [:alnum:]=\.\"]*>|<\/tspan>|[-[:alnum:]\,\.\(\) =]*)*)<\/text>/\1\2<\/text><\/g>\1/g" $i
+sed -ri "s/(<g[-[:alnum:]\(\)\. ,;:=\"#]*>)[[:space:]]*((<text[-[:alnum:]= #\,\"\.\(\)\;\'\"\:]*>|<tspan[- [:alnum:]=\.\"]*>|<\/tspan>|[-[:alnum:]\,\.\(\) =]*)*)<\/text>/\1\2<\/text><\/g>\1/g" $i
+sed -ri "s/(<g[-[:alnum:]\(\)\. ,;:=\"#]*>)[[:space:]]*((<text[-[:alnum:]= #\,\"\.\(\)\;\'\"\:]*>|<tspan[- [:alnum:]=\.\"]*>|<\/tspan>|[-[:alnum:]\,\.\(\) =]*)*)<\/text>/\1\2<\/text><\/g>\1/g" $i
 sed -ri "s/(<g[-[:alnum:]\(\)\. ,;:=\"#]*>)[[:space:]]*<text([-[:alnum:]= #\,\"\.\(\)\;\'\"\:]*)>([-[:alnum:]\,\.\(\) =]*)<\/text>/\1<text\2>\3<\/text><\/g>\1/g" $i
 sed -ri "s/(<g[-[:alnum:]\(\)\. ,;:=\"#]*>)[[:space:]]*<text([-[:alnum:]= #\,\"\.\(\)\;\'\"\:]*)>([-[:alnum:]\,\.\(\) =]*)<\/text>/\1<text\2>\3<\/text><\/g>\1/g" $i
 
