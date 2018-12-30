@@ -47,7 +47,7 @@ echo $i start:
 sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<text([[:lower:][:digit:]= #-\,\"\-\.\(\)]*)>[[:space:]]*<tspan/<text\1><tspan/g" $i #remove spaces and linebreaks between text and tspan
 sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<\/tspan>[[:space:]]*<\/text>/<\/tspan><\/text>/g" $i #remove spaces and linebreaks between text and tspan
 sed -ri "s/<text([-[:lower:][:digit:].,\"= ]+) xml:space=\"preserve\">([-[:alnum:]\\\$\']+)<\/text>/<text\1>\2<\/text>/g" $i #remove xml:space="preserve" in text if unnecesarry
-sed -ri 's/<text [-[:lower:][:digit:] =\"\:\.]+\/>//g' $i #remove empty text
+sed -ri 's/<text [-[:lower:][:digit:] =\"\:\.]+\/>//g' $i #remove selfclosing text
 sed -ri 's/<tspan [-[:lower:][:digit:] =\"\.\:\;\%]+\/>//g' $i #remove selfclosing tspan
 sed -i "s/<tspan x=\"0\" y=\"0\">/<tspan>/g" $i #reduce options in tspan
 sed -ri "s/<tspan>([]\[[:alnum:]\$\^\\\_\{\}= #\,\"\.\(\)\’\&\;\/Επιβάτες¸\°\'\"\@\:−-]*)<\/tspan>([ ]*)/\1/g" $i #remove unnecesarry <tspan>...</tspan> without attributes
@@ -77,7 +77,7 @@ sed -ri  -e ':a' -e 'N' -e '$!ba' -e "s/<text([-[:alnum:]\,\.\"\=\:\ #\(\)]*)( x
 
 
 #put every text in its own group
-sed -ri "s/(<g[-[:alnum:]\(\)\. ,;:=\"#]*>)[[:space:]]*((<text[-[:alnum:]= #\,\"\.\(\)\;\'\"\:]*>|<tspan[- [:alnum:]=\.\"]*>|<\/tspan>|[-[:alnum:]\,\.\(\) =%]*)*)<\/text>/\1\2<\/text><\/g>\1/g" $i
+sed -ri "s/(<g[-[:alnum:]\(\)\. ,;:=\"#]*>)[[:space:]]*((<text[-[:alnum:]= #\,\"\.\(\)\;\'\"\:]*>|<tspan[- [:alnum:]=\.\"]*>|<\/tspan>|[-[:alnum:]\,\.\(\) =%\']*)*)<\/text>/\1\2<\/text><\/g>\1/g" $i
 sed -ri "s/(<g[-[:alnum:]\(\)\. ,;:=\"#]*>)[[:space:]]*((<text[-[:alnum:]= #\,\"\.\(\)\;\'\"\:]*>|<tspan[- [:alnum:]=\.\"]*>|<\/tspan>|[-[:alnum:]\,\.\(\) =%]*)*)<\/text>/\1\2<\/text><\/g>\1/g" $i
 sed -ri "s/(<g[-[:alnum:]\(\)\. ,;:=\"#]*>)[[:space:]]*((<text[-[:alnum:]= #\,\"\.\(\)\;\'\"\:]*>|<tspan[- [:alnum:]=\.\"]*>|<\/tspan>|[-[:alnum:]\,\.\(\) =%]*)*)<\/text>/\1\2<\/text><\/g>\1/g" $i
 sed -ri "s/(<g[-[:alnum:]\(\)\. ,;:=\"#]*>)[[:space:]]*<text([-[:alnum:]= #\,\"\.\(\)\;\'\"\:]*)>([-[:alnum:]\,\.\(\) =]*)<\/text>/\1<text\2>\3<\/text><\/g>\1/g" $i
@@ -89,6 +89,12 @@ sed -ri "s/(<g[-[:alnum:]\(\)\. ,;:=\"#]*>)[[:space:]]*<text([-[:alnum:]= #\,\"\
 #remove two font-size
 sed -ri "s/<text([-[:alnum:]\,\.\"\=\:\ #\(\)\']*)( font-size=\"[-[:digit:]\.\ ]+\")([-[:alnum:]\,\.\"\=\:\ #\(\)\']*) font-size=\"([-[:digit:]\.\ ]+)\"/<text\1\3 font-size=\"\4\"/g" $i
 sed -ri "s/<text([-[:alnum:]\,\.\"\=\:\ #\(\)\']*)( font-size=\"[-[:digit:]\.\ ]+\")([-[:alnum:]\,\.\"\=\:\ #\(\)\']*) font-size=\"([-[:digit:]\.\ ]+)\"/<text\1\3 font-size=\"\4\"/g" $i
+
+#remove empty group
+sed -ri "s/<g[-[:alnum:] =\"\.\(\),#]+>[ ]*<\/g>([ ]*)//g" $i
+
+#remove two linebreaks
+sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/\n[[:space:]]+/\n/g" $i #reduce to one space
 
 echo $i finish
 

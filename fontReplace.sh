@@ -69,7 +69,7 @@ sed -i 's/ font-family=\"Bitstream Vera Serif\"/ font-family=\"DejaVu Serif,Bits
 sed -ri 's/ font-family=\"(Times New Roman|Times-Roman)\"/ font-family=\"Liberation Serif,\1\"/g' $i #as automatic
 
 #monospace
-sed -i 's/ font-family=\"Bitstream Vera Sans Mono\"/ font-family=\"DejaVu Sans Mono,Bitstream Vera Sans Mono\"/g' $i #as automatic
+sed -ri 's/ font-family=\"(monospace|Bitstream Vera Sans Mono)\"/ font-family=\"DejaVu Sans Mono,Bitstream Vera Sans Mono,monospace\"/g' $i #as automatic
 sed -i 's/ font-family=\"Courier New\"/ font-family=\"Liberation Mono,Courier New,Courier,monospace\"/g' $i #as automatic
 
 #simpifying text
@@ -82,11 +82,14 @@ sed -i "s/<tspan x=\"0\" y=\"0\">/<tspan>/g" $i #reduce options in tspan
 sed -ri "s/<tspan>([]\[[:alnum:]\$\^\\\_\{\}= #\,\"\.\(\)\’\&\;\/Επιβάτες¸−-]*)<\/tspan>([ ]*)/\1/g" $i #remove unnecesarry <tspan>...</tspan> without attributes
 sed -ri "s/<tspan[-[:lower:][:digit:]= \"\.]+> <\/tspan>([ ]*)//g" $i #remove useless <tspan (...)> </tspan> without text
 
+sed -i "s/font-family=\"'Liberation Sans'/font-family=\"Liberation Sans/g" $i
+
 
 ## == Workarounds for Librsvg ==
 
 #Change "'font name'" to 'font name'(solves librsvg-Bug) https://commons.wikimedia.org/wiki/File:T184369.svg
-sed -ri "s/font-family=\"'([-[:alnum:] ]*)'(|,[-[:lower:]]+)\"/font-family=\'\1\'/g" $i
+# font-family="Liberation Serif,'Times New Roman'"
+sed -ri "s/font-family=\"([-[:alnum:] ,']*)'([-[:alnum:] ]*)'([-[:lower:][:upper:], ']*)\"/font-family=\"\1\2\3\"/g" $i
 
 
 echo $i finish
@@ -95,10 +98,17 @@ echo $i finish
 
 done
 
+##as automatic
+
 #Arial           -> Liberation Sans,Arial,Nimbus Sans L,Helvetica,sans-serif
 #Times New Roman -> Liberation Serif,Times New Roman,Times,Times-Roman,serif
-#Helvetica       -> Nimbus Sans L,Liberation Sans,Helvetica,Arial,sans-serif
+#Helvetica       -> Nimbus Sans L,Ubuntu,Liberation Sans,Helvetica,Arial,sans-serif
 #Courier New     -> Liberation Mono,Courier New,Courier,monospace
+#Calibri         -> Liberation Sans,Carlito,Calibri,Segoe UI,Myriad,UnDotum,Optima,Tahoma,Arial,sans-serif
+#Verdana         -> Liberation Sans,Verdana,Geneva,Montserrat,quatro-1,quatro-2,Arial Black,Droid Sans,sans-serif
+
+#'Segoe UI', Myriad, Calibri, UnDotum, Optima, Tahoma, sans-serif #https://github.com/ether/etherpad-lite/issues/2713
+
 
 
 #sed -i 's/ font-family=\"Albany embedded\"/ font-family=\"Loma\"/g' $i #as automatic

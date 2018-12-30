@@ -28,12 +28,15 @@ export i=min.svg # just used for debugging
 
 
 ./validByScour.sh
-./ScourFull.sh
+./NoScourFull.sh
+#./ScourFull.sh
 #./scour4compression.sh
-./CleanerFull.sh
+./NoCleanerFull.sh
+#./CleanerFull.sh
 #./cleaner4compression.sh
 #./o4compression.sh
-./OptimizerFull.sh
+./RasterOptimizer.sh
+#./OptimizerFull.sh
 
 ./validByo4compression.sh
 ./validBycleaner.sh

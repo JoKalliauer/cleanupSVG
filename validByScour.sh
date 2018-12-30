@@ -36,11 +36,12 @@ fi
 
 echo scour ${file} to $i begin, min=${minfilesize}, meta=$meta, META= $META, INDENT=$INDENT
 
-scour -i ${file} -o $i --remove-metadata --shorten-ids --enable-comment-stripping --remove-descriptions --strip-xml-space  --set-precision=5 $META $INDENT --renderer-workaround --disable-style-to-xml  --set-c-precision=5  --enable-id-stripping #--enable-viewboxing #  
+scour -i ${file} -o $i --remove-metadata --shorten-ids --enable-comment-stripping --remove-descriptions --strip-xml-space  --set-precision=5 $META $INDENT --renderer-workaround --disable-style-to-xml  --set-c-precision=5  --enable-id-stripping --error-on-flowtext #--enable-viewboxing #  
 
 #== make file valid:
 #  --shorten-ids
 # --remove-metadata #Warning: #This validator does not validate RDF. RDF subtrees go unchecked.
+# not --protect-ids-noninkscape #Error  there is no attribute "href"
 
 #--keep-unreferenced-defs
 ## if referenced-defs are deleted: https://github.com/scour-project/scour/issues/155

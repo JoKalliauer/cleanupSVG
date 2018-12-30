@@ -59,7 +59,8 @@ scour -i ${file} -o $i --keep-unreferenced-defs --enable-comment-stripping --rem
 #--set-precision=5 # https://commons.wikimedia.org/wiki/File:Porr_logo.svg
 #--set-c-precision=3 # https://commons.wikimedia.org/wiki/File:LageplanStrasse.svg https://commons.wikimedia.org/wiki/File:Dojikko2.3.svg
 #--set-c-precision=4 # https://commons.wikimedia.org/wiki/File:Flower_soft.svg
-#--set-c-precision=5 #https://commons.wikimedia.org/wiki/File:Anatomy_of_Human_Ear_with_Cochlear_Frequency_Mapping.svg
+#--set-c-precision=5 #https://commons.wikimedia.org/wiki/File:Anatomy_of_Human_Ear_with_Cochlear_Frequency_Mapping.svg https://commons.wikimedia.org/wiki/File:MichelinStar.svg
+#--set-c-precision=6 same precision as --set-precision=6 #https://commons.wikimedia.org/wiki/File:MichelinStar.svg 
 
 #echo mv ./${file} ./${tmp}3.xml
 mv ./${file} ./${tmp}3.xml

@@ -26,42 +26,23 @@ export i=${tmp}_.svg
 cp ./"${file}" $i
 mv ./"${file}" ./${tmp}1.xml
 echo ${tmp}
-echo $file
-
-sleep 1
 
 echo 
 echo $i start:
- 
- #----
-    #!/bin/bash
-    
-    #defining file
-    #export i=test.svg
-    
-    #Define file as a variable
-    export h=$(sed -r 's/<svg ([-[:alnum:]=\" \.\/:\,]+) viewBox="([-[:digit:]]+) ([-[:digit:]]+) ([[:digit:]]+)\.([[:digit:]])([[:digit:]]*) ([[:digit:]]+)\.([[:digit:]])([[:digit:]]*)"([-[:alnum:]=\" \.\/:\,]+)>/<svg \1 viewBox="0 0 \2\3.\40 \5\6.\70"\8><g transform="scale(10)">/' $i)
-    
-    #Reading out the relevant line
-    export j=$(ls -l|grep -E "viewBox=\"[-[:digit:].]{1,5} [-[:digit:].]{1,5} [[:digit:].]{3,7} [[:digit:].]{3,7}" $i)
-    
-    #Insert a special character to define the point of splitting
-    export l=$(echo $j | sed -e "s/viewBox=\"/>/g" )
-    
-    #split at this special character and take the part afterwards
-    export m=$(echo $l | cut -f2 -d">")
-    
-    #Multiply the four numbers by a factor of 10
-    export n=$(echo $m | awk  '{printf "%f %f %f %f\n",$1*10,$2*10,$3*10,$4*10}')
-    
-    #Replace the old four numbers with the new four numbers
-    sed -ri "s/<svg([-[:alnum:]=\" \.\/:;\,#]*) viewBox=\"[-[:digit:]\.]+ [-[:digit:]\.]+ [[:digit:]\.]+ [[:digit:]\.]+\"([-[:alnum:]=\" \.\/:\,#]+)>/<svg \1 viewBox=\"$n\"\2><g transform=\"scale(10)\">/" $i
-	#<svg id="svg562" version="1.1" viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xlink="http://www.w3.org/1999/xlink">
- #----
-
+  
+  #scale everything by a factor 10 up
+ # sed -ri 's/<svg ([-[:alnum:]=\" \.\/:\,]+) viewBox="0 0 ([[:digit:]]+)\.([[:digit:]])([[:digit:]]*) ([[:digit:]]+)\.([[:digit:]])([[:digit:]]*)"([-[:alnum:]=\" \.\/:\,]+)>/<svg \1 viewBox="0 0 \2\3.\40 \5\6.\70"\8><g transform="scale(10)">/' $i
+  sed -ri 's/<svg ([-[:alnum:]=\" \.\/:\,]+) viewBox="([-[:digit:]]+) ([-[:digit:]]+) ([[:digit:]]+)\.([[:digit:]])([[:digit:]]*) ([[:digit:]]+)\.([[:digit:]])([[:digit:]]*)"([-[:alnum:]=\" \.\/:\,]+)>/<svg \1 viewBox="0 0 \2\3.\40 \5\6.\70"\8><g transform="scale(10)">/' $i
+  awk -F. '/viewBox=\"/ {printf ("viewBox=\"%d\n",$NF*10)}' $i
+  
   sed -ri 's/<\/svg>/<\/g><\/svg>/' $i
 
+ #add constant font-size
+ #sed -ri "s/<text([-—[:alnum:]=\.\" \#\(\)\;\:\%\'\/\,\*]*)>/<text font-size=\"1\" \1>/g" $i
+ #sed -ri "s/<tspan([-[:alnum:]=\.\" \#\(\)\;\:\%\,]*)>/<tspan font-size=\"1\" \1>/g" $i
  
+ #sed -ri "s/ unicode-bidi=\"embed\"//g" $i
+
 echo $i finish
 
 

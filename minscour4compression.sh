@@ -36,10 +36,10 @@ fi
 
 echo scour ${file} to $i begin, min=${minfilesize}, meta=$meta, META= $META, INDENT=$INDENT
 
-scour -i ${file} -o $i --keep-unreferenced-defs --remove-descriptions --strip-xml-space  --set-precision=6 $META $INDENT --renderer-workaround --disable-style-to-xml  --set-c-precision=4 --protect-ids-noninkscape  --disable-simplify-colors  --keep-editor-data # --enable-comment-stripping --create-groups # --remove-titles #--enable-viewboxing #  
+scour -i ${file} -o $i --keep-unreferenced-defs --remove-descriptions --strip-xml-space  --set-precision=6 $META $INDENT --renderer-workaround --disable-style-to-xml  --set-c-precision=6 --protect-ids-noninkscape  --disable-simplify-colors  --keep-editor-data # --enable-comment-stripping --create-groups # --remove-titles #--enable-viewboxing #  
 
 # == min == 
-# --enable-comment-stripping # keep comments
+# not --enable-comment-stripping # keep comments
 
 ### === CSS ===
 # --keep-unreferenced-defs # https://github.com/scour-project/scour/issues/155
@@ -60,8 +60,9 @@ scour -i ${file} -o $i --keep-unreferenced-defs --remove-descriptions --strip-xm
 
 # --set-precision=6 #https://github.com/scour-project/scour/issues/219
 #--set-precision=5 # https://commons.wikimedia.org/wiki/File:Porr_logo.svg
-#--set-c-precision=3 # https://commons.wikimedia.org/wiki/File:LageplanStrasse.svg https://commons.wikimedia.org/wiki/File:Dojikko2.3.svg
 #--set-c-precision=4 # https://commons.wikimedia.org/wiki/File:Flower_soft.svg
+#--set-c-precision=5 #https://commons.wikimedia.org/wiki/File:Anatomy_of_Human_Ear_with_Cochlear_Frequency_Mapping.svg https://commons.wikimedia.org/wiki/File:MichelinStar.svg
+#--set-c-precision=6 same precision as --set-precision=6 # https://commons.wikimedia.org/wiki/File:MichelinStar.svg
 
 #echo mv ./${file} ./${tmp}3.xml
 mv ./${file} ./${tmp}3.xml

@@ -43,16 +43,15 @@ echo $i start:
 
 
 ##Remove W3C-invalid elements
-#sed -ri "s/ text-align=\"(end|center)\"//g"  ${i}
-#sed -i "s/ aria-label=\"[[:digit:]]\"//g;s/ stroke-linejoin=\"null\"//g;s/ stroke-linecap=\"null\"//g;s/ stroke-width=\"null\"//g" $i
+##sed -i "s/ aria-label=\"[[:digit:]]\"//g;s/ stroke-linejoin=\"null\"//g;s/ stroke-linecap=\"null\"//g;s/ stroke-width=\"null\"//g" $i
 #sed -i "s/ solid-color=\"#000000\"//g" $i #QGIS-Files (made file valid)
 #
-## <flowPara font-family="Liberation Sans" font-size="55.071px" style="line-height:125%"/>
+##example <flowPara font-family="Liberation Sans" font-size="55.071px"/>
 #
 ## <flowPara id="flowPara10507" style="fill:url(#linearGradient11781)"/>
 #
 ##remove empty flow Text in svg (everything else will be done by https://github.com/JoKalliauer/cleanupSVG/blob/master/Flow2TextByInkscape.sh )
-##    <flowRoot id="flowRoot3750" style="fill:black;font-family:Linux Libertine;font-size:64;line-height:100%;text-align:center;text-anchor:middle;writing-mode:lr" xml:space="preserve"/>
+## example   <flowRoot id="flowRoot3750" style="fill:black;font-family:Linux Libertine;font-size:64;text-align:center;text-anchor:middle;writing-mode:lr" xml:space="preserve"/>
 #sed -ri 's/<flowPara([-[:alnum:]\" \.\:\%\=\;#\(\)]*)\/>//g;s/<flowRoot([-[:alnum:]" \.:%=;]*)\/>//g' $i
 #sed -i 's/<flowSpan[-[:alnum:]=\":;\. ]*>[[:space:]]*<\/flowSpan>//g' $i
 #sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<flowRoot([-[:alnum:]\.=\" \:\(\)\%\#\,\';]*)>[[:space:]]*<flowRegion(\/|[[:alnum:]\"= ]*>[[:space:]]*<(path|rect) [-[:alnum:]\. \"\=:]*\/>[[:space:]]*<\/flowRegion)>[[:space:]]*(<flowDiv\/>|)[[:space:]]*<\/flowRoot>//g" $i #delete empty flowRoot
@@ -169,7 +168,8 @@ echo $i start:
 # W3C: there is no attribute "line-height"
 # Nu:   Attribute text-align not allowed on SVG element text at this point.
 ## example     <text id="text8220" x="126.62" y="85.62" font-size="16.25" style="font-family:'Liberation Sans';font-size:16.25px;letter-spacing:0;line-height:125%;text-align:center;text-anchor:middle;word-spacing:0" line-height="125%" sodipodi:linespacing="125%"><tspan id="tspan8222" x="126.62" y="85.62">1</tspan></text>
-sed -ri "s/<text([-[:alnum:]=\.\" \(\)\':;%]*) line-height=\"125%\"/<text\1/g" $i
+## example:   <text id="text2998" fill="#f0ff8f" fill-opacity=".941" font-size="1.32" line-height="125%" stroke-width=".165" x="-91.4" xml:space="preserve" y="-40.85">    <tspan id="tspan2996" fill="#f0ff8f" fill-opacity=".941" stroke-width=".165" x="-91.4" y="-40.85">2.19</tspan></text>
+sed -ri "s/<(text|tspan)([-[:alnum:]=\.\" \(\)\':;%#]*) line-height=\"[0123569.%]+\"/<\1\2/g" $i
 
 #W3C: Warning:  DOCTYPE Override in effect!
 # Nu: Warning: Unsupported SVG version specified. This validator only supports SVG 1.1. The recommended way to suppress this warning is to remove the version attribute altogether.
@@ -181,7 +181,14 @@ sed -ri "s/<text([-[:alnum:]=\.\" \(\)\':;%]*) line-height=\"125%\"/<text\1/g" $
    sed -ri 's/<svg ([[:lower:][:digit:]=\"\. -]*)version=\"1\"/<svg \1version=\"1.0\"/' $i 
    sed -i -e ':a' -e 'N' -e '$!ba' -e 's/\?>[[:space:]]*<svg/\?>\n<\!DOCTYPE svg PUBLIC \"-\/\/W3C\/\/DTD SVG 1.0\/\/EN\" \"http:\/\/www.w3.org\/TR\/2001\/REC-SVG-20010904\/DTD\/svg10.dtd\">\n<svg /' $i
   fi
-  
+ 
+#W3C: there is no attribute "text-align"
+#Nu: Attribute text-align not allowed on SVG element text at this point.
+##example: <text id="text308" font-size="1" stroke-width=".165" text-anchor="end" x="21.91" xml:space="preserve" y="16.21" text-align="end">   <tspan id="tspan304" stroke-width=".165" text-anchor="end" x="21.91" y="16.21" text-align="end">+1</tspan><tspan id="tspan306" stroke-width=".165" text-anchor="end" x="21.91" y="17.46" text-align="end">−1</tspan></text>
+## example:  <text id="text42" font-size="3.963" font-weight="bold" stroke-width=".165" text-anchor="middle" x="16.08" xml:space="preserve" y="22.33" text-align="center"/>
+sed -ri "s/ text-align=\"(end|center)\"//g"  ${i}
+
+ 
 #W3C: element "rdf:RDF" undefined
 #Nu: Warning: This validator does not validate RDF. RDF subtrees go unchecked.
 # use scour/svgcleaner/svgo or https://de.wikipedia.org/wiki/Benutzer:Marsupilami/Inkscape-FAQ#Wie_erstelle_ich_eine_Datei_die_dem_Standard_SVG_1.1_entspricht?
@@ -200,6 +207,30 @@ sed -ri "s/<text([-[:alnum:]=\.\" \(\)\':;%]*) line-height=\"125%\"/<text\1/g" $
 #Nu: Error: Attribute enable-background not allowed on SVG element path at this point.
 #use svgcleaner --remove-needless-attributes yes
 
+#W3C: there is no attribute "data-shade"
+#nu: Attribute data-shade not allowed on SVG element use at this point.
+## example: #   <use id="use37" x="146" y="16" data-shade="-2" href="#shadeArea" xlink:href="#shadeArea"/>
+# use svgcleaner
+sed -ri 's/ <use([[:lower:][:digit:]=\" .]+) data-shade="-[12]"/ <use\1/g' $i
+
+#W3C:  there is no attribute "data-name"
+#nu: Attribute data-name not allowed on SVG element path at this point.
+#example   <path class="cls-21" d="M456.28 3500.6h-4.34l-11.83 5.9v-5.9h-1.3l-1.94 8.4 19.41-.6v-1.3h-8.6l8.6-4.3z" data-name="upper left white-2"/>
+sed -ri "s/ data-name=\"([-[:lower:][:digit:] ]*)\"/ id=\"\1\"/g" $i
+
+
+#W3C: value of attribute "id" must be a single token
+#nu:  Bad value  for attribute id on SVG element path: Not a valid XML 1.0 name.
+## example:   <text id="lens _text-9" x="247.78" y="111.492" style="display:inline;fill:#000000;font-family:Arial;font-size:16px;line-height:100%;stroke-width:1px;text-align:center;text-anchor:middle" sodipodi:linespacing="100%" xml:space="preserve">
+sed -ri "s/ <(g|path|text) id=\"([-[:alnum:]:_\.]*)( |'|\(|\)|&|#|,|\/)([-[:alnum:] \':_|\(|\)|&.,\/]+)\"/ <\1 id=\"\2_\4\"/g" $i #replaces (spaces and commas and /) with underlines
+# do not use this line # sed -ri "s/ <(g|path) id=\"([[:digit:]]+)\"/ <\1 id=\"FIPS_\2\"/" $i #valid id names must not start with a number
+
+#W3C (SVG1.1)  element "flowRoot" undefined
+# Nu: SVG element flowRoot not allowed as child of SVG element g in this context. (Suppressing further errors from this subtree.)
+## example: # <flowRoot id="flowRoot4648" transform="matrix(.755786 0 0 .755786 -20.0015 627.017)" style="fill:#000000;font-family:sans-serif;font-size:180px;letter-spacing:0px;line-height:125%;stroke-width:1px;word-spacing:0px" xml:space="preserve"><flowRegion id="flowRegion4650"><rect id="rect4652" x="280.822" y=".656929" width="291.934" height="239.406"/></flowRegion><flowPara id="flowPara4654"/></flowRoot>
+sed -ri 's/<flowPara([-[:alnum:]\" \.\:\%\=\;#\(\)]*)\/>//g;s/<flowRoot([-[:alnum:]" \.:%=;]*)\/>//g' $i
+sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<flowRoot([-[:alnum:]\.=\" \:\(\)\%\#\,\';%]*)>[[:space:]]*<flowRegion([-[:alnum:]=:\" ]*)>[[:space:]]*(<path[-[:alnum:]\.=\"\ \#]*\/>|<rect( id=\"[-[:alnum:]]*\"|) x=\"([-[:digit:]\. ]+)\" y=\"([-[:digit:]\. ]+)\"([[:lower:][:digit:]=\.\" \#:]+)\/>)[[:space:]]*<\/flowRegion>[[:space:]]*(|<flowPara([-[:alnum:]\.=\" \:\#;% ]*)>([[:space:] ]*)<\/flowPara>)[[:space:]]*<\/flowRoot>//g" $i ##delete flowRoot only containing spaces
+
 
 
 ## == https://validator.w3.org/check ==
@@ -212,18 +243,18 @@ sed -ri "s/<ellipse([-[:lower:][:digit:]\"\.= \(\)]*) font-size=\"8\"/<ellipse\1
 ## example #     <path transform="translate(-40.678 -59.61)" d="m273.1 413.76c-3.125-6.026 7.458-8.264 7.8282-17.23" color-rendering="auto" image-rendering="auto" shape-rendering="auto" solid-color="#000000" stroke-width=".945" style="isolation:auto;mix-blend-mode:normal"/>
 sed -ri "s/<path([-[:lower:][:digit:]\"\.= \(\)]*) solid-color=\"#000000\"/<path\1/g" $i
 
+#W3C (SVG1.1):  required attribute "type" not specified
+#Repair https://phabricator.wikimedia.org/T68672 (solves librsvg-Bug)
+sed -i "s/<style>/<style type=\"text\/css\">/" $i
+
+
 
 
 ## == https://validator.nu/ ==
 
-# Nu:  Bad value  for attribute id on SVG element text: Not a valid XML 1.0 name.
-## example:   <text id="lens _text-9" x="247.78" y="111.492" style="display:inline;fill:#000000;font-family:Arial;font-size:16px;line-height:100%;stroke-width:1px;text-align:center;text-anchor:middle" sodipodi:linespacing="100%" xml:space="preserve">
-sed -ri "s/ <(g|path|text) id=\"([-[:alnum:]:_\.]*)( |'|\(|\)|&|#|,|\/)([-[:alnum:] \':_|\(|\)|&.,\/]+)\"/ <\1 id=\"\2_\4\"/g" $i #replaces (spaces and commas and /) with underlines
-
-# Nu: SVG element flowRoot not allowed as child of SVG element g in this context. (Suppressing further errors from this subtree.)
-## example: # <flowRoot xml:space="preserve" id="flowRoot6632" style="font-style:normal;font-weight:normal;line-height:0.01%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" transform="translate(-124.262,-11.219988)"><flowRegion id="flowRegion6634"><rect id="rect6636" width="13.498034" height="74.239189" x="-868.93591" y="1216.3513" /></flowRegion><flowPara id="flowPara6638" style="font-size:40px;line-height:1.25"> </flowPara></flowRoot>
-sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<flowRoot([-[:alnum:]\.=\" \:\(\)\%\#\,\';]*)>[[:space:]]*<flowRegion([-[:alnum:]=:\" ]*)>[[:space:]]*(<path[-[:alnum:]\.=\"\ \#]*\/>|<rect( id=\"[-[:alnum:]]*\"|) x=\"([-[:digit:]\. ]+)\" y=\"([-[:digit:]\. ]+)\"([[:lower:][:digit:]=\.\" \#:]+)\/>)[[:space:]]*<\/flowRegion>[[:space:]]*(|<flowPara([-[:alnum:]\.=\" \:\#;% ]*)>([[:space:] ]*)<\/flowPara>)[[:space:]]*<\/flowRoot>//g" $i ##delete flowRoot only containing spaces
-
+#nu Error: Attribute fill not allowed on SVG element image at this point.
+# example https://commons.wikimedia.org/wiki/File:Epizentroa,_Hipozentroa_eta_failaren_diagrama.svg
+sed -ri "s/<image([[:lower:][:digit:]\" =]*) fill=\"none\"([[:alnum:]\" =:;,+\/]*)>/<image\1\2>/g" $i
 
 
 echo $i finish
