@@ -7,7 +7,7 @@ export file=min.svg # just used for debugging
 export i=min.svg # just used for debugging
 
 #./einzeilTags.sh
-./svg2validsvg.sh
+./pre.sh
 #./InkscapeBatchConverter.sh
 ./Vacuumdefs.sh
 ./scour4compression.sh
@@ -28,11 +28,9 @@ export i=min.svg # just used for debugging
 
 
 ./validByScour.sh
-./NoScourFull.sh
-#./ScourFull.sh
+./ScourFull.sh
 #./scour4compression.sh
-./NoCleanerFull.sh
-#./CleanerFull.sh
+./CleanerFull.sh
 #./cleaner4compression.sh
 #./o4compression.sh
 ./RasterOptimizer.sh
@@ -44,3 +42,4 @@ export i=min.svg # just used for debugging
 ./validBySed.sh
 ./fontReplace.sh
 ./svg2validsvg.sh
+./post.sh

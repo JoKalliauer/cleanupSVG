@@ -8,14 +8,17 @@ export file=min.svg # just used for debugging
 export i=min.svg # just used for debugging
 
 #./einzeilTags.sh
-./svg2validsvg.sh
+./pre.sh
+#./svg2validsvg.sh
 
 ./InkscapeBatchConverter.sh
 ./scour4compression.sh
-./cleaner4compression.sh
+#./cleaner4compression.sh
 #./o4compression.sh
 ./validByo4compression.sh
+./between.sh
 ./validBycleaner.sh
 ./validByscour.sh
 
 ./svg2validsvg.sh
+./post.sh

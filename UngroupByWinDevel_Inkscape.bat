@@ -1,0 +1,92 @@
+REM #!/bin/sh
+
+REM #Author: Johannes Deml, Johannes Kalliauer
+REM #Source: http://www.inkscapeforum.com/viewtopic.php?t=16743
+REM #Download: http://ge.tt/7C8JFmF1/v/0?c
+REM #Download date: 2017-10-29
+
+REM #last Changes: (by Johannes Kalliauer)
+REM #2017-10-29 11h06 defined inkscape alias (Johannes Kalliauer)
+
+echo
+REM #needed if in the bashrc ist defined: export alias inkscape='/cygdrive/c/Program\ Files/Inkscape/inkscape.com'
+
+REM #Input parameters:
+REM #alias inkscape='/cygdrive/c/Program\ Files/Inkscape/inkscape.com' REM #2017-10-29 11h06 (by Johannes Kalliauer)
+REM #alias inkscape.exe='/cygdrive/c/Program\ Files/Inkscape/inkscape.exe'
+sourceType="svg"
+outputType="svg"
+valid=1
+
+
+count=0
+validInput1="svg"
+validInput2="pdf"
+validInput3="eps"
+validOutput1="eps"
+validOutput2="pdf"
+validOutput3="png"
+validOutput4="svg"
+validOutput5="plain-svg"
+
+
+REM #echo "This script allows you to convert all files in this folder from one file type to another."
+
+REM #valid=0
+while [ "$valid" != "1" ]
+do
+    echo "Allowed file types for source: $validInput1, $validInput2, $validInput3"
+	read -p "What file type do you want to use as a source? " sourceType
+    if [ "$sourceType" = "$validInput1" ] || [ "$sourceType" = "$validInput2" ] || [ "$sourceType" = "$validInput3" ]; then
+        valid=1
+    else
+        echo "Invalid input! Please use one of the following: $validInput1, $validInput2, $validInput3"
+    fi
+done
+
+REM #valid=0
+while [ "$valid" != "1" ]
+do
+    echo "Allowed file types for output: $validOutput1, $validOutput2, $validOutput3"
+	read -p "What file type do you want to convert to? " outputType
+    if [ "$outputType" = "$validOutput1" ] || [ "$outputType" = "$validOutput2" ] || [ "$outputType" = "$validOutput3" ] || [ "$outputType" = "$validOutput4" ] || [ "$outputType" = "$validOutput5" ]; then
+        valid=1
+    else
+        echo "Invalid input! Please use one of the following: $validOutput1, $validOutput2, $validOutput3"
+    fi
+done
+
+for fileSource in *.$sourceType
+
+do
+ if [ -f "$fileSource" ]; then    
+   count=$((count+1))
+   file=$(echo $fileSource | cut -d'.' -f1)
+   echo $count". "$fileSource" -> "${file}u.$outputType
+  if [ "$outputType" = "png" ];then
+   read -p "With what dpi should it be exported (e.g. 300)? " dpi
+   inkscape $fileSource --export-$outputType=$file.$outputType --export-dpi=$dpi
+  elif [ "$outputType" = "svg" ];then
+   REM #svgcleaner ${fileSource} ./${file}Cu.svg --join-style-attributes all --join-arcto-flags no --remove-declarations no --remove-nonsvg-elements no --paths-to-relative no --remove-unused-segments no --convert-segments no  --allow-bigger-file --indent 1 --remove-metadata no --remove-nonsvg-attributes no
+   REM #mv ./${fileSource} ./${file}4.xml
+   REM #cp ./${file}Cu.svg ./${file}C.xml
+   cp ./${fileSource} ./${file}u.svg
+   mv ./${fileSource} ./${file}.xml
+   /cygdrive/c/PrgmPort/inkscape/inkscape.exe --verb=EditSelectAll --verb=SelectionUnGroup --verb=SelectionUnGroup --verb=SelectionUnGroup --verb=SelectionUnGroup --verb=SelectionUnGroup --verb=FileSave --verb=FileClose ./${file}u.svg --verb=FileQuit
+   REM #svgcleaner ./${file}Cu.svg ./${file}CuC.svg --join-style-attributes all --join-arcto-flags no --remove-declarations no --remove-nonsvg-elements no --paths-to-relative no --remove-unused-segments no --convert-segments no  --allow-bigger-file --indent 1 --remove-metadata no --remove-nonsvg-attributes no
+   scour -i ./${file}u.svg -o ./${file}us.svg --disable-style-to-xml --keep-unreferenced-defs --disable-embed-rasters --indent=space --nindent=1
+   mv ./${file}u.svg ./${file}u.xml
+  else
+   inkscape $fileSource --export-$outputType=$file.$outputType
+  fi
+ else
+     echo "no file $fileSource found!"
+ fi
+ 
+ 
+ 
+done
+
+
+
+echo "$count file(s) converted!"

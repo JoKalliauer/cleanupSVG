@@ -36,6 +36,7 @@
    xmlns:osb="http://www.openswatchbook.org/uri/2009/osb"
    xmlns:ev="http://www.w3.org/2001/xml-events"
    xmlns:v="http://schemas.microsoft.com/visio/2003/SVGExtensions/"
+    xmlns:v="http://ns.adobe.com/Variables/1.0/"
    xmlns:pdf="http://ns.adobe.com/pdf/1.3/"
    xmlns:xapMM="http://ns.adobe.com/xap/1.0/mm/"
    xmlns:illustrator="http://ns.adobe.com/illustrator/1.0/"
@@ -47,6 +48,8 @@
    xmlns:xmpGImg="http://ns.adobe.com/xap/1.0/g/img/"
    xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/"
    xmlns:xmpTPg="http://ns.adobe.com/xap/1.0/t/pg/"
+   xmlns:iX="http://ns.adobe.com/iX/1.0/"
+   xmlns:tiff="http://ns.adobe.com/tiff/1.0/"
    >
    
  </svg>

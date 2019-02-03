@@ -7,7 +7,7 @@ export outputType="svg" #just to not get asked by Inkscape
 export file=min.svg # just used for debugging
 export i=min.svg # just used for debugging
 
-./svg2validsvg.sh
+./pre.sh
 
 #./Vacuumdefs.sh # this might add ids
 ./minscour4compression.sh
@@ -17,6 +17,7 @@ export i=min.svg # just used for debugging
 
 ./fontReplace.sh
 ./svg2validsvg.sh
+./styleNomincleaner4compression.sh
 
 export meta=0
 ./minscour4compression.sh

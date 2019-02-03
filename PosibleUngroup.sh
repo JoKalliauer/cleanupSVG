@@ -58,7 +58,7 @@ sed -ri "s/<tspan[-[:lower:][:digit:] =\"\.]+> <\/tspan>([ ]*)//g" $i #remove u
 
 #sed -ri "s/<text transform=\"matrix\(([[:digit:]\.]+) 0 0 ([[:digit:]\.]+) ([[:digit:]\.]+) ([[:digit:]\.]+)\)\">([]\[[:alnum:]\$\^\\\_\{\}= #\,\"\.\(\)\’\&\;\/Επιβάτες¸\°\'\"\@\:−-]*)<\/text>([ ]*)/<g transform=\"translate\(\3 \4\)\"><text transform=\"scale\(\1 \2\)\">\5<\/text><\/g>/g" $i #remove unnecesarry <tspan>...</tspan> without attributes
 
-
+# add font-size to first text in every group
 sed -ri "s/<g([-[:alnum:]\(\)\. ,;:=\"#]*) font-size=\"([[:digit:]\.]*)\"([-[:alnum:]\(\)\. ,;:=\"#]*)>((<text|[[:alnum:]\$\^\\\_\{\}= #\,\"\.\(\)\’\&\;\/\'\"\@\:−-]*|>|<\/text>|<tspan|<\/tspan>)*)<text/<g\1 font-size=\"\2\"\3>\4<text font-size=\"\2\"/g" $i
 
 
@@ -77,9 +77,9 @@ sed -ri  -e ':a' -e 'N' -e '$!ba' -e "s/<text([-[:alnum:]\,\.\"\=\:\ #\(\)]*)( x
 
 
 #put every text in its own group
-sed -ri "s/(<g[-[:alnum:]\(\)\. ,;:=\"#]*>)[[:space:]]*((<text[-[:alnum:]= #\,\"\.\(\)\;\'\"\:]*>|<tspan[- [:alnum:]=\.\"]*>|<\/tspan>|[-[:alnum:]\,\.\(\) =%\']*)*)<\/text>/\1\2<\/text><\/g>\1/g" $i
-sed -ri "s/(<g[-[:alnum:]\(\)\. ,;:=\"#]*>)[[:space:]]*((<text[-[:alnum:]= #\,\"\.\(\)\;\'\"\:]*>|<tspan[- [:alnum:]=\.\"]*>|<\/tspan>|[-[:alnum:]\,\.\(\) =%]*)*)<\/text>/\1\2<\/text><\/g>\1/g" $i
-sed -ri "s/(<g[-[:alnum:]\(\)\. ,;:=\"#]*>)[[:space:]]*((<text[-[:alnum:]= #\,\"\.\(\)\;\'\"\:]*>|<tspan[- [:alnum:]=\.\"]*>|<\/tspan>|[-[:alnum:]\,\.\(\) =%]*)*)<\/text>/\1\2<\/text><\/g>\1/g" $i
+sed -ri "s/(<g[-[:alnum:]\(\)\. ,;:=\"#]*>)[[:space:]]*((<text[-[:alnum:]= #\,\"\.\(\)\;\'\"\:]*>|<tspan[- [:alnum:]=\.\"]*>|<\/tspan>|[-[:alnum:]\,\.\(\) =%\'\/\+]*)*)<\/text>/\1\2<\/text><\/g>\1/g" $i
+sed -ri "s/(<g[-[:alnum:]\(\)\. ,;:=\"#]*>)[[:space:]]*((<text[-[:alnum:]= #\,\"\.\(\)\;\'\"\:]*>|<tspan[- [:alnum:]=\.\"]*>|<\/tspan>|[-[:alnum:]\,\.\(\) =%\'\/\+]*)*)<\/text>/\1\2<\/text><\/g>\1/g" $i
+sed -ri "s/(<g[-[:alnum:]\(\)\. ,;:=\"#]*>)[[:space:]]*((<text[-[:alnum:]= #\,\"\.\(\)\;\'\"\:]*>|<tspan[- [:alnum:]=\.\"]*>|<\/tspan>|[-[:alnum:]\,\.\(\) =%\'\/\+]*)*)<\/text>/\1\2<\/text><\/g>\1/g" $i
 sed -ri "s/(<g[-[:alnum:]\(\)\. ,;:=\"#]*>)[[:space:]]*<text([-[:alnum:]= #\,\"\.\(\)\;\'\"\:]*)>([-[:alnum:]\,\.\(\) =]*)<\/text>/\1<text\2>\3<\/text><\/g>\1/g" $i
 sed -ri "s/(<g[-[:alnum:]\(\)\. ,;:=\"#]*>)[[:space:]]*<text([-[:alnum:]= #\,\"\.\(\)\;\'\"\:]*)>([-[:alnum:]\,\.\(\) =]*)<\/text>/\1<text\2>\3<\/text><\/g>\1/g" $i
 

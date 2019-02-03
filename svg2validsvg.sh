@@ -74,29 +74,29 @@ sed -i "s/ stroke-miterlimit=\"10\"//g" $i #Bug in IncscapePDFImport
 #add DOCTYPE
 sed -i -e 's/<svg /\n<svg /' $i
 
-if [ -z ${meta+x} ]; then
- #echo Metadata kept, no DOCTYPE added
- meta=0
-fi
-
-
- if [ $meta != 1 ]; then  
-  #echo add DTD
-  if grep -qE "<svg([[:lower:][:digit:]=\"\. -]*) version=\"1.0\"" $i; then
-   echo Version10
-   sed -i -e ':a' -e 'N' -e '$!ba' -e 's/\?>[[:space:]]*<svg/\?>\n<\!DOCTYPE svg PUBLIC \"-\/\/W3C\/\/DTD SVG 1.0\/\/EN\" \"http:\/\/www.w3.org\/TR\/2001\/REC-SVG-20010904\/DTD\/svg10.dtd\">\n<svg /' $i
-  elif grep -qE "<svg ([[:lower:][:digit:]=\"\. -]*)version=\"1\"" $i; then
-   echo Version1
-   sed -ri 's/<svg ([[:lower:][:digit:]=\"\. -]*)version=\"1\"/<svg \1version=\"1.0\"/' $i 
-   sed -i -e ':a' -e 'N' -e '$!ba' -e 's/\?>[[:space:]]*<svg/\?>\n<\!DOCTYPE svg PUBLIC \"-\/\/W3C\/\/DTD SVG 1.0\/\/EN\" \"http:\/\/www.w3.org\/TR\/2001\/REC-SVG-20010904\/DTD\/svg10.dtd\">\n<svg /' $i
-  else
-   #echo noVersionDetected
-   sed -i -e ':a' -e 'N' -e '$!ba' -e "s/\?>[[:space:]]*<svg/\?>\n<\!DOCTYPE svg PUBLIC \'-\/\/W3C\/\/DTD SVG 1.1\/\/EN\' \'http:\/\/www.w3.org\/Graphics\/SVG\/1.1\/DTD\/svg11.dtd\'>\n<svg/" $i
-   sed -ri 's/<svg ([[:lower:]=\"[:digit:] \.-]+) version="1.2" ([[:alnum:]=\" \.\/:]+)>/<svg \1 \2>/' $i
-  fi
- #else
-  #echo no DOCTYPE added
- fi
+# # if [ -z ${meta+x} ]; then
+# #  #echo Metadata kept, no DOCTYPE added
+# #  meta=0
+# # fi
+# # 
+# # 
+# #  if [ $meta != 1 ]; then  
+# #   #echo add DTD
+# #   if grep -qE "<svg([[:lower:][:digit:]=\"\. -]*) version=\"1.0\"" $i; then
+# #    echo Version10
+# #    sed -i -e ':a' -e 'N' -e '$!ba' -e 's/\?>[[:space:]]*<svg/\?>\n<\!DOCTYPE svg PUBLIC \"-\/\/W3C\/\/DTD SVG 1.0\/\/EN\" \"http:\/\/www.w3.org\/TR\/2001\/REC-SVG-20010904\/DTD\/svg10.dtd\">\n<svg /' $i
+# #   elif grep -qE "<svg ([[:lower:][:digit:]=\"\. -]*)version=\"1\"" $i; then
+# #    echo Version1
+# #    sed -ri 's/<svg ([[:lower:][:digit:]=\"\. -]*)version=\"1\"/<svg \1version=\"1.0\"/' $i 
+# #    sed -i -e ':a' -e 'N' -e '$!ba' -e 's/\?>[[:space:]]*<svg/\?>\n<\!DOCTYPE svg PUBLIC \"-\/\/W3C\/\/DTD SVG 1.0\/\/EN\" \"http:\/\/www.w3.org\/TR\/2001\/REC-SVG-20010904\/DTD\/svg10.dtd\">\n<svg /' $i
+# #   else
+# #    #echo noVersionDetected
+# #    sed -i -e ':a' -e 'N' -e '$!ba' -e "s/\?>[[:space:]]*<svg/\?>\n<\!DOCTYPE svg PUBLIC \'-\/\/W3C\/\/DTD SVG 1.1\/\/EN\' \'http:\/\/www.w3.org\/Graphics\/SVG\/1.1\/DTD\/svg11.dtd\'>\n<svg/" $i
+# #    sed -ri 's/<svg ([[:lower:]=\"[:digit:] \.-]+) version="1.2" ([[:alnum:]=\" \.\/:]+)>/<svg \1 \2>/' $i
+# #   fi
+# #  #else
+# #   #echo no DOCTYPE added
+# #  fi
  
 # if ! grep -qE "xmlns:xlink=" $i; then
 #  sed -ri 's/<svg/<svg xmlns:xlink="http:\/\/www.w3.org\/1999\/xlink"/' $i
@@ -119,7 +119,7 @@ sed -ri "s/<text ([-[:lower:][:digit:].,\"= ]+) xml:space=\"preserve\">([-[:alnu
 sed -ri 's/<text [-[:lower:][:digit:]= \"\:\.\(\)]+\/>//g' $i #remove selfclosing text
 sed -ri 's/<tspan [-[:lower:][:digit:]= \"\.\:\;\%#]+\/>//g' $i #remove selfclosing tspan
 sed -i "s/<tspan x=\"0\" y=\"0\">/<tspan>/g" $i #reduce options in tspan
-sed -ri "s/<tspan>([]\[[:alnum:]\$\^\\\_\{\}= #\,\"\.\(\)\’\&\;\/Επιβάτες¸\°\'\"\@\:−-]*)<\/tspan>([ ]*)/\1/g" $i #remove unnecesarry <tspan>...</tspan> without attributes
+sed -ri "s/<tspan>([]\[[:alnum:]\$\^\\\_\{\}= #\,\"\.\(\)\’\&\;\/Επιβάτες¸\°\'\"\@\:\+−-]*)<\/tspan>([ ]*)/\1/g" $i #remove unnecesarry <tspan>...</tspan> without attributes
 sed -ri "s/<tspan[-[:alnum:]= \"\.#\(\);:,\'%]*>[[:space:]]*<\/tspan>([ ]*)//g" $i #remove useless,empty <tspan (...)> </tspan> without text
 
 #selfclosing groups

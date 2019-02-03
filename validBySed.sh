@@ -42,128 +42,6 @@ echo
 echo $i start:
 
 
-##Remove W3C-invalid elements
-##sed -i "s/ aria-label=\"[[:digit:]]\"//g;s/ stroke-linejoin=\"null\"//g;s/ stroke-linecap=\"null\"//g;s/ stroke-width=\"null\"//g" $i
-#sed -i "s/ solid-color=\"#000000\"//g" $i #QGIS-Files (made file valid)
-#
-##example <flowPara font-family="Liberation Sans" font-size="55.071px"/>
-#
-## <flowPara id="flowPara10507" style="fill:url(#linearGradient11781)"/>
-#
-##remove empty flow Text in svg (everything else will be done by https://github.com/JoKalliauer/cleanupSVG/blob/master/Flow2TextByInkscape.sh )
-## example   <flowRoot id="flowRoot3750" style="fill:black;font-family:Linux Libertine;font-size:64;text-align:center;text-anchor:middle;writing-mode:lr" xml:space="preserve"/>
-#sed -ri 's/<flowPara([-[:alnum:]\" \.\:\%\=\;#\(\)]*)\/>//g;s/<flowRoot([-[:alnum:]" \.:%=;]*)\/>//g' $i
-#sed -i 's/<flowSpan[-[:alnum:]=\":;\. ]*>[[:space:]]*<\/flowSpan>//g' $i
-#sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<flowRoot([-[:alnum:]\.=\" \:\(\)\%\#\,\';]*)>[[:space:]]*<flowRegion(\/|[[:alnum:]\"= ]*>[[:space:]]*<(path|rect) [-[:alnum:]\. \"\=:]*\/>[[:space:]]*<\/flowRegion)>[[:space:]]*(<flowDiv\/>|)[[:space:]]*<\/flowRoot>//g" $i #delete empty flowRoot
-#
-#
-
-
- 
-# if ! grep -qE "xmlns:xlink=" $i; then
-#  sed -ri 's/<svg/<svg xmlns:xlink="http:\/\/www.w3.org\/1999\/xlink"/' $i
-# fi
-
-
-#Inkscape doesnt handle Adobe Ilustrator xmlns right
-#sed -ri "s/=\"([amp38;\#\&\])+ns_flows;\"/=\"http:\/\/ns.adobe.com\/Flows\/1.0\/\"/g" $i 
-#sed -ri "s/ xmlns:x=\"([amp38;\#\&\])+ns_extend;\"/ xmlns:x=\"http:\/\/ns.adobe.com\/Extensibility\/1.0\/\"/" $i #Incskape doesnt handle Adobe Ilustrator xmlns right
-#sed -ri "s/=\"([amp38;\#\&\])+ns_ai;\"/=\"http:\/\/ns.adobe.com\/AdobeIllustrator\/10.0\/\"/" $i #Incskape doesnt handle Adobe Ilustrator xmlns right
-#sed -ri "s/ xmlns:graph=\"([amp38;\#\&\])+ns_graphs;\"/ xmlns:graph=\"http:\/\/ns.adobe.com\/Graphs\/1.0\/\"/" $i #Incskape doesnt handle Adobe Ilustrator xmlns right
-#sed -ri "s/=\"([amp38;\#\&\])+ns_vars;\"/=\"http:\/\/ns.adobe.com\/Variables\/1.0\/\"/g" $i #Incskape doesnt handle Adobe Ilustrator xmlns right
-#sed -ri "s/=\"([amp38;\#\&\])+ns_imrep;\"/=\"http:\/\/ns.adobe.com\/ImageReplacement\/1.0\/\"/g" $i #	<!ENTITY ns_imrep "http://ns.adobe.com/ImageReplacement/1.0/">
-#sed -ri "s/ xmlns=\"([amp38;\#\&\])+ns_sfw;\"/ xmlns=\"http:\/\/ns.adobe.com\/SaveForWeb\/1.0\/\"/" $i #Incskape doesnt handle Adobe Ilustrator xmlns right
-#sed -ri "s/ xmlns=\"([amp38;\#\&\])+ns_custom;\"/ xmlns=\"http:\/\/ns.adobe.com\/GenericCustomNamespace\/1.0\/\"/" $i
-#	<!ENTITY ns_adobe_xpath "http://ns.adobe.com/XPath/1.0/">
-#sed -ri "s/ xmlns=\"([amp38;\#\&\])+ns_svg;\"/ xmlns=\"http:\/\/www.w3.org\/2000\/svg\"/" $i
-#sed -ri "s/ xmlns:xlink=\"([amp38;\#\&\])+ns_xlink;\"/ xmlns:xlink=\"http:\/\/www.w3.org\/1999\/xlink\"/" $i
-
-#sed -i "s/<?xpacket begin='﻿' id='/<?xpacket begin='ZeichenEingefuegtVonKalliauer' id='/g" $i
-
-#CorelDraw-Problem (not very common)
-#sed -i "s/ href=\"#id/ xlink:href=\"#id/g" $i
-
-
-#Remove CDATA by AdobeIllustrator
-#sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<\!\[CDATA\[([[:alnum:]=+\/\t\n[:space:]@:;\(\)\"\,\'\{\}\-])*\t\]\]>[[:space:]]*//g" $i #Remove CDATA
-#sed -ri "s/<i:pgfRef xlink:href=\"#a([[:lower:]_]*)\"\/>//" $i #Remove AI-Elemtents for CDATA
-#sed -i "s/<i:pgf id=\"a\"\/>//" $i #Remove AI-Elemtents for CDATA
-#sed -ri -e ':a' -e 'N' -e "s/<i:pgf( ){1,2}id=\"a([[:lower:]_])*\">[[:space:]]*<\/i:pgf>//" $i #Remove AI-Elemtents for CDATA
-#sed -i "s/ i:extraneous=\"self\"//" $i #Remove AI-Elemtents
-
-#remove jpg im metadata
-#sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<xapGImg:image>([[:alnum:][:space:]\/+])*={0,2}[[:space:]]*<\/xapGImg:image>//g" $i
-
-# == make file valid ==
-
-# font-weight="630"
-#sed -i "s/ font-weight=\"630\"/ font-weight=\"bold\"/g" $i
-
-#ArcMap-problems (made file valid, removes cbs= and gem=)
-#sed -ri "s/<path d=\"m([[:digit:]hlmvz \.-]+)\" ([[:alnum:]\"= \.\(\)\#-]*)\" cbs=\"[[:digit:]GM]*\" gem=\"[[:alpha:]0 \.\(\)-]*\"\/>/<path d=\"m\1\" \2\"\/>/g" $i
-
-##invalid id-names
-#sed -ri "s/ <(g|path) id=\"([-[:alnum:]:_\.]*)( |'|\(|\)|&|#|,|\/)([-[:alnum:] \':_|\(|\)|&.,\/]+)\"/ <\1 id=\"\2_\4\"/" $i #replaces (spaces and commas and /) with underlines
-#sed -ri "s/ <(g|path) id=\"([-[:alnum:]:_\.]+)( |'|\(|\)|&|#|,|\/)([-[:alnum:] \':_|\(|\)|&.,|\/]+)\"/ <\1 id=\"\2_\4\"/" $i #replaces spaces with underlines
-#sed -ri "s/ <(g|path) id=\"([-[:alnum:]:_\.]+)( |'|\(|\)|&|#|,|\/)([-[:alnum:] \':_|\(|\)|&.,|\/]+)\"/ <\1 id=\"\2_\4\"/" $i #replaces spaces with underlines
-#sed -ri "s/ <(g|path) id=\"([-[:alnum:]:_\.]+)( |'|\(|\)|&|#|,|\/)([-[:alnum:] \':_|\(|\)|&.,|\/]+)\"/ <\1 id=\"\2_\4\"/" $i #replaces spaces with underlines
-## do not use this line # sed -ri "s/ <(g|path) id=\"([[:digit:]]+)\"/ <\1 id=\"FIPS_\2\"/" $i #valid id names must not start with a number
-#
-## there is no attribute "data-name" (SVG 2.0)
-#sed -ri "s/<(svg|symbol|path|use|g)([[:alnum:]=\"\.\/ -:]*) data-name=\"[[:alnum:] ]+\"/<\1\2/" $i
-
-
-##suggestions from https://en.wikipedia.org/wiki/Wikipedia:SVG_help
-#sed -i "s/Sans embedded/DejaVu Sans/g" $i
-#sed -ri "s/tspan x=\"([0-9]*) ([0-9 ]*)\"/tspan x=\"\1\"/g" $i
-#sed -ri "s/<g style=\"stroke:none;fill:none\"><text>/<g style=\"stroke:none;fill:rgb(0,0,0)\"><text>/g" $i
-#
-### == Workaround for inkscape bug ==
-# sed -ri "s/inkscape:version=\"0.(4[\. r[:digit:]]|91 r13725)+\"//g" $i # https://bugs.launchpad.net/inkscape/+bug/1763190
-# sed -ri "s/sodipodi:role=\"line\"//g" $i # https://bugs.launchpad.net/inkscape/+bug/1763190
-#
-### == Repair after svgo ==
-#
-##svgo to cleaner
-#sed -ri "s/font-family:&quot;([-[:alnum:] ]*)&quot;/font-family:\"\1\"/g" $i
-#sed -ri "s/font-family:&apos;([-[:alnum:] ]*)&apos;/font-family:'\1'/g" $i
-#
-### == Workarounds for Librsvg ==
-#
-##Repair WARNING in <mask> with id=ay: Mask element found with maskUnits set. It will not be rendered properly by Wikimedia's SVG renderer. See https://phabricator.wikimedia.org/T55899 for details
-#sed -ri "s/<mask([[:alnum:] =\"]*) maskUnits=\"userSpaceOnUse\"( id=\"[[:alnum:]_]+\"|)>/<mask\1\2>/g" $i
-#
-#
-##Change spaces to , in stroke-dasharray (solves librsvg-Bug https://phabricator.wikimedia.org/T32033 )
-#sed -ri 's/stroke-dasharray=\"([[:digit:]\.,]*)([[:digit:]\.]+) ([[:digit:]\., ]+)\"/stroke-dasharray=\"\1\2,\3\"/g' $i
-#sed -ri 's/stroke-dasharray=\"([[:digit:]\., ]*)([[:digit:]\.]+) ([[:digit:]\.,]+)\"/stroke-dasharray=\"\1\2,\3\"/g' $i
-#
-##Change "'font name'" to 'font name'(solves librsvg-Bug) https://commons.wikimedia.org/wiki/File:T184369.svg
-#sed -ri "s/font-family=\"'([-[:alnum:] ]*)'(|,[-[:lower:]]+)\"/font-family=\'\1\'/g" $i
-#
-## multiple x-koordinates https://phabricator.wikimedia.org/T35245
-#sed -ri "s/<tspan([-[:alnum:]\.\"\#\ =]*) x=\"([-[:digit:]\.]+)( |,)([-[:digit:]\. ,]+)\"([-[:alnum:]\.\"\#\ =]*)>([[:alnum:]])/<tspan x=\"\2\" \1 \5>\6<\/tspan><tspan x=\"\4\" \1 \5>/g" $i # remove multipe x-koordinates in tspan (solves librsvg-Bug)
-#sed -ri "s/<text([-[:alnum:]\.\"\#\ =\(\)]*) x=\"([-[:digit:]\.]+)( |,)([-[:digit:]\. ,]+)\"([-[:alnum:]\.\"\#\ =\,]*)>/<text x=\"\2\"\1\5>/g" $i # remove multipe x-koordinates in text (solves librsvg-Bug)
-#sed -ri "s/<text([-[:alnum:]\.\"\#\ =\(\)]*) y=\"([-[:digit:]\.]+)( |,)([-[:digit:]\. ,]+)\"([-[:alnum:]\.\"\#\ =\,]*)>/<text y=\"\2\"\1\5>/g" $i # remove multipe y-koordinates in text (solves librsvg-Bug)
-#
-##Repair https://phabricator.wikimedia.org/T68672 (solves librsvg-Bug)
-#sed -i "s/<style>/<style type=\"text\/css\">/" $i
-#
-##solved librsvg-Bug T193929 https://phabricator.wikimedia.org/T193929
-#sed -i "s/ xlink:href=\"data:image\/jpg;base64,/ xlink:href=\"data:image\/jpeg;base64,/g" $i
-#sed -i "s/ xlink:href=\"data:;base64,\/9j\/4AAQSkZJRgABAgAAZABkAAD\/7AARRHVja3kAAQAEAAAAHgAA/ xlink:href=\"data:image\/jpeg;base64,\/9j\/4AAQSkZJRgABAgAAZABkAAD\/7AARRHVja3kAAQAEAAAAHgAA/" $i
-#sed -ri "s/ xlink:href=\"data:;base64,( |)iVBORw0KGgoAAAANSUhEUgAA/ xlink:href=\"data:image\/png;base64,iVBORw0KGgoAAAANSUhEUgAA/" $i
-#
-##solved librsvg-Bug T194192 https://phabricator.wikimedia.org/T194192
-##<svg font-family="ScriptS" font-size="5" viewBox="0,0,128,128"
-#sed -ri "s/<svg([-[:alnum:]=\" ]*) viewBox=\"0,0,([[:digit:]\.]*),([[:digit:]\.]*)\"/<svg\1 viewBox=\"0 0 \2 \3\"/g" $i
-#
-##librsvgbug https://phabricator.wikimedia.org/phab:T207506 (<code>font-weight="normal"</code> ignored)
-#sed -ri "s/font-weight=\"normal\"/font-weight=\"400\"/g" $i
-
-
-
-
 ## == https://validator.w3.org/check and https://validator.nu/ ==
 # W3C: there is no attribute "line-height"
 # Nu:   Attribute text-align not allowed on SVG element text at this point.
@@ -222,7 +100,7 @@ sed -ri "s/ data-name=\"([-[:lower:][:digit:] ]*)\"/ id=\"\1\"/g" $i
 #W3C: value of attribute "id" must be a single token
 #nu:  Bad value  for attribute id on SVG element path: Not a valid XML 1.0 name.
 ## example:   <text id="lens _text-9" x="247.78" y="111.492" style="display:inline;fill:#000000;font-family:Arial;font-size:16px;line-height:100%;stroke-width:1px;text-align:center;text-anchor:middle" sodipodi:linespacing="100%" xml:space="preserve">
-sed -ri "s/ <(g|path|text) id=\"([-[:alnum:]:_\.]*)( |'|\(|\)|&|#|,|\/)([-[:alnum:] \':_|\(|\)|&.,\/]+)\"/ <\1 id=\"\2_\4\"/g" $i #replaces (spaces and commas and /) with underlines
+sed -ri "s/ <(g|path|text) id=\"([-[:alnum:]:_\.]*)( |'|\(|\)|&|#|,|\/|\+)([-[:alnum:] \':_|\(|\)|&.,\/]+)\"/ <\1 id=\"\2_\4\"/g" $i #replaces (spaces and commas and /) with underlines
 # do not use this line # sed -ri "s/ <(g|path) id=\"([[:digit:]]+)\"/ <\1 id=\"FIPS_\2\"/" $i #valid id names must not start with a number
 
 #W3C (SVG1.1)  element "flowRoot" undefined
@@ -230,6 +108,11 @@ sed -ri "s/ <(g|path|text) id=\"([-[:alnum:]:_\.]*)( |'|\(|\)|&|#|,|\/)([-[:alnu
 ## example: # <flowRoot id="flowRoot4648" transform="matrix(.755786 0 0 .755786 -20.0015 627.017)" style="fill:#000000;font-family:sans-serif;font-size:180px;letter-spacing:0px;line-height:125%;stroke-width:1px;word-spacing:0px" xml:space="preserve"><flowRegion id="flowRegion4650"><rect id="rect4652" x="280.822" y=".656929" width="291.934" height="239.406"/></flowRegion><flowPara id="flowPara4654"/></flowRoot>
 sed -ri 's/<flowPara([-[:alnum:]\" \.\:\%\=\;#\(\)]*)\/>//g;s/<flowRoot([-[:alnum:]" \.:%=;]*)\/>//g' $i
 sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<flowRoot([-[:alnum:]\.=\" \:\(\)\%\#\,\';%]*)>[[:space:]]*<flowRegion([-[:alnum:]=:\" ]*)>[[:space:]]*(<path[-[:alnum:]\.=\"\ \#]*\/>|<rect( id=\"[-[:alnum:]]*\"|) x=\"([-[:digit:]\. ]+)\" y=\"([-[:digit:]\. ]+)\"([[:lower:][:digit:]=\.\" \#:]+)\/>)[[:space:]]*<\/flowRegion>[[:space:]]*(|<flowPara([-[:alnum:]\.=\" \:\#;% ]*)>([[:space:] ]*)<\/flowPara>)[[:space:]]*<\/flowRoot>//g" $i ##delete flowRoot only containing spaces
+
+
+#W3C there is no attribute "i:knockout"
+#Nu  Adobe Illustrator 10.0 attribute knockout not allowed on SVG element path at this point.
+# use scour without --keep-editor-data
 
 
 
@@ -247,7 +130,11 @@ sed -ri "s/<path([-[:lower:][:digit:]\"\.= \(\)]*) solid-color=\"#000000\"/<path
 #Repair https://phabricator.wikimedia.org/T68672 (solves librsvg-Bug)
 sed -i "s/<style>/<style type=\"text\/css\">/" $i
 
-
+#W3C (SVG1.1)  there is no attribute "href"
+#W3C (SVG1.1) Error: required attribute "xlink:href" not specified
+#CorelDraw-Problem (not very common)
+#https://commons.wikimedia.org/wiki/File:IIIIER.svg
+sed -i "s/ href=\"/  xmlns:xlink=\"http:\/\/www.w3.org\/1999\/xlink\" xlink:href=\"/g" $i
 
 
 ## == https://validator.nu/ ==
@@ -255,6 +142,20 @@ sed -i "s/<style>/<style type=\"text\/css\">/" $i
 #nu Error: Attribute fill not allowed on SVG element image at this point.
 # example https://commons.wikimedia.org/wiki/File:Epizentroa,_Hipozentroa_eta_failaren_diagrama.svg
 sed -ri "s/<image([[:lower:][:digit:]\" =]*) fill=\"none\"([[:alnum:]\" =:;,+\/]*)>/<image\1\2>/g" $i
+
+
+#nu Error:  Attribute clip-rule not allowed on SVG element linearGradient at this point.
+#nu Error:  Attribute fill-rule not allowed on SVG element linearGradient at this point.
+#nu Error: Attribute stroke-miterlimit not allowed on SVG element linearGradient at this point
+#nu Error:  Attribute stroke-linecap not allowed on SVG element linearGradient at this point.
+#nu Error: Attribute stroke-linejoin not allowed on SVG element linearGradient at this point.
+#example: <linearGradient id="bo" x1="-302.7" x2="300.7" y1="99.7" y2="99.7" clip-rule="evenodd" fill-rule="evenodd" stroke-miterlimit="3.86" gradientUnits="userSpaceOnUse">
+sed -ri "s/<linearGradient([-[:alnum:]=\". _]*)( clip-rule=\"evenodd\"| fill-rule=\"evenodd\"| stroke-miterlimit=\"3.[[:digit:]]*\"| stroke-linecap=\"round\"| stroke-linejoin=\"round\")( [-[:lower:][:upper:]=\" .]*)>/<linearGradient\1\3>/g" $i
+
+##nu Error:  Attribute stroke-linecap not allowed on SVG element linearGradient at this point.
+#sed -ri "s/ stroke-linecap=\"null\"//g"
+
+
 
 
 echo $i finish

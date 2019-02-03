@@ -11,9 +11,9 @@ export i=min.svg # just used for debugging
 
 ./Vacuumdefs.sh
 
-./NoScourFull.sh
+./ScourFull.sh
 
-./NoCleanerFull.sh
+./CleanerFull.sh
 
 ./RasterOptimizer.sh
 
@@ -24,3 +24,4 @@ export i=min.svg # just used for debugging
 ./validBySed.sh
 ./fontReplace.sh
 ./svg2validsvg.sh
+./post.sh

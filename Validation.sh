@@ -9,7 +9,9 @@ export i=min.svg # just used for debugging
 
 #./Vacuumdefs.sh
 ./validByo4compression.sh
+./between.sh
 ./validBycleaner.sh
 ./validByscour.sh
 ./validBySed.sh
 ./svg2validsvg.sh
+./post.sh

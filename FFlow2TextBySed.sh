@@ -47,8 +47,8 @@ sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<flowRoot([-[:alnum:]\.=\" \:\(\)\%\#\,\'
 sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<flowRoot([-[:alnum:]\.=\" \:\(\)\%\#\,\';]*)>[[:space:]]*<flowRegion([-[:alnum:]=:\" ]*)>[[:space:]]*(<path[-[:alnum:]\.=\"\ \#]*\/>|<rect( id=\"rect[-[:digit:]]{2,7}\"|) x=\"([[:digit:]\. ]+)\" y=\"([-[:digit:]\. ]+)\"([[:lower:][:digit:]=\.\" \#]+)\/>)[[:space:]]*<\/flowRegion>[[:space:]]*(<flowPara([-[:alnum:]\" \.\%])\/>|<flowPara([-[:alnum:]\" \.\:\%\=]*)>([[:space:] ]*)<\/flowPara>)[[:space:]]*<\/flowRoot>//g" $i ##delete flowRoot only containing spaces
 
 
-
-sed -ri "s/<flowRoot([-[:alnum:]\.=\" \:\(\)\%\#\,\';]*)>[[:space:]]*<flowRegion([-[:alnum:]=:\" ]*)>[[:space:]]*<rect([-[:lower:][:digit:]\"= \.]*) x=\"([-[:digit:]\. ]+)\" y=\"([-[:digit:]\. ]+)\"([-[:lower:][:digit:]=\.\" \#:]*)\/>[[:space:]]*<\/flowRegion>[[:space:]]*<flowPara([-[:alnum:]\.=\" \:\#;\%]*)>([-−[:alnum:] \{\}\(\)\+\ \ ]+)<\/flowPara>[[:space:]]*<\/flowRoot>/<text x=\"\4\" y=\"\5\"\1><tspan x=\"\4\" y=\"\5\"\7>\8<\/tspan><\/text>/g" $i
+#<flowRoot id="flowRoot14827" transform="matrix(.996351 .0853476 -.0853476 .996351 255.594 1000.17)" style="display:inline;fill:#a41dec;font-family:Verdana;font-size:16px;letter-spacing:0px;line-height:1.25;stroke-opacity:.976636;word-spacing:0px" xml:space="preserve"><flowRegion id="flowRegion14829" style="fill:#a41dec;stroke-opacity:.976636"><rect id="rect14831" x="230.31" y="446.53" width="319.06" height="84.3491" style="fill:#a41dec"/></flowRegion><flowPara id="flowPara14833" style="fill:#a41dec;font-family:Verdana;font-size:26.6667px;stroke-opacity:.976636;text-align:end;text-anchor:end">?</flowPara></flowRoot>
+sed -ri "s/<flowRoot([-[:alnum:]\.=\" \:\(\)\%\#\,\';]*)>[[:space:]]*<flowRegion([-[:alnum:]=:\" #;\.]*)>[[:space:]]*<rect([-[:lower:][:digit:]\"= \.]*) x=\"([-[:digit:]\. ]+)\" y=\"([-[:digit:]\. ]+)\"([-[:lower:][:digit:]=\.\" \#:]*)\/>[[:space:]]*<\/flowRegion>[[:space:]]*<flowPara([-[:alnum:]\.=\" \:\#;\%]*)>([-−[:alnum:] \{\}\(\)\+\ \ \.\?]+)<\/flowPara>[[:space:]]*<\/flowRoot>/<text x=\"\4\" y=\"\5\"\1><tspan x=\"\4\" y=\"\5\"\7>\8<\/tspan><\/text>/g" $i
 
 echo $i finish
 

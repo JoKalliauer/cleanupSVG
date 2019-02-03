@@ -104,10 +104,12 @@ do
 		 inkscape $i --export-$outputType=$file.$outputType --export-dpi=$dpi
 		elif [ "$outputType" = "svg" ];then #  svg
 		 inkscape $i --export-plain-$outputType=${file}n.$outputType
+		 sed -ri "s/font-family:([-[:alnum:] ,']*)'([-[:alnum:] ]*)'([-[:lower:][:upper:], ']*)/font-family:\1\2\3/g" ${file}n.svg
 		elif [ "$outputType" = "$validOutput6" ] || [ "$outputType" = "$validOutput7" ] || [ "$outputType" = "$validOutput8" ]; then #inkscape-svg
 		  cp ./${fileSource} ./${file}Ink.svg
 		  mv ./${fileSource} ./${file}.xml
 		 inkscape ./${file}Ink.svg --no-convert-text-baseline-spacing --verb=FileSave --verb=FileClose --verb=FileQuit
+		 sed -ri "s/font-family:([-[:alnum:] ,']*)'([-[:alnum:] ]*)'([-[:lower:][:upper:], ']*)/font-family:\1\2\3/g" ./${file}Ink.svg
 		elif  [ "$outputType" = "$validOutput9" ];then #png96
 		 inkscape $i --export-png=$file.png
 		else #eps, pdf, plain-svg and others

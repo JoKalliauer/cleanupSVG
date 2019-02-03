@@ -51,6 +51,7 @@ do
    #cp ./${file}Cu.svg ./${file}C.xml
    cp ./${fileSource} ./${file}r.svg
    mv ./${fileSource} ./${file}.xml
+   sed -ri "s/inkscape:version=\"0.(4[\. r[:digit:]]+|91 r13725)\"//g" ./${file}r.svg # https://bugs.launchpad.net/inkscape/+bug/1763190
    inkscape --with-gui ./${file}r.svg --verb=DialogDocumentProperties --verb=FitCanvasToDrawing --export-plain-svg=${file}rR.svg --verb=FileSave --verb=FileClose --verb=FileQuit
    #scour -i ./${file}r.svg -o ./${file}rs.svg --disable-style-to-xml --keep-unreferenced-defs --indent=space --nindent=1
    #mv ./${file}r.svg ./${file}r.xml

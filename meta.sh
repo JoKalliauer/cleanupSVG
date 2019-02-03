@@ -4,7 +4,7 @@ export minfilesize=0 #1..min file size (1...no line breaks)
 export meta=1 #1 keeps metadata
 export outputType="svg" #just to not get asked by Inkscape
 
-./svg2validsvg.sh
+./pre.sh
 
 ./InkscapeBatchConverter.sh
 

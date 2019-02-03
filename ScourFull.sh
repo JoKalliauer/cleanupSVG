@@ -8,7 +8,7 @@ export i=${tmp}S.svg
 
 echo scour ${file} to $i begin, dig=5, digC=3, min=${minfilesize}, meta=$meta, META= $META, INDENT=$INDENT
 
-scour -i ${file} -o $i --enable-comment-stripping --strip-xml-space --remove-metadata --renderer-workaround  --remove-descriptions --enable-id-stripping --shorten-ids --set-precision=5 --set-c-precision=5 --create-groups      --remove-descriptive-elements --remove-titles # --enable-viewboxing
+scour -i ${file} -o $i --enable-comment-stripping --strip-xml-space --remove-metadata --renderer-workaround  --remove-descriptions --enable-id-stripping --shorten-ids --set-precision=5 --set-c-precision=5 --remove-descriptive-elements --remove-titles # --create-groups --enable-viewboxing
 
 #scour -i ${file} -o $i --enable-comment-stripping --remove-titles --remove-descriptions --disable-embed-rasters --strip-xml-space  --set-precision=${precisiondigitsN} --set-c-precision=${precisiondigits} --create-groups $META $INDENT --renderer-workaround --enable-id-stripping --disable-style-to-xml #--enable-viewboxing #--keep-unreferenced-defs #  
 

@@ -6,6 +6,6 @@ export outputType="svg" #just to not get asked by Inkscape
 export file=min.svg # just used for debugging
 export i=min.svg # just used for debugging
 
-./OptimizerFull.sh
-./NoCleanerFull.sh
-./NoScourFull.sh
+./RasterOptimizer.sh
+./CleanerFull.sh
+./ScourFull.sh

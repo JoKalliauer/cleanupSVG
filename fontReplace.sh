@@ -66,7 +66,7 @@ sed -ri "s/ font-family=\"GOST type B\"/ font-family=\"Bandal,GOST type B,DejaVu
 
 #Serif
 sed -i 's/ font-family=\"Bitstream Vera Serif\"/ font-family=\"DejaVu Serif,Bitstream Vera Serif\"/g' $i #as automatic
-sed -ri 's/ font-family=\"(Times New Roman|Times-Roman)\"/ font-family=\"Liberation Serif,\1\"/g' $i #as automatic
+sed -ri 's/ font-family=\"(Times New Roman|Times-Roman|CMMI10|CMR10)\"/ font-family=\"Liberation Serif,\1\"/g' $i #as automatic
 
 #monospace
 sed -ri 's/ font-family=\"(monospace|Bitstream Vera Sans Mono)\"/ font-family=\"DejaVu Sans Mono,Bitstream Vera Sans Mono,monospace\"/g' $i #as automatic
@@ -81,8 +81,6 @@ sed -ri 's/<tspan [-[:lower:][:digit:]= \"\.\:\;]+\/>//g' $i #remove selfclosing
 sed -i "s/<tspan x=\"0\" y=\"0\">/<tspan>/g" $i #reduce options in tspan
 sed -ri "s/<tspan>([]\[[:alnum:]\$\^\\\_\{\}= #\,\"\.\(\)\’\&\;\/Επιβάτες¸−-]*)<\/tspan>([ ]*)/\1/g" $i #remove unnecesarry <tspan>...</tspan> without attributes
 sed -ri "s/<tspan[-[:lower:][:digit:]= \"\.]+> <\/tspan>([ ]*)//g" $i #remove useless <tspan (...)> </tspan> without text
-
-sed -i "s/font-family=\"'Liberation Sans'/font-family=\"Liberation Sans/g" $i
 
 
 ## == Workarounds for Librsvg ==
