@@ -11,6 +11,7 @@ export i=min.svg # just used for debugging
 
 #./Vacuumdefs.sh # this might add ids
 ./minscour4compression.sh
+./between.sh
 ./mincleaner4compression.sh #deactivate if CSS
 ./mino4compression.sh
 ./validBySed.sh

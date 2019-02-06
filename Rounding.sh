@@ -28,6 +28,7 @@ echo $i start:
  sed -ri "s/ transform=\"scale\(1.000(0|1|2)[[:digit:]]*( |,)(0|).999(8|9)[[:digit:]]*\)\"/ transform=\"scale\(1.000,1\)\"/g" $i
  sed -ri "s/(scale|matrix)\(.9999(8|9)[[:digit:]]*/\1\(1/g" $i
  #sed -ri "s/ transform=\"matrix\(.9999 [-[:digit:].]* [-[:digit:].]* .9999/\1\(1/g" $i
+ sed -ri "s/ opacity=\".9(7|8|9)\"/ opacity=\"1\"/g" $i
 
  # transform="matrix(.9999 -.01414 .01414 .9999 0 0)"
 
