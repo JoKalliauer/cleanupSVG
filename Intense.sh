@@ -11,16 +11,13 @@ export i=min.svg # just used for debugging
 
 ./Vacuumdefs.sh
 
+./RasterOptimizer.sh
+./CleanerFull.sh
 ./ScourFull.sh
 
-./CleanerFull.sh
-
-./RasterOptimizer.sh
-
-
-./validByo4compression.sh
-./validBycleaner.sh
-./validByscour.sh
+#./validByo4compression.sh
+#./validBycleaner.sh
+#./validByscour.sh
 ./validBySed.sh
 ./fontReplace.sh
 ./svg2validsvg.sh

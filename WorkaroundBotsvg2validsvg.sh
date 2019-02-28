@@ -1,29 +1,9 @@
 #!/bin/bash
 
 #Author: Johannes Kalliauer (JoKalliauer)
-#created: 2017-10
+#created: 2019-02-20
 
-#Last Edits:
-#2017-10-29 13h14 new filename (by JoKalliauer)
-#2017-11-01 delte style in text, Doctype minior changes, Remove stroke-width in text, not adding lineforwards, english explantations (by JoKalliauer)
-#2017-11-20 dasharray due to stroke-dasharray="37.10, 37.10"
-#2017-11-22 xml:space="preserve" in simple text removed
-#2017-11-22 remove empty text;
-#2017-11-22 Remove style in text with .
-#2017-11-22 Remove stroke-width in text with .
-#2017-11-27 remove style in text also if "[-\#\(\)]" is before
-#2017-11-27 remove fill in text if x="..." y="..." is before
-#2017-11-27 Remove stroke-width in text edited
-#2017-11-27 Remove stroke-width in tspan
-#2018-04-07 10h17 put no-filebreakc after definiton of $new, deleted the removement of spaces
-#2018-04-28 not remove stroke-width in text
-#2018-05-05 restructured
-#2018-10-14 Version from https://github.com/JoKalliauer/cleanupSVG/blob/master/svg2validsvg.sh
-#2018-10-14 fokussed only on the librsvg-Bugs
-
-mv $1 Bot.svg
-
-export i=Bot.svg
+export i=$1
 
 #remove empty flow Text in svg (everything else will be done by https://github.com/JoKalliauer/cleanupSVG/blob/master/Flow2TextByInkscape.sh )
 #    <flowRoot id="flowRoot3750" style="fill:black;font-family:Linux Libertine;font-size:64;line-height:100%;text-align:center;text-anchor:middle;writing-mode:lr" xml:space="preserve"/>

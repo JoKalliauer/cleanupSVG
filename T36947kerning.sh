@@ -43,15 +43,23 @@ echo $i start:
     
 	#<svg width="1e3" height="1e3" font-family="Liberation Sans" font-weight="bold" letter-spacing="0" word-spacing="0" inkscape:version="0.92.3 (2405546, 2018-03-11)" sodipodi:docname="Belfast City Council Election, 2014 Map.svg" viewBox="0 0 264.583 264.583" xmlns="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd">
 	
+#solved librsvg-Bug T194192 https://phabricator.wikimedia.org/T194192
+#<svg font-family="ScriptS" font-size="5" viewBox="0,0,128,128"
+sed -ri "s/<svg([-[:alnum:]=\"\.\/: ]*) viewBox=\"0,0,([[:digit:]\.]*),([[:digit:]\.]*)\"/<svg viewBox=\"0 0 \2 \3\"\1/g" $i
+
+	
 	#put viewBox at the beginning (otherwise I will have a variable to less)
-	sed -ri 's/<svg([-[:alnum:]=\" \.\/:\,\(\)_]+) viewBox="([-[:digit:] \.]+)"([-[:alnum:]=\" \.\/:\,]+)>/<svg viewBox="\2"\1\3>/' $i
+	
+	#<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="815px" height="505px" viewBox="0 0 163 101" style="stroke-linecap :round; stroke-linejoin :round;">
+
+	sed -ri 's/<svg([-[:alnum:]=\" \.\/:\,\(\)_#]+) viewBox="([-[:digit:] \.]+)"([-[:alnum:]=\" \.\/:\,\(\);]*)>/<svg viewBox="\2"\1\3>/' $i
 	sed -ri 's/\r/\n/g' $i
 	
     #Define file as a variable
-    export h=$(sed -r 's/<svg viewBox="([-[:digit:]]+) ([-[:digit:]]+) ([[:digit:]]+)\.([[:digit:]])([[:digit:]]*) ([[:digit:]]+)\.([[:digit:]])([[:digit:]]*)"([-[:alnum:]=\" \.\/:\,\(\)_]+)>/<svg viewBox="\1 \2 \3\4.\50 \6\7.\80"\9><g transform="scale(10)">/' $i)
+    export h=$(sed -r 's/<svg viewBox="([-[:digit:]]+) ([-[:digit:]]+) ([[:digit:]]+)\.([[:digit:]])([[:digit:]]*) ([[:digit:]]+)\.([[:digit:]])([[:digit:]]*)"([-[:alnum:]=\" \.\/:\,\(\)_;]+)>/<svg viewBox="\1 \2 \3\4.\50 \6\7.\80"\9><g transform="scale(10)">/' $i)
     
     #Reading out the relevant line
-    export j=$(ls -l|grep -E "viewBox=\"[-[:digit:].]{1,5} [-[:digit:].]{1,5} [[:digit:].]{2,7} [[:digit:].]{2,7}" $i)
+    export j=$(ls -l|grep -E "viewBox=\"[-[:digit:].]{1,5} [-[:digit:].]{1,5} [[:digit:].]{2,10} [[:digit:].]{2,8}" $i)
     
     #Insert a special character to define the point of splitting
     export l=$(echo $j | sed -e "s/viewBox=\"/>/g" )
@@ -63,11 +71,11 @@ echo $i start:
     export n=$(echo $m | awk  '{printf "%f %f %f %f\n",$1*10,$2*10,$3*10,$4*10}')
     
     #Replace the old four numbers with the new four numbers
-    sed -ri "s/<svg([-[:alnum:]=\" \.\/:;\,#]*) viewBox=\"[-[:digit:]\.]+ [-[:digit:]\.]+ [[:digit:]\.]+ [[:digit:]\.]+\"([-[:alnum:]=\" \.\/:\,#\(\)_]+)>/<svg \1 viewBox=\"$n\"\2><g transform=\"scale(10)\">/" $i
+    sed -ri "s/<svg([-[:alnum:]=\" \.\/:;\,#]*) viewBox=\"[-[:digit:]\.]+ [-[:digit:]\.]+ [[:digit:]\.]+ [[:digit:]\.]+\"([-[:alnum:]=\" \.\/:\,#\(\)_;]+)>/<svg\1 viewBox=\"$n\"\2>\n<g transform=\"scale(10)\">/" $i
 	#<svg id="svg562" version="1.1" viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xlink="http://www.w3.org/1999/xlink">
  #----
 
-  sed -ri 's/<\/svg>/<\/g><\/svg>/' $i
+  sed -ri 's/<\/svg>/<\/g>\n<\/svg>/' $i
 
  
 echo $i finish

@@ -25,7 +25,7 @@ for file in *.svg;do
  
  
  #If you want to overwrite the exisiting file, without any backup, delete the following three lines
- export i=${tmp}T.svg
+ export i=${tmp}t.svg
  export j=${tmp}Obj.svg
  cp ./"${file}" $i
  #cp ./"${file}" $j

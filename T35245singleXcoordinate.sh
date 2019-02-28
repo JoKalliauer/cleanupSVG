@@ -22,7 +22,7 @@ fi
 export tmp=${new%.svg}
 
 #If you want to overwrite the exisiting file, without any backup, delete the following three lines
-export i=${tmp}_.svg
+export i=${tmp}T.svg
 cp ./"${file}" $i
 mv ./"${file}" ./${tmp}1.xml
 

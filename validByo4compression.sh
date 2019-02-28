@@ -36,11 +36,15 @@ fi
 
 #echo optizer ${file} to $i begin, min=${minfilesize}, meta=$meta, META= $META, INDENT=$INDENT
 
-svgo -i ${file} -o $i $INDENT -p 3 $META --enable=removeUnknownsAndDefaults --disable=convertPathData --disable=mergePaths --enable=removeScriptElement --disable=removeXMLProcInst --enable=cleanupAttrs --enable=cleanupEnableBackground --enable=cleanupIDs --enable=cleanupNumericValues --enable=convertColors --enable=inlineStyles  --enable=minifyStyles --enable=moveElemsAttrsToGroup --enable=moveGroupAttrsToElems  --enable=removeAttrs --enable=removeComments --enable=removeDesc --enable=removeEditorsNSData --enable=removeEmptyAttrs --enable=removeEmptyContainers --enable=removeEmptyText --enable=removeHiddenElems --enable=removeNonInheritableGroupAttrs --disable=removeRasterImages --enable=removeTitle --enable=removeUnusedNS --enable=removeUselessDefs --enable=removeUselessStrokeAndFill --enable=removeViewBox --enable=sortAttrs --disable=removeDoctype --enable={addAttributesToSVGElement}  --enable=removeStyleElement --enable=convertShapeToPath --enable=convertTransform  --disable=convertStyleToAttrs  --multipass
+svgo -i ${file} -o $i $INDENT -p 3 $META --enable=removeUnknownsAndDefaults --disable=convertPathData --disable=mergePaths --enable=removeScriptElement --disable=removeXMLProcInst --enable=cleanupAttrs --enable=cleanupEnableBackground --enable=cleanupIDs --disable=cleanupNumericValues --enable=convertColors --enable=inlineStyles  --enable=minifyStyles --enable=moveElemsAttrsToGroup --enable=moveGroupAttrsToElems  --enable=removeAttrs --enable=removeComments --enable=removeDesc --enable=removeEditorsNSData --enable=removeEmptyAttrs --enable=removeEmptyContainers --enable=removeEmptyText --enable=removeHiddenElems --enable=removeNonInheritableGroupAttrs --disable=removeRasterImages --enable=removeTitle --enable=removeUnusedNS --enable=removeUselessDefs --enable=removeUselessStrokeAndFill --enable=removeViewBox --enable=sortAttrs --disable=removeDoctype --enable={addAttributesToSVGElement}  --enable=removeStyleElement --enable=convertShapeToPath --enable=convertTransform  --disable=convertStyleToAttrs  --multipass
+
+
 
 ## == make file valid: ==
 # --enable=removeUnknownsAndDefaults # Attribute viewbox not allowed on SVG element pattern at this point. # https://commons.wikimedia.org/wiki/File:Gleisplan_Stra%C3%9Fenbahn_Frankfurt_am_Main.svg
 # --enable=removeStyleElement --multipass # Attribute id declares a duplicate ID value  # https://commons.wikimedia.org/wiki/File:Gleisplan_Stra%C3%9Fenbahn_Frankfurt_am_Main.svg
+
+
 
 ## == Bugs ==
 # --disable=mergePaths # https://github.com/svg/svgo/issues/872 # https://github.com/svg/svgo/issues/958 # sometimes Chrome-displaybug
@@ -52,6 +56,8 @@ svgo -i ${file} -o $i $INDENT -p 3 $META --enable=removeUnknownsAndDefaults --di
 # --disable=convertShapeToPath ##can be problematic for flowtext
 
 #  --disable=convertStyleToAttrs  #https://github.com/svg/svgo/issues/1040 #https://commons.wikimedia.org/wiki/File:2016_Angola_and_DR_Congo_yellow_fever_outbreak.svg
+
+#  --disable=cleanupNumericValues #https://github.com/svg/svgo/issues/1080
 
 
 

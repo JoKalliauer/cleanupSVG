@@ -45,7 +45,7 @@ echo $i start:
 ## == https://validator.w3.org/check and https://validator.nu/ ==
 # W3C: there is no attribute "line-height"
 # Nu:   Attribute text-align not allowed on SVG element text at this point.
-## example     <text id="text8220" x="126.62" y="85.62" font-size="16.25" style="font-family:'Liberation Sans';font-size:16.25px;letter-spacing:0;line-height:125%;text-align:center;text-anchor:middle;word-spacing:0" line-height="125%" sodipodi:linespacing="125%"><tspan id="tspan8222" x="126.62" y="85.62">1</tspan></text>
+## example     <text id="text8220" x="126.62" y="85.62" style="letter-spacing:0;line-height:125%;text-align:center;text-anchor:middle;word-spacing:0" line-height="125%" sodipodi:linespacing="125%"><tspan id="tspan8222" x="126.62" y="85.62">1</tspan></text>
 ## example:   <text id="text2998" fill="#f0ff8f" fill-opacity=".941" font-size="1.32" line-height="125%" stroke-width=".165" x="-91.4" xml:space="preserve" y="-40.85">    <tspan id="tspan2996" fill="#f0ff8f" fill-opacity=".941" stroke-width=".165" x="-91.4" y="-40.85">2.19</tspan></text>
 sed -ri "s/<(text|tspan)([-[:alnum:]=\.\" \(\)\':;%#]*) line-height=\"[0123569.%]+\"/<\1\2/g" $i
 
@@ -62,8 +62,8 @@ sed -ri "s/<(text|tspan)([-[:alnum:]=\.\" \(\)\':;%#]*) line-height=\"[0123569.%
  
 #W3C: there is no attribute "text-align"
 #Nu: Attribute text-align not allowed on SVG element text at this point.
-##example: <text id="text308" font-size="1" stroke-width=".165" text-anchor="end" x="21.91" xml:space="preserve" y="16.21" text-align="end">   <tspan id="tspan304" stroke-width=".165" text-anchor="end" x="21.91" y="16.21" text-align="end">+1</tspan><tspan id="tspan306" stroke-width=".165" text-anchor="end" x="21.91" y="17.46" text-align="end">−1</tspan></text>
-## example:  <text id="text42" font-size="3.963" font-weight="bold" stroke-width=".165" text-anchor="middle" x="16.08" xml:space="preserve" y="22.33" text-align="center"/>
+##example: <text id="text308" stroke-width=".165" text-anchor="end" x="21.91" xml:space="preserve" y="16.21" text-align="end">   <tspan id="tspan304" stroke-width=".165" text-anchor="end" x="21.91" y="16.21" text-align="end">+1</tspan><tspan id="tspan306" stroke-width=".165" text-anchor="end" x="21.91" y="17.46" text-align="end">−1</tspan></text>
+## example:  <text id="text42" font-weight="bold" stroke-width=".165" text-anchor="middle" x="16.08" xml:space="preserve" y="22.33" text-align="center"/>
 sed -ri "s/ text-align=\"(end|center)\"//g"  ${i}
 
  
@@ -100,7 +100,7 @@ sed -ri "s/ data-name=\"([-[:lower:][:digit:] ]*)\"/ id=\"\1\"/g" $i
 #W3C: value of attribute "id" must be a single token
 #nu:  Bad value  for attribute id on SVG element path: Not a valid XML 1.0 name.
 ## example:   <text id="lens _text-9" x="247.78" y="111.492" style="display:inline;fill:#000000;font-family:Arial;font-size:16px;line-height:100%;stroke-width:1px;text-align:center;text-anchor:middle" sodipodi:linespacing="100%" xml:space="preserve">
-sed -ri "s/ <(g|path|text) id=\"([-[:alnum:]:_\.]*)( |'|\(|\)|&|#|,|\/|\+)([-[:alnum:] \':_|\(|\)|&.,\/]+)\"/ <\1 id=\"\2_\4\"/g" $i #replaces (spaces and commas and /) with underlines
+sed -ri "s/ <(g|path|text|rect) id=\"([-[:alnum:]:_\.]*)( |'|\(|\)|&|#|,|\/|\+)([-[:alnum:] \':_|\(|\)|&.,\/]+)\"/ <\1 id=\"\2_\4\"/g" $i #replaces (spaces and commas and /) with underlines
 # do not use this line # sed -ri "s/ <(g|path) id=\"([[:digit:]]+)\"/ <\1 id=\"FIPS_\2\"/" $i #valid id names must not start with a number
 
 #W3C (SVG1.1)  element "flowRoot" undefined
@@ -113,6 +113,11 @@ sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<flowRoot([-[:alnum:]\.=\" \:\(\)\%\#\,\'
 #W3C there is no attribute "i:knockout"
 #Nu  Adobe Illustrator 10.0 attribute knockout not allowed on SVG element path at this point.
 # use scour without --keep-editor-data
+
+
+#W3C there is no attribute "font-feature-settings"
+#nu Attribute font-feature-settings not allowed on SVG element g at this point.
+#svgo --enable=removeUnknownsAndDefaults
 
 
 

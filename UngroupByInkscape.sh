@@ -81,7 +81,7 @@ do
    sed -ri "s/inkscape:version=\"0.(4[\. r[:digit:]]+|91 r13725)\"//g" ./${file}u.svg # https://bugs.launchpad.net/inkscape/+bug/1763190
    inkscape --verb=EditSelectAll --verb=SelectionUnGroup --verb=SelectionUnGroup --verb=SelectionUnGroup --verb=SelectionUnGroup --verb=SelectionUnGroup --verb=FileSave --verb=FileClose ./${file}u.svg --verb=FileQuit
    sed -ri "s/font-family:([-[:alnum:] ,']*)'([-[:alnum:] ]*)'([-[:lower:][:upper:], ']*)/font-family:\1\2\3/g" ./${file}u.svg
-   #svgcleaner ./${file}Cu.svg ./${file}CuC.svg --join-style-attributes all --join-arcto-flags no --remove-declarations no --remove-nonsvg-elements no --paths-to-relative no --remove-unused-segments no --convert-segments no  --allow-bigger-file --indent 1 --remove-metadata no --remove-nonsvg-attributes no
+   #svgcleaner ./${file}u.svg ./${file}uC.svg --join-arcto-flags no --remove-declarations no --remove-nonsvg-elements no --paths-to-relative no --remove-unused-segments no --convert-segments no  --allow-bigger-file --indent 1 --remove-metadata no --remove-nonsvg-attributes no --group-by-style no
    scour -i ./${file}u.svg -o ./${file}us.svg --disable-style-to-xml --keep-unreferenced-defs --disable-embed-rasters --indent=space --nindent=1 --keep-editor-data
    mv ./${file}u.svg ./${file}u.xml
   else
