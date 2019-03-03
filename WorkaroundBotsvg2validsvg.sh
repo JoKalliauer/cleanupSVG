@@ -3,6 +3,10 @@
 #Author: Johannes Kalliauer (JoKalliauer)
 #created: 2019-02-20
 
+
+
+wget https://commons.wikimedia.org/wiki/Special:FilePath/$1
+
 export i=$1
 
 #remove empty flow Text in svg (everything else will be done by https://github.com/JoKalliauer/cleanupSVG/blob/master/Flow2TextByInkscape.sh )
