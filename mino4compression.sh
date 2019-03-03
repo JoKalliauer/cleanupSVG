@@ -40,6 +40,7 @@ svgo -i ${file} -o $i $INDENT -p 3 $META --disable=removeHiddenElems --disable=r
 
 ## == min ==
 #  --disable=removeComments #keep Comments
+#  --disable=cleanupIDs
 
 ### === CSS ===
 # --disable=inlineStyles # keep CSS

@@ -55,6 +55,7 @@ svgcleaner $file $i --allow-bigger-file --indent $INDENT --resolve-use no --appl
 # and to --remove-unused-segments yes
 # and to --convert-segments no
 
+# == min ==
 # keep id names: --remove-unreferenced-ids no --trim-ids no --ungroup-groups no 
 
 #echo mv ./${file} ./${tmp}4.xml

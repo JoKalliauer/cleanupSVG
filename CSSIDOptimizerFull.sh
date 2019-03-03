@@ -8,7 +8,23 @@ export i=${tmp}O.svg
 
 echo optizer ${file} to $i begin
 
-svgo -i ${file} -o $i -p 4 --pretty --indent=1 --disable=removeHiddenElems  --enable=convertTransform --enable=convertPathData --enable=mergePaths --enable=cleanupAttrs --enable=cleanupEnableBackground --enable=cleanupIDs --enable=cleanupListOfValues --enable=cleanupNumericValues --enable=collapseGroups --enable=convertColors --enable=convertShapeToPath --enable=convertStyleToAttrs --enable=inlineStyles --enable=minifyStyles --enable=moveElemsAttrsToGroup --enable=moveGroupAttrsToElems  --enable=removeAttrs --enable=removeComments --enable=removeDesc --enable=removeDoctype --enable=removeEditorsNSData --enable=removeEmptyAttrs --enable=removeEmptyContainers --enable=removeEmptyText --enable=removeMetadata --enable=removeNonInheritableGroupAttrs --enable=removeScriptElement --enable=removeTitle --enable=removeUnknownsAndDefaults --enable=removeUnusedNS --enable=removeUselessDefs --enable=removeUselessStrokeAndFill --enable=removeViewBox --disable=removeXMLProcInst --enable=sortAttrs --disable=removeXMLNS    --enable={addAttributesToSVGElement} --enable=removeRasterImages  --multipass --enable=removeStyleElement ## --enable=removeElementsByAttr
+svgo -i ${file} -o $i -p 4 --pretty --indent=1 --disable=inlineStyles --disable=convertStyleToAttrs --disable=removeStyleElement  --enable=convertTransform --enable=convertPathData --enable=mergePaths --enable=cleanupAttrs --enable=cleanupEnableBackground --disable=cleanupIDs --enable=cleanupListOfValues --enable=cleanupNumericValues --enable=collapseGroups --enable=convertColors --enable=convertShapeToPath --enable=minifyStyles --enable=moveElemsAttrsToGroup --enable=moveGroupAttrsToElems  --enable=removeAttrs --disable=removeComments --enable=removeDesc --enable=removeDoctype --enable=removeEditorsNSData --enable=removeEmptyAttrs --enable=removeEmptyContainers --enable=removeEmptyText --enable=removeHiddenElems --enable=removeMetadata --enable=removeNonInheritableGroupAttrs --enable=removeScriptElement --enable=removeTitle --enable=removeUnknownsAndDefaults --enable=removeUnusedNS --enable=removeUselessDefs --enable=removeUselessStrokeAndFill --enable=removeViewBox --disable=removeXMLProcInst --enable=sortAttrs --disable=removeXMLNS    --enable={addAttributesToSVGElement} --enable=removeRasterImages  --multipass ## --enable=removeElementsByAttr
+
+
+
+
+## == min ==
+#  --disable=removeComments #keep Comments
+## == min ==
+#  --disable=removeComments #keep Comments
+#  --disable=cleanupIDs
+
+### === CSS ===
+# --disable=inlineStyles # keep CSS
+#  --disable=convertStyleToAttrs # CSS-Problem: https://github.com/svg/svgo/issues/1040
+#  --disable=removeStyleElement # (default) keep CSS
+
+## == Bugs ==
 
 # --enable=removeElementsByAttr  # https://github.com/svg/svgo/issues/945 (option does not make sence)
 
@@ -24,6 +40,7 @@ svgo -i ${file} -o $i -p 4 --pretty --indent=1 --disable=removeHiddenElems  --en
 
 ## == keep id-names == # --disable=cleanupIDs
 
+## == not define ==
 # do not define: --enable=prefixIds #Extends the filename to the ID
 #--enable=cleanupListOfValues  https://github.com/svg/svgo/issues/923
 #--enable=convertPathData # https://github.com/svg/svgo/issues/880 and https://github.com/svg/svgo/issues/1053
