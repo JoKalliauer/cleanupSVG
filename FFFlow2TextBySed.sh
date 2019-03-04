@@ -25,9 +25,9 @@ echo
 echo $i start:
 
 #remove empty flow Text in svg (everything else will be done by https://github.com/JoKalliauer/cleanupSVG/blob/master/Flow2TextByInkscape.sh )
-sed -ri 's/<flowPara([-[:alnum:]\" \.\:\%\=]*)\/>//g;s/<flowRoot\/>//g' $i
-sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<flowRoot([-[:alnum:]\.=\" \:\(\)\%\#\,\';]*)>[[:space:]]*<flowRegion([-[:alnum:]=:\" #;\.%]*)(\/|>[[:space:]]*<(path|rect)([-[:alnum:]\"= \.:;# ]*)\/>[[:space:]]*<\/flowRegion)>[[:space:]]*(<flowDiv\/>|)[[:space:]]*<\/flowRoot>//g" $i #delete empty flowRoot
-sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<flowRoot([-[:alnum:]\.=\" \:\(\)\%\#\,\';]*)>[[:space:]]*<flowRegion([-[:alnum:]=:\" #;\.%]*)>[[:space:]]*(<path[-[:alnum:]\.=\"\ \#]*\/>|<rect([-[:alnum:]\"= \.:;]*) x=\"([[:digit:]\. ]+)\" y=\"([-[:digit:]\. ]+)\"([[:lower:][:digit:]=\.\" \#:;]+)\/>)[[:space:]]*<\/flowRegion>[[:space:]]*(|<flowPara([-[:alnum:]\.=\" \:\#;% ]*)\/>|<flowPara([-[:alnum:]\"= \.\:\#;%]*)>([[:space:] ]*)<\/flowPara>)[[:space:]]*<\/flowRoot>//g" $i ##delete flowRoot only containing spaces
+#sed -ri 's/<flowPara([-[:alnum:]\" \.\:\%\=]*)\/>//g;s/<flowRoot\/>//g' $i
+#sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<flowRoot([-[:alnum:]\.=\" \:\(\)\%\#\,\';]*)>[[:space:]]*<flowRegion([-[:alnum:]=:\" #;\.%]*)(\/|>[[:space:]]*<(path|rect)([-[:alnum:]\"= \.:;# ]*)\/>[[:space:]]*<\/flowRegion)>[[:space:]]*(<flowDiv\/>|)[[:space:]]*<\/flowRoot>//g" $i #delete empty flowRoot
+#sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<flowRoot([-[:alnum:]\.=\" \:\(\)\%\#\,\';]*)>[[:space:]]*<flowRegion([-[:alnum:]=:\" #;\.%]*)>[[:space:]]*(<path[-[:alnum:]\.=\"\ \#]*\/>|<rect([-[:alnum:]\"= \.:;]*) x=\"([[:digit:]\. ]+)\" y=\"([-[:digit:]\. ]+)\"([[:lower:][:digit:]=\.\" \#:;]+)\/>)[[:space:]]*<\/flowRegion>[[:space:]]*(|<flowPara([-[:alnum:]\.=\" \:\#;% ]*)\/>|<flowPara([-[:alnum:]\"= \.\:\#;%]*)>([[:space:] ]*)<\/flowPara>)[[:space:]]*<\/flowRoot>//g" $i ##delete flowRoot only containing spaces
 
 
  #   <flowRoot transform="matrix(.26458 0 0 .26458 -19.267 -12.985)" fill="#000000" font-family="DejaVu Sans,sans-serif" font-size="40px" letter-spacing="-6.25px" stroke-width="1px" style="line-height:79.19999957%" xml:space="preserve"><flowRegion style="line-height:79.19999957%"><rect x="3713.9" y="2203.9" width="241.2" height="126.32"/></flowRegion><flowPara fill="#fafafa" font-size="74.667px" text-anchor="middle" style="line-height:79.19999957%">Call-</flowPara><flowPara fill="#fafafa" font-size="74.667px" text-anchor="middle" style="line-height:79.19999957%">isto</flowPara></flowRoot>

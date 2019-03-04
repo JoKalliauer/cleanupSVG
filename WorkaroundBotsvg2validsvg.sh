@@ -55,5 +55,7 @@ sed -ri "s/<svg([-[:alnum:]=\" ]*) viewBox=\"0,0,([[:digit:]\.]*),([[:digit:]\.]
 #librsvgbug https://phabricator.wikimedia.org/phab:T207506 (<code>font-weight="normal"</code> ignored)
 sed -ri "s/font-weight=\"normal\"/font-weight=\"400\"/g" $i
 
+python /data/project/shared/pywikipedia/core/scripts/upload.py $i -keep -ignorewarn -noverify -descfile WorkaroundBotsvg2validsvg.sh
 
+rm $i
 
