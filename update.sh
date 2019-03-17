@@ -1,6 +1,10 @@
 #!/bin/bash
 
+# That has just internal usage for JoKalliauer, please ignore this file
+
 rm master.zip
+
+rmdir ./cleanupSVG-master/
 
 wget https://github.com/JoKalliauer/cleanupSVG/archive/master.zip
 
@@ -13,3 +17,5 @@ cd /data/project/svgworkaroundbot/SVGWorkaroundBot/cleanupSVG-master/
 chmod a+x *.sh
 
 cd ..
+
+cp /data/project/svgworkaroundbot/SVGWorkaroundBot/cleanupSVG-master/update.sh ./update.sh
