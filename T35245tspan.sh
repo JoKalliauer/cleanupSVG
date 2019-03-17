@@ -13,7 +13,7 @@ for file in *.svg;do
 
 ## == Remove scecial characters in filename ==
 
-#export i=$file #i will be overritan later, just for debugging
+#export i=$file #i will be overwritten later, just for debugging
 export new="${file//[^abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\.\_\+]/}"
 if [ $new == '*.svg' ]; then #new has to be controlled because it might have "-" which confuses bash
  echo "no file, (or filename does not contain any default latin character (a-z) )"
@@ -21,10 +21,15 @@ if [ $new == '*.svg' ]; then #new has to be controlled because it might have "-"
 fi
 export tmp=${new%.svg}
 
-#If you want to overwrite the exisiting file, without any backup, delete the following three lines
-export i=${tmp}_.svg
-cp ./"${file}" $i
-mv ./"${file}" ./${tmp}1.xml
+if [ $overwriteJK == 'YES' ]; then
+ echo file will be overwritten
+ export i=$file
+else 
+ #If you want to overwrite the exisiting file, without any backup, delete the following three lines
+ export i=${tmp}_.svg
+ cp ./"${file}" $i
+ mv ./"${file}" ./${tmp}1.xml
+fi
 
 echo 
 echo $i start:
