@@ -4,7 +4,7 @@
 
 rm master.zip
 
-rmdir ./cleanupSVG-master/
+rmdir  --ignore-fail-on-non-empty ./cleanupSVG-master/
 
 wget https://github.com/JoKalliauer/cleanupSVG/archive/master.zip
 
