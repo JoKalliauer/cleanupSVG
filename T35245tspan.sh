@@ -32,6 +32,13 @@ else
  mv ./"${file}" ./${tmp}1.xml
 fi
 
+if [ -z ${1+x} ]; then
+ echo kein Input, verwende $i
+else
+ echo Input $1, verwende $1 anstatt $i
+ i=$1
+fi
+
 echo 
 echo $i start:
 
