@@ -23,11 +23,11 @@ export tmp=${new%.svg}
 
 if [ $overwriteJK == 'YES' ]; then
  echo file will be overwritten
- export i=$file
+ i=$file
 else 
  echo not overwritten
  #If you want to overwrite the exisiting file, without any backup, delete the following three lines
- export i=${tmp}_.svg
+ i=${tmp}_.svg
  cp ./"${file}" $i
  mv ./"${file}" ./${tmp}1.xml
 fi
