@@ -18,4 +18,4 @@ chmod a+x *.sh
 
 cd ..
 
-cp /data/project/svgworkaroundbot/SVGWorkaroundBot/cleanupSVG-master/update.sh ./update.sh
+cp /data/project/svgworkaroundbot/SVGWorkaroundBot/cleanupSVG-master/botupdate.sh ./botupdate.sh
