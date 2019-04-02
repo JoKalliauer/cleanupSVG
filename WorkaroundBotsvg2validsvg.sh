@@ -11,9 +11,9 @@ export i=$1
 
 #----
 
-T35245tspan=YES
-EinzeilTags=YES
-SVGCleaner=YES
+export T35245tspan=YES
+export EinzeilTags=YES
+export SVGCleaner=YES
 
 wget -q https://commons.wikimedia.org/wiki/Special:FilePath/$i -O $i
 
