@@ -5,11 +5,11 @@
 rm master.zip
 
 #rmdir --ignore-fail-on-non-empty ./cleanupSVG-master/
-rm -r cleanupSVG-master/
+#rm -r cleanupSVG-master/
 
 wget -q https://github.com/JoKalliauer/cleanupSVG/archive/master.zip -O master.zip
 
-unzip -zo master.zip
+unzip -qo master.zip
 
 chmod a+x cleanupSVG-master/WorkaroundBotsvg2validsvg.sh
 
