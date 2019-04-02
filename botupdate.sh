@@ -4,9 +4,10 @@
 
 rm master.zip
 
-rmdir --ignore-fail-on-non-empty ./cleanupSVG-master/
+#rmdir --ignore-fail-on-non-empty ./cleanupSVG-master/
+rm -r cleanupSVG-master/
 
-wget https://github.com/JoKalliauer/cleanupSVG/archive/master.zip
+wget -q https://github.com/JoKalliauer/cleanupSVG/archive/master.zip -O master.zip
 
 unzip -zo master.zip
 
