@@ -3,7 +3,9 @@
 #Author: Johannes Kalliauer (JoKalliauer)
 #created: 2019-02-20
 
-
+# $1 ... input (f.e. Buggy.svg)
+# $2 ... output (f.e. Repaired.svg)
+# $3 ... SVGCleaner (YES or NO)
 
 rm -f $1
 
@@ -11,11 +13,20 @@ export i=$1
 
 #----
 
+~/.bash_profile
+
+
 export T35245tspan=YES
 export EinzeilTags=YES
 export SVGCleaner=YES
 
 wget -q https://commons.wikimedia.org/wiki/Special:FilePath/$i -O $i
+
+if [ $SVGCleaner = '' ]; then
+ SVGCleaner=YES
+fi
+
+export PATH=/data/project/svgworkaroundbot/SVGWorkaroundBot/cleanupSVG-master/:$PATH
 
 if [ $SVGCleaner = 'YES' ]; then
  /data/project/svgworkaroundbot/prgm/svgcleaner/svgcleaner $i tmp.svg --allow-bigger-file --indent 1 --resolve-use no --apply-transform-to-gradients yes --apply-transform-to-shapes yes --convert-shapes yes --group-by-style no --join-arcto-flags no --join-style-attributes no --merge-gradients yes --regroup-gradient-stops yes --remove-comments no --remove-declarations no --remove-default-attributes yes --remove-desc yes --remove-dupl-cmd-in-paths yes --remove-dupl-fegaussianblur yes --remove-dupl-lineargradient yes --remove-dupl-radialgradient yes --remove-gradient-attributes yes --remove-invalid-stops yes --remove-invisible-elements no --remove-metadata no --remove-needless-attributes yes --remove-nonsvg-attributes no --remove-nonsvg-elements no --remove-text-attributes no --remove-title no --remove-unreferenced-ids no --remove-unresolved-classes yes --remove-unused-coordinates yes --remove-unused-defs yes --remove-version yes --remove-xmlns-xlink-attribute yes --simplify-transforms yes --trim-colors yes --trim-ids no --trim-paths yes --ungroup-defs yes --ungroup-groups no --use-implicit-cmds yes --list-separator comma --paths-to-relative yes --remove-unused-segments yes --convert-segments yes --apply-transform-to-paths no --coordinates-precision 2 --paths-coordinates-precision 5 --properties-precision 3 --transforms-precision 7 --copy-on-error

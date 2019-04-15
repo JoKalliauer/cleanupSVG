@@ -6,7 +6,7 @@
 #Download date: 2017-10-29
 
 #last Changes: (by Johannes Kalliauer)
-#2017-10-29 11h06 defined inkscape alias (Johannes Kalliauer)
+#2017-10-29 11h06 defined Inkscape alias (Johannes Kalliauer)
 
 echo
 
@@ -18,15 +18,21 @@ echo
 #outputType="svg"
 #outputType="png"
 
+~/.bash_profile
+
+export PATH=/data/project/svgworkaroundbot/prgm2/OptiPNG/optipng-0.7.7/src/optipng:$PATH
+
 
 for fileSource in *.svg
 do
+
+#fileSource=$1
 
  export i=$fileSource #i will be overwritten later
  export fileN=$(echo $fileSource | cut -f1 -d" ") #remove spaces if exsiting (and everything after)
  export tmp=${fileN%.base64}
 
- #If you want to overwrite the exisiting file, without any backup, delete the following three lines
+ #If you want to overwrite the existing file, without any backup, delete the following three lines
  export i=${tmp}
  if [ -f "$i" ]; then
   echo no renaming
@@ -36,7 +42,7 @@ do
  fi
  
  #mv "${fileSource}.$sourceType" "${fileSource}2.xml"
-
+ echo $i
  if [ -f "$i" ]; then    
   count=$((count+1))
   file=${i%.base64}
