@@ -7,7 +7,7 @@ echo #Add a empty line to split the output
 
 #pingo $file
 
-pngout.exe  $file
+pngout  $file
 
 #pingo $file
 

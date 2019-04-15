@@ -56,7 +56,7 @@ sed -ri 's/ font-family="([[:alnum:] ]*)( |-)"/ font-family="\1"/g' $i
 sed -i "s/ font-family=\"DejaVu Sans Condensed\"/ font-family=\"DejaVu Sans\" font-stretch=\"condensed\"/g" $i
 
 #Sans
-sed -ri 's/ font-family=\"Arial/ font-family=\"Liberation Sans,Arial/g' $i #as automatic
+sed -ri 's/ font-family=\"(Arial|MyriadPro|Myriad Pro)/ font-family=\"Liberation Sans,\1/g' $i #as automatic
 sed -ri 's/ font-family=\"DejaVuSans\"/ font-family=\"DejaVu Sans\"/g' $i #as automatic
 sed -i 's/ font-family=\"Helvetica\"/ font-family=\"Nimbus Sans L,Liberation Sans,Helvetica\"/g' $i #looks similar https://commons.wikimedia.org/wiki/File_talk:Meta_SVG_fonts.svg #https://meta.wikimedia.org/wiki/File:SVG_Text_Font_Test.svg
 sed -i "s/ font-family=\"Arial Narrow\"/ font-family=\"Liberation Sans Narrow,Arial Narrow\"/g" $i

@@ -21,7 +21,7 @@ if [ $new == '*.svg' ]; then #new has to be controlled because it might have "-"
 fi
 export tmp=${new%.svg}
 
-if [ $overwriteJK == 'YES' ]; then
+if [ $overwriteJK = "YES" ]; then
  echo file will be overwritten
  i=$file
 else 
@@ -32,12 +32,12 @@ else
  mv ./"${file}" ./${tmp}1.xml
 fi
 
-if [ -z ${1+x} ]; then
- echo kein Input, verwende $i
-else
- echo Input $1, verwende $1 anstatt $i
- i=$1
-fi
+# if [ -z ${1+x} ]; then
+#  echo kein Input, verwende $i
+# else
+#  echo Input $1, verwende $1 anstatt $i
+#  i=$1
+# fi
 
 echo 
 echo $i start:
