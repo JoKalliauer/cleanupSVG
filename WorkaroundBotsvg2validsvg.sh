@@ -16,25 +16,22 @@ export i=$1
 ~/.bash_profile
 
 T35245tspan=YES
-EinzeilTags=YES
+#EinzeilTags=YES
 #SVGCleaner=YES
-
-if [ -z ${SVGCleaner+x} ]; then
- SVGCleaner=YES
-fi
 
 wget -q https://commons.wikimedia.org/wiki/Special:FilePath/$i -O $i
 
-if [ $SVGCleaner = '' ]; then
- SVGCleaner=YES
-fi
-
 export PATH=/data/project/svgworkaroundbot/SVGWorkaroundBot/cleanupSVG-master/:/data/project/svgworkaroundbot/prgm/svgcleaner/:$PATH
 
+if [ $EinzeilTags = 'YES' ]; then
   sed -i "s/\r/ /g" $i #remove carriage return (DOS,MAC)
   sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/\n[[:space:]]+/ /g" $i #reduce to one space
   #sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/[[:space:]\r\n]+/ /g" $i #no need for that
   sed -ri 's/[[:space:]]*<(g|path|svg|flowRoot|defs|clipPath|radialGradient|linearGradient|filter|mask|pattern|text|metadata) /\r\n<\1 /g' $i
+
+  #remove useless metadata
+  sed -i "s/<metadata id=\"metadata8\">  <rdf:RDF>  <cc:Work rdf:about=\"\">  <dc:format>image\/svg+xml<\/dc:format>  <dc:type rdf:resource=\"http:\/\/purl.org\/dc\/dcmitype\/StillImage\"\/>  <dc:title\/>  <\/cc:Work>  <\/rdf:RDF>  <\/metadata>//" $i
+fi
 
 
 #remove empty flow Text in svg (first update svg2validsvg.sh)
@@ -55,10 +52,6 @@ if [ $SVGCleaner = 'YES' ]; then
  svgcleaner $i tmp.svg --allow-bigger-file --indent 1 --resolve-use no --apply-transform-to-gradients yes --apply-transform-to-shapes yes --convert-shapes yes --group-by-style no --join-arcto-flags no --join-style-attributes no --merge-gradients yes --regroup-gradient-stops yes --remove-comments no --remove-declarations no --remove-default-attributes yes --remove-desc yes --remove-dupl-cmd-in-paths yes --remove-dupl-fegaussianblur yes --remove-dupl-lineargradient yes --remove-dupl-radialgradient yes --remove-gradient-attributes yes --remove-invalid-stops yes --remove-invisible-elements no --remove-metadata no --remove-needless-attributes yes --remove-nonsvg-attributes no --remove-nonsvg-elements no --remove-text-attributes no --remove-title no --remove-unreferenced-ids no --remove-unresolved-classes yes --remove-unused-coordinates yes --remove-unused-defs yes --remove-version yes --remove-xmlns-xlink-attribute yes --simplify-transforms yes --trim-colors yes --trim-ids no --trim-paths yes --ungroup-defs yes --ungroup-groups no --use-implicit-cmds yes --list-separator comma --paths-to-relative yes --remove-unused-segments yes --convert-segments yes --apply-transform-to-paths no --coordinates-precision 2 --paths-coordinates-precision 5 --properties-precision 3 --transforms-precision 7 --copy-on-error
  cp -f tmp.svg $i
 fi
-
-#remove useless metadata
-sed -i "s/<metadata id=\"metadata8\">  <rdf:RDF>  <cc:Work rdf:about=\"\">  <dc:format>image\/svg+xml<\/dc:format>  <dc:type rdf:resource=\"http:\/\/purl.org\/dc\/dcmitype\/StillImage\"\/>  <dc:title\/>  <\/cc:Work>  <\/rdf:RDF>  <\/metadata>//" $i
-
 
 
 #Remove CDATA by AdobeIllustrator
