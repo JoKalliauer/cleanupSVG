@@ -111,5 +111,5 @@ fi
 
 python /data/project/shared/pywikipedia/core/scripts/upload.py $i -keep -ignorewarn -noverify -descfile WorkaroundBotsvg2validsvg.sh
 
-#rm $i
+rm $i
 
