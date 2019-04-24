@@ -75,8 +75,14 @@ do
    #svgcleaner ${fileSource} ./${file}Cu.svg --join-style-attributes all --join-arcto-flags no --remove-declarations no --remove-nonsvg-elements no --paths-to-relative no --remove-unused-segments no --convert-segments no  --allow-bigger-file --indent 1 --remove-metadata no --remove-nonsvg-attributes no
    #mv ./${fileSource} ./${file}4.xml
    #cp ./${file}Cu.svg ./${file}C.xml
-   cp ./${fileSource} ./${file}f.svg
+   
+   #scour -i ./${fileSource} -o ./${file}s.svg --disable-style-to-xml --keep-unreferenced-defs --indent=space --nindent=1  --keep-editor-data #https://gitlab.com/inkscape/inkscape/issues/117
+   
+   #svgo -i ${file} -o ${file}o.svg $INDENT -p 3 $META --disable=removeHiddenElems --disable=removeUnknownsAndDefaults --disable=convertTransform --disable=convertPathData --disable=mergePaths --enable=removeScriptElement --disable=removeXMLProcInst --disable=convertStyleToAttrs --enable=cleanupAttrs --enable=cleanupEnableBackground --disable=cleanupIDs --disable=cleanupNumericValues --enable=convertColors --disable=convertShapeToPath --disable=inlineStyles  --disable=minifyStyles --enable=moveElemsAttrsToGroup --enable=moveGroupAttrsToElems  --enable=removeAttrs --disable=removeComments --enable=removeDesc --disable=removeEditorsNSData --enable=removeEmptyAttrs --enable=removeEmptyContainers --enable=removeEmptyText --enable=removeNonInheritableGroupAttrs --disable=removeRasterImages --disable=removeTitle --enable=removeUnusedNS --enable=removeUselessDefs --enable=removeUselessStrokeAndFill --enable=removeViewBox --enable=sortAttrs --disable=removeDoctype --enable={addAttributesToSVGElement}  --disable=collapseGroups  --disable=removeStyleElement
+   
+   cp ./${file}.svg ./${file}f.svg
    mv ./${fileSource} ./${file}.xml
+   #mv ./${file}o.svg ./${file}o.xml
    
    #remove empty flow Text in svg (first update svg2validsvg.sh)
    sed -ri 's/<flowPara([-[:alnum:]\" \.\:\%\=\;#\(\)]*)\/>//g;s/<flowRoot([-[:alnum:]" \.:%=;]*)\/>//g' ${file}f.svg
@@ -85,8 +91,15 @@ do
    sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<flowRoot([-[:alnum:]\.=\" \:\(\)\%\#\,\';]*)>[[:space:]]*<flowRegion([-[:alnum:]=:\" ]*)>[[:space:]]*(<path[-[:alnum:]\.=\"\ \#]*\/>|<rect( id=\"[-[:alnum:]]*\"|) x=\"([-[:digit:]\. ]+)\" y=\"([-[:digit:]\. ]+)\"([[:lower:][:digit:]=\.\" \#:]+)\/>)[[:space:]]*<\/flowRegion>[[:space:]]*(|<flowPara([-[:alnum:]\.=\" \:\#;% ]*)>([[:space:] ]*)<\/flowPara>)[[:space:]]*<\/flowRoot>//g" ${file}f.svg ##delete flowRoot only containing spaces
    
    sed -ri "s/inkscape:version=\"0.(4[\. r[:digit:]]+|91 r13725)\"//g" ./${file}f.svg # https://bugs.launchpad.net/inkscape/+bug/1763190
-
+   
    inkscape ./${file}f.svg --verb=EditSelectAll --verb=ObjectFlowtextToText --verb=FileSave --verb=FileClose --verb=FileQuit
+   
+   #remove useless metadata
+   sed -i -e ':a' -e 'N' -e '$!ba' -e "s/<metadata id=\"metadata[[:digit:]]*\">[[:space:]\r\n]*<rdf:RDF>[[:space:]\r\n]*<cc:Work rdf:about=\"\">[[:space:]\r\n]*<dc:format>image\/svg+xml<\/dc:format>[[:space:]\r\n]*<dc:type rdf:resource=\"http:\/\/purl.org\/dc\/dcmitype\/StillImage\"\/>[[:space:]\r\n]*<dc:title\/>[[:space:]\r\n]*<\/cc:Work>[[:space:]\r\n]*<\/rdf:RDF>[[:space:]\r\n]*<\/metadata>//" ${file}f.svg
+   
+   sed -i "s/<sodipodi:namedview id=\"namedview[[:digit:]]*\" bordercolor=\"#666666\" borderopacity=\"1\" gridtolerance=\"10\" guidetolerance=\"10\" inkscape:current-layer=\"svg[[:digit:]]*\" inkscape:cx=\"[[:digit:].]*\" inkscape:cy=\"[-[:digit:].]*\" inkscape:pageopacity=\"0\" inkscape:pageshadow=\"2\" inkscape:window-height=\"480\" inkscape:window-maximized=\"0\" inkscape:window-width=\"640\" inkscape:window-x=\"0\" inkscape:window-y=\"0\" inkscape:zoom=\"0.[[:digit:]]*\" objecttolerance=\"10\" pagecolor=\"#ffffff\" showgrid=\"false\"\/>//" ${file}f.svg
+
+   
    #svgcleaner ./${file}Cu.svg ./${file}CuC.svg --join-style-attributes all --join-arcto-flags no --remove-declarations no --remove-nonsvg-elements no --paths-to-relative no --remove-unused-segments no --convert-segments no  --allow-bigger-file --indent 1 --remove-metadata no --remove-nonsvg-attributes no
    scour -i ./${file}f.svg -o ./${file}fs.svg --disable-style-to-xml --keep-unreferenced-defs --indent=space --nindent=1  --keep-editor-data #--enable-id-stripping
    mv ./${file}f.svg ./${file}f.xml

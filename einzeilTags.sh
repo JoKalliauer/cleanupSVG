@@ -39,7 +39,7 @@ for file in *.svg;do
  #remove objects:
 
  #sed -ri "s/ <rect ([-[:alnum:]=\.\" \#\(\)]+)\/>//g" $i #delete all Rectangles
- 
+  sed -i "s/\r/ /g" $i #remove carriage return (DOS,MAC)
  sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/\n[[:space:]]+/ /g" $i #reduce to one space
  sed -ri "s/<mask([[:alnum:] =\"]*) maskUnits=\"userSpaceOnUse\"( id=\"[[:alnum:]_]+\"|)>/<mask\1\2>/g" $i
  

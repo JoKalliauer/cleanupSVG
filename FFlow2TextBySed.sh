@@ -2,6 +2,8 @@
 
 #Author: Johannes Kalliauer (JoKalliauer)
 
+./einzeilTags.sh
+
 for file in *.svg;do
 
 echo $file
@@ -24,7 +26,7 @@ mv ./"${file}" ./${tmp}1.xml
 echo 
 echo $i start:
 
-#remove empty flow Text in svg (everything else will be done by https://github.com/JoKalliauer/cleanupSVG/blob/master/Flow2TextByInkscape.sh , newerst version see svg2validsvg.sh)
+#remove empty flow Text in svg (everything else will be done by https://github.com/JoKalliauer/cleanupSVG/blob/master/Flow2TextByInkscape.sh , newest version see svg2validsvg.sh)
 sed -ri 's/<flowPara([-[:alnum:]\" \.\:\%\=]*)\/>//g;s/<flowRoot\/>//g' $i
 sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<flowRoot([-[:alnum:]\.=\" \:\(\)\%\#\,\';]*)>[[:space:]]*<flowRegion([-[:alnum:]=:\" #;\.%]*)(\/|>[[:space:]]*<(path|rect)([-[:alnum:]\"= \.:;# ]*)\/>[[:space:]]*<\/flowRegion)>[[:space:]]*(<flowDiv\/>|)[[:space:]]*<\/flowRoot>//g" $i #delete empty flowRoot
 sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<flowRoot([-[:alnum:]\.=\" \:\(\)\%\#\,\';]*)>[[:space:]]*<flowRegion([-[:alnum:]=:\" #;\.%]*)>[[:space:]]*(<path[-[:alnum:]\.=\"\ \#]*\/>|<rect([-[:alnum:]\"= \.:;]*) x=\"([[:digit:]\. ]+)\" y=\"([-[:digit:]\. ]+)\"([[:lower:][:digit:]=\.\" \#:;]+)\/>)[[:space:]]*<\/flowRegion>[[:space:]]*(|<flowPara([-[:alnum:]\.=\" \:\#;% ]*)\/>|<flowPara([-[:alnum:]\"= \.\:\#;%]*)>([[:space:] ]*)<\/flowPara>)[[:space:]]*<\/flowRoot>//g" $i ##delete flowRoot only containing spaces

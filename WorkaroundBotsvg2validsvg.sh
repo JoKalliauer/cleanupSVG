@@ -16,11 +16,20 @@ export i=$1
 ~/.bash_profile
 
 T35245tspan=YES
+EinzeilTags=NO
+SVGCleaner=NO
 #EinzeilTags=YES
 #SVGCleaner=YES
 
-wget -q https://commons.wikimedia.org/wiki/Special:FilePath/$i -O $i
-
+if [ $HOSTNAME = LAPTOP-K1FUMMIP ]; then
+ wget -q https://commons.wikimedia.org/wiki/Special:FilePath/$i -O $i
+else
+ if [ $HOSTNAME = tools-sgebastion-07 ]; then
+  wget -q https://commons.wikimedia.org/wiki/Special:FilePath/$i -O $i 
+ else
+  echo did not recognice HOSTNAME $HOSTNAME
+ fi
+fi
 export PATH=/data/project/svgworkaroundbot/SVGWorkaroundBot/cleanupSVG-master/:/data/project/svgworkaroundbot/prgm/svgcleaner/:$PATH
 
 if [ $EinzeilTags = 'YES' ]; then
@@ -109,7 +118,17 @@ fi
 
 #cp -f $i $2
 
-python /data/project/shared/pywikipedia/core/scripts/upload.py $i -keep -ignorewarn -noverify -descfile WorkaroundBotsvg2validsvg.sh
+if [ $HOSTNAME = LAPTOP-K1FUMMIP ]; then
+ echo do upload manually
+else
+ if [ $HOSTNAME = tools-sgebastion-07 ]; then
+  python /data/project/shared/pywikipedia/core/scripts/upload.py $i -keep -ignorewarn -noverify -descfile WorkaroundBotsvg2validsvg.sh
+  rm $i
+ else
+  echo did not recognice HOSTNAME $HOSTNAME
+ fi
+fi
+export P
 
-rm $i
+
 
