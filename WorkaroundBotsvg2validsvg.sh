@@ -122,8 +122,8 @@ if [ $HOSTNAME = LAPTOP-K1FUMMIP ]; then
  echo do upload manually
 else
  if [ $HOSTNAME = tools-sgebastion-07 ]; then
-  python /data/project/shared/pywikipedia/core/scripts/upload.py $i -keep -ignorewarn -noverify -descfile WorkaroundBotsvg2validsvg.sh
-  rm $i
+  #python /data/project/shared/pywikipedia/core/scripts/upload.py $i -keep -ignorewarn -noverify -descfile WorkaroundBotsvg2validsvg.sh
+  #rm $i
  else
   echo did not recognice HOSTNAME $HOSTNAME
  fi
