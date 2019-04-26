@@ -124,7 +124,7 @@ if [ $HOSTNAME = LAPTOP-K1FUMMIP ]; then
 else
  if [ $HOSTNAME = tools-sgebastion-07 ]; then
   echo no upload
-  #python /data/project/shared/pywikipedia/core/scripts/upload.py $i -keep -ignorewarn -noverify -descfile WorkaroundForLibrsvgBugsWithSVGCleaner$SVGCleaner
+  #python /data/project/shared/pywikipedia/core/scripts/upload.py $i -keep -ignorewarn -noverify -descfile "WorkaroundForLibrsvgBugs WithSVGCleaner$SVGCleaner [[phab:T55899]]"
   #rm $i
  else
   echo did not recognice HOSTNAME $HOSTNAME
