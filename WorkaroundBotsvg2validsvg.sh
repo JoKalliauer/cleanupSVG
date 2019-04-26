@@ -17,7 +17,7 @@ export i=$1
 
 T35245tspan=YES
 EinzeilTags=NO
-SVGCleaner=NO
+#SVGCleaner=NO
 #EinzeilTags=YES
 #SVGCleaner=YES
 
@@ -124,8 +124,8 @@ if [ $HOSTNAME = LAPTOP-K1FUMMIP ]; then
 else
  if [ $HOSTNAME = tools-sgebastion-07 ]; then
   echo no upload
-  python /data/project/shared/pywikipedia/core/scripts/upload.py $i -keep -ignorewarn -noverify -descfile WorkaroundForLibrsvgBugs
-  rm $i
+  #python /data/project/shared/pywikipedia/core/scripts/upload.py $i -keep -ignorewarn -noverify -descfile WorkaroundForLibrsvgBugs
+  #rm $i
  else
   echo did not recognice HOSTNAME $HOSTNAME
  fi
