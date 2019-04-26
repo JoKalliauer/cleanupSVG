@@ -70,6 +70,8 @@ sed -ri "s/ text-align=\"(end|center)\"//g"  ${i}
 #W3C: element "rdf:RDF" undefined
 #Nu: Warning: This validator does not validate RDF. RDF subtrees go unchecked.
 # use scour/svgcleaner/svgo or https://de.wikipedia.org/wiki/Benutzer:Marsupilami/Inkscape-FAQ#Wie_erstelle_ich_eine_Datei_die_dem_Standard_SVG_1.1_entspricht?
+   sed -i -e ':a' -e 'N' -e '$!ba' -e "s/<metadata id=\"metadata[[:digit:]]*\">[[:space:]\r\n]*<rdf:RDF>[[:space:]\r\n]*<cc:Work rdf:about=\"\">[[:space:]\r\n]*<dc:format>image\/svg+xml<\/dc:format>[[:space:]\r\n]*<dc:type rdf:resource=\"http:\/\/purl.org\/dc\/dcmitype\/StillImage\"\/>[[:space:]\r\n]*<dc:title\/>[[:space:]\r\n]*<\/cc:Work>[[:space:]\r\n]*<\/rdf:RDF>[[:space:]\r\n]*<\/metadata>//" $i
+   
 
 #W3C: Error: there is no attribute "sodipodi:version"
 #W3C: Error: element "sodipodi:namedview" undefined
@@ -80,6 +82,7 @@ sed -ri "s/ text-align=\"(end|center)\"//g"  ${i}
 #W3C: Error:  there is no attribute "sodipodi:nodetypes"
 #Nu: Warning: This validator does not validate Inkscape extensions properly. Inkscape-specific errors may go unnoticed.
 # use scour/svgcleaner --remove-nonsvg-attributes yes --remove-nonsvg-elements yes/svgo
+   sed -i "s/<sodipodi:namedview id=\"namedview[[:digit:]]*\" bordercolor=\"#666666\" borderopacity=\"1\" gridtolerance=\"10\" guidetolerance=\"10\" inkscape:current-layer=\"svg[[:digit:]]*\" inkscape:cx=\"[[:digit:].]*\" inkscape:cy=\"[-[:digit:].]*\" inkscape:pageopacity=\"0\" inkscape:pageshadow=\"2\" inkscape:window-height=\"480\" inkscape:window-maximized=\"0\" inkscape:window-width=\"640\" inkscape:window-x=\"0\" inkscape:window-y=\"0\" inkscape:zoom=\"0.[[:digit:]]*\" objecttolerance=\"10\" pagecolor=\"#ffffff\" showgrid=\"false\"\/>//" $i
 
 #W3C: Error:  there is no attribute "enable-background"
 #Nu: Error: Attribute enable-background not allowed on SVG element path at this point.
@@ -139,6 +142,7 @@ sed -i "s/<style>/<style type=\"text\/css\">/" $i
 #W3C (SVG1.1) Error: required attribute "xlink:href" not specified
 #CorelDraw-Problem (not very common)
 #https://commons.wikimedia.org/wiki/File:IIIIER.svg
+#https://commons.wikimedia.org/wiki/File:Eliandthethirteenthconfession_logo.svg
 sed -i "s/ href=\"/  xmlns:xlink=\"http:\/\/www.w3.org\/1999\/xlink\" xlink:href=\"/g" $i
 
 
