@@ -1,12 +1,17 @@
 #!/bin/bash
+#solves librsvg-Bug (Workarounds)
+# Input $1 ... File from Commons (downloaded, repaired and overwritten automatically)
 
+## == Credit ==
 #Author: Johannes Kalliauer (JoKalliauer)
 #created: 2019-02-20
+#published: https://github.com/JoKalliauer/cleanupSVG and https://github.com/JoKalliauer/convert
 
-# $1 ... input (f.e. Buggy.svg)
-# $2 ... output (f.e. Repaired.svg)
-# $3 ... SVGCleaner (YES or NO)
+## == Last changes ==
+#2019-04-26 20h37 by JoKalliauer included SVGCleaner, remove default/empty/useless metadata/sodipodi:namedview,  href to xlink:href
 
+
+## == Programm ==
 rm -f $1
 
 export i=$1
@@ -154,7 +159,7 @@ if [ $HOSTNAME = LAPTOP-K1FUMMIP ]; then
 else
  if [ $HOSTNAME = tools-sgebastion-07 ]; then
   #echo no upload
-  python /data/project/shared/pywikipedia/core/scripts/upload.py $i -keep -ignorewarn -noverify -descfile "WorkaroundForLibrsvgBugs WithSVGCleaner$SVGCleaner [[phab:T55899]]"
+  python /data/project/shared/pywikipedia/core/scripts/upload.py $i -keep -ignorewarn -noverify -descfile "WorkaroundForLibrsvgBugs SVGCleaner$SVGCleaner [[phab:T55899]] http://tools.wmflabs.org/svgworkaroundbot/ [[User:SVGWorkaroundBot/source]] https://github.com/JoKalliauer/cleanupSVG/blob/master/WorkaroundBotsvg2validsvg.sh"
   rm $i
  else
   echo did not recognice HOSTNAME $HOSTNAME
