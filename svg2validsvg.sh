@@ -202,8 +202,7 @@ sed -ri "s/font-family:&apos;([-[:alnum:] ]*)&apos;/font-family:'\1'/g" $i
 
 #Repair WARNING in <mask> with id=ay: Mask element found with maskUnits set. It will not be rendered properly by Wikimedia's SVG renderer. See https://phabricator.wikimedia.org/T55899 for details
 #example https://commons.wikimedia.org/wiki/File:%22Mentor%22_Sticker_Design_version_A.svg
-# <mask id="c" x="834.04" y="1063.07" width="824.39" height="752.82" maskUnits="userSpaceOnUse">
-sed -ri "s/<mask([[:alnum:] =\".]*) maskUnits=\"userSpaceOnUse\"([[:alnum:]=_\" ]*)>/<mask\1\2>/g" $i
+sed -ri "s/<mask([[:alnum:]_ =\".]*) maskUnits=\"userSpaceOnUse\"([[:alnum:]=_\". ]*)>/<mask\1\2>/g" $i
 
 
 #Change spaces to , in stroke-dasharray (solves librsvg-Bug https://phabricator.wikimedia.org/T32033 )

@@ -100,7 +100,7 @@ sed -ri "s/ data-name=\"([-[:lower:][:digit:] ]*)\"/ id=\"\1\"/g" $i
 #W3C: value of attribute "id" must be a single token
 #nu:  Bad value  for attribute id on SVG element path: Not a valid XML 1.0 name.
 ## example:   <text id="lens _text-9" x="247.78" y="111.492" style="display:inline;fill:#000000;font-family:Arial;font-size:16px;line-height:100%;stroke-width:1px;text-align:center;text-anchor:middle" sodipodi:linespacing="100%" xml:space="preserve">
-sed -ri "s/ <(g|path|text|rect) id=\"([-[:alnum:]:_\.]*)( |'|\(|\)|&|#|,|\/|\+)([-[:alnum:] \':_|\(|\)|&.,\/]+)\"/ <\1 id=\"\2_\4\"/g" $i #replaces (spaces and commas and /) with underlines
+sed -ri "s/ <(g|path|text|rect) id=\"([-[:alnum:]íã:_\.]*)( |'|\(|\)|&|#|,|\/|\+)([-[:alnum:] \':_|\(|\)|&.,\/]+)\"/ <\1 id=\"\2_\4\"/g" $i #replaces (spaces and commas and /) with underlines
 # do not use this line # sed -ri "s/ <(g|path) id=\"([[:digit:]]+)\"/ <\1 id=\"FIPS_\2\"/" $i #valid id names must not start with a number
 
 #W3C (SVG1.1)  element "flowRoot" undefined
