@@ -82,8 +82,7 @@ if [ $ScourScour = 'YES' ]; then
  #rm tmp.svg
  scour -i $i -o tmp.svg --keep-unreferenced-defs --remove-descriptions --strip-xml-space  --set-precision=6 --indent=space --nindent=1 --renderer-workaround --disable-style-to-xml  --set-c-precision=6 --protect-ids-noninkscape  --disable-simplify-colors  --keep-editor-data --error-on-flowtext # --enable-comment-stripping --create-groups  #--enable-viewboxing #
  rm $i
- tail tmp.svg
- #mv tmp.svg $i
+ mv tmp.svg $i
 else 
  echo no ScourScour $ScourScour
 fi
@@ -186,8 +185,8 @@ if [ $HOSTNAME = LAPTOP-K1FUMMIP ]; then
 else
  if [ $HOSTNAME = tools-sgebastion-07 ]; then
   #echo no upload
-  #python /data/project/shared/pywikipedia/core/scripts/upload.py $i -keep -ignorewarn -noverify -descfile "$uploadcomment"
-  #rm $i
+  python /data/project/shared/pywikipedia/core/scripts/upload.py $i -keep -ignorewarn -noverify -descfile "$uploadcomment"
+  rm $i
  else
   echo did not recognice HOSTNAME $HOSTNAME
  fi
