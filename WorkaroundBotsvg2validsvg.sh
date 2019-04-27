@@ -79,9 +79,11 @@ fi
 if [ $ScourScour = 'YES' ]; then
  echo runScourScour $ScourScour
  #rm tmp.svg
- scour -i $i -o tmp.svg --keep-unreferenced-defs --remove-descriptions --strip-xml-space  --set-precision=6 --indent=space --nindent=1 --renderer-workaround --disable-style-to-xml  --set-c-precision=6 --protect-ids-noninkscape  --disable-simplify-colors  --keep-editor-data --error-on-flowtext # --enable-comment-stripping --create-groups  #--enable-viewboxing #
+ python3 -m scour.scour  -i $i -o tmp.svg
+ #scour -i $i -o tmp.svg --keep-unreferenced-defs --remove-descriptions --strip-xml-space  --set-precision=6 --indent=space --nindent=1 --renderer-workaround --disable-style-to-xml  --set-c-precision=6 --protect-ids-noninkscape  --disable-simplify-colors  --keep-editor-data --error-on-flowtext # --enable-comment-stripping --create-groups  #--enable-viewboxing #
  rm $i
- mv tmp.svg $i
+ tail tmp.svg
+ #mv tmp.svg $i
 else 
  echo no ScourScour $ScourScour
 fi
