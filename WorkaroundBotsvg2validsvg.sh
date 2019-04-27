@@ -34,10 +34,11 @@ fi
 
 if [ $HOSTNAME = LAPTOP-K1FUMMIP ]; then
  wget -q https://commons.wikimedia.org/wiki/Special:FilePath/$i -O $i
+ export ScourJK=scour
 else
  if [ $HOSTNAME = tools-sgebastion-07 ]; then
   wget -q https://commons.wikimedia.org/wiki/Special:FilePath/$i -O $i 
-  alias scour="python3 -m scour.scour"
+  export ScourJK="python3 -m scour.scour"
  else
   echo did not recognice HOSTNAME $HOSTNAME
  fi
@@ -78,9 +79,9 @@ fi
 
 if [ $ScourScour = 'YES' ]; then
  export scour
- echo runScourScour $ScourScour
+ echo runScourScour $ScourJK $ScourScour
  #rm tmp.svg
- scour -i $i -o tmp.svg --keep-unreferenced-defs --remove-descriptions --strip-xml-space  --set-precision=6 --indent=space --nindent=1 --renderer-workaround --disable-style-to-xml  --set-c-precision=6 --protect-ids-noninkscape  --disable-simplify-colors  --keep-editor-data --error-on-flowtext # --enable-comment-stripping --create-groups  #--enable-viewboxing #
+ $ScourJK -i $i -o tmp.svg --keep-unreferenced-defs --remove-descriptions --strip-xml-space  --set-precision=6 --indent=space --nindent=1 --renderer-workaround --disable-style-to-xml  --set-c-precision=6 --protect-ids-noninkscape  --disable-simplify-colors  --keep-editor-data --error-on-flowtext # --enable-comment-stripping --create-groups  #--enable-viewboxing #
  rm $i
  mv tmp.svg $i
 else 
@@ -184,8 +185,8 @@ if [ $HOSTNAME = LAPTOP-K1FUMMIP ]; then
  echo do upload manually
 else
  if [ $HOSTNAME = tools-sgebastion-07 ]; then
-  #echo no upload
-  python /data/project/shared/pywikipedia/core/scripts/upload.py $i -keep -ignorewarn -noverify -descfile "$uploadcomment"
+  echo no upload
+  #python /data/project/shared/pywikipedia/core/scripts/upload.py $i -keep -ignorewarn -noverify -descfile "$uploadcomment"
   rm $i
  else
   echo did not recognice HOSTNAME $HOSTNAME
