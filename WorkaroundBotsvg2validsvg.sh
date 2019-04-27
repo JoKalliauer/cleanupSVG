@@ -21,12 +21,15 @@ export i=$1
 ~/.bash_profile
 
 T35245tspan=YES
-EinzeilTags=NO
-#EinzeilTags=YES
-
 
 if [ -z ${SVGCleaner+x} ]; then
  SVGCleaner=NO
+fi
+if [ -z ${EinzeilTags+x} ]; then
+ EinzeilTags=NO
+fi
+if [ -z ${ScourScour+x} ]; then
+ ScourScour=NO
 fi
 
 if [ $HOSTNAME = LAPTOP-K1FUMMIP ]; then
@@ -44,7 +47,7 @@ if [ $EinzeilTags = 'YES' ]; then
   sed -i "s/\r/ /g" $i #remove carriage return (DOS,MAC)
   sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/\n[[:space:]]+/ /g" $i #reduce to one space
   #sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/[[:space:]\r\n]+/ /g" $i #no need for that
-  sed -ri 's/[[:space:]]*<(g|path|svg|flowRoot|defs|clipPath|radialGradient|linearGradient|filter|mask|pattern|text|metadata) /\r\n<\1 /g' $i
+  sed -ri 's/[[:space:]]*<(g|path|svg|flowRoot|defs|clipPath|radialGradient|linearGradient|filter|mask|pattern|text|metadata|!--|image|inkscape:perspective) /\n<\1 /g' $i
 fi
 
 
@@ -70,6 +73,16 @@ if [ $SVGCleaner = 'YES' ]; then
  mv tmp.svg $i
 else 
  echo no svgcleaner $SVGCleaner
+fi
+
+if [ $ScourScour = 'YES' ]; then
+ echo runScourScour $ScourScour
+ #rm tmp.svg
+ scour -i $i -o tmp.svg --keep-unreferenced-defs --remove-descriptions --strip-xml-space  --set-precision=6 --indent=space --nindent=1 --renderer-workaround --disable-style-to-xml  --set-c-precision=6 --protect-ids-noninkscape  --disable-simplify-colors  --keep-editor-data --error-on-flowtext # --enable-comment-stripping --create-groups  #--enable-viewboxing #
+ rm $i
+ mv tmp.svg $i
+else 
+ echo no ScourScour $ScourScour
 fi
 
 
@@ -133,7 +146,8 @@ fi
 #W3C: element "rdf:RDF" undefined
 #Nu: Warning: This validator does not validate RDF. RDF subtrees go unchecked.
 # use scour/svgcleaner/svgo or https://de.wikipedia.org/wiki/Benutzer:Marsupilami/Inkscape-FAQ#Wie_erstelle_ich_eine_Datei_die_dem_Standard_SVG_1.1_entspricht?
-   sed -i -e ':a' -e 'N' -e '$!ba' -e "s/<metadata id=\"metadata[[:digit:]]*\">[[:space:]\r\n]*<rdf:RDF>[[:space:]\r\n]*<cc:Work rdf:about=\"\">[[:space:]\r\n]*<dc:format>image\/svg+xml<\/dc:format>[[:space:]\r\n]*<dc:type rdf:resource=\"http:\/\/purl.org\/dc\/dcmitype\/StillImage\"\/>[[:space:]\r\n]*<dc:title\/>[[:space:]\r\n]*<\/cc:Work>[[:space:]\r\n]*<\/rdf:RDF>[[:space:]\r\n]*<\/metadata>//" $i
+   sed -i -e ':a' -e 'N' -e '$!ba' -e "s/[[:space:]\r\n]*<rdf:RDF>[[:space:]\r\n]*<cc:Work rdf:about=\"\">[[:space:]\r\n]*<dc:format>image\/svg+xml<\/dc:format>[[:space:]\r\n]*<dc:type rdf:resource=\"http:\/\/purl.org\/dc\/dcmitype\/StillImage\"\/>[[:space:]\r\n]*<dc:title\/>[[:space:]\r\n]*<\/cc:Work>[[:space:]\r\n]*<\/rdf:RDF>[[:space:]\r\n]*//" $i
+   #sed -i -e ':a' -e 'N' -e '$!ba' -e "s/<metadata id=\"metadata[[:digit:]]*\">[[:space:]\r\n]*<rdf:RDF>[[:space:]\r\n]*<cc:Work rdf:about=\"\">[[:space:]\r\n]*<dc:format>image\/svg+xml<\/dc:format>[[:space:]\r\n]*<dc:type rdf:resource=\"http:\/\/purl.org\/dc\/dcmitype\/StillImage\"\/>[[:space:]\r\n]*<dc:title\/>[[:space:]\r\n]*<\/cc:Work>[[:space:]\r\n]*<\/rdf:RDF>[[:space:]\r\n]*<\/metadata>//" $i
    
 
 #W3C: Error: there is no attribute "sodipodi:version"
@@ -161,12 +175,15 @@ sed -ri 's/ font-family=\"(Times New Roman)\"/ font-family=\"Liberation Serif,\1
 
 #cp -f $i $2
 
+export uploadcomment="WorkaroundForLibrsvgBugs [[phab:T55899]] Scour$ScourScour SVGCleaner$SVGCleaner  http://tools.wmflabs.org/svgworkaroundbot/ [[User:SVGWorkaroundBot/source]] https://github.com/JoKalliauer/cleanupSVG/blob/master/WorkaroundBotsvg2validsvg.sh"
+
 if [ $HOSTNAME = LAPTOP-K1FUMMIP ]; then
+ echo "$uploadcomment"
  echo do upload manually
 else
  if [ $HOSTNAME = tools-sgebastion-07 ]; then
   #echo no upload
-  python /data/project/shared/pywikipedia/core/scripts/upload.py $i -keep -ignorewarn -noverify -descfile "WorkaroundForLibrsvgBugs SVGCleaner$SVGCleaner [[phab:T55899]] http://tools.wmflabs.org/svgworkaroundbot/ [[User:SVGWorkaroundBot/source]] https://github.com/JoKalliauer/cleanupSVG/blob/master/WorkaroundBotsvg2validsvg.sh"
+  python /data/project/shared/pywikipedia/core/scripts/upload.py $i -keep -ignorewarn -noverify -descfile "$uploadcomment"
   rm $i
  else
   echo did not recognice HOSTNAME $HOSTNAME
