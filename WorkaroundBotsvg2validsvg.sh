@@ -37,6 +37,7 @@ if [ $HOSTNAME = LAPTOP-K1FUMMIP ]; then
 else
  if [ $HOSTNAME = tools-sgebastion-07 ]; then
   wget -q https://commons.wikimedia.org/wiki/Special:FilePath/$i -O $i 
+  alias scour="python3 -m scour.scour"
  else
   echo did not recognice HOSTNAME $HOSTNAME
  fi
@@ -183,8 +184,8 @@ if [ $HOSTNAME = LAPTOP-K1FUMMIP ]; then
 else
  if [ $HOSTNAME = tools-sgebastion-07 ]; then
   #echo no upload
-  python /data/project/shared/pywikipedia/core/scripts/upload.py $i -keep -ignorewarn -noverify -descfile "$uploadcomment"
-  rm $i
+  #python /data/project/shared/pywikipedia/core/scripts/upload.py $i -keep -ignorewarn -noverify -descfile "$uploadcomment"
+  #rm $i
  else
   echo did not recognice HOSTNAME $HOSTNAME
  fi
