@@ -30,15 +30,15 @@ do
 
  export i=$fileSource #i will be overwritten later
  export fileN=$(echo $fileSource | cut -f1 -d" ") #remove spaces if exsiting (and everything after)
- export tmp=${fileN%.base64}
+ export tmp=${fileN%.svg}
 
  #If you want to overwrite the existing file, without any backup, delete the following three lines
- export i=${tmp}
+ export i=${tmp}s.svg
  if [ -f "$i" ]; then
   echo no renaming
  else
   echo move
-  mv "${fileSource}" $i
+  scour -i ${fileSource} -o $i --keep-unreferenced-defs --remove-descriptions --strip-xml-space  --set-precision=6 $META $INDENT --renderer-workaround --disable-style-to-xml  --set-c-precision=6 --protect-ids-noninkscape  --disable-simplify-colors  --keep-editor-data # --enable-comment-stripping --create-groups  #--enable-viewboxing # 
  fi
  
  #mv "${fileSource}.$sourceType" "${fileSource}2.xml"
@@ -46,15 +46,15 @@ do
  if [ -f "$i" ]; then    
   count=$((count+1))
   file=${i%.base64}
-  echo $count". "$i" -> "${file}.base64
-  sed -ri "s/iVBORw0KGgoAAAANSUhEUgAA/ \n iVBORw0KGgoAAAANSUhEUgAA/g" $i
-  sed -ri "s/\/9j\/4AAQSkZJRgABAg(.)A(....)AAD\/7AARRHVja3kAAQAEAAAAHgAA/ \n \/9j\/4AAQSkZJRgABAg\1A\2AAD\/7AARRHVja3kAAQAEAAAAHgAA/g" $i
+  echo $count". "$i" -> "${file}.base64 
+  sed -ri "s/iVBORw0KGgoAAAANSUhEUgAA/ \niVBORw0KGgoAAAANSUhEUgAA/g" $i
+  sed -ri "s/\/9j\/4AAQSkZJRgABA(..)A(....)AAD\// \n\/9j\/4AAQSkZJRgABA\1A\2AAD\//g" $i
   sed -ri "s/(AAAAAElFTkSuQmCC|=)[ ]*\"(\/>| )/\1\n\"\2/g" $i
   sed -ri "s/\r/ /" $i
   sed -ri "s/\n/ /" $i
   
   grep "iVBORw0KGgoAAAANSUhEUgAA" $i > $file.png_base64
-  grep "\/9j\/4AAQSkZJRgABAg.A....AAD\/7AARRHVja3kAAQAEAAAAHgAA"  $i > $file.jpeg_base64
+  grep "\/9j\/4AAQSkZJRgABA..A....AAD\/"  $i > $file.jpeg_base64
   
   linenumbers=$(wc -l $file.png_base64|awk '{print $1}')
   if [ "$linenumbers" -gt 0 ]; then
@@ -72,6 +72,9 @@ do
      sed -n "${ln}p" $file.png_base64 > $file.png${ln}_base64
      sed -i "s/ /\n/g" $file.png${ln}_base64
      base64 --decode ${file}.png${ln}_base64 > ${file}_File${ln}.png
+     optipng ${file}_File${ln}.png 
+     #wait
+     pngout ${file}_File${ln}.png &
 	done
     #sed -n '2p' $file.png_base64 > $file.png2_base64
     #sed -i "s/ /\n/g" $file.png2_base64
@@ -104,9 +107,9 @@ do
       echo "no file $i found!"
  fi
  
- if [ "$outputType" = "svg" ] || [ "$outputType" = "plain-svg" ] || [ "$outputType" = "ink-svg" ]; then
-  mv ${i} ${file}bak2.xml
- fi
+ #if [ "$outputType" = "svg" ] || [ "$outputType" = "plain-svg" ] || [ "$outputType" = "ink-svg" ]; then
+  mv $fileSource ${file}bak2.xml
+ #fi
 	
 done
 

@@ -38,30 +38,6 @@ validOutput5="plain-svg"
 
 #echo "This script allows you to convert all files in this folder from one file type to another."
 
-#valid=0
-while [ "$valid" != "1" ]
-do
-    echo "Allowed file types for source: $validInput1, $validInput2, $validInput3"
-	read -p "What file type do you want to use as a source? " sourceType
-    if [ "$sourceType" = "$validInput1" ] || [ "$sourceType" = "$validInput2" ] || [ "$sourceType" = "$validInput3" ]; then
-        valid=1
-    else
-        echo "Invalid input! Please use one of the following: $validInput1, $validInput2, $validInput3"
-    fi
-done
-
-#valid=0
-while [ "$valid" != "1" ]
-do
-    echo "Allowed file types for output: $validOutput1, $validOutput2, $validOutput3"
-	read -p "What file type do you want to convert to? " outputType
-    if [ "$outputType" = "$validOutput1" ] || [ "$outputType" = "$validOutput2" ] || [ "$outputType" = "$validOutput3" ] || [ "$outputType" = "$validOutput4" ] || [ "$outputType" = "$validOutput5" ]; then
-        valid=1
-    else
-        echo "Invalid input! Please use one of the following: $validOutput1, $validOutput2, $validOutput3"
-    fi
-done
-
 for fileSource in *.$sourceType
 
 do
@@ -80,7 +56,7 @@ do
    
    #svgo -i ${file} -o ${file}o.svg $INDENT -p 3 $META --disable=removeHiddenElems --disable=removeUnknownsAndDefaults --disable=convertTransform --disable=convertPathData --disable=mergePaths --enable=removeScriptElement --disable=removeXMLProcInst --disable=convertStyleToAttrs --enable=cleanupAttrs --enable=cleanupEnableBackground --disable=cleanupIDs --disable=cleanupNumericValues --enable=convertColors --disable=convertShapeToPath --disable=inlineStyles  --disable=minifyStyles --enable=moveElemsAttrsToGroup --enable=moveGroupAttrsToElems  --enable=removeAttrs --disable=removeComments --enable=removeDesc --disable=removeEditorsNSData --enable=removeEmptyAttrs --enable=removeEmptyContainers --enable=removeEmptyText --enable=removeNonInheritableGroupAttrs --disable=removeRasterImages --disable=removeTitle --enable=removeUnusedNS --enable=removeUselessDefs --enable=removeUselessStrokeAndFill --enable=removeViewBox --enable=sortAttrs --disable=removeDoctype --enable={addAttributesToSVGElement}  --disable=collapseGroups  --disable=removeStyleElement
    
-   cp ./${file}.svg ./${file}f.svg
+   cp $fileSource ./${file}f.svg
    mv ./${fileSource} ./${file}.xml
    #mv ./${file}o.svg ./${file}o.xml
    

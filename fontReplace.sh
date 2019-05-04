@@ -66,7 +66,7 @@ sed -ri "s/ font-family=\"GOST type B\"/ font-family=\"Bandal,GOST type B,DejaVu
 
 #Serif
 sed -i 's/ font-family=\"Bitstream Vera Serif\"/ font-family=\"DejaVu Serif,Bitstream Vera Serif\"/g' $i #as automatic
-sed -ri 's/ font-family=\"(Times New Roman|Times-Roman|CMMI10|CMR10)\"/ font-family=\"Liberation Serif,\1\"/g' $i #as automatic
+sed -ri 's/ font-family=\"(Times New Roman|Times-Roman|CMMI10|CMR10|LnrxdlTimes|JnsptfTimes|PkbwthTimes|Times|CghgsrSymbol)\"/ font-family=\"Liberation Serif,\1\"/g' $i #as automatic
 
 #monospace
 sed -ri 's/ font-family=\"(monospace|Bitstream Vera Sans Mono)\"/ font-family=\"DejaVu Sans Mono,Bitstream Vera Sans Mono,monospace\"/g' $i #as automatic

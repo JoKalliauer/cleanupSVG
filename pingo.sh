@@ -7,7 +7,7 @@ echo #Add a empty line to split the output
 
 #pingo $file
 optipng $file
-pngout  $file &
+pingo  $file
 
 #pingo $file
 

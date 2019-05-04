@@ -96,13 +96,14 @@ do
    if [ -f "$i" ]; then    
         count=$((count+1))
         file=${i%.svg}
-        echo $count". "$i" -> "${file}n.$outputType
+        #echo $count". "$i" -> "${file}n.$outputType
 		sed -ri "s/inkscape:version=\"0.4[\. r[:digit:]]+\"//g" $i
 		
 		if [ "$outputType" = "png" ];then #png
 		 read -p "With what dpi should it be exported (e.g. 300, default: 96)? " dpi
 		 inkscape $i --export-$outputType=$file.$outputType --export-dpi=$dpi
 		elif [ "$outputType" = "svg" ];then #  svg
+		 echo $count". "$i" -> "${file}n.$outputType
 		 inkscape $i --export-plain-$outputType=${file}n.$outputType
 		 sed -ri "s/font-family:([-[:alnum:] ,']*)'([-[:alnum:] ]*)'([-[:lower:][:upper:], ']*)/font-family:\1\2\3/g" ${file}n.svg
 		elif [ "$outputType" = "$validOutput6" ] || [ "$outputType" = "$validOutput7" ] || [ "$outputType" = "$validOutput8" ]; then #inkscape-svg
@@ -113,6 +114,7 @@ do
 		elif  [ "$outputType" = "$validOutput9" ];then #png96
 		 inkscape $i --export-png=$file.png
 		else #eps, pdf, plain-svg and others
+		 echo $count". "$i" -> "${file}.$outputType
 		 inkscape $i --export-$outputType=$file.$outputType
 		fi
     else

@@ -19,7 +19,7 @@ export i=min.svg # just used for debugging
 #./einzeilTags.sh
 #./PosibleUngroup.sh
 #./UngroupByInkscape.sh
-#./Flow2TextByInkscape.sh
+./Flow2TextByInkscape.sh
 ##./FFlow2TextBySed.sh
 ##./Text2Path.sh
 #./SimplifyByInkscape.sh
