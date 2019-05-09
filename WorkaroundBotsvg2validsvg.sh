@@ -182,7 +182,7 @@ sed -ri 's/ font-family=\"(Times New Roman)\"/ font-family=\"Liberation Serif,\1
 
 #cp -f $i $2
 
-export uploadcomment="WorkaroundForLibrsvgBugs Scour$ScourScour SVGCleaner$SVGCleaner  http://tools.wmflabs.org/svgworkaroundbot/ [[User:SVGWorkaroundBot/source]] https://github.com/JoKalliauer/cleanupSVG/blob/master/WorkaroundBotsvg2validsvg.sh"
+export uploadcomment="WorkaroundForLibrsvgBugs Scour$ScourScour SVGCleaner$SVGCleaner [[User:SVGWorkaroundBot/source]]; most common bugs: [[phab:T55899]], reduce invalid-Errors"
 
 if [ $HOSTNAME = LAPTOP-K1FUMMIP ]; then
  echo "$uploadcomment"
