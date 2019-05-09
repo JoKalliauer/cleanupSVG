@@ -2,6 +2,9 @@
 #solves librsvg-Bug (Workarounds)
 # Input $1 ... File from Commons (downloaded, repaired and overwritten automatically)
 
+# export ScourScour=YES ; export SVGCleaner=YES
+
+
 ## == Credit ==
 #Author: Johannes Kalliauer (JoKalliauer)
 #created: 2019-02-20
@@ -150,7 +153,7 @@ fi
 #Nu: Warning: This validator does not validate RDF. RDF subtrees go unchecked.
 # use scour/svgcleaner/svgo or https://de.wikipedia.org/wiki/Benutzer:Marsupilami/Inkscape-FAQ#Wie_erstelle_ich_eine_Datei_die_dem_Standard_SVG_1.1_entspricht?
 #copied form validbySed
-sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/[[:space:]\r\n]*<rdf:RDF>[[:space:]\r\n]*<cc:Work( rdf:about=\"\"|)>[[:space:]\r\n]*<dc:format>image\/svg\+xml<\/dc:format>[[:space:]\r\n]*<dc:type rdf:resource=\"http:\/\/purl.org\/dc\/dcmitype\/StillImage\"\/>[[:space:]\r\n]*<dc:title\/>[[:space:]\r\n]*<\/cc:Work>[[:space:]\r\n]*<\/rdf:RDF>//" $i
+sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/[[:space:]\r\n]*<rdf:RDF>[[:space:]\r\n]*<cc:Work( rdf:about=\"\"|)>[[:space:]\r\n]*<dc:format>image\/svg\+xml<\/dc:format>[[:space:]\r\n]*<dc:type rdf:resource=\"http:\/\/purl.org\/dc\/dcmitype\/StillImage\"\/>([[:space:]\r\n]*<dc:title\/>|)[[:space:]\r\n]*<\/cc:Work>[[:space:]\r\n]*<\/rdf:RDF>//" $i
 sed -i -e ':a' -e 'N' -e '$!ba' -e "s/<metadata id=\"metadata[[:digit:]]*\">[[:space:]\r\n]*<\/metadata>//" $i
    
 
@@ -179,7 +182,7 @@ sed -ri 's/ font-family=\"(Times New Roman)\"/ font-family=\"Liberation Serif,\1
 
 #cp -f $i $2
 
-export uploadcomment="WorkaroundForLibrsvgBugs [[phab:T55899]] Scour$ScourScour SVGCleaner$SVGCleaner  http://tools.wmflabs.org/svgworkaroundbot/ [[User:SVGWorkaroundBot/source]] https://github.com/JoKalliauer/cleanupSVG/blob/master/WorkaroundBotsvg2validsvg.sh"
+export uploadcomment="WorkaroundForLibrsvgBugs Scour$ScourScour SVGCleaner$SVGCleaner  http://tools.wmflabs.org/svgworkaroundbot/ [[User:SVGWorkaroundBot/source]] https://github.com/JoKalliauer/cleanupSVG/blob/master/WorkaroundBotsvg2validsvg.sh"
 
 if [ $HOSTNAME = LAPTOP-K1FUMMIP ]; then
  echo "$uploadcomment"
