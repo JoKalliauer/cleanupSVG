@@ -16,7 +16,7 @@
 
 
 ## == Programm ==
-rm -f $1
+
 
 export i=$1
 
@@ -37,10 +37,12 @@ if [ -z ${ScourScour+x} ]; then
 fi
 
 if [ $HOSTNAME = LAPTOP-K1FUMMIP ]; then
- wget -q https://commons.wikimedia.org/wiki/Special:FilePath/$i -O $i
+ #rm -f $1
+ #wget -q https://commons.wikimedia.org/wiki/Special:FilePath/$i -O $i
  export ScourJK=scour
 else
  if [ $HOSTNAME = tools-sgebastion-07 ]; then
+  rm -f $1
   wget -q https://commons.wikimedia.org/wiki/Special:FilePath/$i -O $i 
   export ScourJK="python3 -m scour.scour"
  else
@@ -98,6 +100,9 @@ sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<\!\[CDATA\[([[:alnum:]=+\/\t\n[:space:]@
 #remove jpg im metadata
 sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<xapGImg:image>([[:alnum:][:space:]\/+])*={0,2}[[:space:]]*<\/xapGImg:image>//g" $i
 
+## == unsave uploads
+#https://commons.wikimedia.org/wiki/Commons:Help_desk#Found_unsafe_CSS_in_the_style_element_of_uploaded_SVG_file
+sed -i "s/src: url(\"data:font\/woff;charset=utf-8;base64,data:application\/x-font-ttf;base64,AAEAAAAQAQAABAAAR[[:alnum:]+\/]*\");//" $i
 
 ## == Workarounds for Librsvg ==
 
@@ -118,7 +123,8 @@ sed -ri "s/<text([-[:alnum:]\.\"\#\ =\(\)]*) x=\"([-[:digit:]\.]+)( |,)([-[:digi
 sed -ri "s/<text([-[:alnum:]\.\"\#\ =\(\)]*) y=\"([-[:digit:]\.]+)( |,)([-[:digit:]\. ,]+)\"([-[:alnum:]\.\"\#\ =\,]*)>/<text y=\"\2\"\1\5>/g" $i # remove multipe y-koordinates in text (solves librsvg-Bug)
 
 #Repair https://phabricator.wikimedia.org/T68672 (solves librsvg-Bug)
-sed -i "s/<style>/<style type=\"text\/css\">/" $i
+#from svg2validsvg
+sed -ri "s/<style( id=\"[[:alnum:]]*\"|)>/<style type=\"text\/css\"\1>/" $i
 
 #solved librsvg-Bug T193929 https://phabricator.wikimedia.org/T193929
 sed -i "s/ xlink:href=\"data:image\/jpg;base64,/ xlink:href=\"data:image\/jpeg;base64,/g" $i
