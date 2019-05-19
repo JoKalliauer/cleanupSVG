@@ -47,6 +47,7 @@ echo $i start:
 # Nu:   Attribute text-align not allowed on SVG element text at this point.
 ## example     <text id="text8220" x="126.62" y="85.62" style="letter-spacing:0;line-height:125%;text-align:center;text-anchor:middle;word-spacing:0" line-height="125%" sodipodi:linespacing="125%"><tspan id="tspan8222" x="126.62" y="85.62">1</tspan></text>
 ## example:   <text id="text2998" fill="#f0ff8f" fill-opacity=".941" font-size="1.32" line-height="125%" stroke-width=".165" x="-91.4" xml:space="preserve" y="-40.85">    <tspan id="tspan2996" fill="#f0ff8f" fill-opacity=".941" stroke-width=".165" x="-91.4" y="-40.85">2.19</tspan></text>
+#svgcleaner or svgo
 sed -ri "s/<(text|tspan)([-[:alnum:]=\.\" \(\)\':;%#]*) line-height=\"[0123569.%]+\"/<\1\2/g" $i
 
 #W3C: Warning:  DOCTYPE Override in effect!
@@ -137,7 +138,8 @@ sed -ri "s/<path([-[:lower:][:digit:]\"\.= \(\)]*) solid-color=\"#000000\"/<path
 
 #W3C (SVG1.1):  required attribute "type" not specified
 #Repair https://phabricator.wikimedia.org/T68672 (solves librsvg-Bug)
-sed -i "s/<style>/<style type=\"text\/css\">/" $i
+#from svg2validsvg.sh
+sed -ri "s/<style( id=\"[[:alnum:]]*\"|)>/<style type=\"text\/css\"\1>/" $i
 
 #W3C (SVG1.1)  there is no attribute "href"
 #W3C (SVG1.1) Error: required attribute "xlink:href" not specified
