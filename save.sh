@@ -20,5 +20,6 @@ export i=min.svg # just used for debugging
 ./svg2validsvg.sh
 #./styleNomincleaner4compression.sh
 
-export meta=0
+#export meta=0
 ./minscour4compression.sh
+./post.sh

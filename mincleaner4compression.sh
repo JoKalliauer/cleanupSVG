@@ -27,7 +27,7 @@ fi
 
 echo cleaner ${file} to $i begin, min=${minfilesize}, METAdelete=no, INDENT=$INDENT
 
-svgcleaner $file $i --allow-bigger-file --indent $INDENT --resolve-use no --apply-transform-to-gradients yes --apply-transform-to-shapes yes --convert-shapes yes --group-by-style no --join-arcto-flags no --join-style-attributes no --merge-gradients yes --regroup-gradient-stops yes --remove-comments no --remove-declarations no --remove-default-attributes yes --remove-desc yes --remove-dupl-cmd-in-paths yes --remove-dupl-fegaussianblur yes --remove-dupl-lineargradient yes --remove-dupl-radialgradient yes --remove-gradient-attributes yes --remove-invalid-stops yes --remove-invisible-elements no --remove-metadata no --remove-needless-attributes yes --remove-nonsvg-attributes no --remove-nonsvg-elements no --remove-text-attributes no --remove-title no --remove-unreferenced-ids no --remove-unresolved-classes yes --remove-unused-coordinates yes --remove-unused-defs yes --remove-version yes --remove-xmlns-xlink-attribute yes --simplify-transforms yes --trim-colors yes --trim-ids no --trim-paths yes --ungroup-defs yes --ungroup-groups no --use-implicit-cmds yes --list-separator comma --paths-to-relative yes --remove-unused-segments yes --convert-segments yes --apply-transform-to-paths no --coordinates-precision 2 --paths-coordinates-precision 5 --properties-precision 3 --transforms-precision 7  # --multipass # --copy-on-error # 
+svgcleaner $file $i --allow-bigger-file --indent $INDENT --resolve-use no --apply-transform-to-gradients yes --apply-transform-to-shapes yes --convert-shapes no --group-by-style no --join-arcto-flags no --join-style-attributes no --merge-gradients yes --regroup-gradient-stops yes --remove-comments no --remove-declarations no --remove-default-attributes yes --remove-desc yes --remove-dupl-cmd-in-paths yes --remove-dupl-fegaussianblur yes --remove-dupl-lineargradient yes --remove-dupl-radialgradient yes --remove-gradient-attributes yes --remove-invalid-stops yes --remove-invisible-elements no --remove-metadata no --remove-needless-attributes yes --remove-nonsvg-attributes no --remove-nonsvg-elements no --remove-text-attributes no --remove-title no --remove-unreferenced-ids no --remove-unresolved-classes yes --remove-unused-coordinates yes --remove-unused-defs yes --remove-version yes --remove-xmlns-xlink-attribute yes --simplify-transforms yes --trim-colors yes --trim-ids no --trim-paths yes --ungroup-defs yes --ungroup-groups no --use-implicit-cmds yes --list-separator comma --paths-to-relative yes --remove-unused-segments yes --convert-segments yes --apply-transform-to-paths yes --coordinates-precision 2 --paths-coordinates-precision 5 --properties-precision 3 --transforms-precision 7  # --multipass # --copy-on-error # 
 
 #--properties-precision 3 #https://commons.wikimedia.org/wiki/File:Simpsons-vector.svg #--properties-precision 2 # https://commons.wikimedia.org/wiki/File:Mn_coa_%C3%B6v%C3%B6rkhangai_aimag.svg
  #--transforms-precision 7 # Philippines_orthographic_projection #--transforms-precision 5 # 5 https://commons.wikimedia.org/wiki/File:South_west_Asia.svg ## 4  https://commons.wikimedia.org/wiki/File:Mn_coa_%C3%B6v%C3%B6rkhangai_aimag.svg
@@ -41,9 +41,9 @@ svgcleaner $file $i --allow-bigger-file --indent $INDENT --resolve-use no --appl
 #--remove-nonsvg-elements  # removes flowtext https://github.com/RazrFalcon/svgcleaner/issues/126
 #--remove-nonsvg-attributes no # https://github.com/RazrFalcon/svgcleaner/issues/141
 
-#--remove-text-attributes no #keeps xml:space="preserve" for a workaround for https://github.com/scour-project/scour/issues/160
+#--remove-text-attributes no #keeps xml:space="preserve" for a workaround for https://github.com/scour-project/scour/issues/160 (solved) https://gitlab.com/inkscape/inbox/issues/247
 
-#--join-arcto-flags no # https://github.com/svg/svgo/issues/949
+#--join-arcto-flags no # https://github.com/svg/svgo/issues/949 (solved); https://github.com/scour-project/scour/wiki/Documentation#--renderer-workaround-and---no-renderer-workaround
 
 #--remove-unused-segments no # https://github.com/RazrFalcon/svgcleaner/issues/146
 

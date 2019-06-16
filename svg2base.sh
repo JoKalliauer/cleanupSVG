@@ -49,7 +49,7 @@ do
   echo $count". "$i" -> "${file}.base64 
   sed -ri "s/iVBORw0KGgoAAAANSUhEUgAA/ \niVBORw0KGgoAAAANSUhEUgAA/g" $i
   sed -ri "s/\/9j\/4AAQSkZJRgABA(..)A(....)AAD\// \n\/9j\/4AAQSkZJRgABA\1A\2AAD\//g" $i
-  sed -ri "s/(AAAAAElFTkSuQmCC|=)[ ]*\"(\/>| )/\1\n\"\2/g" $i
+  sed -ri "s/(AAAAAElFTkSuQmCC| QmCC|=)[ ]*\"(\/>| )/\1\n\"\2/g" $i
   sed -ri "s/\r/ /" $i
   sed -ri "s/\n/ /" $i
   

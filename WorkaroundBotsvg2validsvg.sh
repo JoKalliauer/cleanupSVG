@@ -37,8 +37,8 @@ if [ -z ${ScourScour+x} ]; then
 fi
 
 if [ $HOSTNAME = LAPTOP-K1FUMMIP ]; then
- #rm -f $1
- #wget -q https://commons.wikimedia.org/wiki/Special:FilePath/$i -O $i
+ rm -f $1
+ wget -q https://commons.wikimedia.org/wiki/Special:FilePath/$i -O $i
  export ScourJK=scour
 else
  if [ $HOSTNAME = tools-sgebastion-07 ]; then

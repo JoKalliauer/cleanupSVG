@@ -35,8 +35,12 @@ sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<flowRoot([-[:alnum:]\.=\" \:\(\)\%\#\,\'
  #   <flowRoot transform="matrix(.26458 0 0 .26458 -19.267 -12.985)" fill="#000000" font-family="DejaVu Sans,sans-serif" font-size="40px" letter-spacing="-6.25px" stroke-width="1px" style="line-height:79.19999957%" xml:space="preserve"><flowRegion style="line-height:79.19999957%"><rect x="3713.9" y="2203.9" width="241.2" height="126.32"/></flowRegion><flowPara fill="#fafafa" font-size="74.667px" text-anchor="middle" style="line-height:79.19999957%">Call-</flowPara><flowPara fill="#fafafa" font-size="74.667px" text-anchor="middle" style="line-height:79.19999957%">isto</flowPara></flowRoot>
 sed -ri "s/<flowRoot([-[:alnum:]\.=\" \:\(\)\%\#\,\';]*)>[[:space:]]*<flowRegion([-[:alnum:]=:\" #;\.%\',]*)>[[:space:]]*<rect([-[:lower:][:digit:]\"= \.:;]*) x=\"([-[:digit:]\. ]+)\" y=\"([-[:digit:]\. ]+)\"([-[:alnum:]=\.\" \#:;\',]*)\/>[[:space:]]*<\/flowRegion>[[:space:]]*<flowPara([-[:alnum:]\.=\" \:\#;\%]*)>([-−[:alnum:] \{\}\(\)\+\ \ \.\?\']+)<\/flowPara>[[:space:]]*<\/flowRoot>/<text x=\"\4\" y=\"\5\"\1><tspan x=\"\4\" y=\"\5\"\7>\8<\/tspan><\/text>/g" $i
  
-
- 
+#How to improve:
+#Die Y-koordinate von tspan/text sollte um \5+.88476562*font-size gesetzt werden
+#Example:
+#Input:
+#Output: <text y="884.76562" font-size="1000px"><tspan y="884.76562">someText</tspan></text>
+# <flowRoot font-size="1000px"> <flowRegion> <rect/> </flowRegion> <flowPara>someText</flowPara> </flowRoot>
 
 echo $i finish
 

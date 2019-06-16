@@ -19,6 +19,7 @@
 
 for file in *.svg;do
  
+ # file=min.svg
  export i=$file #i will be overritan later
  export fileN=$(echo $file | cut -f1 -d" ") #remove spaces if exsiting (and everything after)
  export tmp=$(echo $fileN | cut -f1 -d".")
@@ -39,12 +40,12 @@ for file in *.svg;do
  
  sed -ri "s/<tspan([-[:alnum:]=\.\" \#\(\)\;\:\%\,\']*)>|<\/tspan>//g" $j #remove tspans
  
- sed -ri "s/>[]\[[:alnum:][:space:]\$\^\\\_\{\} \'\’\“\”\/\(\)\!\,\:#\.=,\"\&\;\¯\°\¸üä\*\+«»–—­−-]*/>/g" $j #Remove everything after tags
+ sed -ri "s/>[]\[[:alnum:][:space:]\$\^\\\_\{\} \'\’\“\”\/\(\)\!\,\:#\.=,\"\&\;\¯\°\¸\*\+«»–—­−-]*/>/g" $j #Remove everything after tags
  
-  sed -ri "s/[]\[[:alnum:][:space:]\$\^\\\_\{\} \'\’\“\”\/\(\)\!\,\:#\.=,\"\&\;\¯\°\¸üä\*\+«»–—­−-]*</</g" $j #Remove everything before in tags
+  sed -ri "s/[]\[[:alnum:][:space:]\$\^\\\_\{\} \'\’\“\”\/\(\)\!\,\:#\.=,\"\&\;\¯\°\¸\*\+«»–—­−-]*</</g" $j #Remove everything before in tags
+#  sed -ri "s/[]\[[:alnum:][:space:]\$\^\\\_\{\} \'\’\“\”\/\(\)\!\,\:#\.=,\"\&\;\¯\°\¸üä\*\+«»–—­−-]*</</g" $j #Remove everything before in tags
  
- sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<text([-[:alnum:]=\.\" \#\(\)\;\:\%\'\/\,]*)>([]\[[:alnum:][:space:]\$\^\\\_\{\} \'\’\“\”\/\(\)\!?\,\:#\.=≈,\"\&\;\¯\→°º\¸üä\*\+«»¹²³⁴⁶⁷⁸⁹•…⁺⁻–—­−-]*|<tspan([-[:alnum:]=\.\" \#\(\)\;\:\%\,\']*)>|<\/tspan>)*<\/text>//g" $j
- 
+ sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<text([-—[:alnum:]=\.\" \#\(\)\;\:\%\'\/\,\*]*)>([]\[[:alnum:][:space:]äüößÄÜÖ\$\^\\\_\{\} \'\’\“\”\/\(\)\!?\,\:#\.=≈,\"\&\;\¯\¸\°\*\+\|~\´→·˚º«»%@¹²³⁴⁶⁷⁸⁹•…⁺⁻–—­−-]*|<tspan([-[:alnum:]=\.\" \#\(\)\;\:\%\,\']*)>|<\/tspan>)*<\/text>//g" $j
  
  #just for debugging
  #sed -ri "s/

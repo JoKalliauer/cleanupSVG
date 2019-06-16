@@ -78,9 +78,16 @@ do
    #cp ./${file}Cu.svg ./${file}C.xml
    cp ./${fileSource} ./${file}u.svg
    mv ./${fileSource} ./${file}.xml
-   inkscape ./${file}u.svg --verb=EditSelectAll --verb=SelectionUnGroup --verb=FileSave --verb=FileClose #--verb=FileQuit
+   inkscape ./${file}u.svg --verb=EditSelectAll --verb=SelectionUnGroup --verb=FileSave --verb=FileClose --verb=FileQuit
    #svgcleaner ./${file}Cu.svg ./${file}CuC.svg --join-style-attributes all --join-arcto-flags no --remove-declarations no --remove-nonsvg-elements no --paths-to-relative no --remove-unused-segments no --convert-segments no  --allow-bigger-file --indent 1 --remove-metadata no --remove-nonsvg-attributes no
    scour -i ./${file}u.svg -o ./${file}us.svg --disable-style-to-xml --keep-unreferenced-defs --disable-embed-rasters --indent=space --nindent=1
+   
+#W3C: element "rdf:RDF" undefined
+#Nu: Warning: This validator does not validate RDF. RDF subtrees go unchecked.
+# use scour/svgcleaner/svgo or https://de.wikipedia.org/wiki/Benutzer:Marsupilami/Inkscape-FAQ#Wie_erstelle_ich_eine_Datei_die_dem_Standard_SVG_1.1_entspricht?
+sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/[[:space:]\r\n]*<rdf:RDF>[[:space:]\r\n]*<cc:Work( rdf:about=\"\"|)>[[:space:]\r\n]*(<dc:format>[[:space:]\r\n]*image\/svg\+xml[[:space:]\r\n]*<\/dc:format>|<dc:format\/>)[[:space:]\r\n]*<dc:type rdf:resource=\"http:\/\/purl.org\/dc\/dcmitype\/StillImage\"\/>([[:space:]\r\n]*<dc:title\/>|)[[:space:]\r\n]*<\/cc:Work>[[:space:]\r\n]*<\/rdf:RDF>//" $i
+sed -i -e ':a' -e 'N' -e '$!ba' -e "s/<metadata id=\"metadata[[:digit:]]*\">[[:space:]\r\n]*<\/metadata>//" $i
+
    mv ./${file}u.svg ./${file}u.xml
   else
    inkscape $fileSource --export-$outputType=$file.$outputType

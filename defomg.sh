@@ -8,7 +8,7 @@ export i=${tmp}o.svg
 
 echo #Add a empty line to split the output
 
-svgo -i ${file} -o $i --pretty --indent=1
+svgo -i ${file} -o $i --pretty --indent=1 --disable=removeXMLProcInst --disable=removeDoctype
 
 mv ./${file} ./${tmp}5.xml
 

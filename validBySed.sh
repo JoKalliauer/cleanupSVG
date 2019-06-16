@@ -71,7 +71,7 @@ sed -ri "s/ text-align=\"(end|center)\"//g"  ${i}
 #W3C: element "rdf:RDF" undefined
 #Nu: Warning: This validator does not validate RDF. RDF subtrees go unchecked.
 # use scour/svgcleaner/svgo or https://de.wikipedia.org/wiki/Benutzer:Marsupilami/Inkscape-FAQ#Wie_erstelle_ich_eine_Datei_die_dem_Standard_SVG_1.1_entspricht?
-sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/[[:space:]\r\n]*<rdf:RDF>[[:space:]\r\n]*<cc:Work( rdf:about=\"\"|)>[[:space:]\r\n]*<dc:format>image\/svg\+xml<\/dc:format>[[:space:]\r\n]*<dc:type rdf:resource=\"http:\/\/purl.org\/dc\/dcmitype\/StillImage\"\/>([[:space:]\r\n]*<dc:title\/>|)[[:space:]\r\n]*<\/cc:Work>[[:space:]\r\n]*<\/rdf:RDF>//" $i
+sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/[[:space:]\r\n]*<rdf:RDF>[[:space:]\r\n]*<cc:Work( rdf:about=\"\"|)>[[:space:]\r\n]*(<dc:format>[[:space:]\r\n]*image\/svg\+xml[[:space:]\r\n]*<\/dc:format>|<dc:format\/>)[[:space:]\r\n]*<dc:type rdf:resource=\"http:\/\/purl.org\/dc\/dcmitype\/StillImage\"\/>([[:space:]\r\n]*<dc:title\/>|)[[:space:]\r\n]*<\/cc:Work>[[:space:]\r\n]*<\/rdf:RDF>//" $i
 sed -i -e ':a' -e 'N' -e '$!ba' -e "s/<metadata id=\"metadata[[:digit:]]*\">[[:space:]\r\n]*<\/metadata>//" $i
    
 
@@ -84,7 +84,7 @@ sed -i -e ':a' -e 'N' -e '$!ba' -e "s/<metadata id=\"metadata[[:digit:]]*\">[[:s
 #W3C: Error:  there is no attribute "sodipodi:nodetypes"
 #Nu: Warning: This validator does not validate Inkscape extensions properly. Inkscape-specific errors may go unnoticed.
 # use scour/svgcleaner --remove-nonsvg-attributes yes --remove-nonsvg-elements yes/svgo
-   sed -i "s/<sodipodi:namedview id=\"namedview[[:digit:]]*\" bordercolor=\"#666666\" borderopacity=\"1\" gridtolerance=\"10\" guidetolerance=\"10\" inkscape:current-layer=\"svg[[:digit:]]*\" inkscape:cx=\"[[:digit:].]*\" inkscape:cy=\"[-[:digit:].]*\" inkscape:pageopacity=\"0\" inkscape:pageshadow=\"2\" inkscape:window-height=\"480\" inkscape:window-maximized=\"0\" inkscape:window-width=\"640\" inkscape:window-x=\"0\" inkscape:window-y=\"0\" inkscape:zoom=\"0.[[:digit:]]*\" objecttolerance=\"10\" pagecolor=\"#ffffff\" showgrid=\"false\"\/>//" $i
+   sed -ri "s/<sodipodi:namedview( id=\"namedview[[:digit:]]*\"|) bordercolor=\"#666666\" borderopacity=\"1\" gridtolerance=\"10\" guidetolerance=\"10\" inkscape:current-layer=\"svg[[:digit:]]*\" inkscape:cx=\"[-[:digit:].]*\" inkscape:cy=\"[-[:digit:].]*\" inkscape:pageopacity=\"0\" inkscape:pageshadow=\"2\" inkscape:window-height=\"(480|1017)\" inkscape:window-maximized=\"(0|1)\" inkscape:window-width=\"(640|1920)\" inkscape:window-x=\"(0|-8)\" inkscape:window-y=\"(0|-8)\" inkscape:zoom=\"[[:digit:].]*\" objecttolerance=\"10\" pagecolor=\"#ffffff\" showgrid=\"false\"\/>//" $i
 
 #W3C: Error:  there is no attribute "enable-background"
 #Nu: Error: Attribute enable-background not allowed on SVG element path at this point.
@@ -124,12 +124,14 @@ sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<flowRoot([-[:alnum:]\.=\" \:\(\)\%\#\,\'
 #nu Attribute font-feature-settings not allowed on SVG element g at this point.
 #svgo --enable=removeUnknownsAndDefaults
 
-
+# SVG element ellipse is missing required attribute rx
+#  required attribute "rx" not specified
+# repair with inkscape
+# not: (notscour/notcleaner/notsvgo) might contained d-data 
 
 ## == https://validator.w3.org/check ==
 
 # W3C: there is no attribute "font-size"
-# example  <ellipse id="ellipse5986" transform="matrix(1.59508 0 0 1.57553 205.96 -1234.18)" cx="5.67" cy="836.22" rx="5.67" ry="5.67" font-size="8" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"/>
 sed -ri "s/<ellipse([-[:lower:][:digit:]\"\.= \(\)]*) font-size=\"8\"/<ellipse\1/g" $i
 
 # W3C (SVG1.0): there is no attribute "solid-color"

@@ -59,7 +59,7 @@ sed -ri "s/<svg([-[:alnum:]=\"\.\/: ]*) viewBox=\"0,0,([[:digit:]\.]*),([[:digit
     export h=$(sed -r 's/<svg viewBox="([-[:digit:]]+) ([-[:digit:]]+) ([[:digit:]]+)\.([[:digit:]])([[:digit:]]*) ([[:digit:]]+)\.([[:digit:]])([[:digit:]]*)"([-[:alnum:]=\" \.\/:\,\(\)_;]+)>/<svg viewBox="\1 \2 \3\4.\50 \6\7.\80"\9><g transform="scale(10)">/' $i)
     
     #Reading out the relevant line
-    export j=$(ls -l|grep -E "viewBox=\"[-[:digit:].]{1,5} [-[:digit:].]{1,5} [[:digit:].]{2,10} [[:digit:].]{2,8}" $i)
+    export j=$(ls -l|grep -E "viewBox=\"[-[:digit:].]{1,8} [-[:digit:].]{1,8} [[:digit:].]{2,11} [[:digit:].]{2,11}" $i)
     
     #Insert a special character to define the point of splitting
     export l=$(echo $j | sed -e "s/viewBox=\"/>/g" )

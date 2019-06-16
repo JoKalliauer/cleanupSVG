@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="620" height="472" font-size="180" inkscape:version="0.92.2 (5c3e80d, 2017-08-06)" sodipodi:docname="20190401041014!Test2.svg">
+ <text x="59.49" y="174.47">
+  TEST
+ </text>
+</svg>

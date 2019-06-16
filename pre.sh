@@ -233,6 +233,10 @@ sed -i "s/<?xpacket begin='﻿' id='/<?xpacket begin='ZeichenEingefuegtVonKallia
 #  #  
 #  #  
 
+## == unsave uploads
+#https://commons.wikimedia.org/wiki/Commons:Help_desk#Found_unsafe_CSS_in_the_style_element_of_uploaded_SVG_file
+sed -i "s/src: url(\"data:font\/woff;charset=utf-8;base64,data:application\/x-font-ttf;base64,AAEAAAAQAQAABAAAR[[:alnum:]+\/]*\");//" $i
+
 echo $i finish
 
 
