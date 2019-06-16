@@ -1,6 +1,6 @@
 # !/usr/bin/env python3
 
-with open("min.svg", "r+") as fp:
+with open("tmp.svg", "r+") as fp:
     alllines = fp.readlines()
     for i in range(len(alllines)):
         if "<flowRoot" in alllines[i]:
@@ -62,7 +62,7 @@ with open("min.svg", "r+") as fp:
                 str(cflowParatags)+">"+str(flowParaText)+"</tspan></text>\n"
             alllines[i] = line
     dateiX = "".join(alllines)
-    print(dateiX)
+    # print(dateiX)
 fp.close()
 fp2 = open("Output.svg", "w")
 fp2.write(dateiX)

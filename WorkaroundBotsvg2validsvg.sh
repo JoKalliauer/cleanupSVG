@@ -27,13 +27,13 @@ export i=$1
 T35245tspan=YES
 
 if [ -z ${SVGCleaner+x} ]; then
- SVGCleaner=NO
+ SVGCleaner=YES
 fi
 if [ -z ${EinzeilTags+x} ]; then
- EinzeilTags=NO
+ EinzeilTags=YES
 fi
 if [ -z ${ScourScour+x} ]; then
- ScourScour=NO
+ ScourScour=YES
 fi
 
 if [ $HOSTNAME = LAPTOP-K1FUMMIP ]; then
@@ -68,20 +68,33 @@ sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<flowRoot([-[:alnum:]\.=\" \:\(\)\%\#\,\'
 
 sed -ri "s/inkscape:version=\"0.(4[\. r[:digit:]]+|91 r13725)\"//g" $i # https://bugs.launchpad.net/inkscape/+bug/1763190
 
- #copied from FFlow2TextBySed.sh https://github.com/JoKalliauer/cleanupSVG/blob/master/FFlow2TextBySed.sh
- sed -ri "s/<flowRoot([-[:alnum:]\.=\" \:\(\)\%\#\,\';]*)>[[:space:]]*<flowRegion([-[:alnum:]=:\" #;\.%\',]*)>[[:space:]]*<rect([-[:lower:][:digit:]\"= \.:;]*) x=\"([-[:digit:]\. ]+)\" y=\"([-[:digit:]\. ]+)\"([-[:alnum:]=\.\" \#:;\',]*)\/>[[:space:]]*<\/flowRegion>[[:space:]]*<flowPara([-[:alnum:]\.=\" \:\#;\%]*)>([-−[:alnum:] \{\}\(\)\+\ \ \.\?\']+)<\/flowPara>[[:space:]]*<\/flowRoot>/<text x=\"\4\" y=\"\5\"\1><tspan x=\"\4\" y=\"\5\"\7>\8<\/tspan><\/text>/g" $i
- 
-
 if [ $ScourScour = 'YES' ]; then
  export scour
  echo runScourScour $ScourJK $ScourScour
  #rm tmp.svg
- $ScourJK -i $i -o tmp.svg --keep-unreferenced-defs --remove-descriptions --strip-xml-space  --set-precision=6 --indent=space --nindent=1 --renderer-workaround --disable-style-to-xml  --set-c-precision=6 --protect-ids-noninkscape  --disable-simplify-colors  --keep-editor-data --error-on-flowtext # --enable-comment-stripping --create-groups  #--enable-viewboxing #
+ $ScourJK -i $i -o tmp.svg --keep-unreferenced-defs --remove-descriptions --strip-xml-space  --set-precision=6 --indent=space --nindent=1 --renderer-workaround --set-c-precision=6 --protect-ids-noninkscape  --disable-simplify-colors  --keep-editor-data # --enable-comment-stripping --create-groups  #--enable-viewboxing #
+ 
+ python3 ./FFlow2TextBySed.py
  rm $i
- mv tmp.svg $i
+ mv Output.svg $i
+
+ #copied from FFlow2TextBySed.sh https://github.com/JoKalliauer/cleanupSVG/blob/master/FFlow2TextBySed.sh
+ #sed -ri "s/<flowRoot([-[:alnum:]\.=\" \:\(\)\%\#\,\';]*)>[[:space:]]*<flowRegion([-[:alnum:]=:\" #;\.%\',]*)>[[:space:]]*<rect([-[:lower:][:digit:]\"= \.:;]*) x=\"([-[:digit:]\. ]+)\" y=\"([-[:digit:]\. ]+)\"([-[:alnum:]=\.\" \#:;\',]*)\/>[[:space:]]*<\/flowRegion>[[:space:]]*<flowPara([-[:alnum:]\.=\" \:\#;\%]*)>([-−[:alnum:] \{\}\(\)\+\ \ \.\?\']+)<\/flowPara>[[:space:]]*<\/flowRoot>/<text x=\"\4\" y=\"\5\"\1><tspan x=\"\4\" y=\"\5\"\7>\8<\/tspan><\/text>/g" $i
+
+ $ScourJK -i $i -o tmp.svg --keep-unreferenced-defs --remove-descriptions --strip-xml-space  --set-precision=6 --indent=space --nindent=1 --renderer-workaround --set-c-precision=6 --protect-ids-noninkscape  --disable-simplify-colors  --keep-editor-data --error-on-flowtext
+ rm $i
+ cp tmp.svg $i
+
 else 
  echo no ScourScour $ScourScour
 fi
+
+
+ 
+
+
+
+
 
 if [ $SVGCleaner = 'YES' ]; then
  echo runsvgcleaner $SVGCleaner
@@ -188,7 +201,7 @@ sed -ri 's/ font-family=\"(Times New Roman)\"/ font-family=\"Liberation Serif,\1
 
 #cp -f $i $2
 
-export uploadcomment="WorkaroundForLibrsvgBugs Scour$ScourScour SVGCleaner$SVGCleaner [[User:SVGWorkaroundBot/source]]; most common bugs: [[phab:T55899]], reduce invalid-Errors"
+export uploadcomment="WorkaroundForLibrsvgBugs Scour$ScourScour SVGCleaner$SVGCleaner [[User:SVGWorkaroundBot/source]]; solves bugs such as: [[phab:T55899]], reduce invalid-Errors, convert flowRoot to SVG1.1-text"
 
 if [ $HOSTNAME = LAPTOP-K1FUMMIP ]; then
  echo "$uploadcomment"
