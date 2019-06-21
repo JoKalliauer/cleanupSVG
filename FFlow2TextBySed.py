@@ -1,6 +1,11 @@
 # !/usr/bin/env python3
 
-with open("tmp.svg", "r+") as fp:
+import sys
+
+inputfile = int(sys.argv[1])
+outputfile = int(sys.argv[2])
+
+with open(inputfile, "r+") as fp:
     alllines = fp.readlines()
     for i in range(len(alllines)):
         if "<flowRoot" in alllines[i]:
@@ -64,7 +69,7 @@ with open("tmp.svg", "r+") as fp:
     dateiX = "".join(alllines)
     # print(dateiX)
 fp.close()
-fp2 = open("Output.svg", "w")
+fp2 = open(outputfile, "w")
 fp2.write(dateiX)
 fp2.close()
 

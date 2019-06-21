@@ -190,7 +190,6 @@ sed -i "s/<?xpacket begin='﻿' id='/<?xpacket begin='ZeichenEingefuegtVonKallia
 
 ## == Workaround for inkscape bug ==
  sed -ri "s/inkscape:version=\"0.(4[\. r[:digit:]]+|91 r13725)\"//g" $i # https://bugs.launchpad.net/inkscape/+bug/1763190
- sed -ri "s/sodipodi:role=\"line\"//g" $i # https://bugs.launchpad.net/inkscape/+bug/1763190
 
 #  #  ## == Repair after svgo ==
 #  #  
