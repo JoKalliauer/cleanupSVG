@@ -57,7 +57,7 @@ Similar scripts<br/>
 2b)Add "C:\Python37" and "C:\Python37\Scripts" to enviroment variable %Path%<br/>
  -(Option-i)Run cmd.exe; type ```set PYTHONPATH=C:\Python37``` and ```set PATH=%PATH%;%PYTHONPATH%;C:\Python37\Scripts```<br/>
  -(Option-ii)Run Sysdm.cpl; to to the advanced-Tab; Environemt variables...; click Path, click Edit; add ```C:\Python37``` and ```C:\Python37\Scripts```<br/>
-2c)Run cmd.exe<br/>
+2c)Run cmd.exe as a administrator<br/>
 2c,i)```python -m pip install --upgrade pip```<br/>
 2c,ii)```pip install --upgrade https://github.com/codedread/scour/archive/master.zip```<br/>
 3)[svgcleaner](https://github.com/RazrFalcon/svgcleaner)<br/>
