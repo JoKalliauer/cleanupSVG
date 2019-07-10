@@ -53,10 +53,10 @@ Similar scripts<br/>
 1)Inkscape<br/>
 1a)Download&Install https://inkscape.org/release/0.92.3/ (Don't forget to choose your language)<br/>
 2)[scour](https://github.com/scour-project/scour)<br/>
-2a)Download&Install Python 2.7: https://www.python.org/downloads/<br/>
-2b)Add "C:\Python27" and "C:\Python27\Scripts" to enviroment variable %Path%<br/>
- -(Option-i)Run cmd.exe; type ```set PYTHONPATH=C:\Python27``` and ```set PATH=%PATH%;%PYTHONPATH%;C:\Python27\Scripts```<br/>
- -(Option-ii)Run Sysdm.cpl; to to the advanced-Tab; Environemt variables...; click Path, click Edit; add ```C:\Python27``` and ```C:\Python27\Scripts```<br/>
+2a)Download&Install CPython 3.7: https://www.python.org/downloads/<br/>
+2b)Add "C:\Python37" and "C:\Python37\Scripts" to enviroment variable %Path%<br/>
+ -(Option-i)Run cmd.exe; type ```set PYTHONPATH=C:\Python37``` and ```set PATH=%PATH%;%PYTHONPATH%;C:\Python37\Scripts```<br/>
+ -(Option-ii)Run Sysdm.cpl; to to the advanced-Tab; Environemt variables...; click Path, click Edit; add ```C:\Python37``` and ```C:\Python37\Scripts```<br/>
 2c)Run cmd.exe<br/>
 2c,i)```python -m pip install --upgrade pip```<br/>
 2c,ii)```pip install --upgrade https://github.com/codedread/scour/archive/master.zip```<br/>
