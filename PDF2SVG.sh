@@ -46,34 +46,7 @@ validOutput9="png96"
 
 #echo "This script allows you to convert all files in this folder from one file type to another."
 
-#valid=0
-if [ -z $sourceType ]; then
- while [ "$valid" != "1" ]
- do
-     echo "Allowed file types for source: $validInput1, $validInput2, $validInput3"
- 	read -p "What file type do you want to use as a source? " sourceType
-     if [ "$sourceType" = "$validInput1" ] || [ "$sourceType" = "$validInput1a" ] || [ "$sourceType" = "$validInput1b" ] || [ "$sourceType" = "$validInput2" ] || [ "$sourceType" = "$validInput3" ]; then
-         valid=1
-     else
-         echo "Invalid input! Please use one of the following: $validInput1, $validInput2, $validInput3"
-     fi
- done
-fi
 
-if [ -z ${outputType+x} ]; then
-  valid=0 #ask it output is not defined
-fi
-
-while [ "$valid" != "1" ]
-do
-    echo "Allowed file types for output: $validOutput1, $validOutput2, $validOutput3, $validOutput4 (plain), $validOutput5, $validOutput8"
-	read -p "What file type do you want to convert to? " outputType
-    if [ "$outputType" = "$validOutput1" ] || [ "$outputType" = "$validOutput2" ] || [ "$outputType" = "$validOutput3" ] || [ "$outputType" = "$validOutput4" ] || [ "$outputType" = "$validOutput5" ] || [ "$outputType" = "$validOutput6" ] || [ "$outputType" = "$validOutput7" ] || [ "$outputType" = "$validOutput8" ] || [ "$outputType" = "$validOutput9" ]; then
-        valid=1
-    else
-        echo "Invalid input! Please use one of the following: $validOutput1, $validOutput2, $validOutput3, $validOutput4"
-    fi
-done
 
 for fileSource in *.$sourceType
 do
@@ -99,17 +72,12 @@ do
         echo $count". "$i" -> "${file}n.$outputType
 		sed -ri "s/inkscape:version=\"0.4[\. r[:digit:]]+\"//g" $i
 		
-		if [ "$outputType" = "png" ];then #png
-		 read -p "With what dpi should it be exported (e.g. 300, default: 96)? " dpi
-		 inkscape $i --export-$outputType=$file.$outputType --export-dpi=$dpi
-		elif [ "$outputType" = "svg" ];then #  svg
+		if [ "$outputType" = "svg" ];then #  svg
 		 inkscape $i --export-plain-$outputType=${file}n.$outputType
 		elif [ "$outputType" = "$validOutput6" ] || [ "$outputType" = "$validOutput7" ] || [ "$outputType" = "$validOutput8" ]; then #inkscape-svg
 		  cp ./${fileSource} ./${file}Ink.svg
 		  mv ./${fileSource} ./${file}.xml
 		 inkscape ./${file}Ink.svg --no-convert-text-baseline-spacing --verb=FileSave --verb=FileClose --verb=FileQuit
-		elif  [ "$outputType" = "$validOutput9" ];then #png96
-		 inkscape $i --export-png=$file.png
 		else #eps, pdf, plain-svg and others
 		 inkscape $i --export-$outputType=$file.$outputType
 		fi

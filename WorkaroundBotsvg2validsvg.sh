@@ -2,8 +2,7 @@
 #solves librsvg-Bug (Workarounds)
 # Input $1 ... File from Commons (downloaded, repaired and overwritten automatically)
 
-# export ScourScour=YES ; export SVGCleaner=YES
-
+# ScourScour=YES ; SVGCleaner=YES ; EinzeilTags=YES; validValid=YES;
 
 ## == Credit ==
 #Author: Johannes Kalliauer (JoKalliauer)
@@ -27,6 +26,12 @@ export i3=Output.svg
 ~/.bash_profile
 
 T35245tspan=YES
+			   
+			 
+			 
+			 
+
+	  
 
 if [ -z ${SVGCleaner+x} ]; then
  SVGCleaner=YES
@@ -40,6 +45,19 @@ fi
 if [ -z ${validValid+x} ]; then
  validValid=NO
 fi
+								
+				 
+  
+
+				  
+				   
+				  
+				  
+
+
+							  
+				
+   
 
 if [ $HOSTNAME = LAPTOP-K1FUMMIP ]; then
  #rm -f $1
@@ -47,9 +65,11 @@ if [ $HOSTNAME = LAPTOP-K1FUMMIP ]; then
  export ScourJK=scour
 else
  if [ $HOSTNAME = tools-sgebastion-07 ]; then
+  #this is needed to run bot
   rm -f $1
   wget -q https://commons.wikimedia.org/wiki/Special:FilePath/$i -O $i 
   export ScourJK="python3 -m scour.scour"
+						  
  else
   echo did not recognice HOSTNAME $HOSTNAME
  fi
@@ -79,9 +99,20 @@ sed -ri "s/inkscape:version=\"0.(4[\. r[:digit:]]+|91 r13725)\"//g" $i # https:/
 
 if [ $ScourScour = 'YES' ]; then
  export scour
- echo runScourScour $ScourJK $ScourScour
+ echo runScourScour,JK $ScourJK, YN $ScourScour, i $i ,ii $i2
  #rm tmp.svg
+					
  $ScourJK -i $i -o $i2 --keep-unreferenced-defs --remove-descriptions --strip-xml-space  --set-precision=6 --indent=space --nindent=1 --renderer-workaround --set-c-precision=6 --protect-ids-noninkscape  --disable-simplify-colors  --keep-editor-data #--disable-style-to-xml --error-on-flowtext # --enable-comment-stripping --create-groups  #--enable-viewboxing #
+																																																																																							  
+					 
+		   
+				 
+				   
+		  
+							 
+														
+									
+					  
 
  python3 ./FFlow2TextBySed.py $i2 $i3
  rm $i
@@ -89,6 +120,7 @@ if [ $ScourScour = 'YES' ]; then
 else
  echo no ScourScour $ScourScour
 fi
+					
 
 if [ $SVGCleaner = 'YES' ]; then
  echo runsvgcleaner $SVGCleaner
@@ -219,6 +251,9 @@ else
  fi
 fi
 
+					
 
+																																	  
 
+	   
 

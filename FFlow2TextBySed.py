@@ -2,12 +2,40 @@
 
 import sys
 
-inputfile = int(sys.argv[1])
-outputfile = int(sys.argv[2])
+#inputfile = "in.svg"
+#outputfile = "out.svg"
 
-with open(inputfile, "r+") as fp:
+inputfile = (sys.argv[1])
+outputfile = (sys.argv[2])
+
+with open(inputfile, "r+", encoding='utf-8') as fp:
     alllines = fp.readlines()
     for i in range(len(alllines)):
+        if "<g" in alllines[i]:
+            line = alllines[i]
+            tags = line.replace(">", "<")
+            tags = tags.split("<")
+            # print(line)
+            flowParaNR = -10
+            for i3 in range(len(tags)):
+                tag = tags[i3].strip()
+                # words = words.split(" ")
+                # print(tag)
+                if tag == "":
+                    pass
+                else:
+                    tag = tag.split(" ")
+                    for attribute in tag:
+                        # print(attribute)
+                        if attribute[0:11] == 'font-size=\"':
+                            fs = attribute[11:]
+                            # fs = fs.replace(">", " ")
+                            fs = fs.strip()
+                            fs = fs.split('"')
+                            fs = fs[0]
+                            fs = fs.replace("px", " ")
+                            fs = float(fs)
+                            # print(fs)
         if "<flowRoot" in alllines[i]:
             line = alllines[i]
             tags = line.replace(">", "<")
@@ -22,6 +50,17 @@ with open(inputfile, "r+") as fp:
                     pass
                 else:
                     tag = tag.split(" ")
+                    for attribute in tag:
+                        # print(attribute)
+                        if attribute[0:11] == 'font-size=\"':
+                            fs = attribute[11:]
+                            # fs = fs.replace(">", " ")
+                            fs = fs.strip()
+                            fs = fs.split('"')
+                            fs = fs[0]
+                            fs = fs.replace("px", " ")
+                            fs = float(fs)
+                            # print(fs)
                     if tag[0] == 'flowRoot':
                         flowRoottags = tag[1:]
                         cflowRoottags = " ".join(flowRoottags)
@@ -40,27 +79,16 @@ with open(inputfile, "r+") as fp:
                             elif attribute[0:3] == "y=\"":
                                 ry = attribute[3:-1].strip()
                         tx = float(rx)
-                        ty = float(ry) + .88476562*fs
                         # print(tx)
                     elif tag[0] == 'flowPara':
                         flowParatags = tag[1:]
                         cflowParatags = " ".join(flowParatags)
                         flowParaNR = i3
+                        ty = float(ry) + .88476562*fs
                     elif i3 == flowParaNR+1:
-                        print(tag)
+                        #print(tag)
                         flowParaText = " ".join(tag[0:])
-                        print(flowParaText)
-                    for attribute in tag:
-                        # print(attribute)
-                        if attribute[0:11] == 'font-size=\"':
-                            fs = attribute[11:]
-                            # fs = fs.replace(">", " ")
-                            fs = fs.strip()
-                            fs = fs.split('"')
-                            fs = fs[0]
-                            fs = fs.replace("px", " ")
-                            fs = float(fs)
-                            # print(fs)
+                        #print(flowParaText)
             line = "<text x=\""+str(tx)+"\" y=\""+str(ty) + \
                 "\" "+str(cflowRoottags)+">" + \
                 "<tspan x=\""+str(tx)+"\" y=\""+str(ty)+"\" " + \
@@ -69,7 +97,7 @@ with open(inputfile, "r+") as fp:
     dateiX = "".join(alllines)
     # print(dateiX)
 fp.close()
-fp2 = open(outputfile, "w")
+fp2 = open(outputfile, "w", encoding='utf-8')
 fp2.write(dateiX)
 fp2.close()
 

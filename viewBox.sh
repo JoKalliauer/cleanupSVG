@@ -31,7 +31,8 @@ fi
 
 echo scour ${file} to $i begin, min=${minfilesize}, meta=$meta, META= $META, INDENT=$INDENTs
 
-scour -i ${file} -o $i --keep-unreferenced-defs --enable-comment-stripping --remove-titles --remove-descriptions --strip-xml-space  --set-precision=5 $META $INDENTs --renderer-workaround --disable-style-to-xml --create-groups  --set-c-precision=4 --enable-viewboxing #  
+#scour -i ${file} -o $i --keep-unreferenced-defs --enable-comment-stripping --remove-titles --remove-descriptions --strip-xml-space  --set-precision=5 $META $INDENTs --renderer-workaround --disable-style-to-xml --create-groups  --set-c-precision=4 --enable-viewboxing #  
+./viewBoxS.sh
 
 mv ./${file} ./${tmp}3.xml
 

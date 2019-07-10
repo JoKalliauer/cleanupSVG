@@ -40,12 +40,12 @@ for file in *.svg;do
  
  sed -ri "s/<tspan([-[:alnum:]=\.\" \#\(\)\;\:\%\,\']*)>|<\/tspan>//g" $j #remove tspans
  
- sed -ri "s/>[]\[[:alnum:][:space:]\$\^\\\_\{\} \'\’\“\”\/\(\)\!\,\:#\.=,\"\&\;\¯\°\¸\*\+«»–—­−-]*/>/g" $j #Remove everything after tags
+ sed -ri "s/>[]\[[:alnum:][:space:]\$\^\\\_\{\}   \'\’\“\”\/\(\)\!\,\:#\.=,\"\&\;\¯\°\¸äöüå\*\+«»–—­−-]*/>/g" $j #Remove everything after tags
  
-  sed -ri "s/[]\[[:alnum:][:space:]\$\^\\\_\{\} \'\’\“\”\/\(\)\!\,\:#\.=,\"\&\;\¯\°\¸\*\+«»–—­−-]*</</g" $j #Remove everything before in tags
+  sed -ri "s/[]\[[:alnum:][:space:]\$\^\\\_\{\}   \'\’\“\”\/\(\)\!\,\:#\.=,\"\&\;\¯\°\¸äöüå\*\+«»–—­−-]*</</g" $j #Remove everything before in tags
 #  sed -ri "s/[]\[[:alnum:][:space:]\$\^\\\_\{\} \'\’\“\”\/\(\)\!\,\:#\.=,\"\&\;\¯\°\¸üä\*\+«»–—­−-]*</</g" $j #Remove everything before in tags
  
- sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<text([-—[:alnum:]=\.\" \#\(\)\;\:\%\'\/\,\*]*)>([]\[[:alnum:][:space:]äüößÄÜÖ\$\^\\\_\{\} \'\’\“\”\/\(\)\!?\,\:#\.=≈,\"\&\;\¯\¸\°\*\+\|~\´→·˚º«»%@¹²³⁴⁶⁷⁸⁹•…⁺⁻–—­−-]*|<tspan([-[:alnum:]=\.\" \#\(\)\;\:\%\,\']*)>|<\/tspan>)*<\/text>//g" $j
+ sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<text([-—[:alnum:]=\.\" \#\(\)\;\:\%\'\/\,\*]*)>([]\[[:alnum:][:space:]äąęłüößżÄÜÖł\$\^\\\_\{\} \'\’\“\”\/\(\)\!?\,\:#\.=≈,\"\&\;\¯\¸\°\*\+\|~\´→·˚º«»%@¹²³⁴⁶⁷⁸⁹•…⁺⁻–—­−-]*|<tspan([-[:alnum:]=\.\" \#\(\)\;\:\%\,\']*)>|<\/tspan>)*<\/text>//g" $j
  
  #just for debugging
  #sed -ri "s/

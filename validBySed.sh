@@ -72,7 +72,7 @@ sed -ri "s/ text-align=\"(end|center)\"//g"  ${i}
 #Nu: Warning: This validator does not validate RDF. RDF subtrees go unchecked.
 # use scour/svgcleaner/svgo or https://de.wikipedia.org/wiki/Benutzer:Marsupilami/Inkscape-FAQ#Wie_erstelle_ich_eine_Datei_die_dem_Standard_SVG_1.1_entspricht?
 sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/[[:space:]\r\n]*<rdf:RDF>[[:space:]\r\n]*<cc:Work( rdf:about=\"\"|)>[[:space:]\r\n]*(<dc:format>[[:space:]\r\n]*image\/svg\+xml[[:space:]\r\n]*<\/dc:format>|<dc:format\/>)[[:space:]\r\n]*<dc:type rdf:resource=\"http:\/\/purl.org\/dc\/dcmitype\/StillImage\"\/>([[:space:]\r\n]*<dc:title\/>|)[[:space:]\r\n]*<\/cc:Work>[[:space:]\r\n]*<\/rdf:RDF>//" $i
-sed -i -e ':a' -e 'N' -e '$!ba' -e "s/<metadata id=\"metadata[[:digit:]]*\">[[:space:]\r\n]*<\/metadata>//" $i
+sed -i -e ':a' -e 'N' -e '$!ba' -e "s/<metadata( id=\"metadata[[:digit:]]*\"|)>[[:space:]\r\n]*<\/metadata>//" $i
    
 
 #W3C: Error: there is no attribute "sodipodi:version"
@@ -82,8 +82,12 @@ sed -i -e ':a' -e 'N' -e '$!ba' -e "s/<metadata id=\"metadata[[:digit:]]*\">[[:s
 #W3C: Error: there is no attribute "sodipodi:cx"
 #W3C: Error: there is no attribute "inkscape:label"
 #W3C: Error:  there is no attribute "sodipodi:nodetypes"
+#W3C: Error: there is no attribute "inkscape:connector-curvature"
 #Nu: Warning: This validator does not validate Inkscape extensions properly. Inkscape-specific errors may go unnoticed.
-# use scour/svgcleaner --remove-nonsvg-attributes yes --remove-nonsvg-elements yes/svgo
+# use scour
+# use svgcleaner --remove-nonsvg-attributes yes --remove-nonsvg-elements yes
+# use svgo
+ sed -i "s/ inkscape:connector-curvature=\"0\"//g" $i
    sed -ri "s/<sodipodi:namedview( id=\"namedview[[:digit:]]*\"|) bordercolor=\"#666666\" borderopacity=\"1\" gridtolerance=\"10\" guidetolerance=\"10\" inkscape:current-layer=\"svg[[:digit:]]*\" inkscape:cx=\"[-[:digit:].]*\" inkscape:cy=\"[-[:digit:].]*\" inkscape:pageopacity=\"0\" inkscape:pageshadow=\"2\" inkscape:window-height=\"(480|1017)\" inkscape:window-maximized=\"(0|1)\" inkscape:window-width=\"(640|1920)\" inkscape:window-x=\"(0|-8)\" inkscape:window-y=\"(0|-8)\" inkscape:zoom=\"[[:digit:].]*\" objecttolerance=\"10\" pagecolor=\"#ffffff\" showgrid=\"false\"\/>//" $i
 
 #W3C: Error:  there is no attribute "enable-background"

@@ -43,13 +43,14 @@ for file in *.svg;do
  sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/\n[[:space:]]+/ /g" $i #reduce to one space
  sed -ri "s/<mask([[:alnum:] =\"]*) maskUnits=\"userSpaceOnUse\"( id=\"[[:alnum:]_]+\"|)>/<mask\1\2>/g" $i
  
- sed -ri 's/[[:space:]]*<(g|path|svg|flowRoot|defs|clipPath|radialGradient|linearGradient|filter|mask|pattern) /\r\n<\1 /g' $i
+ sed -ri 's/[[:space:]]*<(g|path|svg|flowRoot|defs|clipPath|radialGradient|linearGradient|filter|mask|pattern|use|defs) /\n<\1 /g' $i
 # sed -ri 's/[[:space:]]*<text /\n<text /g' $i #deactivated for PosibilityUngroup
 #sed -ri 's/[[:space:]]*<tspan /\n<tspan /g' $i #ruins text
 #  sed -ri 's/[[:space:]]*<rect /\n<rect /g' $i #deactivated for Flow2TextBySed
 
 
- sed -ri 's/<\/(g|flowRoot)>/<\/\1>\r\n/g' $i
+ sed -ri 's/<\/(g|flowRoot)>/<\/\1>\n/g' $i
+ sed -ri 's/\n\n/\n/g' $i
  
 done
 

@@ -4,7 +4,7 @@ export minfilesize=1 #1..min file size (1...no line breaks)
 export meta=0 #0 removes metadata
 export outputType="svg" #just to not get asked by Inkscape
 
-./svg2validsvg.sh
+#./svg2validsvg.sh
 ./InkscapeBatchConverter.sh
 ./scour4compression.sh
 ./cleaner4compression.sh
@@ -17,13 +17,13 @@ export outputType="svg" #just to not get asked by Inkscape
 ./ScourFull.sh
 ./ScourFull.sh
 ./CleanerFull.sh
-./cleaner4compression.sh
-./o4compression.sh
+#./cleaner4compression.sh
+#./o4compression.sh
 ./OptimizerFull.sh
-./o4compression.sh
+#./o4compression.sh
 
-./validBycleaner.sh
-./scour4compression.sh
+#./validBycleaner.sh
+#./scour4compression.sh
 ./svg2validsvg.sh
 
 for file in *.svg;do
