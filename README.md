@@ -48,8 +48,9 @@ Similar scripts<br/>
 -[scour](https://github.com/scour-project/scour)<br/>
 -[svgcleaner](https://github.com/RazrFalcon/svgcleaner)
 
-## Installation on Windows:
+## Installation:
 
+Windows
 1)Inkscape<br/>
 1a)Download&Install https://inkscape.org/release/0.92.3/ (Don't forget to choose your language)<br/>
 2)[scour](https://github.com/scour-project/scour)<br/>
@@ -72,8 +73,8 @@ Similar scripts<br/>
 4a)Install node.js: https://nodejs.org/  (Don't forget to choose your language)<br/>
 4b)cmd.exe: ```npm install -g svgo```<br/>
 5)Cygwin<br/>
-5a)Download&Install (32bit or 64bit) https://cygwin.com/install.html (in some cases you have to deactivate Avast)
-
+5a)Download&Install (32bit or 64bit) https://cygwin.com/install.html (in some cases you have to deactivate Virusprotection (e.g. Avast))<br/>
+6)cygwin.exe: `/usr/bin/python3 -m pip install scour`
 
 ## Update
 
