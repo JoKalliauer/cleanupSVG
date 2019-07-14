@@ -8,25 +8,25 @@ export i=min.svg # just used for debugging
 
 ./einzeilTags.sh
 ./svg2validsvg.sh
-./InkscapeBatchConverter.sh
-./einzeilTags.sh
+# ./InkscapeBatchConverter.sh
+# ./einzeilTags.sh
 
-./cleaner4compression.sh
-#./o4compression.sh #https://github.com/svg/svgo/issues/1001
-
-##./einzeilTags.sh
-##./PosibleUngroup.sh
-##./UngroupByInkscape.sh
-##./Flow2TextByInkscape.sh
-##./SimplifyByInkscape.sh
-
-#./scour4compression.sh #https://github.com/scour-project/scour/issues/202
-./CleanerFull.sh
-##./cleaner4compression.sh
-##./o4compression.sh
-##./OptimizerFull.sh
-#./o4compression.sh #https://github.com/svg/svgo/issues/1001
+# ./cleaner4compression.sh
+# #./o4compression.sh #https://github.com/svg/svgo/issues/1001
+# 
+# ##./einzeilTags.sh
+# ##./PosibleUngroup.sh
+# ##./UngroupByInkscape.sh
+# ##./Flow2TextByInkscape.sh
+# ##./SimplifyByInkscape.sh
+# 
+# #./scour4compression.sh #https://github.com/scour-project/scour/issues/202
+# ./CleanerFull.sh
+# ##./cleaner4compression.sh
+# ##./o4compression.sh
+# ##./OptimizerFull.sh
+# #./o4compression.sh #https://github.com/svg/svgo/issues/1001
 
 ./fontReplace.sh
-./validBycleaner.sh
+# ./validBycleaner.sh
 ./svg2validsvg.sh

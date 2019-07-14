@@ -26,12 +26,6 @@ export i3=Output.svg
 ~/.bash_profile
 
 T35245tspan=YES
-			   
-			 
-			 
-			 
-
-	  
 
 if [ -z ${SVGCleaner+x} ]; then
  SVGCleaner=YES
@@ -45,31 +39,19 @@ fi
 if [ -z ${validValid+x} ]; then
  validValid=NO
 fi
-								
-				 
-  
 
-				  
-				   
-				  
-				  
-
-
-							  
-				
-   
 
 if [ $HOSTNAME = LAPTOP-K1FUMMIP ]; then
- #rm -f $1
- #wget -q https://commons.wikimedia.org/wiki/Special:FilePath/$i -O $i
- export ScourJK=scour
+ rm -f $1
+ wget -q https://commons.wikimedia.org/wiki/Special:FilePath/$i -O $i
+ export ScourJK="python3 -m scour.scour"
 else
  if [ $HOSTNAME = tools-sgebastion-07 ]; then
   #this is needed to run bot
   rm -f $1
   wget -q https://commons.wikimedia.org/wiki/Special:FilePath/$i -O $i 
   export ScourJK="python3 -m scour.scour"
-						  
+  
  else
   echo did not recognice HOSTNAME $HOSTNAME
  fi
@@ -101,18 +83,9 @@ if [ $ScourScour = 'YES' ]; then
  export scour
  echo runScourScour,JK $ScourJK, YN $ScourScour, i $i ,ii $i2
  #rm tmp.svg
-					
+
  $ScourJK -i $i -o $i2 --keep-unreferenced-defs --remove-descriptions --strip-xml-space  --set-precision=6 --indent=space --nindent=1 --renderer-workaround --set-c-precision=6 --protect-ids-noninkscape  --disable-simplify-colors  --keep-editor-data #--disable-style-to-xml --error-on-flowtext # --enable-comment-stripping --create-groups  #--enable-viewboxing #
-																																																																																							  
-					 
-		   
-				 
-				   
-		  
-							 
-														
-									
-					  
+
 
  python3 ./FFlow2TextBySed.py $i2 $i3
  rm $i
@@ -120,7 +93,7 @@ if [ $ScourScour = 'YES' ]; then
 else
  echo no ScourScour $ScourScour
 fi
-					
+
 
 if [ $SVGCleaner = 'YES' ]; then
  echo runsvgcleaner $SVGCleaner
@@ -141,6 +114,7 @@ sed -i "s/<metadata id=\"metadata8\">  <rdf:RDF>  <cc:Work rdf:about=\"\">  <dc:
 
 #Remove CDATA by AdobeIllustrator
 sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<\!\[CDATA\[([[:alnum:]=+\/\t\n[:space:]@:;\(\)\"\,\'\{\}\-])*\t\]\]>[[:space:]]*//g" $i #Remove CDATA
+sed -ri -e ':a' -e 'N' -e "s/<i:pgf[[:lower:] =\"_]*>[[:space:][:alnum:]\/=\+]*<\/i:pgf>//" $i #Remove AI-Elemtents for CDATA
 
 #remove jpg im metadata
 sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<xapGImg:image>([[:alnum:][:space:]\/+])*={0,2}[[:space:]]*<\/xapGImg:image>//g" $i
@@ -236,7 +210,7 @@ sed -ri 's/ font-family=\"(Times New Roman)\"/ font-family=\"Liberation Serif,\1
 
 #cp -f $i $2
 
-export uploadcomment="WorkaroundForLibrsvgBugs Scour$ScourScour SVGCleaner$SVGCleaner [[User:SVGWorkaroundBot/source]]; solves bugs such as: [[phab:T55899]], reduce invalid-Errors, convert flowRoot to SVG1.1-text"
+export uploadcomment="WorkaroundForLibrsvgBugs Scour$ScourScour SVGCleaner$SVGCleaner [[User:SVGWorkaroundBot/source]]; solves bugs such as: [[phab:T55899]], [[phab:T68672]], [[phab:T43424]], reduce invalid-Errors, convert flowRoot to SVG1.1-text, please see description-page for the actual bug"
 
 if [ $HOSTNAME = LAPTOP-K1FUMMIP ]; then
  echo "$uploadcomment"
@@ -250,10 +224,4 @@ else
   echo did not recognice HOSTNAME $HOSTNAME
  fi
 fi
-
-					
-
-																																	  
-
-	   
 
