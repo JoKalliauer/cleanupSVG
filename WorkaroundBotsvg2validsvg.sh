@@ -34,6 +34,7 @@ if [ -z ${EinzeilTags+x} ]; then
  EinzeilTags=YES
 fi
 if [ -z ${ScourScour+x} ]; then
+ echo set scour to yes
  ScourScour=YES
 fi
 if [ -z ${validValid+x} ]; then
