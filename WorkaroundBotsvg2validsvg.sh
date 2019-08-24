@@ -79,6 +79,8 @@ sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<flowRoot([-[:alnum:]\.=\" \:\(\)\%\#\,\'
 
 sed -ri "s/inkscape:version=\"0.(4[\. r[:digit:]]+|91 r13725)\"//g" $i # https://bugs.launchpad.net/inkscape/+bug/1763190
 
+ sed -i "s/ inkscape:connector-curvature=\"0\"//g" $i #https://commons.wikimedia.org/wiki/File:Royal_Monogram_of_Princess_Adityadhornkitikhun.svg
+
 
 if [ $ScourScour = 'YES' ]; then
  export scour
@@ -106,7 +108,7 @@ else
 fi
 if [ $validValid = 'YES' ]; then
  svgcleaner $i $i2 --allow-bigger-file --indent 1 --remove-nonsvg-attributes yes --remove-nonsvg-elements yes --remove-version yes --remove-text-attributes yes --remove-needless-attributes yes --resolve-use no --apply-transform-to-gradients yes --apply-transform-to-shapes yes --convert-shapes yes --group-by-style no --join-arcto-flags no --join-style-attributes no --merge-gradients yes --regroup-gradient-stops yes --remove-comments yes --remove-declarations no --remove-default-attributes yes --remove-desc yes --remove-dupl-cmd-in-paths yes --remove-dupl-fegaussianblur yes --remove-dupl-lineargradient yes --remove-dupl-radialgradient yes --remove-gradient-attributes yes --remove-invalid-stops yes --remove-invisible-elements yes --remove-metadata no --remove-title yes --remove-unreferenced-ids yes --remove-unresolved-classes yes --remove-unused-coordinates yes --remove-unused-defs yes --remove-xmlns-xlink-attribute yes --simplify-transforms yes --trim-colors yes --trim-ids yes --trim-paths yes --ungroup-defs yes --ungroup-groups yes --use-implicit-cmds yes --list-separator comma --paths-to-relative yes --remove-unused-segments yes --convert-segments yes --apply-transform-to-paths no --coordinates-precision 2 --paths-coordinates-precision 5 --properties-precision 3 --transforms-precision 5
- cp -f $i2 $i
+ mv $i2 $i
 fi
 
 #remove useless metadata
