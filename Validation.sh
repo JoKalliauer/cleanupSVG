@@ -8,9 +8,9 @@ export file=min.svg # just used for debugging
 export i=min.svg # just used for debugging
 
 #./Vacuumdefs.sh
-./validByo4compression.sh
 ./between.sh
 ./validBycleaner.sh
+./validByo4compression.sh #after svgcleaner https://github.com/svg/svgo/issues/1146
 ./validByscour.sh
 ./validBySed.sh
 ./svg2validsvg.sh

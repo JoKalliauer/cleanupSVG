@@ -81,6 +81,7 @@ Windows
 Windows:
 ```cmd
 python -m pip install --upgrade pip
+pip install --upgrade pip
 #pip install --upgrade https://github.com/codedread/scour/archive/master.zip
 pip3 install --upgrade https://github.com/codedread/scour/archive/master.zip
 rustup update

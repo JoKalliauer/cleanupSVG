@@ -90,6 +90,7 @@ sed -i -e ':a' -e 'N' -e '$!ba' -e "s/<metadata( id=\"metadata[[:digit:]]*\"|)>[
  sed -i "s/ inkscape:connector-curvature=\"0\"//g" $i
  #<sodipodi:namedview bordercolor="#666666" borderopacity="1" gridtolerance="10" guidetolerance="10" inkscape:current-layer="svg2" inkscape:cx="398.5" inkscape:cy="96.5" inkscape:pageopacity="0" inkscape:pageshadow="2" inkscape:window-height="480" inkscape:window-maximized="0" inkscape:window-width="640" inkscape:window-x="0" inkscape:window-y="0" inkscape:zoom="0.36010038" objecttolerance="10" pagecolor="#ffffff" showgrid="false"/>
    sed -ri "s/<sodipodi:namedview( id=\"namedview[[:digit:]]*\"|) bordercolor=\"#666666\" borderopacity=\"1\" gridtolerance=\"10\" guidetolerance=\"10\" inkscape:current-layer=\"[[:digit:]svgEbene_]*\" inkscape:cx=\"[-[:digit:].]*\" inkscape:cy=\"[-[:digit:].]*\" inkscape:pageopacity=\"0\" inkscape:pageshadow=\"2\" inkscape:window-height=\"(480|1017)\" inkscape:window-maximized=\"(0|1)\" inkscape:window-width=\"(640|1920)\" inkscape:window-x=\"(0|-8)\" inkscape:window-y=\"(0|-8)\" inkscape:zoom=\"[[:digit:].]*\" objecttolerance=\"10\" pagecolor=\"#ffffff\"( showgrid=\"false\"|)\/>//" $i
+ sed -ri "s/ sodipodi:nodetypes=\"[c]+\"//" $i
 
 #W3C: Error:  there is no attribute "enable-background"
 #Nu: Error: Attribute enable-background not allowed on SVG element path at this point.
@@ -134,6 +135,20 @@ sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<flowRoot([-[:alnum:]\.=\" \:\(\)\%\#\,\'
 # repair with inkscape
 # not: (notscour/notcleaner/notsvgo) might contained d-data 
 
+
+#nu Error:  SVG element variableSets not allowed as child of SVG element metadata in this context. (Suppressing further errors from this subtree.)
+#W3C Error:  element "variableSets" undefined
+#sour --remove-metadata
+#svgcleaner  --remove-metadata yes
+#svgo --enable=removeMetadata
+
+
+#nu Error:  SVG element imageReplacement not allowed as child of SVG element foreignObject in this context. (Suppressing further errors from this subtree.)
+#W3C Error: element "imageReplacement" undefined
+#svgcleaner --remove-nonsvg-elements yes
+
+
+################################################################################
 ## == https://validator.w3.org/check ==
 
 # W3C: there is no attribute "font-size"
@@ -156,6 +171,7 @@ sed -ri "s/<style( id=\"[[:alnum:]]*\"|)>/<style type=\"text\/css\"\1>/" $i
 sed -i "s/ href=\"/  xmlns:xlink=\"http:\/\/www.w3.org\/1999\/xlink\" xlink:href=\"/g" $i
 
 
+################################################################################
 ## == https://validator.nu/ ==
 
 #nu Error: Attribute fill not allowed on SVG element image at this point.
@@ -173,6 +189,8 @@ sed -ri "s/<linearGradient([-[:alnum:]=\". _]*)( clip-rule=\"evenodd\"| fill-rul
 
 ##nu Error:  Attribute stroke-linecap not allowed on SVG element linearGradient at this point.
 #sed -ri "s/ stroke-linecap=\"null\"//g"
+
+
 
 
 
