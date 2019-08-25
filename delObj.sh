@@ -58,7 +58,11 @@ for file in *.svg;do
 
  sed -ri "s/<use [-[:alnum:]=\,\.\" \:\;#\(\)]*\/>//g" $i
  
+ sed -ri "s/<switch[-[:alnum:]\"\.= #,]*\/>//g" $i #delte selfclosing switch
+ #<switch fill="#231f20" font-family="Liberation Sans,ArialMT" font-size="10"/>
+ 
  sed -ri -e ':a' -e 'N' -e '$!ba' -e  "s/<g[-[:lower:][:digit:]\"\.= #\(\)\:\,\;]*>[[:space:]]*<\/g>//g" $i #delete empty groups
+ sed -ri -e ':a' -e 'N' -e '$!ba' -e  "s/<switch[-[:alnum:]\"\.= #\(\)\:\,\;]*>[[:space:]]*<\/switch>//g" $i #delete empty switch
  
  sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/\n[[:space:]]*/\n/g" $i #reduce to one space
  

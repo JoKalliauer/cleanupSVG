@@ -80,7 +80,7 @@ do
    mv ./${fileSource} ./${file}.xml
    inkscape ./${file}u.svg --verb=EditSelectAll --verb=SelectionUnGroup --verb=FileSave --verb=FileClose --verb=FileQuit
    #svgcleaner ./${file}Cu.svg ./${file}CuC.svg --join-style-attributes all --join-arcto-flags no --remove-declarations no --remove-nonsvg-elements no --paths-to-relative no --remove-unused-segments no --convert-segments no  --allow-bigger-file --indent 1 --remove-metadata no --remove-nonsvg-attributes no
-   scour -i ./${file}u.svg -o ./${file}us.svg --disable-style-to-xml --keep-unreferenced-defs --disable-embed-rasters --indent=space --nindent=1
+   scour -i ./${file}u.svg -o ./${file}us.svg --disable-style-to-xml --keep-unreferenced-defs --disable-embed-rasters --indent=space --nindent=1 --keep-editor-data
    
 #W3C: element "rdf:RDF" undefined
 #Nu: Warning: This validator does not validate RDF. RDF subtrees go unchecked.

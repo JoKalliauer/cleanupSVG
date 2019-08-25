@@ -193,7 +193,11 @@ sed -ri "s/<linearGradient([-[:alnum:]=\". _]*)( clip-rule=\"evenodd\"| fill-rul
 
 
 
-
+################################################################################
+## ==  https://tools.wmflabs.org/svgcheck/index.php ==
+#*Warning* foreignObject tag found.
+# 		 Since foreignObject tags refer to metadata, they usually just add to filesize, and can cause Inkscape and other editors to choke.
+#Validation (svgcleaner AND svgo)
 
 echo $i finish
 
