@@ -41,7 +41,7 @@ svgo -i "${file}" -o $i $INDENT -p 3 $META --disable=removeHiddenElems --disable
 ## == min ==
 #  --disable=removeComments #keep Comments
 #  --disable=cleanupIDs
-# --disable=removeEditorsNSData # keep grid and guide
+# --disable=removeEditorsNSData # keep grid and guide and layer
 #  --disable=removeDesc  # keep <desc>
 
 
