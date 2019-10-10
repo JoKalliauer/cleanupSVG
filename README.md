@@ -48,7 +48,7 @@ Similar scripts<br/>
 -[scour](https://github.com/scour-project/scour)<br/>
 -[svgcleaner](https://github.com/RazrFalcon/svgcleaner)
 
-## Installation:
+## Install Prerequiaries:
 
 Windows
 1)Inkscape<br/>
@@ -76,7 +76,18 @@ Windows
 5a)Download&Install (32bit or 64bit) https://cygwin.com/install.html (in some cases you have to deactivate Virusprotection (e.g. Avast))<br/>
 6)cygwin.exe: `/usr/bin/python3 -m pip install scour`
 
-## Update
+## Install cleanupSVG (portable if prerequiary exits)
+wget https://github.com/JoKalliauer/cleanupSVG/archive/master.zip
+unzip master.zip
+cd cleanupSVG-master/
+
+Copy your svgs into this folder and then run:
+- `./save.sh` if you want to run it safly
+- `./Validation.sh` for validation
+- `./Intense.sh` for maximum options
+
+
+## Update Prerequiaries
 
 Windows:
 ```cmd
