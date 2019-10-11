@@ -35,7 +35,7 @@ do
  #If you want to overwrite the existing file, without any backup, delete the following three lines
  export i=${tmp}s.svg
  if [ -f "$i" ]; then
-  echo no renaming
+  echo no renaming #do not overwrite if exits
  else
   echo move
   scour -i ${fileSource} -o $i --keep-unreferenced-defs --remove-descriptions --strip-xml-space  --set-precision=6 $META $INDENT --renderer-workaround --disable-style-to-xml  --set-c-precision=6 --protect-ids-noninkscape  --disable-simplify-colors  --keep-editor-data # --enable-comment-stripping --create-groups  #--enable-viewboxing # 
@@ -47,9 +47,9 @@ do
   count=$((count+1))
   file=${i%.base64}
   echo $count". "$i" -> "${file}.base64 
-  sed -ri "s/iVBORw0KGgoAAAANSUhEUgAA/ \niVBORw0KGgoAAAANSUhEUgAA/g" $i
-  sed -ri "s/\/9j\/4AAQSkZJRgABA(..)A(....)AAD\// \n\/9j\/4AAQSkZJRgABA\1A\2AAD\//g" $i
-  sed -ri "s/(AAAAAElFTkSuQmCC| QmCC|=)[ ]*\"(\/>| )/\1\n\"\2/g" $i
+  sed -ri "s/iVBORw0KGgoAAAANSUhEUgAA/ \niVBORw0KGgoAAAANSUhEUgAA/g" $i #linebreak before PNG
+  sed -ri "s/\/9j\/4AAQSkZJRgABA(..)A(....)AAD\// \n\/9j\/4AAQSkZJRgABA\1A\2AAD\//g" $i #linebreak before JPG
+  sed -ri "s/(AAAAAElFTkSuQmCC| QmCC|=)[ ]*\"(\/>| )/\1\n\"\2/g" $i #linebreak after end
   sed -ri "s/\r/ /" $i
   sed -ri "s/\n/ /" $i
   
