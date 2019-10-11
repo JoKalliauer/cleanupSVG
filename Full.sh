@@ -11,6 +11,7 @@ export i=min.svg # just used for debugging
 #./InkscapeBatchConverter.sh
 ./Vacuumdefs.sh
 ./scour4compression.sh
+./between.sh
 ./cleaner4compression.sh
 ./o4compression.sh
 

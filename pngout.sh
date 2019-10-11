@@ -1,16 +1,26 @@
 #!/bin/bash
 
-for file in *.png
-do
+echo $1
 
-echo #Add a empty line to split the output
+if [ -z $1 ]; then
+ for file in *.png
+  do
 
-#pingo $file
-optipng $file
-pngout  $file &
+  echo #Add a empty line to split the output
+ 
+  #pingo $file
+  optipng $file
+  pngout  $file &
+  #pingo $file
 
-#pingo $file
+  done
+else
 
-done
+ optipng $1
+ pngout $1
+
+fi
 
 wait
+echo finish
+
