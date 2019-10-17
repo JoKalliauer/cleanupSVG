@@ -27,6 +27,14 @@ fi
 
 echo cleaner ${file} to $i begin, min=${minfilesize}, METAdelete=no, INDENT=$INDENT
 
+# Inkscape->svgcleaner
+#Change "'font name'" to 'font name'(solves librsvg-Bug) https://commons.wikimedia.org/wiki/File:T184369.svg
+# <text id="text2" x="236.39999" y="111.6" font-size="4.98" style="font-family:'Liberation Serif', CMTT8;font-size:66.398px;stroke-width:13.333">1</text>
+sed -ri "s/font-family:([-[:alnum:] ,']*)'([-[:alnum:] ]*)'([-[:lower:][:upper:], ']*)/font-family:\1\2\3/g" $file
+sed -ri "s/font-family:([-[:alnum:] ,']*)'([-[:alnum:] ]*)'([-[:lower:][:upper:], ']*)/font-family:\1\2\3/g" $file
+sed -ri "s/font-family=\"([-[:alnum:] ,']*)'([-[:alnum:] ]*)'([-[:lower:][:upper:], ']*)\"/font-family=\"\1\2\3\"/g" $file
+#sed -ri "s/font-family=\"'([-[:alnum:] ]*)'(|,[-[:lower:]]+)\"/font-family=\'\1\'/g" $i
+
 svgcleaner $file $i --allow-bigger-file --indent $INDENT --resolve-use no --apply-transform-to-gradients yes --apply-transform-to-shapes yes --convert-shapes no --group-by-style no --join-arcto-flags no --join-style-attributes no --merge-gradients yes --regroup-gradient-stops yes --remove-comments no --remove-declarations no --remove-default-attributes yes --remove-desc no --remove-dupl-cmd-in-paths yes --remove-dupl-fegaussianblur yes --remove-dupl-lineargradient yes --remove-dupl-radialgradient yes --remove-gradient-attributes yes --remove-invalid-stops yes --remove-invisible-elements no --remove-metadata no --remove-needless-attributes yes --remove-nonsvg-attributes no --remove-nonsvg-elements no --remove-text-attributes no --remove-title no --remove-unreferenced-ids no --remove-unresolved-classes yes --remove-unused-coordinates yes --remove-unused-defs yes --remove-version yes --remove-xmlns-xlink-attribute yes --simplify-transforms yes --trim-colors yes --trim-ids no --trim-paths yes --ungroup-defs yes --ungroup-groups no --use-implicit-cmds yes --list-separator comma --paths-to-relative yes --remove-unused-segments yes --convert-segments yes --apply-transform-to-paths yes --coordinates-precision 2 --paths-coordinates-precision 5 --properties-precision 3 --transforms-precision 7  # --multipass # --copy-on-error # 
 
 #--properties-precision 3 #https://commons.wikimedia.org/wiki/File:Simpsons-vector.svg #--properties-precision 2 # https://commons.wikimedia.org/wiki/File:Mn_coa_%C3%B6v%C3%B6rkhangai_aimag.svg
@@ -59,6 +67,8 @@ svgcleaner $file $i --allow-bigger-file --indent $INDENT --resolve-use no --appl
 # keep id names: --remove-unreferenced-ids no --trim-ids no --ungroup-groups no 
 # comments  --remove-comments no
 # descriptions  --remove-desc no
+# layers --remove-nonsvg-attributes no
+# metadata  --remove-metadata no  --remove-nonsvg-elements no
 
 #echo mv ./${file} ./${tmp}4.xml
 mv ./${file} ./${tmp}4.xml

@@ -45,6 +45,8 @@ python3 -m scour.scour -i "${file}" -o "$i" --keep-unreferenced-defs --strip-xml
 #no --shorten-ids 
 # no --remove-descriptions  # keep <desc>
 # use --keep-editor-data # layer
+#no  --remove-metadata
+#no  --remove-descriptive-elements
 
 ### === CSS ===
 # --keep-unreferenced-defs # https://github.com/scour-project/scour/issues/155

@@ -21,6 +21,7 @@
 
 for file in *.svg;do
 
+echo 
 mv "$file" `echo ${file} | tr ' ' '_'` ;
 
 ## == Remove scecial characters in filename ==
@@ -38,7 +39,6 @@ export i=${tmp}p.svg
 cp ./"${file}" $i
 mv ./"${file}" ./${tmp}1.xml
 
-echo 
 echo $i start:
 
 # # # #Define prepost equal to zero if not defined

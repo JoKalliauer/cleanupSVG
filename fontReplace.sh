@@ -48,6 +48,7 @@ sed -ri 's/ font-family=\"(s|S)ans\"/ font-family=\"DejaVu Sans,sans-serif,Sans\
 sed -ri 's/ font-family=\"(s|S)erif\"/ font-family=\"DejaVu Serif,serif\"/g' $i #as automatic
 sed -ri 's/ font-family=\"(s|S)ans-(s|S)erif\"/ font-family=\"DejaVu Sans,sans-serif\"/g' $i #as automatic
 
+sed -ri 's/ font-family="([-[:alnum:] ]*)MT"/ font-family="\1"/g' $i # I dont know what MT stands for
 
 sed -ri 's/ font-family="([-[:alnum:] ]*)Oblique"/ font-family="\1" font-style=\"oblique\"/g' $i
 sed -ri 's/ font-family="([-[:alnum:] ]*)Italic"/ font-family="\1" font-style=\"italic\"/g' $i
@@ -66,7 +67,7 @@ sed -ri "s/ font-family=\"GOST type B\"/ font-family=\"Bandal,GOST type B,DejaVu
 
 #Serif
 sed -i 's/ font-family=\"Bitstream Vera Serif\"/ font-family=\"DejaVu Serif,Bitstream Vera Serif\"/g' $i #as automatic
-sed -ri 's/ font-family=\"(Times New Roman|Times-Roman|CMMI10|CMR10|LnrxdlTimes|JnsptfTimes|PkbwthTimes|Times|CghgsrSymbol)\"/ font-family=\"Liberation Serif,\1\"/g' $i #as automatic
+sed -ri 's/ font-family=\"(Times New Roman|Times-Roman|CMMI10|CMR10|LnrxdlTimes|JnsptfTimes|PkbwthTimes|Times|CghgsrSymbol|TimesNewRomanPS|TimesNewRomanPSMT)\"/ font-family=\"Liberation Serif,\1\"/g' $i #as automatic
 
 #monospace
 sed -ri 's/ font-family=\"(monospace|Bitstream Vera Sans Mono)\"/ font-family=\"DejaVu Sans Mono,Bitstream Vera Sans Mono,monospace\"/g' $i #as automatic

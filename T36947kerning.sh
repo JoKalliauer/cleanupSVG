@@ -46,7 +46,7 @@ echo $i start:
 
 	
 	#put viewBox at the beginning (otherwise I will have a variable to less)
-	sed -ri 's/<svg([-[:alnum:]=\" \.\/:\,\(\)_#]+) viewBox="([-[:digit:] \.]+)"([-[:alnum:]=\" \.\/:\,\(\);#]*)>/<svg viewBox="\2"\1\3>/' $i
+	sed -ri 's/<svg([-[:alnum:]é=\" \.\/\\:\,\(\)_#]+) viewBox="([-[:digit:] \.]+)"([-[:alnum:]=\" \.\/:\,\(\);#]*)>/<svg viewBox="\2"\1\3>/' $i
 	sed -ri 's/\r/\n/g' $i
 	
     #Define file as a variable
@@ -65,7 +65,7 @@ echo $i start:
     export n=$(echo $m | awk  '{printf "%f %f %f %f\n",$1*10,$2*10,$3*10,$4*10}')
     
     #Replace the old four numbers with the new four numbers
-    sed -ri "s/<svg([-[:alnum:]=\" \.\/:;\,#]*) viewBox=\"[-[:digit:]\.]+ [-[:digit:]\.]+ [[:digit:]\.]+ [[:digit:]\.]+\"([-[:alnum:]=\" \.\/:\,#\(\)_;]+)>/<svg\1 viewBox=\"$n\"\2>\n<g transform=\"scale(10)\">/" $i
+    sed -ri "s/<svg([-[:alnum:]=\" \.\/:;\,#]*) viewBox=\"[-[:digit:]\.]+ [-[:digit:]\.]+ [[:digit:]\.]+ [[:digit:]\.]+\"([-[:alnum:]é=\" \.\/\\:\,#\(\)_;]+)>/<svg\1 viewBox=\"$n\"\2>\n<g transform=\"scale(10)\">/" $i
  #----
 
   sed -ri 's/<\/svg>/<\/g>\n<\/svg>/' $i

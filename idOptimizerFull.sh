@@ -8,13 +8,14 @@ export i=${tmp}O.svg
 
 echo optizer ${file} to $i begin
 
-svgo -i ${file} -o $i -p 4 --pretty --indent=1  --enable=convertTransform --enable=convertPathData --enable=mergePaths --enable=cleanupAttrs --enable=cleanupEnableBackground --disable=cleanupIDs --enable=cleanupListOfValues --enable=cleanupNumericValues --enable=collapseGroups --enable=convertColors --enable=convertShapeToPath --enable=convertStyleToAttrs --enable=inlineStyles --enable=minifyStyles --enable=moveElemsAttrsToGroup --enable=moveGroupAttrsToElems  --enable=removeAttrs --disable=removeComments --disable=removeDesc --disable=removeDoctype --disable=removeEditorsNSData --enable=removeEmptyAttrs --enable=removeEmptyContainers --enable=removeEmptyText --enable=removeHiddenElems --enable=removeMetadata --enable=removeNonInheritableGroupAttrs --enable=removeScriptElement --enable=removeTitle --enable=removeUnknownsAndDefaults --enable=removeUnusedNS --enable=removeUselessDefs --enable=removeUselessStrokeAndFill --enable=removeViewBox --disable=removeXMLProcInst --enable=sortAttrs --disable=removeXMLNS    --enable={addAttributesToSVGElement} --enable=removeRasterImages  --multipass --enable=removeStyleElement ## --enable=removeElementsByAttr
+svgo -i ${file} -o $i -p 4 --pretty --indent=1  --enable=convertTransform --enable=convertPathData --enable=mergePaths --enable=cleanupAttrs --enable=cleanupEnableBackground --disable=cleanupIDs --enable=cleanupListOfValues --enable=cleanupNumericValues --enable=collapseGroups --enable=convertColors --enable=convertShapeToPath --enable=convertStyleToAttrs --enable=inlineStyles --enable=minifyStyles --enable=moveElemsAttrsToGroup --enable=moveGroupAttrsToElems  --enable=removeAttrs --disable=removeComments --disable=removeDesc --disable=removeDoctype --disable=removeEditorsNSData --enable=removeEmptyAttrs --enable=removeEmptyContainers --enable=removeEmptyText --enable=removeHiddenElems --disable=removeMetadata --enable=removeNonInheritableGroupAttrs --enable=removeScriptElement --enable=removeTitle --enable=removeUnknownsAndDefaults --enable=removeUnusedNS --enable=removeUselessDefs --enable=removeUselessStrokeAndFill --enable=removeViewBox --disable=removeXMLProcInst --enable=sortAttrs --disable=removeXMLNS    --enable={addAttributesToSVGElement} --enable=removeRasterImages  --multipass --enable=removeStyleElement ## --enable=removeElementsByAttr
 
 ## == min ==
 #  --disable=removeComments #keep Comments
 #  --disable=cleanupIDs
 # --disable=removeEditorsNSData # keep grid and guide and layer
 #  --disable=removeDesc  # keep <desc>
+# --disable=removeMetadata
 
 # --enable=removeElementsByAttr  # https://github.com/svg/svgo/issues/945 (option does not make sence)
 

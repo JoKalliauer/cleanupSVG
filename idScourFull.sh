@@ -8,7 +8,7 @@ export i=${tmp}S.svg
 
 echo scour ${file} to $i begin, dig=5, digC=3, min=${minfilesize}, meta=$meta, META= $META, INDENT=$INDENT
 
-scour -i ${file} -o $i --strip-xml-space --remove-metadata --renderer-workaround --set-precision=5 --set-c-precision=5 --remove-descriptive-elements --keep-editor-data
+scour -i ${file} -o $i --strip-xml-space --renderer-workaround --set-precision=5 --set-c-precision=5 --keep-editor-data
 
 # == min == 
 # not --enable-comment-stripping # keep comments
@@ -17,6 +17,8 @@ scour -i ${file} -o $i --strip-xml-space --remove-metadata --renderer-workaround
 #no --shorten-ids 
 # no --remove-descriptions  # keep <desc>
 # use --keep-editor-data # layer
+#no  --remove-metadata
+#no  --remove-descriptive-elements
 
 #--keep-unreferenced-defs
 ## if referenced-defs are deleted: https://github.com/scour-project/scour/issues/155
