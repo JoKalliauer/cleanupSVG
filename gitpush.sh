@@ -4,7 +4,7 @@ git add .
 
 git status
 
-read -p "Press enter to continue"
+read -p "Press enter to continue" #Press Control C for stop
 
 git status
 git commit -m "Update"
