@@ -110,7 +110,7 @@ for fileSource in *.$sourceType
 		elif [ "$outputType" = "jpeg" ] || [ "$outputType" = "jpg" ];then
 		 base64.exe --decode ${file}.base64 > ${file}.jpeg
 		elif [ "$outputType" = "base64" ];then
-		  convert ${file} -transparent white t${file}
+		  convert ${file} -transparent white -trim t${file}
 		  optipng t${file}
 		  pngout t${file}
 		  openssl base64 -in t${file} -out t${file}.txt
