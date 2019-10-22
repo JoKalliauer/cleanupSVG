@@ -50,9 +50,9 @@ Similar scripts<br/>
 
 ## Install Prerequiaries:
 
-Windows
+Windows<br/>
 1)Inkscape<br/>
-1a)Download&Install https://inkscape.org/release/0.92.3/ (Don't forget to choose your language)<br/>
+1a)Download&Install https://inkscape.org/release/ (i.e. https://inkscape.org/de/release/inkscape-0.92.4/ or https://inkscape.org/release/inkscape-1.0beta1/ )<br/>
 2)[scour](https://github.com/scour-project/scour)<br/>
 2a)Download&Install CPython 3.7: https://www.python.org/downloads/<br/>
 2b)Add "C:\Python37" and "C:\Python37\Scripts" to enviroment variable %Path%<br/>
@@ -62,18 +62,18 @@ Windows
 2c,i)```python -m pip install --upgrade pip```<br/>
 2c,ii)```pip install --upgrade https://github.com/codedread/scour/archive/master.zip```<br/>
 3)[svgcleaner](https://github.com/RazrFalcon/svgcleaner)<br/>
-3a)Download "Visual Studio Community 2017" https://www.visualstudio.com/downloads/ (Don't forget to choose your language)<br/>
+3a)Download "Visual Studio Community" https://www.visualstudio.com/downloads/ (i.e. https://visualstudio.microsoft.com/de/downloads/ )<br/>
 3b)Add `Desktop development with C++`, see https://github.com/rust-lang/rust/issues/49519#issuecomment-377569726
-3c)Download&Install https://www.rust-lang.org/ (Don't forget to choose your language)<br/>
+3c)Download&Install https://www.rust-lang.org/ (i.e. https://www.rust-lang.org/de/ )<br/>
 3d)Add "%USERPROFILE%\.cargo\bin" to enviroment variable %Path%<br/>
  -(Option-i)Run cmd.exe; type ```set PATH=%PATH%;%USERPROFILE%\.cargo\bin```<br/>
  -(Option-ii)Run Sysdm.cpl; to to the advanced-Tab; Environemt variables...; click Path, click Edit; add ```%USERPROFILE%\.cargo\bin```<br/>
 3e)cmd.exe: ```cargo install svgcleaner --force --git https://github.com/RazrFalcon/svgcleaner```<br/>
 4)[svgo](https://github.com/svg/svgo)<br/>
-4a)Install node.js: https://nodejs.org/  (Don't forget to choose your language)<br/>
+4a)Install node.js: https://nodejs.org/  (i.e. https://nodejs.org/de/ )<br/>
 4b)cmd.exe: ```npm install -g svgo```<br/>
 5)Cygwin<br/>
-5a)Download&Install (32bit or 64bit) https://cygwin.com/install.html (in some cases you have to deactivate Virusprotection (e.g. Avast))<br/>
+5a)Download&Install (32bit or 64bit) https://cygwin.com/install.html (in some cases you have to deactivate Virusprotection (i.e. Avast makes Problemms without reporting))<br/>
 6)cygwin.exe: `/usr/bin/python3 -m pip install scour`
 
 ## Install cleanupSVG (portable if prerequiary exits)
