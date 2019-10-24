@@ -6,14 +6,14 @@ git pull
 git add .
 git status
 
-while true; do
+
     read -p "Do you wish to proceed?" yn
     case $yn in
         [Yy]* ) git commit -m "Update";git push;;
         [Nn]* ) exit;;
         * ) echo "Please answer yes or no.";;
     esac
-done
+
 
 #git status
 
