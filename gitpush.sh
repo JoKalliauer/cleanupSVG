@@ -6,9 +6,16 @@ git pull
 git add .
 git status
 
-read -rsn1 -p"Press any key to continue" variable;echo
+while true; do
+    read -p "Do you wish to proceed?" yn
+    case $yn in
+        [Yy]* ) git commit -m "Update";git push;;
+        [Nn]* ) exit;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
 
-git status
-git commit -m "Update"
-git status
-git push
+#git status
+
+#git status
+
