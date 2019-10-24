@@ -5,7 +5,9 @@ git pull
 #git status
 git add .
 git status
-read -p "Press enter to continue" -n1 -s #Press Control C for stop
+
+read -n 1 -s -r -p "Press any key to continue"
+
 git status
 git commit -m "Update"
 git status
