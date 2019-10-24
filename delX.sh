@@ -61,6 +61,7 @@ for file in *.svg;do
  
  #sed -ri "s/ <text ([-[:alnum:]=\.\" \#\(\)\;\:\%\'\%]+)>.*<\/text>//g" $j #delete all oneline-text
  
+ sed -ri "s/>[^<]*/>/g" $j #Remove everything after tags
  sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<text([-—[:alnum:]=\.\" \#\(\)\;\:\%\'\/\,\*]*)>([]\[[:alnum:][:space:]\$\^\\\_\{\} \'\’\“\”\/\(\)\!?\,\:#\.=≈,\"\&\;\¯\¸\°\*\+\´→·˚º«»%@¹²³⁴⁶⁷⁸⁹•…⁺⁻–—­−-]*|<tspan([-[:alnum:]=\.\" \#\(\)\;\:\%\,]*)>|<\/tspan>)*<\/text>//g" $j
  
  echo $j finish

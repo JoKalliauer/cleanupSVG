@@ -118,7 +118,7 @@ sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<\/tspan>[[:space:]]*<\/text>/<\/tspan><\
 sed -ri "s/<text ([-[:lower:][:digit:].,\"= ]+) xml:space=\"preserve\">([-[:alnum:]\\\$\']+)<\/text>/<text \1>\2<\/text>/g" $i #remove xml:space="preserve" in text if unnecesarry
 sed -ri 's/<text [-[:lower:][:digit:]= \"\:\.\(\)]+\/>//g' $i #remove selfclosing text
 sed -ri 's/<tspan [-[:lower:][:digit:]= \"\.\:\;\%#]+\/>//g' $i #remove selfclosing tspan
-sed -i "s/<tspan x=\"0\" y=\"0\">/<tspan>/g" $i #reduce options in tspan
+#sed -i "s/<tspan x=\"0\" y=\"0\">/<tspan>/g" $i #reduce options in tspan
 sed -ri "s/<tspan>([]\[[:alnum:]\$\^\\\_\{\}= #\,\"\.\(\)\’\&\;\/Επιβάτες¸\°\'\"\@\:\+−-]*)<\/tspan>([ ]*)/\1/g" $i #remove unnecesarry <tspan>...</tspan> without attributes
 sed -ri "s/<tspan[-[:alnum:]= \"\.#\(\);:,\'%]*>[[:space:]]*<\/tspan>([ ]*)//g" $i #remove useless,empty <tspan (...)> </tspan> without text
 
