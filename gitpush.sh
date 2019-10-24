@@ -6,7 +6,7 @@ git pull
 git add .
 git status
 
-read -n 1 -s -r -p "Press any key to continue"
+read -rsn1 -p"Press any key to continue" variable;echo
 
 git status
 git commit -m "Update"
