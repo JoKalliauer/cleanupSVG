@@ -20,7 +20,7 @@ fi
 #Input parameters:
 #alias inkscape='/cygdrive/c/Program\ Files/Inkscape/inkscape.com' #2017-10-29 11h06 (by Johannes Kalliauer)
 #alias inkscape.exe='/cygdrive/c/Program\ Files/Inkscape/inkscape.exe'
-sourceType="png"; valid=1
+#sourceType="png"; valid=1
 outputType="base64"
 
 
@@ -82,10 +82,18 @@ done
 if [ -z $1 ]; then
 
 for fileSource in *.$sourceType
+do
+  mv "$fileSource" `echo ${fileSource} | tr ' ' '_'` ;
+  mv "$fileSource" `echo ${fileSource} | tr '-' '_'` ;
+done
+
+for fileSource in *.$sourceType
  do
+  
 
   export i=$fileSource #i will be overritan later
-  export fileN=$(echo $fileSource | cut -f1 -d" ") #remove spaces if exsiting (and everything after)
+  echo $i
+  export fileN=$(echo $i | cut -f1 -d" ") #remove spaces if exsiting (and everything after)
   export tmp=${fileN%.$sourceType}
 
   #If you want to overwrite the exisiting file, without any backup, delete the following three lines
@@ -110,10 +118,10 @@ for fileSource in *.$sourceType
 		elif [ "$outputType" = "jpeg" ] || [ "$outputType" = "jpg" ];then
 		 base64.exe --decode ${file}.base64 > ${file}.jpeg
 		elif [ "$outputType" = "base64" ];then
-		  convert ${file} -transparent white -trim t${file}
-		  optipng t${file}
-		  pngout t${file}
-		  openssl base64 -in t${file} -out t${file}.txt
+		  #convert ${file} -transparent white -trim t${file}
+		  optipng ${file}
+		  pngout ${file}
+		  openssl base64 -in ${file} -out ${file}.txt
 		 #openssl base64 -in ${file} -out ${file}.txt
 		elif [ "$outputType" = "svg" ];then #  svg
 		 inkscape $i --export-plain-$outputType=${file}n.$outputType
