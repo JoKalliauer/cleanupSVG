@@ -10,7 +10,7 @@ echo #Add a empty line to split the output
 
 echo cleaner ${file} to $i begin
 
-svgcleaner "$file" $i  --allow-bigger-file --indent 1 --group-by-style no --apply-transform-to-gradients yes --apply-transform-to-shapes yes --convert-shapes yes --join-arcto-flags no --join-style-attributes no --merge-gradients yes --regroup-gradient-stops yes --remove-comments yes --remove-declarations yes --remove-default-attributes yes --remove-desc yes --remove-dupl-cmd-in-paths yes --remove-dupl-fegaussianblur yes --remove-dupl-lineargradient yes --remove-dupl-radialgradient yes --remove-gradient-attributes yes --remove-invalid-stops yes --remove-invisible-elements yes --remove-metadata yes --remove-needless-attributes yes --remove-nonsvg-attributes yes --remove-nonsvg-elements yes --remove-text-attributes yes --remove-title yes --remove-unreferenced-ids yes --remove-unresolved-classes yes --remove-unused-coordinates yes --remove-unused-defs yes --remove-version yes --remove-xmlns-xlink-attribute yes --resolve-use yes --simplify-transforms yes --trim-colors yes --trim-ids yes --trim-paths yes --ungroup-defs yes --ungroup-groups yes --use-implicit-cmds yes --list-separator comma --paths-to-relative yes --convert-segments yes --apply-transform-to-paths yes --coordinates-precision 2 --paths-coordinates-precision 4 --properties-precision 3 --transforms-precision 5 --remove-unused-segments yes --multipass
+svgcleaner "$file" $i  --allow-bigger-file --indent 1 --group-by-style no --apply-transform-to-gradients yes --apply-transform-to-shapes yes --convert-shapes yes --join-arcto-flags no --join-style-attributes no --merge-gradients yes --regroup-gradient-stops yes --remove-comments yes --remove-declarations no --remove-default-attributes yes --remove-desc yes --remove-dupl-cmd-in-paths yes --remove-dupl-fegaussianblur yes --remove-dupl-lineargradient yes --remove-dupl-radialgradient yes --remove-gradient-attributes yes --remove-invalid-stops yes --remove-invisible-elements yes --remove-metadata yes --remove-needless-attributes yes --remove-nonsvg-attributes yes --remove-nonsvg-elements yes --remove-text-attributes yes --remove-title yes --remove-unreferenced-ids yes --remove-unresolved-classes yes --remove-unused-coordinates yes --remove-unused-defs yes --remove-version yes --remove-xmlns-xlink-attribute yes --resolve-use yes --simplify-transforms yes --trim-colors yes --trim-ids yes --trim-paths yes --ungroup-defs yes --ungroup-groups yes --use-implicit-cmds yes --list-separator comma --paths-to-relative yes --convert-segments yes --apply-transform-to-paths yes --coordinates-precision 2 --paths-coordinates-precision 4 --properties-precision 3 --transforms-precision 5 --remove-unused-segments yes --multipass
 
 #--properties-precision 2 # https://commons.wikimedia.org/wiki/File:Mn_coa_%C3%B6v%C3%B6rkhangai_aimag.svg  --properties-precision 3 https://commons.wikimedia.org/wiki/File:France_-_Density_of_Monuments_historiques_by_commune,_with_departments.svg
 #--transforms-precision 4 # https://commons.wikimedia.org/wiki/File:Mn_coa_%C3%B6v%C3%B6rkhangai_aimag.svg
@@ -23,7 +23,7 @@ svgcleaner "$file" $i  --allow-bigger-file --indent 1 --group-by-style no --appl
 
 #--join-style-attributes no # I prefer font-size="20px" than style="font-size:20px;"
 
-#--remove-declarations no #valid-warning
+#--remove-declarations no #valid-warning https://github.com/RazrFalcon/svgcleaner/issues/121
 
 #--remove-nonsvg-elements  # removes flowtext
 

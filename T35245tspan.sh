@@ -64,6 +64,10 @@ sed -ri "s/<tspan([-[:alnum:]\.\"\#\ =]*) x=\"([-[:digit:]\.]+)( |,)([-[:digit:]
 sed -ri "s/<tspan([-[:alnum:]\.\"\#\ =]*) x=\"([-[:digit:]\.]+)( |,)([-[:digit:]\. ,]+)\"([-[:alnum:]\.\"\#\ =]*)>([-[:alnum:] \'\+=\.\%\(\)→\“\”,])/<tspan x=\"\2\"\1\5>\6<\/tspan><tspan x=\"\4\"\1\5>/g" $i # remove multipe x-koordinates in tspan (librsvg-Bug)
 sed -ri "s/<tspan([-[:alnum:]\.\"\#\ =]*) x=\"([-[:digit:]\.]+)( |,)([-[:digit:]\. ,]+)\"([-[:alnum:]\.\"\#\ =]*)>([-[:alnum:] \'\+=\.\%\(\)→\“\”,])/<tspan x=\"\2\"\1\5>\6<\/tspan><tspan x=\"\4\"\1\5>/g" $i # remove multipe x-koordinates in tspan (librsvg-Bug)
 
+#<text transform="matrix(.965926 .258819 -.258819 .965926 0 0)" x="611.34" y="148.84" dy="6,-1,-2,0,-2,-1,0,1,2" fill="#ff9b00" text-anchor="end">2b. Orion-</text>
+#sed -ri "s/<text([-[:alnum:]\.\"\#\ =\(\)]*) dy=\"([-[:digit:]\.]+)( |,)([-[:digit:]\. ,]+)\"([-[:alnum:]\.\"\#\ =]*)>/<text \1\5><tspan dy=\"\2\3\4\"\1>/" $i
+sed -ri "s/<tspan([-[:alnum:]\.\"\#\ =\(\)]*) dy=\"([-[:digit:]\.]+)( |,)([-[:digit:]\. ,]+)\"([-[:alnum:]\.\"\#\ =]*)>([-[:alnum:] \'\+=\.\%\(\)→\“\”,])/<tspan dy=\"\2\"\1\5>\6<\/tspan><tspan dy=\"\4\"\1\5>/g" $i # remove multipe dy-koordinates in tspan (librsvg-Bug)
+
 #sed -ri 's/(<tspan[^>]* x=")([^ "]+) ([^"]+)("[^>]*>)(.)([^<]+)(<\/tspan>)/\1\2\4\5\7\1\3\4\6\7/g' $i #suggested by TilmannR in https://commons.wikimedia.org/wiki/User_talk:JoKalliauer#Fixing_phab:T35245_in_(R)-Citronellal_Structural_Formula_V.1_1.svg
 #sed -ri 's/(<tspan[^>]* x=")([^,"]+),([^"]+)("[^>]*>)(.)([^<]+)(<\/tspan>)/\1\2\4\5\7\1\3\4\6\7/g' $i #suggested by TilmannR in https://commons.wikimedia.org/wiki/User_talk:JoKalliauer#Fixing_phab:T35245_in_(R)-Citronellal_Structural_Formula_V.1_1.svg
  
