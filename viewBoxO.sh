@@ -29,13 +29,13 @@ else
  echo some error minfilesize is $minfilesize
 fi
 
-echo scour ${file} to $i begin, min=${minfilesize}, meta=$meta, META= $META, INDENT=$INDENTs
+#echo scour ${file} to $i begin, min=${minfilesize}, meta=$meta, META= $META, INDENT=$INDENTs
 
 #scour -i ${file} -o $i --keep-unreferenced-defs --enable-comment-stripping --remove-titles --remove-descriptions --strip-xml-space  --set-precision=5 $META $INDENTs --renderer-workaround --disable-style-to-xml --create-groups  --set-c-precision=4 --enable-viewboxing #  
 
 #mv ./${file} ./${tmp}3.xml
 
-echo scour $i finish
+#echo scour $i finish
 
 export file=$i
 export fileN=$(echo $i | cut -f1 -d" ")
@@ -45,7 +45,7 @@ export i=${tmp}o.svg
 echo #Add a empty line to split the output
 
 if [ $meta == 1 ]; then
- echo keep metadata
+ #echo keep metadata
  export META="--disable=removeMetadata"
 elif [ $meta == 0 ]; then
  export META="--enable=removeMetadata"

@@ -17,7 +17,7 @@ fi
 echo #Add a empty line to split the output
 
 if [ $meta == 1 ]; then
- echo keep metadata
+ #echo keep metadata
  export META="--disable=removeMetadata"
 elif [ $meta == 0 ]; then
  export META="--enable=removeMetadata"
