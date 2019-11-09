@@ -100,7 +100,7 @@ do
 		sed -ri "s/inkscape:version=\"0.4[\. r[:digit:]]+\"//g" $i
 		
 		if [ "$outputType" = "png" ];then #png
-		 base64.exe --decode ${file}.base64 > ${file}.png
+		 base64 --decode ${file}.base64 > ${file}.png
 		elif [ "$outputType" = "jpeg" ] || [ "$outputType" = "jpg" ];then
 		 base64.exe --decode ${file}.base64 > ${file}.jpeg
 		elif [ "$outputType" = "svg" ];then #  svg
