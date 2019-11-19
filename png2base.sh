@@ -119,8 +119,10 @@ for fileSource in *.$sourceType
 		 base64.exe --decode ${file}.base64 > ${file}.jpeg
 		elif [ "$outputType" = "base64" ];then
 		  #convert ${file} -transparent white -trim t${file}
-		  optipng ${file}
-		  pngout ${file}
+		  if [ "$sourceType" = "$validInput4" ];then
+		   optipng ${file}
+		   pngout ${file}
+		  fi
 		  openssl base64 -in ${file} -out ${file}.txt
 		 #openssl base64 -in ${file} -out ${file}.txt
 		elif [ "$outputType" = "svg" ];then #  svg

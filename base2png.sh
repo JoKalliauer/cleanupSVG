@@ -102,7 +102,7 @@ do
 		if [ "$outputType" = "png" ];then #png
 		 base64 --decode ${file}.base64 > ${file}.png
 		elif [ "$outputType" = "jpeg" ] || [ "$outputType" = "jpg" ];then
-		 base64.exe --decode ${file}.base64 > ${file}.jpeg
+		 base64 --decode ${file}.base64 > ${file}.jpeg
 		elif [ "$outputType" = "svg" ];then #  svg
 		 inkscape $i --export-plain-$outputType=${file}n.$outputType
 		 sed -ri "s/font-family:([-[:alnum:] ,']*)'([-[:alnum:] ]*)'([-[:lower:][:upper:], ']*)/font-family:\1\2\3/g" ${file}n.svg

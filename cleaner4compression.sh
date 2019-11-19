@@ -49,20 +49,13 @@ svgcleaner $file $i --allow-bigger-file --indent $INDENT --resolve-use no --appl
 #--join-style-attributes all # https://github.com/RazrFalcon/svgcleaner/issues/182
 #--join-style-attributes no # Firefox does not understand <g style="font-size:65">
 # -> # --group-by-style no # siehe oben https://bugs.launchpad.net/inkscape/+bug/1733651
-
 #--remove-declarations no #valid-warning
-
 #--remove-nonsvg-elements  # removes flowtext https://github.com/RazrFalcon/svgcleaner/issues/126
 #--remove-nonsvg-attributes no # https://github.com/RazrFalcon/svgcleaner/issues/141
-
 #--remove-text-attributes no #keeps xml:space="preserve" for a workaround for https://github.com/scour-project/scour/issues/160
-
 #--join-arcto-flags no # https://github.com/svg/svgo/issues/949
-
 #--remove-unused-segments no # https://github.com/RazrFalcon/svgcleaner/issues/146
-
- # --resolve-use no # https://github.com/RazrFalcon/svgcleaner/issues/159
-
+# --resolve-use no # https://github.com/RazrFalcon/svgcleaner/issues/159 https://github.com/RazrFalcon/svgcleaner/issues/204
 # --remove-invisible-elements no # https://github.com/RazrFalcon/svgcleaner/issues/187
  
 ## == keep id-names ==
