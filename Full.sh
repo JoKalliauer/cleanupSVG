@@ -9,7 +9,7 @@ export i=min.svg # just used for debugging
 #./einzeilTags.sh
 ./pre.sh
 #./InkscapeBatchConverter.sh
-./Vacuumdefs.sh
+#./Vacuumdefs.sh
 ./scour4compression.sh
 ./between.sh
 ./cleaner4compression.sh

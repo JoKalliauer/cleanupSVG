@@ -35,7 +35,7 @@ fi
 
 echo cleaner ${file} to $i begin, min=${minfilesize}, METAdelete=$META, INDENT=$INDENT
 
-svgcleaner $file $i --allow-bigger-file --indent $INDENT --remove-nonsvg-attributes yes --remove-nonsvg-elements yes --remove-version yes --remove-text-attributes yes --remove-needless-attributes yes --resolve-use no --apply-transform-to-gradients yes --apply-transform-to-shapes yes --convert-shapes yes --group-by-style no --join-arcto-flags no --join-style-attributes no --merge-gradients yes --regroup-gradient-stops yes --remove-comments yes --remove-declarations no --remove-default-attributes yes --remove-desc yes --remove-dupl-cmd-in-paths yes --remove-dupl-fegaussianblur yes --remove-dupl-lineargradient yes --remove-dupl-radialgradient yes --remove-gradient-attributes yes --remove-invalid-stops yes --remove-invisible-elements yes --remove-metadata $META --remove-title yes --remove-unreferenced-ids yes --remove-unresolved-classes yes --remove-unused-coordinates yes --remove-unused-defs yes --remove-xmlns-xlink-attribute yes --simplify-transforms yes --trim-colors yes --trim-ids yes --trim-paths yes --ungroup-defs yes --ungroup-groups yes --use-implicit-cmds yes --list-separator comma --paths-to-relative yes --remove-unused-segments yes --convert-segments yes --apply-transform-to-paths no --coordinates-precision 2 --paths-coordinates-precision 5 --properties-precision 3 --transforms-precision 5 # --multipass # --copy-on-error # 
+svgcleaner $file $i --allow-bigger-file --indent $INDENT --remove-nonsvg-attributes yes --remove-nonsvg-elements yes --remove-version yes --remove-text-attributes yes --remove-needless-attributes yes --resolve-use no --apply-transform-to-gradients yes --apply-transform-to-shapes yes --convert-shapes yes --group-by-style no --join-arcto-flags no --join-style-attributes no --merge-gradients yes --regroup-gradient-stops yes --remove-comments yes --remove-declarations no --remove-default-attributes yes --remove-desc yes --remove-dupl-cmd-in-paths yes --remove-dupl-fegaussianblur yes --remove-dupl-lineargradient yes --remove-dupl-radialgradient yes --remove-gradient-attributes yes --remove-invalid-stops yes --remove-invisible-elements yes --remove-metadata $META --remove-title yes --remove-unreferenced-ids yes --remove-unresolved-classes yes --remove-unused-coordinates yes --remove-unused-defs yes --remove-xmlns-xlink-attribute yes --simplify-transforms yes --trim-colors yes --trim-ids yes --trim-paths yes --ungroup-defs yes --ungroup-groups yes --use-implicit-cmds yes --list-separator comma --paths-to-relative yes --remove-unused-segments yes --convert-segments yes --apply-transform-to-paths no --coordinates-precision 2 --paths-coordinates-precision 5 --properties-precision 3 --transforms-precision 6 # --multipass # --copy-on-error # 
 
 #----
 #== make file valid:
@@ -45,11 +45,14 @@ svgcleaner $file $i --allow-bigger-file --indent $INDENT --remove-nonsvg-attribu
 #  --remove-needless-attributes yes # Error: Attribute enable-background not allowed on SVG element path at this point.
 
 #----
-
+#== precission
 #--properties-precision 3 #https://commons.wikimedia.org/wiki/File:Simpsons-vector.svg #--properties-precision 2 # https://commons.wikimedia.org/wiki/File:Mn_coa_%C3%B6v%C3%B6rkhangai_aimag.svg
 #--transforms-precision 4 # https://commons.wikimedia.org/wiki/File:Mn_coa_%C3%B6v%C3%B6rkhangai_aimag.svg
+#--transforms-precision 6 # https://commons.wikimedia.org/wiki/File:Flag-map_of_the_world.svg
 ## outdated # --paths-coordinates-precision 3 # https://commons.wikimedia.org/wiki/File:Flag_of_Budapest_(1873-2011).svg
 # --paths-coordinates-precision 4 https://commons.wikimedia.org/wiki/File:FlagOfYorkshire.svg
+
+
 
 #--join-style-attributes no # I prefer font-size="20px" than style="font-size:20px;"
 

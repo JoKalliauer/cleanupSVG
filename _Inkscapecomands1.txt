@@ -1,0 +1,909 @@
+$ inkscape --verb-list
+FileNew: Create new document from the default template (Ctrl+N)
+FileOpen: Open an existing document (Ctrl+O)
+FileRevert: Revert to the last saved version of document (changes will be lost)
+FileSave: Save document (Ctrl+S)
+FileSaveAs: Save document under a new name (Shift+Ctrl+S)
+FileSaveACopy: Save a copy of the document under a new name (Shift+Ctrl+Alt+S)
+FileSaveTemplate: Save a copy of the document as template
+FilePrint: Print document (Ctrl+P)
+FileVacuum: Remove unused definitions (such as gradients or clipping paths) from the &lt;defs&gt; of the document
+FileImport: Import a bitmap or SVG image into this document (Ctrl+I)
+NextWindow: Switch to the next document window (Ctrl+Tab)
+PrevWindow: Switch to the previous document window (Ctrl+Left Tab)
+FileClose: Close this document window (Ctrl+W)
+FileQuit: Quit Inkscape (Ctrl+Q)
+FileTemplates: Create new project from template (Ctrl+Alt+N)
+EditUndo: Undo last action (Ctrl+Z)
+EditRedo: Do again the last undone action (Shift+Ctrl+Z)
+EditCut: Cut selection to clipboard (Ctrl+X)
+EditCopy: Copy selection to clipboard (Ctrl+C)
+EditPaste: Paste objects from clipboard to mouse point, or paste text (Ctrl+V)
+EditPasteStyle: Apply the style of the copied object to selection (Shift+Ctrl+V)
+EditPasteSize: Scale selection to match the size of the copied object
+EditPasteWidth: Scale selection horizontally to match the width of the copied object
+EditPasteHeight: Scale selection vertically to match the height of the copied object
+EditPasteSizeSeparately: Scale each selected object to match the size of the copied object
+EditPasteWidthSeparately: Scale each selected object horizontally to match the width of the copied object
+EditPasteHeightSeparately: Scale each selected object vertically to match the height of the copied object
+EditPasteInPlace: Paste objects from clipboard to the original location (Ctrl+Alt+V)
+PasteLivePathEffect: Apply the path effect of the copied object to selection (&)
+RemoveLivePathEffect: Remove any path effects from selected objects
+RemoveFilter: Remove any filters from selected objects
+EditDelete: Delete selection (Delete)
+EditDuplicate: Duplicate Selected Objects (Ctrl+D)
+EditClone: Create a clone (a copy linked to the original) of selected object (Alt+D)
+EditUnlinkClone: Cut the selected clones' links to the originals, turning them into standalone objects (Shift+Alt+D)
+EditUnlinkCloneRecursive: Unlink all clones in the selection, even if they are in groups.
+EditRelinkClone: Relink the selected clones to the object currently on the clipboard
+EditCloneSelectOriginal: Select the object to which the selected clone is linked (Shift+D)
+EditCloneOriginalPathLPE: Creates a new path, applies the Clone original LPE, and refers it to the selected path
+ObjectsToMarker: Convert selection to a line marker
+ObjectsToGuides: Convert selected objects to a collection of guidelines aligned with their edges (Shift+G)
+ObjectsToPattern: Convert selection to a rectangle with tiled pattern fill (Alt+I)
+ObjectsFromPattern: Extract objects from a tiled pattern fill (Shift+Alt+I)
+ObjectsToSymbol: Convert group to a symbol
+ObjectsFromSymbol: Extract group from a symbol
+EditClearAll: Delete all objects from document
+EditSelectAll: Select all objects or all nodes (Ctrl+A)
+EditSelectAllInAllLayers: Select all objects in all visible and unlocked layers (Ctrl+Alt+A)
+EditSelectSameFillStroke: Select all objects with the same fill and stroke as the selected objects
+EditSelectSameFillColor: Select all objects with the same fill as the selected objects
+EditSelectSameStrokeColor: Select all objects with the same stroke as the selected objects
+EditSelectSameStrokeStyle: Select all objects with the same stroke style (width, dash, markers) as the selected objects
+EditSelectSameObjectType: Select all objects with the same object type (rect, arc, text, path, bitmap etc) as the selected objects (Shift+Alt+A)
+EditInvert: Invert selection (unselect what is selected and select everything else) (!)
+EditInvertInAllLayers: Invert selection in all visible and unlocked layers (Alt+!)
+EditSelectNext: Select next object or node (Tab)
+EditSelectPrev: Select previous object or node (Left Tab)
+EditDeselect: Deselect any selected objects or nodes (Escape)
+EditRemoveAllGuides: Delete all the guides in the document
+EditGuidesToggleLock: Toggle lock of all guides in the document
+EditGuidesAroundPage: Create four guides aligned with the page borders
+EditNextPathEffectParameter: Show next editable path effect parameter (7)
+EditSwapFillStroke: Swap fill and stroke of an object
+SelectionToFront: Raise selection to top (Home)
+SelectionToBack: Lower selection to bottom (End)
+SelectionRaise: Raise selection one step (Page Up)
+SelectionLower: Lower selection one step (Page Down)
+SelectionStackUp: Stack selection one step up
+SelectionStackDown: Stack selection one step down
+SelectionGroup: Group selected objects (Ctrl+G)
+SelectionUnGroup: Ungroup selected groups (Shift+Ctrl+G)
+SelectionUnGroupPopSelection: Pop selected objects out of group
+SelectionTextToPath: Put text on path
+SelectionTextFromPath: Remove text from path
+SelectionTextRemoveKerns: Remove all manual kerns and glyph rotations from a text object
+SelectionUnion: Create union of selected paths (Ctrl++)
+SelectionIntersect: Create intersection of selected paths (Ctrl+*)
+SelectionDiff: Create difference of selected paths (bottom minus top) (Ctrl+-)
+SelectionSymDiff: Create exclusive OR of selected paths (those parts that belong to only one path) (Ctrl+^)
+SelectionDivide: Cut the bottom path into pieces (Ctrl+/)
+SelectionCutPath: Cut the bottom path's stroke into pieces, removing fill (Ctrl+Alt+/)
+SelectionGrow: Make selected objects bigger (.)
+SelectionGrowScreen: Make selected objects bigger relative to screen
+SelectionGrowDouble: Double the size of selected objects
+SelectionShrink: Make selected objects smaller (,)
+SelectionShrinkScreen: Make selected objects smaller relative to screen
+SelectionShrinkHalve: Halve the size of selected objects
+SelectionOffset: Outset selected paths (Ctrl+))
+SelectionOffsetScreen: Outset selected paths by 1 px (Alt+))
+SelectionOffsetScreen10: Outset selected paths by 10 px (Shift+Alt+))
+SelectionInset: Inset selected paths (Ctrl+()
+SelectionInsetScreen: Inset selected paths by 1 px (Alt+()
+SelectionInsetScreen10: Inset selected paths by 10 px (Shift+Alt+()
+SelectionDynOffset: Create a dynamic offset object (Ctrl+J)
+SelectionLinkedOffset: Create a dynamic offset object linked to the original path (Ctrl+Alt+J)
+StrokeToPath: Convert selected object's stroke to paths (Ctrl+Alt+C)
+StrokeToPathLegacy: Convert selected object's stroke to paths legacy mode
+SelectionSimplify: Simplify selected paths (remove extra nodes) (Ctrl+L)
+SelectionReverse: Reverse the direction of selected paths (useful for flipping markers)
+SelectionTrace: Create one or more paths from a bitmap by tracing it (Shift+Alt+B)
+SelectionCreateBitmap: Export selection to a bitmap and insert it into document (Alt+B)
+SelectionCombine: Combine several paths into one (Ctrl+K)
+SelectionBreakApart: Break selected paths into subpaths (Shift+Ctrl+K)
+DialogArrange: Arrange selected objects in a table or circle
+LayerNew: Create a new layer
+LayerRename: Rename the current layer
+LayerNext: Switch to the layer above the current (Ctrl+Page Up)
+LayerPrev: Switch to the layer below the current (Ctrl+Page Down)
+LayerMoveToNext: Move selection to the layer above the current (Shift+Page Up)
+LayerMoveToPrev: Move selection to the layer below the current (Shift+Page Down)
+LayerMoveTo: Move selection to layer
+LayerToTop: Raise the current layer to the top (Shift+Ctrl+Home)
+LayerToBottom: Lower the current layer to the bottom (Shift+Ctrl+End)
+LayerRaise: Raise the current layer (Shift+Ctrl+Page Up)
+LayerLower: Lower the current layer (Shift+Ctrl+Page Down)
+LayerDuplicate: Duplicate an existing layer
+LayerDelete: Delete the current layer
+LayerSolo: Solo the current layer
+LayerShowAll: Show all the layers
+LayerHideAll: Hide all the layers
+LayerLockAll: Lock all the layers
+LayerLockOthers: Lock all the other layers
+LayerUnlockAll: Unlock all the layers
+LayerToggleLock: Toggle lock on current layer
+LayerToggleHide: Toggle visibility of current layer
+ObjectRotate90: Rotate selection 90° clockwise (Ctrl+])
+ObjectRotate90CCW: Rotate selection 90° counter-clockwise (Ctrl+[)
+ObjectRemoveTransform: Remove transformations from object
+ObjectToPath: Convert selected object to path (Shift+Ctrl+C)
+ObjectFlowText: Put text into a frame (path or shape), creating a flowed text linked to the frame object (Alt+W)
+ObjectUnFlowText: Remove text from frame (creates a single-line text object) (Shift+Alt+W)
+ObjectFlowtextToText: Convert flowed text to regular text object (preserves appearance)
+ObjectFlipHorizontally: Flip selected objects horizontally (H)
+ObjectFlipVertically: Flip selected objects vertically (V)
+ObjectSetMask: Apply mask to selection (using the topmost object as mask)
+ObjectSetInverseMask: Apply inverse mask to selection (using the topmost object as mask)
+ObjectEditMask: Edit mask
+ObjectUnSetMask: Remove mask from selection
+ObjectSetClipPath: Apply clipping path to selection (using the topmost object as clipping path)
+ObjectSetInverseClipPath: Apply inverse clipping path to selection (using the topmost object as clipping path)
+ObjectCreateClipGroup: Creates a clip group using the selected objects as a base
+ObjectEditClipPath: Edit clipping path
+ObjectUnSetClipPath: Remove clipping path from selection
+ToolSelector: Select and transform objects (S)
+ToolNode: Edit paths by nodes (N)
+ToolTweak: Tweak objects by sculpting or painting (W)
+ToolSpray: Spray objects by sculpting or painting (A)
+ToolRect: Create rectangles and squares (R)
+Tool3DBox: Create 3D boxes (X)
+ToolArc: Create circles, ellipses, and arcs (E)
+ToolStar: Create stars and polygons (*)
+ToolSpiral: Create spirals (I)
+ToolPencil: Draw freehand lines (P)
+ToolPen: Draw Bezier curves and straight lines (B)
+ToolCalligraphic: Draw calligraphic or brush strokes (C)
+ToolText: Create and edit text objects (T)
+ToolGradient: Create and edit gradients (G)
+ToolMesh: Create and edit meshes
+ToolZoom: Zoom in or out (Z)
+ToolMeasure: Measurement tool (M)
+ToolDropper: Pick colors from image (D)
+ToolConnector: Create diagram connectors (O)
+ToolPaintBucket: Fill bounded areas (U)
+ToolLPE: Edit Path Effect parameters
+ToolEraser: Erase existing paths (Shift+E)
+ToolLPETool: Do geometric constructions
+SelectPrefs: Open Preferences for the Selector tool
+NodePrefs: Open Preferences for the Node tool
+TweakPrefs: Open Preferences for the Tweak tool
+SprayPrefs: Open Preferences for the Spray tool
+RectPrefs: Open Preferences for the Rectangle tool
+3DBoxPrefs: Open Preferences for the 3D Box tool
+ArcPrefs: Open Preferences for the Ellipse tool
+StarPrefs: Open Preferences for the Star tool
+SpiralPrefs: Open Preferences for the Spiral tool
+PencilPrefs: Open Preferences for the Pencil tool
+PenPrefs: Open Preferences for the Pen tool
+CalligraphicPrefs: Open Preferences for the Calligraphy tool
+TextPrefs: Open Preferences for the Text tool
+GradientPrefs: Open Preferences for the Gradient tool
+Mesh_Prefs: Open Preferences for the Mesh tool
+ZoomPrefs: Open Preferences for the Zoom tool
+MeasurePrefs: Open Preferences for the Measure tool
+DropperPrefs: Open Preferences for the Dropper tool
+ConnectorPrefs: Open Preferences for the Connector tool
+PaintBucketPrefs: Open Preferences for the Paint Bucket tool
+EraserPrefs: Open Preferences for the Eraser tool
+LPEToolPrefs: Open Preferences for the LPETool tool
+ZoomIn: Zoom in (+)
+ZoomOut: Zoom out (-)
+ZoomNext: Next zoom (from the history of zooms) (Shift+`)
+ZoomPrev: Previous zoom (from the history of zooms) (`)
+Zoom1:0: Zoom to 1:1 (1)
+Zoom1:2: Zoom to 1:2 (2)
+Zoom2:1: Zoom to 2:1
+ZoomPage: Zoom to fit page in window (5)
+ZoomPageWidth: Zoom to fit page width in window (6)
+ZoomDrawing: Zoom to fit drawing in window (4)
+ZoomSelection: Zoom to fit selection in window (3)
+ZoomCenterPage: Center page in window (Ctrl+4)
+RotateClockwise: Rotate canvas clockwise
+RotateCounterClockwise: Rotate canvas counter-clockwise
+RotateZero: Reset canvas rotation to zero
+FlipHorizontal: Flip canvas horizontally
+FlipVertical: Flip canvas vertically
+FlipNone: Undo any flip
+ToggleRulers: Show or hide the canvas rulers (Ctrl+R)
+ToggleScrollbars: Show or hide the canvas scrollbars (Ctrl+B)
+ToggleGrid: Show or hide the page grid (#)
+ToggleGuides: Show or hide guides (drag from a ruler to create a guide) (|)
+ToggleSnapGlobal: Enable snapping (%)
+ToggleCommandsToolbar: Show or hide the Commands bar (under the menu)
+ToggleSnapToolbar: Show or hide the snapping controls
+ToggleToolToolbar: Show or hide the Tool Controls bar
+ToggleToolbox: Show or hide the main toolbox (on the left)
+TogglePalette: Show or hide the color palette (Shift+Alt+P)
+ToggleStatusbar: Show or hide the statusbar (at the bottom of the window)
+FullScreen: Stretch this document window to full screen (F11)
+FullScreenFocus: Stretch this document window to full screen (Ctrl+F11)
+FocusToggle: Remove excess toolbars to focus on drawing (Shift+F11)
+ViewNew: Open a new window with the same document
+ViewModeNormal: Switch to normal display mode
+ViewModeNoFilters: Switch to normal display without filters
+ViewModeOutline: Switch to outline (wireframe) display mode
+ViewModeVisibleHairlines: Make sure hairlines are always drawn thick enough to see
+ViewModeToggle: Toggle between normal and outline display modes (Ctrl+5)
+ViewColorModeNormal: Switch to normal color display mode
+ViewColorModeGrayscale: Switch to grayscale display mode
+ViewColorModeToggle: Toggle between normal and grayscale color display modes (Alt+5)
+ViewSplitModeToggle: Split canvas in 2 to show outline (Ctrl+6)
+ViewXRayToggle: XRay around cursor (Alt+6)
+ViewCmsToggle: Toggle color-managed display for this document window
+ViewIconPreview: Open a window to preview objects at different icon resolutions
+DialogPrototype: Prototype Dialog
+DialogPreferences: Edit global Inkscape preferences (Shift+Ctrl+P)
+DialogDocumentProperties: Edit properties of this document (to be saved with the document) (Shift+Ctrl+D)
+DialogFillStroke: Edit objects' colors, gradients, arrowheads, and other fill and stroke properties... (Shift+Ctrl+F)
+DialogGlyphs: Select Unicode characters from a palette
+DialogSwatches: Select colors from a swatches palette (Shift+Ctrl+W)
+DialogSymbols: Select symbol from a symbols palette (Shift+Ctrl+Y)
+DialogPaintServers: Select paint server from a collection
+DialogTransform: Precisely control objects' transformations (Shift+Ctrl+M)
+DialogAlignDistribute: Align and distribute objects (Shift+Ctrl+A)
+DialogSprayOption: Some options for the spray
+DialogUndoHistory: Undo History (Shift+Ctrl+H)
+DialogText: View and select font family, font size and other text properties (Shift+Ctrl+T)
+DialogXMLEditor: View and edit the XML tree of the document (Shift+Ctrl+X)
+DialogSelectors: View and edit CSS selectors and styles (Shift+Ctrl+Q)
+DialogFind: Find objects in document (Ctrl+F)
+DialogSpellcheck: Check spelling of text in document (Ctrl+Alt+K)
+DialogDebug: View debug messages
+DialogsToggle: Show or hide all open dialogs (F12)
+DialogClonetiler: Create multiple clones of selected object, arranging them into a pattern or scattering
+DialogObjectAttributes: Edit the object attributes...
+DialogObjectProperties: Edit the ID, locked and visible status, and other object properties (Shift+Ctrl+O)
+DialogInput: Configure extended input devices, such as a graphics tablet
+org.inkscape.dialogs.extensioneditor: Query information about extensions
+DialogLayers: View Layers (Shift+Ctrl+L)
+DialogObjects: View Objects
+DialogStyle: View Style Dialog
+DialogLivePathEffect: Manage, edit, and apply path effects (Ctrl+&)
+DialogFilterEffects: Manage, edit, and apply SVG filters
+DialogSVGFonts: Edit SVG fonts
+DialogPrintColorsPreview: Select which color separations to render in Print Colors Preview rendermode
+DialogExport: Export this document or a selection as a PNG image (Shift+Ctrl+E)
+HelpAboutExtensions: Information on Inkscape extensions
+HelpAboutMemory: Memory usage information
+HelpAbout: Inkscape version, authors, license
+TutorialsBasic: Getting started with Inkscape
+TutorialsShapes: Using shape tools to create and edit shapes
+TutorialsAdvanced: Advanced Inkscape topics
+TutorialsTracing: Using bitmap tracing
+TutorialsTracingPixelArt: Using Trace Pixel Art dialog
+TutorialsCalligraphy: Using the Calligraphy pen tool
+TutorialsInterpolate: Using the interpolate extension
+TutorialsDesign: Principles of design in the tutorial form
+TutorialsTips: Miscellaneous tips and tricks
+EffectLast: Repeat the last extension with the same settings (Alt+Q)
+EffectLastPref: Repeat the last extension with new settings (Shift+Alt+Q)
+FitCanvasToSelection: Fit the page to the current selection
+FitCanvasToDrawing: Fit the page to the drawing
+FitCanvasToSelectionOrDrawing: Fit the page to the current selection or the drawing if there is no selection (Shift+Ctrl+R)
+UnlockAll: Unlock all objects in the current layer
+UnlockAllInAllLayers: Unlock all objects in all layers
+UnhideAll: Unhide all objects in the current layer
+UnhideAllInAllLayers: Unhide all objects in all layers
+LinkColorProfile: Link an ICC color profile
+RemoveColorProfile: Remove a linked ICC color profile
+AddExternalScript: Add an external script
+AddEmbeddedScript: Add an embedded script
+EditEmbeddedScript: Edit an embedded script
+RemoveExternalScript: Remove an external script
+RemoveEmbeddedScript: Remove an embedded script
+AlignHorizontalRightToAnchor: Align right edges of objects to the left edge of the anchor
+AlignHorizontalLeft: Align left edges (Ctrl+Alt+4)
+AlignHorizontalCenter: Center on vertical axis (Ctrl+Alt+H)
+AlignHorizontalRight: Align right sides (Ctrl+Alt+6)
+AlignHorizontalLeftToAnchor: Align left edges of objects to the right edge of the anchor
+AlignVerticalBottomToAnchor: Align bottom edges of objects to the top edge of the anchor
+AlignVerticalTop: Align top edges (Ctrl+Alt+8)
+AlignVerticalCenter: Center on horizontal axis (Ctrl+Alt+T)
+AlignVerticalBottom: Align bottom edges (Ctrl+Alt+2)
+AlignVerticalTopToAnchor: Align top edges of objects to the bottom edge of the anchor
+AlignBothTopLeft: Align top-left corners
+AlignBothTopRight: Align top-right corners
+AlignBothBottomRight: Align bottom-right corners
+AlignBothBottomLeft: Align bottom-left corners
+AlignBothTopLeftToAnchor: Align top-left corners of objects to the bottom-right corner of the anchor
+AlignBothTopRightToAnchor: Align top-right corners of objects to the bottom-left corner of the anchor
+AlignBothBottomRightToAnchor: Align bottom-right corners of objects to the top-left corner of the anchor
+AlignBothBottomLeftToAnchor: Align bottom-left corners of objects to the top-right corner of the anchor
+AlignVerticalHorizontalCenter: Center on horizontal and vertical axis (Ctrl+Alt+5)
+org.inkscape.effect.bluredge: Inset/Outset Halo...
+org.inkscape.effect.bluredge.noprefs: Inset/Outset Halo (No preferences)
+org.inkscape.effect.grid: Draw a path which is a grid
+org.inkscape.effect.grid.noprefs: Grid (No preferences)
+org.inkscape.effect.bitmap.adaptiveThreshold: Apply adaptive thresholding to selected bitmap(s)
+org.inkscape.effect.bitmap.adaptiveThreshold.noprefs: Adaptive Threshold (No preferences)
+org.inkscape.effect.bitmap.addNoise: Add random noise to selected bitmap(s)
+org.inkscape.effect.bitmap.addNoise.noprefs: Add Noise (No preferences)
+org.inkscape.effect.bitmap.blur: Blur selected bitmap(s)
+org.inkscape.effect.bitmap.blur.noprefs: Blur (No preferences)
+org.inkscape.effect.bitmap.channel: Extract specific channel from image
+org.inkscape.effect.bitmap.channel.noprefs: Channel (No preferences)
+org.inkscape.effect.bitmap.charcoal: Apply charcoal stylization to selected bitmap(s)
+org.inkscape.effect.bitmap.charcoal.noprefs: Charcoal (No preferences)
+org.inkscape.effect.bitmap.colorize: Colorize selected bitmap(s) with specified color, using given opacity
+org.inkscape.effect.bitmap.colorize.noprefs: Colorize (No preferences)
+org.inkscape.effect.bitmap.contrast: Increase or decrease contrast in bitmap(s)
+org.inkscape.effect.bitmap.contrast.noprefs: Contrast (No preferences)
+org.inkscape.effect.bitmap.crop: Crop selected bitmap(s)
+org.inkscape.effect.bitmap.crop.noprefs: Crop (No preferences)
+org.inkscape.effect.bitmap.cycleColormap: Cycle colormap(s) of selected bitmap(s)
+org.inkscape.effect.bitmap.cycleColormap.noprefs: Cycle Colormap (No preferences)
+org.inkscape.effect.bitmap.edge: Highlight edges of selected bitmap(s)
+org.inkscape.effect.bitmap.edge.noprefs: Edge (No preferences)
+org.inkscape.effect.bitmap.despeckle: Reduce speckle noise of selected bitmap(s)
+org.inkscape.effect.bitmap.despeckle.noprefs: Despeckle (No preferences)
+org.inkscape.effect.bitmap.emboss: Emboss selected bitmap(s); highlight edges with 3D effect
+org.inkscape.effect.bitmap.emboss.noprefs: Emboss (No preferences)
+org.inkscape.effect.bitmap.enhance: Enhance selected bitmap(s); minimize noise
+org.inkscape.effect.bitmap.enhance.noprefs: Enhance (No preferences)
+org.inkscape.effect.bitmap.equalize: Equalize selected bitmap(s); histogram equalization
+org.inkscape.effect.bitmap.equalize.noprefs: Equalize (No preferences)
+org.inkscape.effect.bitmap.gaussianBlur: Gaussian blur selected bitmap(s)
+org.inkscape.effect.bitmap.gaussianBlur.noprefs: Gaussian Blur (No preferences)
+org.inkscape.effect.bitmap.implode: Implode selected bitmap(s)
+org.inkscape.effect.bitmap.implode.noprefs: Implode (No preferences)
+org.inkscape.effect.bitmap.level: Level selected bitmap(s) by scaling values falling between the given ranges to the full color range
+org.inkscape.effect.bitmap.level.noprefs: Level (No preferences)
+org.inkscape.effect.bitmap.levelChannel: Level the specified channel of selected bitmap(s) by scaling values falling between the given ranges to the full color range
+org.inkscape.effect.bitmap.levelChannel.noprefs: Level (with Channel) (No preferences)
+org.inkscape.effect.bitmap.medianFilter: Replace each pixel component with the median color in a circular neighborhood
+org.inkscape.effect.bitmap.medianFilter.noprefs: Median (No preferences)
+org.inkscape.effect.bitmap.modulate: Adjust the amount of hue, saturation, and brightness in selected bitmap(s)
+org.inkscape.effect.bitmap.modulate.noprefs: HSB Adjust (No preferences)
+org.inkscape.effect.bitmap.negate: Negate (take inverse) selected bitmap(s)
+org.inkscape.effect.bitmap.negate.noprefs: Negate (No preferences)
+org.inkscape.effect.bitmap.normalize: Normalize selected bitmap(s), expanding color range to the full possible range of color
+org.inkscape.effect.bitmap.normalize.noprefs: Normalize (No preferences)
+org.inkscape.effect.bitmap.oilPaint: Stylize selected bitmap(s) so that they appear to be painted with oils
+org.inkscape.effect.bitmap.oilPaint.noprefs: Oil Paint (No preferences)
+org.inkscape.effect.bitmap.opacity: Modify opacity channel(s) of selected bitmap(s)
+org.inkscape.effect.bitmap.opacity.noprefs: Opacity (No preferences)
+org.inkscape.effect.bitmap.raise: Alter lightness the edges of selected bitmap(s) to create a raised appearance
+org.inkscape.effect.bitmap.raise.noprefs: Raise (No preferences)
+org.inkscape.effect.bitmap.reduceNoise: Reduce noise in selected bitmap(s) using a noise peak elimination filter
+org.inkscape.effect.bitmap.reduceNoise.noprefs: Reduce Noise (No preferences)
+org.inkscape.effect.bitmap.sample: Alter the resolution of selected image by resizing it to the given pixel size
+org.inkscape.effect.bitmap.sample.noprefs: Resample (No preferences)
+org.inkscape.effect.bitmap.shade: Shade selected bitmap(s) simulating distant light source
+org.inkscape.effect.bitmap.shade.noprefs: Shade (No preferences)
+org.inkscape.effect.bitmap.sharpen: Sharpen selected bitmap(s)
+org.inkscape.effect.bitmap.sharpen.noprefs: Sharpen (No preferences)
+org.inkscape.effect.bitmap.solarize: Solarize selected bitmap(s), like overexposing photographic film
+org.inkscape.effect.bitmap.solarize.noprefs: Solarize (No preferences)
+org.inkscape.effect.bitmap.spread: Randomly scatter pixels in selected bitmap(s), within the given radius of the original position
+org.inkscape.effect.bitmap.spread.noprefs: Dither (No preferences)
+org.inkscape.effect.bitmap.swirl: Swirl selected bitmap(s) around center point
+org.inkscape.effect.bitmap.swirl.noprefs: Swirl (No preferences)
+org.inkscape.effect.bitmap.unsharpmask: Sharpen selected bitmap(s) using unsharp mask algorithms
+org.inkscape.effect.bitmap.unsharpmask.noprefs: Unsharp Mask (No preferences)
+org.inkscape.effect.bitmap.wave: Alter selected bitmap(s) along sine wave
+org.inkscape.effect.bitmap.wave.noprefs: Wave (No preferences)
+org.inkscape.effect.filter.DiffuseLight: Basic diffuse bevel to use for building textures
+org.inkscape.effect.filter.DiffuseLight.noprefs: Diffuse Light (No preferences)
+org.inkscape.effect.filter.MatteJelly: Bulging, matte jelly covering
+org.inkscape.effect.filter.MatteJelly.noprefs: Matte Jelly (No preferences)
+org.inkscape.effect.filter.SpecularLight: Basic specular bevel to use for building textures
+org.inkscape.effect.filter.SpecularLight.noprefs: Specular Light (No preferences)
+org.inkscape.effect.filter.Blur: Simple vertical and horizontal blur effect
+org.inkscape.effect.filter.Blur.noprefs: Blur (No preferences)
+org.inkscape.effect.filter.CleanEdges: Removes or decreases glows and jaggeries around objects edges after applying some filters
+org.inkscape.effect.filter.CleanEdges.noprefs: Clean Edges (No preferences)
+org.inkscape.effect.filter.CrossBlur: Combine vertical and horizontal blur
+org.inkscape.effect.filter.CrossBlur.noprefs: Cross Blur (No preferences)
+org.inkscape.effect.filter.Feather: Blurred mask on the edge without altering the contents
+org.inkscape.effect.filter.Feather.noprefs: Feather (No preferences)
+org.inkscape.effect.filter.ImageBlur: Blur eroded by white or transparency
+org.inkscape.effect.filter.ImageBlur.noprefs: Out of Focus (No preferences)
+org.inkscape.effect.filter.Bump: All purposes bump filter
+org.inkscape.effect.filter.Bump.noprefs: Bump (No preferences)
+org.inkscape.effect.filter.WaxBump: Turns an image to jelly
+org.inkscape.effect.filter.WaxBump.noprefs: Wax Bump (No preferences)
+org.inkscape.effect.filter.Brilliance: Brightness filter
+org.inkscape.effect.filter.Brilliance.noprefs: Brilliance (No preferences)
+org.inkscape.effect.filter.ChannelPaint: Replace RGB by any color
+org.inkscape.effect.filter.ChannelPaint.noprefs: Channel Painting (No preferences)
+org.inkscape.effect.filter.ColorBlindness: Simulate color blindness
+org.inkscape.effect.filter.ColorBlindness.noprefs: Color Blindness (No preferences)
+org.inkscape.effect.filter.ColorShift: Rotate and desaturate hue
+org.inkscape.effect.filter.ColorShift.noprefs: Color Shift (No preferences)
+org.inkscape.effect.filter.Colorize: Blend image or object with a flood color
+org.inkscape.effect.filter.Colorize.noprefs: Colorize (No preferences)
+org.inkscape.effect.filter.ComponentTransfer: Basic component transfer structure
+org.inkscape.effect.filter.ComponentTransfer.noprefs: Component Transfer (No preferences)
+org.inkscape.effect.filter.Duochrome: Convert luminance values to a duochrome palette
+org.inkscape.effect.filter.Duochrome.noprefs: Duochrome (No preferences)
+org.inkscape.effect.filter.ExtractChannel: Extract color channel as a transparent image
+org.inkscape.effect.filter.ExtractChannel.noprefs: Extract Channel (No preferences)
+org.inkscape.effect.filter.FadeToBW: Fade to black or white
+org.inkscape.effect.filter.FadeToBW.noprefs: Fade to Black or White (No preferences)
+org.inkscape.effect.filter.Greyscale: Customize greyscale components
+org.inkscape.effect.filter.Greyscale.noprefs: Greyscale (No preferences)
+org.inkscape.effect.filter.Invert: Manage hue, lightness and transparency inversions
+org.inkscape.effect.filter.Invert.noprefs: Invert (No preferences)
+org.inkscape.effect.filter.Lighting: Modify lights and shadows separately
+org.inkscape.effect.filter.Lighting.noprefs: Lighting (No preferences)
+org.inkscape.effect.filter.LightnessContrast: Modify lightness and contrast separately
+org.inkscape.effect.filter.LightnessContrast.noprefs: Lightness-Contrast (No preferences)
+org.inkscape.effect.filter.NudgeRGB: Nudge RGB channels separately and blend them to different types of backgrounds
+org.inkscape.effect.filter.NudgeRGB.noprefs: Nudge RGB (No preferences)
+org.inkscape.effect.filter.NudgeCMY: Nudge CMY channels separately and blend them to different types of backgrounds
+org.inkscape.effect.filter.NudgeCMY.noprefs: Nudge CMY (No preferences)
+org.inkscape.effect.filter.Quadritone: Replace hue by two colors
+org.inkscape.effect.filter.Quadritone.noprefs: Quadritone Fantasy (No preferences)
+org.inkscape.effect.filter.SimpleBlend: Simple blend filter
+org.inkscape.effect.filter.SimpleBlend.noprefs: Simple blend (No preferences)
+org.inkscape.effect.filter.Solarize: Classic photographic solarization effect
+org.inkscape.effect.filter.Solarize.noprefs: Solarize (No preferences)
+org.inkscape.effect.filter.Tritone: Create a custom tritone palette with additional glow, blend modes and hue moving
+org.inkscape.effect.filter.Tritone.noprefs: Tritone (No preferences)
+org.inkscape.effect.filter.FeltFeather: Blur and displace edges of shapes and pictures
+org.inkscape.effect.filter.FeltFeather.noprefs: Felt Feather (No preferences)
+org.inkscape.effect.filter.Roughen: Small-scale roughening to edges and content
+org.inkscape.effect.filter.Roughen.noprefs: Roughen (No preferences)
+org.inkscape.effect.filter.EdgeDetect: Detect color edges in object
+org.inkscape.effect.filter.EdgeDetect.noprefs: Edge Detect (No preferences)
+org.inkscape.effect.filter.Chromolitho: Chromo effect with customizable edge drawing and graininess
+org.inkscape.effect.filter.Chromolitho.noprefs: Chromolitho (No preferences)
+org.inkscape.effect.filter.CrossEngraving: Convert image to an engraving made of vertical and horizontal lines
+org.inkscape.effect.filter.CrossEngraving.noprefs: Cross Engraving (No preferences)
+org.inkscape.effect.filter.Drawing: Convert images to duochrome drawings
+org.inkscape.effect.filter.Drawing.noprefs: Drawing (No preferences)
+org.inkscape.effect.filter.Electrize: Electro solarization effects
+org.inkscape.effect.filter.Electrize.noprefs: Electrize (No preferences)
+org.inkscape.effect.filter.NeonDraw: Posterize and draw smooth lines around color shapes
+org.inkscape.effect.filter.NeonDraw.noprefs: Neon Draw (No preferences)
+org.inkscape.effect.filter.PointEngraving: Convert image to a transparent point engraving
+org.inkscape.effect.filter.PointEngraving.noprefs: Point Engraving (No preferences)
+org.inkscape.effect.filter.Posterize: Poster and painting effects
+org.inkscape.effect.filter.Posterize.noprefs: Poster Paint (No preferences)
+org.inkscape.effect.filter.PosterizeBasic: Simple posterizing effect
+org.inkscape.effect.filter.PosterizeBasic.noprefs: Posterize Basic (No preferences)
+org.inkscape.effect.filter.crosssmooth: Smooth edges and angles of shapes
+org.inkscape.effect.filter.crosssmooth.noprefs: Cross-smooth (No preferences)
+org.inkscape.effect.filter.Outline: Adds a colorizable outline
+org.inkscape.effect.filter.Outline.noprefs: Outline (No preferences)
+org.inkscape.effect.filter.NoiseFill: Basic noise fill and transparency texture
+org.inkscape.effect.filter.NoiseFill.noprefs: Noise Fill (No preferences)
+org.inkscape.effect.filter.snow: Snow has fallen on object
+org.inkscape.effect.filter.snow.noprefs: Snow Crest (No preferences)
+org.inkscape.effect.filter.ColorDropShadow: Colorizable Drop shadow
+org.inkscape.effect.filter.ColorDropShadow.noprefs: Drop Shadow (No preferences)
+org.inkscape.effect.filter.InkBlot: Inkblot on tissue or rough paper
+org.inkscape.effect.filter.InkBlot.noprefs: Ink Blot (No preferences)
+org.inkscape.effect.filter.Blend: Blend objects with background images or with themselves
+org.inkscape.effect.filter.Blend.noprefs: Blend (No preferences)
+org.inkscape.effect.filter.ChannelTransparency: Replace RGB with transparency
+org.inkscape.effect.filter.ChannelTransparency.noprefs: Channel Transparency (No preferences)
+org.inkscape.effect.filter.LightEraser: Make the lightest parts of the object progressively transparent
+org.inkscape.effect.filter.LightEraser.noprefs: Light Eraser (No preferences)
+org.inkscape.effect.filter.Opacity: Set opacity and strength of opacity boundaries
+org.inkscape.effect.filter.Opacity.noprefs: Opacity (No preferences)
+org.inkscape.effect.filter.Silhouette: Repaint anything visible monochrome
+org.inkscape.effect.filter.Silhouette.noprefs: Silhouette (No preferences)
+org.inkscape.effect.filter.f001: Same as Matte jelly but with more controls
+org.inkscape.effect.filter.f001.noprefs: Smart Jelly (No preferences)
+org.inkscape.effect.filter.f002: Smooth drop-like bevel with metallic finish
+org.inkscape.effect.filter.f002.noprefs: Metal Casting (No preferences)
+org.inkscape.effect.filter.f003: Edges are partly feathered out
+org.inkscape.effect.filter.f003.noprefs: Apparition (No preferences)
+org.inkscape.effect.filter.f005: Low, sharp bevel
+org.inkscape.effect.filter.f005.noprefs: Jigsaw Piece (No preferences)
+org.inkscape.effect.filter.f006: Random whiteouts inside
+org.inkscape.effect.filter.f006.noprefs: Rubber Stamp (No preferences)
+org.inkscape.effect.filter.f007: Inky splotches underneath the object
+org.inkscape.effect.filter.f007.noprefs: Ink Bleed (No preferences)
+org.inkscape.effect.filter.f008: Edges of object are on fire
+org.inkscape.effect.filter.f008.noprefs: Fire (No preferences)
+org.inkscape.effect.filter.f009: Soft, cushion-like bevel with matte highlights
+org.inkscape.effect.filter.f009.noprefs: Bloom (No preferences)
+org.inkscape.effect.filter.f010: Ridged border with inner bevel
+org.inkscape.effect.filter.f010.noprefs: Ridged Border (No preferences)
+org.inkscape.effect.filter.f011: Horizontal rippling of edges
+org.inkscape.effect.filter.f011.noprefs: Ripple (No preferences)
+org.inkscape.effect.filter.f012: Fill object with sparse translucent specks
+org.inkscape.effect.filter.f012.noprefs: Speckle (No preferences)
+org.inkscape.effect.filter.f013: Rainbow-colored semitransparent oily splotches
+org.inkscape.effect.filter.f013.noprefs: Oil Slick (No preferences)
+org.inkscape.effect.filter.f014: Flake-like white splotches
+org.inkscape.effect.filter.f014.noprefs: Frost (No preferences)
+org.inkscape.effect.filter.f015: Leopard spots (loses object's own color)
+org.inkscape.effect.filter.f015.noprefs: Leopard Fur (No preferences)
+org.inkscape.effect.filter.f016: Irregular vertical dark stripes (loses object's own color)
+org.inkscape.effect.filter.f016.noprefs: Zebra (No preferences)
+org.inkscape.effect.filter.f017: Airy, fluffy, sparse white clouds
+org.inkscape.effect.filter.f017.noprefs: Clouds (No preferences)
+org.inkscape.effect.filter.f018: Sharpen edges and boundaries within the object, force=0.15
+org.inkscape.effect.filter.f018.noprefs: Sharpen (No preferences)
+org.inkscape.effect.filter.f019: Sharpen edges and boundaries within the object, force=0.3
+org.inkscape.effect.filter.f019.noprefs: Sharpen More (No preferences)
+org.inkscape.effect.filter.f020: Simulate oil painting style
+org.inkscape.effect.filter.f020.noprefs: Oil Painting (No preferences)
+org.inkscape.effect.filter.f021: Detect color edges and retrace them in grayscale
+org.inkscape.effect.filter.f021.noprefs: Pencil (No preferences)
+org.inkscape.effect.filter.f022: Detect color edges and retrace them in blue
+org.inkscape.effect.filter.f022.noprefs: Blueprint (No preferences)
+org.inkscape.effect.filter.f025: Imitate aged photograph
+org.inkscape.effect.filter.f025.noprefs: Age (No preferences)
+org.inkscape.effect.filter.f026: Bulging, knotty, slick 3D surface
+org.inkscape.effect.filter.f026.noprefs: Organic (No preferences)
+org.inkscape.effect.filter.f027: Gray bevelled wires with drop shadows
+org.inkscape.effect.filter.f027.noprefs: Barbed Wire (No preferences)
+org.inkscape.effect.filter.f028: Random inner-bevel holes
+org.inkscape.effect.filter.f028.noprefs: Swiss Cheese (No preferences)
+org.inkscape.effect.filter.f029: Marble-like bluish speckles
+org.inkscape.effect.filter.f029.noprefs: Blue Cheese (No preferences)
+org.inkscape.effect.filter.f030: Soft bevel, slightly depressed middle
+org.inkscape.effect.filter.f030.noprefs: Button (No preferences)
+org.inkscape.effect.filter.f031: Shadowy outer bevel
+org.inkscape.effect.filter.f031.noprefs: Inset (No preferences)
+org.inkscape.effect.filter.f032: Random paint streaks downwards
+org.inkscape.effect.filter.f032.noprefs: Dripping (No preferences)
+org.inkscape.effect.filter.f033: Glossy clumpy jam spread
+org.inkscape.effect.filter.f033.noprefs: Jam Spread (No preferences)
+org.inkscape.effect.filter.f034: Van Gogh painting effect for bitmaps
+org.inkscape.effect.filter.f034.noprefs: Pixel Smear (No preferences)
+org.inkscape.effect.filter.f035: Under a cracked glass
+org.inkscape.effect.filter.f035.noprefs: Cracked Glass (No preferences)
+org.inkscape.effect.filter.f036: Flexible bubbles effect with some displacement
+org.inkscape.effect.filter.f036.noprefs: Bubbly Bumps (No preferences)
+org.inkscape.effect.filter.f037: Bubble effect with refraction and glow
+org.inkscape.effect.filter.f037.noprefs: Glowing Bubble (No preferences)
+org.inkscape.effect.filter.f038: Neon light effect
+org.inkscape.effect.filter.f038.noprefs: Neon (No preferences)
+org.inkscape.effect.filter.f039: Melting parts of object together, with a glossy bevel and a glow
+org.inkscape.effect.filter.f039.noprefs: Molten Metal (No preferences)
+org.inkscape.effect.filter.f040: Pressed metal with a rolled edge
+org.inkscape.effect.filter.f040.noprefs: Pressed Steel (No preferences)
+org.inkscape.effect.filter.f041: Soft, pastel-colored, blurry bevel
+org.inkscape.effect.filter.f041.noprefs: Matte Bevel (No preferences)
+org.inkscape.effect.filter.f042: Thin like a soap membrane
+org.inkscape.effect.filter.f042.noprefs: Thin Membrane (No preferences)
+org.inkscape.effect.filter.f043: Soft pastel ridge
+org.inkscape.effect.filter.f043.noprefs: Matte Ridge (No preferences)
+org.inkscape.effect.filter.f044: Glowing metal texture
+org.inkscape.effect.filter.f044.noprefs: Glowing Metal (No preferences)
+org.inkscape.effect.filter.f045: Leaves on the ground in Fall, or living foliage
+org.inkscape.effect.filter.f045.noprefs: Leaves (No preferences)
+org.inkscape.effect.filter.f046: Illuminated translucent plastic or glass effect
+org.inkscape.effect.filter.f046.noprefs: Translucent (No preferences)
+org.inkscape.effect.filter.f047: Waxy texture which keeps its iridescence through color fill change
+org.inkscape.effect.filter.f047.noprefs: Iridescent Beeswax (No preferences)
+org.inkscape.effect.filter.f048: Eroded metal texture with ridges, grooves, holes and bumps
+org.inkscape.effect.filter.f048.noprefs: Eroded Metal (No preferences)
+org.inkscape.effect.filter.f049: A volcanic texture, a little like leather
+org.inkscape.effect.filter.f049.noprefs: Cracked Lava (No preferences)
+org.inkscape.effect.filter.f050: Bark texture, vertical; use with deep colors
+org.inkscape.effect.filter.f050.noprefs: Bark (No preferences)
+org.inkscape.effect.filter.f051: Stylized reptile skin texture
+org.inkscape.effect.filter.f051.noprefs: Lizard Skin (No preferences)
+org.inkscape.effect.filter.f052: Stone wall texture to use with not too saturated colors
+org.inkscape.effect.filter.f052.noprefs: Stone Wall (No preferences)
+org.inkscape.effect.filter.f053: Silk carpet texture, horizontal stripes
+org.inkscape.effect.filter.f053.noprefs: Silk Carpet (No preferences)
+org.inkscape.effect.filter.f054: Gel effect with light refraction
+org.inkscape.effect.filter.f054.noprefs: Refractive Gel A (No preferences)
+org.inkscape.effect.filter.f055: Gel effect with strong refraction
+org.inkscape.effect.filter.f055.noprefs: Refractive Gel B (No preferences)
+org.inkscape.effect.filter.f056: Metallized effect with a soft lighting, slightly translucent at the edges
+org.inkscape.effect.filter.f056.noprefs: Metallized Paint (No preferences)
+org.inkscape.effect.filter.f057: Gel Ridge with a pearlescent look
+org.inkscape.effect.filter.f057.noprefs: Dragee (No preferences)
+org.inkscape.effect.filter.f058: Strongly raised border around a flat surface
+org.inkscape.effect.filter.f058.noprefs: Raised Border (No preferences)
+org.inkscape.effect.filter.f059: Gel Ridge metallized at its top
+org.inkscape.effect.filter.f059.noprefs: Metallized Ridge (No preferences)
+org.inkscape.effect.filter.f060: Fat oil with some adjustable turbulence
+org.inkscape.effect.filter.f060.noprefs: Fat Oil (No preferences)
+org.inkscape.effect.filter.f063: Creates a black light inside and outside
+org.inkscape.effect.filter.f063.noprefs: Black Hole (No preferences)
+org.inkscape.effect.filter.f065: Scattered cubes; adjust the Morphology primitive to vary size
+org.inkscape.effect.filter.f065.noprefs: Cubes (No preferences)
+org.inkscape.effect.filter.f066: Peeling painting on a wall
+org.inkscape.effect.filter.f066.noprefs: Peel Off (No preferences)
+org.inkscape.effect.filter.f067: Splattered cast metal, with golden highlights
+org.inkscape.effect.filter.f067.noprefs: Gold Splatter (No preferences)
+org.inkscape.effect.filter.f068: Fat pasted cast metal, with golden highlights
+org.inkscape.effect.filter.f068.noprefs: Gold Paste (No preferences)
+org.inkscape.effect.filter.f069: Crumpled matte plastic, with melted edge
+org.inkscape.effect.filter.f069.noprefs: Crumpled Plastic (No preferences)
+org.inkscape.effect.filter.f070: Slightly cracked enameled texture
+org.inkscape.effect.filter.f070.noprefs: Enamel Jewelry (No preferences)
+org.inkscape.effect.filter.f071: Aquarelle paper effect which can be used for pictures as for objects
+org.inkscape.effect.filter.f071.noprefs: Rough Paper (No preferences)
+org.inkscape.effect.filter.f072: Crumpled glossy paper effect which can be used for pictures as for objects
+org.inkscape.effect.filter.f072.noprefs: Rough and Glossy (No preferences)
+org.inkscape.effect.filter.f073: Inner colorized shadow, outer black shadow
+org.inkscape.effect.filter.f073.noprefs: In and Out (No preferences)
+org.inkscape.effect.filter.f074: Convert to small scattered particles with some thickness
+org.inkscape.effect.filter.f074.noprefs: Air Spray (No preferences)
+org.inkscape.effect.filter.f075: Blurred colorized contour, filled inside
+org.inkscape.effect.filter.f075.noprefs: Warm Inside (No preferences)
+org.inkscape.effect.filter.f076: Blurred colorized contour, empty inside
+org.inkscape.effect.filter.f076.noprefs: Cool Outside (No preferences)
+org.inkscape.effect.filter.f077: Bevel, crude light, discoloration and glow like in electronic microscopy
+org.inkscape.effect.filter.f077.noprefs: Electronic Microscopy (No preferences)
+org.inkscape.effect.filter.f078: Checkered tartan pattern
+org.inkscape.effect.filter.f078.noprefs: Tartan (No preferences)
+org.inkscape.effect.filter.f083: Colorizable filling with flow inside like transparency
+org.inkscape.effect.filter.f083.noprefs: Shaken Liquid (No preferences)
+org.inkscape.effect.filter.f085: Glowing image content without blurring it
+org.inkscape.effect.filter.f085.noprefs: Soft Focus Lens (No preferences)
+org.inkscape.effect.filter.f086: Illuminated stained glass effect
+org.inkscape.effect.filter.f086.noprefs: Stained Glass (No preferences)
+org.inkscape.effect.filter.f087: Illuminated glass effect with light coming from beneath
+org.inkscape.effect.filter.f087.noprefs: Dark Glass (No preferences)
+org.inkscape.effect.filter.f088: Same as HSL Bumps but with transparent highlights
+org.inkscape.effect.filter.f088.noprefs: HSL Bumps Alpha (No preferences)
+org.inkscape.effect.filter.f089: Same as Bubbly Bumps but with transparent highlights
+org.inkscape.effect.filter.f089.noprefs: Bubbly Bumps Alpha (No preferences)
+org.inkscape.effect.filter.f090: Displace the outside of shapes and pictures without altering their content
+org.inkscape.effect.filter.f090.noprefs: Torn Edges (No preferences)
+org.inkscape.effect.filter.f092: Roughen all inside shapes
+org.inkscape.effect.filter.f092.noprefs: Roughen Inside (No preferences)
+org.inkscape.effect.filter.f093: Blur the contents of objects, preserving the outline and adding progressive transparency at edges
+org.inkscape.effect.filter.f093.noprefs: Evanescent (No preferences)
+org.inkscape.effect.filter.f094: Low turbulence gives sponge look and high turbulence chalk
+org.inkscape.effect.filter.f094.noprefs: Chalk and Sponge (No preferences)
+org.inkscape.effect.filter.f095: Colorized blotches, like a crowd of people
+org.inkscape.effect.filter.f095.noprefs: People (No preferences)
+org.inkscape.effect.filter.f096: Colorized mountain tops out of the fog
+org.inkscape.effect.filter.f096.noprefs: Scotland (No preferences)
+org.inkscape.effect.filter.f097: Phantasmagorical turbulent wisps, like Hieronymus Bosch's Garden of Delights
+org.inkscape.effect.filter.f097.noprefs: Garden of Delights (No preferences)
+org.inkscape.effect.filter.f098: In and out glow with a possible offset and colorizable flood
+org.inkscape.effect.filter.f098.noprefs: Cutout Glow (No preferences)
+org.inkscape.effect.filter.f099: Emboss effect : 3D relief where white is replaced by black
+org.inkscape.effect.filter.f099.noprefs: Dark Emboss (No preferences)
+org.inkscape.effect.filter.f100: Same as Bubbly Bumps but with a diffuse light instead of a specular one
+org.inkscape.effect.filter.f100.noprefs: Bubbly Bumps Matte (No preferences)
+org.inkscape.effect.filter.f101: Inkblot on blotting paper
+org.inkscape.effect.filter.f101.noprefs: Blotting Paper (No preferences)
+org.inkscape.effect.filter.f102: Wax print on tissue texture
+org.inkscape.effect.filter.f102.noprefs: Wax Print (No preferences)
+org.inkscape.effect.filter.f104: Displace the outside of shapes and pictures without altering their content
+org.inkscape.effect.filter.f104.noprefs: Torn Edges (No preferences)
+org.inkscape.effect.filter.f107: Cloudy watercolor effect
+org.inkscape.effect.filter.f107.noprefs: Watercolor (No preferences)
+org.inkscape.effect.filter.f108: Felt like texture with color turbulence and slightly darker at the edges
+org.inkscape.effect.filter.f108.noprefs: Felt (No preferences)
+org.inkscape.effect.filter.f109: Ink paint on paper with some turbulent color shift
+org.inkscape.effect.filter.f109.noprefs: Ink Paint (No preferences)
+org.inkscape.effect.filter.f110: Smooth rainbow colors melted along the edges and colorizable
+org.inkscape.effect.filter.f110.noprefs: Tinted Rainbow (No preferences)
+org.inkscape.effect.filter.f111: Smooth rainbow colors slightly melted along the edges
+org.inkscape.effect.filter.f111.noprefs: Melted Rainbow (No preferences)
+org.inkscape.effect.filter.f112: Bright, polished uneven metal casting, colorizable
+org.inkscape.effect.filter.f112.noprefs: Flex Metal (No preferences)
+org.inkscape.effect.filter.f113: Tartan pattern with a wavy displacement and bevel around the edges
+org.inkscape.effect.filter.f113.noprefs: Wavy Tartan (No preferences)
+org.inkscape.effect.filter.f114: 3D warped marble texture
+org.inkscape.effect.filter.f114.noprefs: 3D Marble (No preferences)
+org.inkscape.effect.filter.f115: 3D warped, fibered wood texture
+org.inkscape.effect.filter.f115.noprefs: 3D Wood (No preferences)
+org.inkscape.effect.filter.f116: 3D warped, iridescent pearly shell texture
+org.inkscape.effect.filter.f116.noprefs: 3D Mother of Pearl (No preferences)
+org.inkscape.effect.filter.f117: Tiger fur pattern with folds and bevel around the edges
+org.inkscape.effect.filter.f117.noprefs: Tiger Fur (No preferences)
+org.inkscape.effect.filter.f119: Light areas turn to black
+org.inkscape.effect.filter.f119.noprefs: Black Light (No preferences)
+org.inkscape.effect.filter.f122: Adds a small scale graininess
+org.inkscape.effect.filter.f122.noprefs: Film Grain (No preferences)
+org.inkscape.effect.filter.f123: Colored plaster emboss effect
+org.inkscape.effect.filter.f123.noprefs: Plaster Color (No preferences)
+org.inkscape.effect.filter.f124: Gives Smooth Bumps velvet like
+org.inkscape.effect.filter.f124.noprefs: Velvet Bumps (No preferences)
+org.inkscape.effect.filter.f125: Comics shader with creamy waves transparency
+org.inkscape.effect.filter.f125.noprefs: Comics Cream (No preferences)
+org.inkscape.effect.filter.f127: Creates colorizable blotches which smoothly flow over the edges of the lines at their crossings
+org.inkscape.effect.filter.f127.noprefs: Chewing Gum (No preferences)
+org.inkscape.effect.filter.f128: Darkens the edge with an inner blur and adds a flexible glow
+org.inkscape.effect.filter.f128.noprefs: Dark and Glow (No preferences)
+org.inkscape.effect.filter.f130: Smooth rainbow colors warped along the edges and colorizable
+org.inkscape.effect.filter.f130.noprefs: Warped Rainbow (No preferences)
+org.inkscape.effect.filter.f131: Create a turbulent contour around
+org.inkscape.effect.filter.f131.noprefs: Rough and Dilate (No preferences)
+org.inkscape.effect.filter.f132: Slightly posterize and draw edges like on old printed postcards
+org.inkscape.effect.filter.f132.noprefs: Old Postcard (No preferences)
+org.inkscape.effect.filter.f134: Gives a pointillist HSL sensitive transparency
+org.inkscape.effect.filter.f134.noprefs: Dots Transparency (No preferences)
+org.inkscape.effect.filter.f135: Gives a canvas like HSL sensitive transparency.
+org.inkscape.effect.filter.f135.noprefs: Canvas Transparency (No preferences)
+org.inkscape.effect.filter.f136: Paint objects with a transparent turbulence which turns around color edges
+org.inkscape.effect.filter.f136.noprefs: Smear Transparency (No preferences)
+org.inkscape.effect.filter.f137: Thick painting effect with turbulence
+org.inkscape.effect.filter.f137.noprefs: Thick Paint (No preferences)
+org.inkscape.effect.filter.f138: Burst balloon texture crumpled and with holes
+org.inkscape.effect.filter.f138.noprefs: Burst (No preferences)
+org.inkscape.effect.filter.f139: Combine a HSL edges detection bump with a leathery or woody and colorizable texture
+org.inkscape.effect.filter.f139.noprefs: Embossed Leather (No preferences)
+org.inkscape.effect.filter.f140: White splotches evocating carnaval masks
+org.inkscape.effect.filter.f140.noprefs: Carnaval (No preferences)
+org.inkscape.effect.filter.f141: HSL edges detection bump with a wavy reflective surface effect and variable crumple
+org.inkscape.effect.filter.f141.noprefs: Plastify (No preferences)
+org.inkscape.effect.filter.f142: Combine a HSL edges detection bump with a matte and crumpled surface effect
+org.inkscape.effect.filter.f142.noprefs: Plaster (No preferences)
+org.inkscape.effect.filter.f143: Adds a turbulent transparency which displaces pixels at the same time
+org.inkscape.effect.filter.f143.noprefs: Rough Transparency (No preferences)
+org.inkscape.effect.filter.f144: Partly opaque water color effect with bleed
+org.inkscape.effect.filter.f144.noprefs: Gouache (No preferences)
+org.inkscape.effect.filter.f145: Gives a transparent engraving effect with rough line and filling
+org.inkscape.effect.filter.f145.noprefs: Alpha Engraving (No preferences)
+org.inkscape.effect.filter.f146: Gives a transparent fluid drawing effect with rough line and filling
+org.inkscape.effect.filter.f146.noprefs: Alpha Draw Liquid (No preferences)
+org.inkscape.effect.filter.f147: Gives a fluid and wavy expressionist drawing effect to images
+org.inkscape.effect.filter.f147.noprefs: Liquid Drawing (No preferences)
+org.inkscape.effect.filter.f148: Marbled transparency effect which conforms to image detected edges
+org.inkscape.effect.filter.f148.noprefs: Marbled Ink (No preferences)
+org.inkscape.effect.filter.f149: Thick acrylic paint texture with high texture depth
+org.inkscape.effect.filter.f149.noprefs: Thick Acrylic (No preferences)
+org.inkscape.effect.filter.f150: Gives a controllable roughness engraving effect to bitmaps and materials
+org.inkscape.effect.filter.f150.noprefs: Alpha Engraving B (No preferences)
+org.inkscape.effect.filter.f151: Something like a water noise
+org.inkscape.effect.filter.f151.noprefs: Lapping (No preferences)
+org.inkscape.effect.filter.f152: Convert to a colorizable transparent positive or negative
+org.inkscape.effect.filter.f152.noprefs: Monochrome Transparency (No preferences)
+org.inkscape.effect.filter.f154: Creates an approximative semi-transparent and colorizable image of the saturation levels
+org.inkscape.effect.filter.f154.noprefs: Saturation Map (No preferences)
+org.inkscape.effect.filter.f155: Riddle the surface and add bump to images
+org.inkscape.effect.filter.f155.noprefs: Riddled (No preferences)
+org.inkscape.effect.filter.f156: Thick glossy and translucent paint texture with high depth
+org.inkscape.effect.filter.f156.noprefs: Wrinkled Varnish (No preferences)
+org.inkscape.effect.filter.f157: Canvas texture with an HSL sensitive height map
+org.inkscape.effect.filter.f157.noprefs: Canvas Bumps (No preferences)
+org.inkscape.effect.filter.f158: Same as Canvas Bumps but with a diffuse light instead of a specular one
+org.inkscape.effect.filter.f158.noprefs: Canvas Bumps Matte (No preferences)
+org.inkscape.effect.filter.f159: Same as Canvas Bumps but with transparent highlights
+org.inkscape.effect.filter.f159.noprefs: Canvas Bumps Alpha (No preferences)
+org.inkscape.effect.filter.f161: Bright metallic effect for any color
+org.inkscape.effect.filter.f161.noprefs: Bright Metal (No preferences)
+org.inkscape.effect.filter.f162: Transparent plastic with deep colors
+org.inkscape.effect.filter.f162.noprefs: Deep Colors Plastic (No preferences)
+org.inkscape.effect.filter.f163: Matte bevel with blurred edges
+org.inkscape.effect.filter.f163.noprefs: Melted Jelly Matte (No preferences)
+org.inkscape.effect.filter.f164: Glossy bevel with blurred edges
+org.inkscape.effect.filter.f164.noprefs: Melted Jelly (No preferences)
+org.inkscape.effect.filter.f165: Basic specular bevel to use for building textures
+org.inkscape.effect.filter.f165.noprefs: Combined Lighting (No preferences)
+org.inkscape.effect.filter.f166: Metallic foil effect combining two lighting types and variable crumple
+org.inkscape.effect.filter.f166.noprefs: Tinfoil (No preferences)
+org.inkscape.effect.filter.f167: Adds a colorizable edges glow inside objects and pictures
+org.inkscape.effect.filter.f167.noprefs: Soft Colors (No preferences)
+org.inkscape.effect.filter.f168: Bumps effect with a bevel, color flood and complex lighting
+org.inkscape.effect.filter.f168.noprefs: Relief Print (No preferences)
+org.inkscape.effect.filter.f169: Random rounded living cells like fill
+org.inkscape.effect.filter.f169.noprefs: Growing Cells (No preferences)
+org.inkscape.effect.filter.f170: Oversaturate colors which can be fluorescent in real world
+org.inkscape.effect.filter.f170.noprefs: Fluorescence (No preferences)
+org.inkscape.effect.filter.f171: Reduce or remove antialiasing around shapes
+org.inkscape.effect.filter.f171.noprefs: Pixellize (No preferences)
+org.inkscape.effect.filter.f173: Matte emboss effect
+org.inkscape.effect.filter.f173.noprefs: Basic Diffuse Bump (No preferences)
+org.inkscape.effect.filter.f174: Specular emboss effect
+org.inkscape.effect.filter.f174.noprefs: Basic Specular Bump (No preferences)
+org.inkscape.effect.filter.f175: Two types of lighting emboss effect
+org.inkscape.effect.filter.f175.noprefs: Basic Two Lights Bump (No preferences)
+org.inkscape.effect.filter.f176: Painting canvas emboss effect
+org.inkscape.effect.filter.f176.noprefs: Linen Canvas (No preferences)
+org.inkscape.effect.filter.f177: Matte modeling paste emboss effect
+org.inkscape.effect.filter.f177.noprefs: Plasticine (No preferences)
+org.inkscape.effect.filter.f178: Painting canvas emboss effect
+org.inkscape.effect.filter.f178.noprefs: Rough Canvas Painting (No preferences)
+org.inkscape.effect.filter.f179: Paper like emboss effect
+org.inkscape.effect.filter.f179.noprefs: Paper Bump (No preferences)
+org.inkscape.effect.filter.f180: Convert pictures to thick jelly
+org.inkscape.effect.filter.f180.noprefs: Jelly Bump (No preferences)
+org.inkscape.effect.filter.f181: Blend an image with its hue opposite
+org.inkscape.effect.filter.f181.noprefs: Blend Opposites (No preferences)
+org.inkscape.effect.filter.f182: Fades hue progressively to white
+org.inkscape.effect.filter.f182.noprefs: Hue to White (No preferences)
+org.inkscape.effect.filter.f185: Paint objects with a transparent turbulence which wraps around color edges
+org.inkscape.effect.filter.f185.noprefs: Swirl (No preferences)
+org.inkscape.effect.filter.f188: Gives a turbulent pointillist HSL sensitive transparency
+org.inkscape.effect.filter.f188.noprefs: Pointillism (No preferences)
+org.inkscape.effect.filter.f189: Basic noise transparency texture
+org.inkscape.effect.filter.f189.noprefs: Silhouette Marbled (No preferences)
+org.inkscape.effect.filter.f190: Adds a colorizable opaque background
+org.inkscape.effect.filter.f190.noprefs: Fill Background (No preferences)
+org.inkscape.effect.filter.f191: Adds a white opaque background
+org.inkscape.effect.filter.f191.noprefs: Flatten Transparency (No preferences)
+org.inkscape.effect.filter.f193: Overlays two copies with different blur amounts and modifiable blend and composite
+org.inkscape.effect.filter.f193.noprefs: Blur Double (No preferences)
+org.inkscape.effect.filter.f194: Enhance and redraw color edges in 1 bit black and white
+org.inkscape.effect.filter.f194.noprefs: Image Drawing Basic (No preferences)
+org.inkscape.effect.filter.f195: Enhance and redraw edges around posterized areas
+org.inkscape.effect.filter.f195.noprefs: Poster Draw (No preferences)
+org.inkscape.effect.filter.f197: Overlay with a small scale screen like noise
+org.inkscape.effect.filter.f197.noprefs: Cross Noise Poster (No preferences)
+org.inkscape.effect.filter.f198: Adds a small scale screen like noise locally
+org.inkscape.effect.filter.f198.noprefs: Cross Noise Poster B (No preferences)
+org.inkscape.effect.filter.f199: Poster Color Fun
+org.inkscape.effect.filter.f199.noprefs: Poster Color Fun (No preferences)
+org.inkscape.effect.filter.f200: Adds roughness to one of the two channels of the Poster paint filter
+org.inkscape.effect.filter.f200.noprefs: Poster Rough (No preferences)
+org.inkscape.effect.filter.f201: Basic noise fill texture; adjust color in Flood
+org.inkscape.effect.filter.f201.noprefs: Alpha Monochrome Cracked (No preferences)
+org.inkscape.effect.filter.f202: Basic noise fill texture; adjust color in Flood
+org.inkscape.effect.filter.f202.noprefs: Alpha Turbulent (No preferences)
+org.inkscape.effect.filter.f203: Basic noise fill texture; adjust color in Flood
+org.inkscape.effect.filter.f203.noprefs: Colorize Turbulent (No preferences)
+org.inkscape.effect.filter.f204: Adds a small scale crossy graininess
+org.inkscape.effect.filter.f204.noprefs: Cross Noise B (No preferences)
+org.inkscape.effect.filter.f205: Adds a small scale screen like graininess
+org.inkscape.effect.filter.f205.noprefs: Cross Noise (No preferences)
+org.inkscape.effect.filter.f206: Basic noise fill texture; adjust color in Flood
+org.inkscape.effect.filter.f206.noprefs: Duotone Turbulent (No preferences)
+org.inkscape.effect.filter.f207: Basic noise fill texture; adjust color in Flood
+org.inkscape.effect.filter.f207.noprefs: Light Eraser Cracked (No preferences)
+org.inkscape.effect.filter.f208: Basic noise fill texture; adjust color in Flood
+org.inkscape.effect.filter.f208.noprefs: Poster Turbulent (No preferences)
+org.inkscape.effect.filter.f209: Highly configurable checkered tartan pattern
+org.inkscape.effect.filter.f209.noprefs: Tartan Smart (No preferences)
+org.inkscape.effect.filter.f210: Uses vertical specular light to draw lines
+org.inkscape.effect.filter.f210.noprefs: Light Contour (No preferences)
+org.inkscape.effect.filter.f216: Colorizable filling with liquid transparency
+org.inkscape.effect.filter.f216.noprefs: Liquid (No preferences)
+org.inkscape.effect.filter.f217: Aluminium effect with sharp brushed reflections
+org.inkscape.effect.filter.f217.noprefs: Aluminium (No preferences)
+org.inkscape.effect.filter.f218: Comics cartoon drawing effect
+org.inkscape.effect.filter.f218.noprefs: Comics (No preferences)
+org.inkscape.effect.filter.f219: Draft painted cartoon shading with a glassy look
+org.inkscape.effect.filter.f219.noprefs: Comics Draft (No preferences)
+org.inkscape.effect.filter.f220: Cartoon paint style with some fading at the edges
+org.inkscape.effect.filter.f220.noprefs: Comics Fading (No preferences)
+org.inkscape.effect.filter.f221: Satiny metal surface effect
+org.inkscape.effect.filter.f221.noprefs: Brushed Metal (No preferences)
+org.inkscape.effect.filter.f222: Contouring version of smooth shader
+org.inkscape.effect.filter.f222.noprefs: Opaline (No preferences)
+org.inkscape.effect.filter.f223: Bright chrome effect
+org.inkscape.effect.filter.f223.noprefs: Chrome (No preferences)
+org.inkscape.effect.filter.f224: Dark chrome effect
+org.inkscape.effect.filter.f224.noprefs: Deep Chrome (No preferences)
+org.inkscape.effect.filter.f225: Combination of satiny and emboss effect
+org.inkscape.effect.filter.f225.noprefs: Emboss Shader (No preferences)
+org.inkscape.effect.filter.f226: Chrome effect with darkened edges
+org.inkscape.effect.filter.f226.noprefs: Sharp Metal (No preferences)
+org.inkscape.effect.filter.f227: Draft painted cartoon shading with a glassy look
+org.inkscape.effect.filter.f227.noprefs: Brush Draw (No preferences)
+org.inkscape.effect.filter.f228: Embossed chrome effect
+org.inkscape.effect.filter.f228.noprefs: Chrome Emboss (No preferences)
+org.inkscape.effect.filter.f229: Satiny and embossed contour effect
+org.inkscape.effect.filter.f229.noprefs: Contour Emboss (No preferences)
+org.inkscape.effect.filter.f230: Unrealistic reflections with sharp edges
+org.inkscape.effect.filter.f230.noprefs: Sharp Deco (No preferences)
+org.inkscape.effect.filter.f231: Deep and dark metal shading
+org.inkscape.effect.filter.f231.noprefs: Deep Metal (No preferences)
+org.inkscape.effect.filter.f232: Satiny aluminium effect with embossing
+org.inkscape.effect.filter.f232.noprefs: Aluminium Emboss (No preferences)
+org.inkscape.effect.filter.f233: Double reflection through glass with some refraction
+org.inkscape.effect.filter.f233.noprefs: Refractive Glass (No preferences)
+org.inkscape.effect.filter.f234: Satiny glass effect
+org.inkscape.effect.filter.f234.noprefs: Frosted Glass (No preferences)
+org.inkscape.effect.filter.filter53: Carving emboss effect
+org.inkscape.effect.filter.filter53.noprefs: Bump Engraving (No preferences)
+org.inkscape.effect.filter.filter81: Old chromolithographic effect
+org.inkscape.effect.filter.filter81.noprefs: Chromolitho Alternate (No preferences)
+org.inkscape.effect.filter.filter109: Convoluted emboss effect
+org.inkscape.effect.filter.filter109.noprefs: Convoluted Bump (No preferences)
+org.inkscape.effect.filter.filter127: Cut out, add inner shadow and colorize some parts of an image
+org.inkscape.effect.filter.filter127.noprefs: Emergence (No preferences)
+org.inkscape.effect.filter.filter169: Create a two colors lithographic effect
+org.inkscape.effect.filter.filter169.noprefs: Litho (No preferences)
+org.inkscape.effect.filter.filter291: Colorize separately the three color channels
+org.inkscape.effect.filter.filter291.noprefs: Paint Channels (No preferences)
+org.inkscape.effect.filter.filter451: Create a semi transparent posterized image
+org.inkscape.effect.filter.filter451.noprefs: Posterized Light Eraser (No preferences)
+org.inkscape.effect.filter.filter499: Like Duochrome but with three colors
+org.inkscape.effect.filter.filter499.noprefs: Trichrome (No preferences)
+org.inkscape.effect.filter.filter106: Render Cyan, Magenta and Yellow channels with a colorizable background
+org.inkscape.effect.filter.filter106.noprefs: Simulate CMY (No preferences)
+org.inkscape.effect.filter.filter581: Blurred multiple contours for objects
+org.inkscape.effect.filter.filter581.noprefs: Contouring Table (No preferences)
+org.inkscape.effect.filter.filter609: Converts blurred contour to posterized steps
+org.inkscape.effect.filter.filter609.noprefs: Posterized Blur (No preferences)
+org.inkscape.effect.filter.filter672: Sharp multiple contour for objects
+org.inkscape.effect.filter.filter672.noprefs: Contouring Discrete (No preferences)

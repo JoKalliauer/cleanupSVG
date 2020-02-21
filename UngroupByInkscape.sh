@@ -80,7 +80,7 @@ do
    mv "./${fileSource}" "./${file}.xml"
    sed -ri "s/inkscape:version=\"0.(4[\. r[:digit:]]+|91 r13725)\"//g" "./${file}u.svg" # https://bugs.launchpad.net/inkscape/+bug/1763190
    #inkscape  "./${file}u.svg" --verb=EditSelectAll --verb=SelectionUnGroup --verb=SelectionUnGroup --verb=SelectionUnGroup --verb=SelectionUnGroup --verb=SelectionUnGroup --verb=FileSave --verb=FileClose --verb=FileQuit
-   inkscape1  "./${file}u.svg" --actions='EditSelectAll;SelectionUnGroup;SelectionUnGroup;SelectionUnGroup;SelectionUnGroup;SelectionUnGroup;FileSave;FileClose;FileQuit'
+   inkscape -g "./${file}u.svg" --actions='EditSelectAll;SelectionUnGroup;SelectionUnGroup;SelectionUnGroup;SelectionUnGroup;SelectionUnGroup;FileSave;FileClose;FileQuit'
    sed -ri "s/font-family:([-[:alnum:] ,']*)'([-[:alnum:] ]*)'([-[:lower:][:upper:], ']*)/font-family:\1\2\3/g" "./${file}u.svg"
    #svgcleaner ./${file}u.svg ./${file}uC.svg --join-arcto-flags no --remove-declarations no --remove-nonsvg-elements no --paths-to-relative no --remove-unused-segments no --convert-segments no  --allow-bigger-file --indent 1 --remove-metadata no --remove-nonsvg-attributes no --group-by-style no
    i="./${file}us.svg"

@@ -36,7 +36,7 @@ fi
 
 #echo optizer ${file} to $i begin, min=${minfilesize}, meta=$meta, META= $META, INDENT=$INDENT
 
-svgo -i ${file} -o $i $INDENT -p 3 $META --enable=removeHiddenElems --disable=removeUnknownsAndDefaults --disable=convertPathData --disable=mergePaths --enable=removeScriptElement --disable=removeXMLProcInst --enable=cleanupAttrs --enable=cleanupEnableBackground --disable=cleanupIDs --disable=cleanupNumericValues --enable=convertColors --enable=inlineStyles  --enable=minifyStyles --enable=moveElemsAttrsToGroup --enable=moveGroupAttrsToElems  --enable=removeAttrs --enable=removeComments --enable=removeDesc --enable=removeEditorsNSData --enable=removeEmptyAttrs --disable=removeEmptyContainers --enable=removeEmptyText --enable=removeNonInheritableGroupAttrs --disable=removeRasterImages --enable=removeTitle --enable=removeUnusedNS --enable=removeUselessDefs --enable=removeUselessStrokeAndFill --enable=removeViewBox --enable=sortAttrs --disable=removeDoctype --enable={addAttributesToSVGElement}  --disable=removeStyleElement --enable=convertShapeToPath --enable=convertTransform  --disable=convertStyleToAttrs  --disable=collapseGroups
+svgo -i ${file} -o $i $INDENT -p 3 $META --enable=removeHiddenElems --disable=removeUnknownsAndDefaults --disable=convertPathData --disable=mergePaths --enable=removeScriptElement --disable=removeXMLProcInst --enable=cleanupAttrs --enable=cleanupEnableBackground --disable=cleanupIDs --disable=cleanupNumericValues --enable=convertColors --enable=inlineStyles  --enable=minifyStyles --enable=moveElemsAttrsToGroup --enable=moveGroupAttrsToElems  --enable=removeAttrs --enable=removeComments --enable=removeDesc --enable=removeEditorsNSData --enable=removeEmptyAttrs --disable=removeEmptyContainers --enable=removeEmptyText --enable=removeNonInheritableGroupAttrs --disable=removeRasterImages --enable=removeTitle --enable=removeUnusedNS --enable=removeUselessDefs --enable=removeUselessStrokeAndFill --enable=removeViewBox --enable=sortAttrs --disable=removeDoctype --enable={addAttributesToSVGElement}  --disable=removeStyleElement --enable=convertShapeToPath --disable=convertTransform  --disable=convertStyleToAttrs  --disable=collapseGroups
 
 ## == Bugs ==
 # --disable=minifyStyles #https://github.com/svg/svgo/issues/888 (not mine)
@@ -49,6 +49,8 @@ svgo -i ${file} -o $i $INDENT -p 3 $META --enable=removeHiddenElems --disable=re
 #  --disable=cleanupNumericValues #https://github.com/svg/svgo/issues/1080
 # --disable=removeEmptyContainers # https://github.com/svg/svgo/issues/1194
 # --disable=cleanupIDs # https://github.com/svg/svgo/issues/1195
+# --disable=convertTransform # https://github.com/svg/svgo/issues/1222
+
 
 ## == keep id-names == # --disable=cleanupIDs
 
@@ -65,7 +67,6 @@ svgo -i ${file} -o $i $INDENT -p 3 $META --enable=removeHiddenElems --disable=re
 
 
 #=== closed ====
-# --disable=convertTransform #https://github.com/svg/svgo/issues/986 (closed)
 #--disable=collapseGroups #https://github.com/svg/svgo/issues/1020 (closed)
 
 #echo mv ./${file} ./${tmp}5.xml

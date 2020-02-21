@@ -9,7 +9,7 @@ export i=min.svg # just used for debugging
 
 ./pre.sh
 
-./Vacuumdefs.sh
+#./Vacuumdefs.sh
 
 ./RasterOptimizer.sh
 ./CleanerFull.sh
