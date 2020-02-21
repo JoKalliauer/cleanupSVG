@@ -36,7 +36,7 @@ fi
 
 #echo optizer ${file} to $i begin, min=${minfilesize}, meta=$meta, META= $META, INDENT=$INDENT
 
-svgo -i "${file}" -o $i $INDENT -p 3 $META --disable=removeHiddenElems --disable=removeUnknownsAndDefaults --enable=convertTransform --disable=convertPathData --disable=mergePaths --enable=removeScriptElement --disable=removeXMLProcInst --disable=convertStyleToAttrs --enable=cleanupAttrs --enable=cleanupEnableBackground --disable=cleanupIDs --disable=cleanupNumericValues --enable=convertColors --disable=convertShapeToPath --disable=inlineStyles  --enable=minifyStyles --enable=moveElemsAttrsToGroup --enable=moveGroupAttrsToElems  --enable=removeAttrs --disable=removeComments --disable=removeDesc --disable=removeEditorsNSData --enable=removeEmptyAttrs --disable=removeEmptyContainers --enable=removeEmptyText --enable=removeNonInheritableGroupAttrs --disable=removeRasterImages --disable=removeTitle --disable=removeUnusedNS --enable=removeUselessDefs --enable=removeUselessStrokeAndFill --enable=removeViewBox --enable=sortAttrs --enable=removeDoctype --enable={addAttributesToSVGElement}  --disable=collapseGroups  --disable=removeStyleElement
+svgo -i "${file}" -o $i $INDENT -p 3 $META --disable=removeHiddenElems --disable=removeUnknownsAndDefaults --disable=convertTransform --disable=convertPathData --disable=mergePaths --enable=removeScriptElement --disable=removeXMLProcInst --disable=convertStyleToAttrs --enable=cleanupAttrs --enable=cleanupEnableBackground --disable=cleanupIDs --disable=cleanupNumericValues --enable=convertColors --disable=convertShapeToPath --disable=inlineStyles  --enable=minifyStyles --enable=moveElemsAttrsToGroup --enable=moveGroupAttrsToElems  --enable=removeAttrs --disable=removeComments --disable=removeDesc --disable=removeEditorsNSData --enable=removeEmptyAttrs --disable=removeEmptyContainers --enable=removeEmptyText --enable=removeNonInheritableGroupAttrs --disable=removeRasterImages --disable=removeTitle --disable=removeUnusedNS --enable=removeUselessDefs --enable=removeUselessStrokeAndFill --enable=removeViewBox --enable=sortAttrs --enable=removeDoctype --enable={addAttributesToSVGElement}  --disable=collapseGroups  --disable=removeStyleElement
 
 ## == min ==
 #  --disable=removeComments #keep Comments
@@ -62,6 +62,7 @@ svgo -i "${file}" -o $i $INDENT -p 3 $META --disable=removeHiddenElems --disable
 # --disable=minifyStyles #https://github.com/svg/svgo/issues/888 (not mine)
 # --disable=removeEmptyContainers # https://github.com/svg/svgo/issues/1194
 # --disable=cleanupIDs # https://github.com/svg/svgo/issues/1195
+# --disable=convertTransform # https://github.com/svg/svgo/issues/1222
 
 
 ## ==Precission ==
@@ -85,7 +86,7 @@ svgo -i "${file}" -o $i $INDENT -p 3 $META --disable=removeHiddenElems --disable
 
 #=== old ===
 #keep id-names --disable=cleanupIDs
-# --disable=convertTransform #https://github.com/svg/svgo/issues/986 (solved)
+
 
 #echo mv ./${file} ./${tmp}5.xml
 mv ./"${file}" ./${tmp}5.xml
