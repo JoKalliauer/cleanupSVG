@@ -3,6 +3,7 @@
 # Input $1 ... File from Commons (downloaded, repaired and overwritten automatically)
 
 # export ScourScour=YES ; export SVGCleaner=YES ; export EinzeilTags=YES; export validValid=YES;
+# export ScourScour=NO  ; export SVGCleaner=NO  ; export EinzeilTags=NO ; export validValid=NO ;
 
 ## == Credit ==
 #Author: Johannes Kalliauer (JoKalliauer)
@@ -41,8 +42,15 @@ if [ -z ${validValid+x} ]; then
  validValid=NO
 fi
 
-
 if [ $HOSTNAME = LAPTOP-K1FUMMIP ]; then
+ PC=local
+elif [ $HOSTNAME = jkalliau-Z87M-D3H ]; then
+ PC=local
+elif [ $HOSTNAME = tools-sgebastion-07 ]; then
+ PC=WikiMedia
+fi
+
+if [ $PC = local ]; then
  rm -f $1
  wget -q https://commons.wikimedia.org/wiki/Special:FilePath/$i -O $i
  export ScourJK="python3 -m scour.scour"
