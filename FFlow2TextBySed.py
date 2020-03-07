@@ -86,9 +86,9 @@ with open(inputfile, "r+", encoding='utf-8') as fp:
                         flowParaNR = i3
                         ty = float(ry) + .88476562*fs
                     elif i3 == flowParaNR+1:
-                        #print(tag)
+                        # print(tag)
                         flowParaText = " ".join(tag[0:])
-                        #print(flowParaText)
+                        # print(flowParaText)
             line = "<text x=\""+str(tx)+"\" y=\""+str(ty) + \
                 "\" "+str(cflowRoottags)+">" + \
                 "<tspan x=\""+str(tx)+"\" y=\""+str(ty)+"\" " + \
