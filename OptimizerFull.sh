@@ -40,7 +40,7 @@ svgo -i "${file}" -o $i -p 5 --pretty --indent=1  --enable=convertTransform --di
 #--disable=removeUnknownsAndDefaults # removes Flowtext # https://github.com/svg/svgo/issues/959 (closed)
 
 #echo mv ./${file} ./${tmp}5.xml
-mv ./${file} ./${tmp}5.xml
+mv "./${file}" ./${tmp}5.xml
 
 #echo svgo $i finish
 

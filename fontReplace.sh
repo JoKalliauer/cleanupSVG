@@ -41,6 +41,13 @@ mv ./"${file}" ./${tmp}1.xml
 
 echo $i start:
 
+## == Workarounds for Librsvg ==
+
+#Change "'font name'" to 'font name'(solves librsvg-Bug) https://commons.wikimedia.org/wiki/File:T184369.svg
+# font-family="Liberation Serif,'Times New Roman'"
+sed -ri "s/font-family=\"([-[:alnum:] ,']*)'([-[:alnum:] ]*)'([-[:lower:][:upper:], ']*)\"/font-family=\"\1\2\3\"/g" $i
+
+
 ## ==Change Fonts to WikiFonts ==
 
 #Change to Wikis Fallbackfont https://commons.wikimedia.org/wiki/Help:SVG#fallback to be compatible with https://meta.wikimedia.org/wiki/SVG_fonts
@@ -48,7 +55,7 @@ sed -ri 's/ font-family=\"(s|S)ans\"/ font-family=\"DejaVu Sans,sans-serif,Sans\
 sed -ri 's/ font-family=\"(s|S)erif\"/ font-family=\"DejaVu Serif,serif\"/g' $i #as automatic
 sed -ri 's/ font-family=\"(s|S)ans-(s|S)erif\"/ font-family=\"DejaVu Sans,sans-serif\"/g' $i #as automatic
 
-sed -ri 's/ font-family="([-[:alnum:] ]*)MT"/ font-family="\1"/g' $i # I dont know what MT stands for
+sed -ri 's/ font-family="([-[:alnum:] ]*)MT"/ font-family="\1"/g' $i # MT stands for Monotype
 
 sed -ri 's/ font-family="([-[:alnum:] ]*)Oblique"/ font-family="\1" font-style=\"oblique\"/g' $i
 sed -ri 's/ font-family="([-[:alnum:] ]*)Italic"/ font-family="\1" font-style=\"italic\"/g' $i
@@ -82,13 +89,6 @@ sed -ri 's/<tspan [-[:lower:][:digit:]= \"\.\:\;]+\/>//g' $i #remove selfclosing
 sed -i "s/<tspan x=\"0\" y=\"0\">/<tspan>/g" $i #reduce options in tspan
 sed -ri "s/<tspan>([]\[[:alnum:]\$\^\\\_\{\}= #\,\"\.\(\)\’\&\;\/Επιβάτες¸−-]*)<\/tspan>([ ]*)/\1/g" $i #remove unnecesarry <tspan>...</tspan> without attributes
 sed -ri "s/<tspan[-[:lower:][:digit:]= \"\.]+> <\/tspan>([ ]*)//g" $i #remove useless <tspan (...)> </tspan> without text
-
-
-## == Workarounds for Librsvg ==
-
-#Change "'font name'" to 'font name'(solves librsvg-Bug) https://commons.wikimedia.org/wiki/File:T184369.svg
-# font-family="Liberation Serif,'Times New Roman'"
-sed -ri "s/font-family=\"([-[:alnum:] ,']*)'([-[:alnum:] ]*)'([-[:lower:][:upper:], ']*)\"/font-family=\"\1\2\3\"/g" $i
 
 
 echo $i finish

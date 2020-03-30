@@ -34,7 +34,7 @@ svgcleaner "$file" $i  --allow-bigger-file --indent 1 --group-by-style no --appl
 
 
 #echo mv ./${file} ./${tmp}4.xml
-mv ./${file} ./${tmp}4.xml
+mv "./${file}" ./${tmp}4.xml
 
 #echo cleaner $i finish
 

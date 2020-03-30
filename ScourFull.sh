@@ -32,7 +32,7 @@ scour -i "${file}" -o $i --enable-comment-stripping --strip-xml-space --remove-m
 # --enable-id-stripping #https://github.com/scour-project/scour/issues/164
 
 #echo mv ./${file} ./${tmp}3.xml
-mv ./${file} ./${tmp}3.xml
+mv "./${file}" ./${tmp}3.xml
 
 echo scour $i finish
 

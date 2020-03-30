@@ -59,7 +59,13 @@ sed -ri "s/ systemLanguageS=\"/ systemLanguage=\"/g" $i
 # and to --remove-unused-segments yes
 # and to --convert-segments no
 
+# == min ==
 # keep id names: --remove-unreferenced-ids no --trim-ids no --ungroup-groups no 
+# comments  --remove-comments no
+# descriptions  --remove-desc no
+# layers --remove-nonsvg-attributes no
+# metadata  --remove-metadata no  --remove-nonsvg-elements no
+
 
 #echo mv ./${file} ./${tmp}4.xml
 mv ./${file} ./${tmp}4.xml
@@ -68,16 +74,4 @@ mv ./${file} ./${tmp}4.xml
 
 done
 
-DeactivateEverything=<<END
-
-svgcleaner.exe min.svg output.svg --allow-bigger-file --indent 1 --resolve-use no --apply-transform-to-gradients no --apply-transform-to-shapes no --convert-segments no --convert-shapes no --group-by-style no --join-arcto-flags no --join-style-attributes no --merge-gradients no --regroup-gradient-stops no --remove-comments no --remove-declarations no --remove-default-attributes no --remove-desc no --remove-dupl-cmd-in-paths no --remove-dupl-fegaussianblur no --remove-dupl-lineargradient no --remove-dupl-radialgradient no --remove-gradient-attributes no --remove-invalid-stops no --remove-invisible-elements no --remove-metadata no --remove-needless-attributes no --remove-nonsvg-attributes no --remove-nonsvg-elements no --remove-text-attributes no --remove-title no --remove-unreferenced-ids no --remove-unresolved-classes no --remove-unused-coordinates no --remove-unused-defs no --remove-unused-segments no --paths-to-relative no --remove-version no --remove-xmlns-xlink-attribute no --simplify-transforms no --trim-colors no --trim-ids no --trim-paths no --ungroup-defs no --ungroup-groups no --use-implicit-cmds no --apply-transform-to-paths no  # --copy-on-error
-
-END
-
-ActivateEverything=<<END
-
-
-svgcleaner min.svg output.svg --allow-bigger-file --indent 1 --apply-transform-to-gradients yes --apply-transform-to-shapes yes --convert-shapes yes --group-by-style yes --join-arcto-flags yes --join-style-attributes all --merge-gradients yes --regroup-gradient-stops yes --remove-comments yes --remove-declarations yes --remove-default-attributes yes --remove-desc yes --remove-dupl-cmd-in-paths yes --remove-dupl-fegaussianblur yes --remove-dupl-lineargradient yes --remove-dupl-radialgradient yes --remove-gradient-attributes yes --remove-invalid-stops yes --remove-invisible-elements yes --remove-metadata yes --remove-needless-attributes yes --remove-nonsvg-attributes yes --remove-nonsvg-elements yes --remove-text-attributes yes --remove-title yes --remove-unreferenced-ids yes --remove-unresolved-classes yes --remove-unused-coordinates yes --remove-unused-defs yes --remove-version yes --remove-xmlns-xlink-attribute yes --resolve-use yes --simplify-transforms yes --trim-colors yes --trim-ids yes --trim-paths yes --ungroup-defs yes --ungroup-groups yes --use-implicit-cmds yes --list-separator comma --paths-to-relative yes --remove-unused-segments yes --convert-segments yes --apply-transform-to-paths yes
-
-END
 

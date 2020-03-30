@@ -31,7 +31,17 @@ fi
 
 echo scour ${file} to $i begin, min=${minfilesize}, meta=$meta, META= $META, INDENT=$INDENTs
 
-scour -i ${file} -o $i --keep-unreferenced-defs --enable-comment-stripping --remove-titles --remove-descriptions --strip-xml-space  --set-precision=5 $META $INDENTs --renderer-workaround --disable-style-to-xml  --set-c-precision=4 --enable-viewboxing  --keep-editor-data #  
+scour -i ${file} -o $i --keep-unreferenced-defs --strip-xml-space  --set-precision=5 $META $INDENTs --renderer-workaround --disable-style-to-xml  --set-c-precision=4 --enable-viewboxing  --keep-editor-data #  
+
+# == min == 
+# not --enable-comment-stripping # keep comments
+# not --remove-titles
+# not  --enable-id-stripping
+#no --shorten-ids 
+# no --remove-descriptions  # keep <desc>
+# use --keep-editor-data # layer
+#no  --remove-metadata
+#no  --remove-descriptive-elements
 
 mv ./${file} ./${tmp}3.xml
 

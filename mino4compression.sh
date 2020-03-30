@@ -43,6 +43,8 @@ svgo -i "${file}" -o $i $INDENT -p 3 $META --disable=removeHiddenElems --disable
 #  --disable=cleanupIDs
 # --disable=removeEditorsNSData # keep grid and guide and layer
 #  --disable=removeDesc  # keep <desc>
+# --disable=removeTitle
+
 
 
 ### === CSS ===
@@ -79,10 +81,6 @@ svgo -i "${file}" -o $i $INDENT -p 3 $META --disable=removeHiddenElems --disable
 # --enable=removeXMLNS ## not valid 
 # --enable=addClassesToSVGElement ## i think i dont need to add any classes
 # --enable=addClassesToSVGElement #strange warning
-
-#== structure ==
- #--disable=removeTitle
- # --disable=cleanupIDs
 
 #=== old ===
 #keep id-names --disable=cleanupIDs

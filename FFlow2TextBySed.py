@@ -1,16 +1,20 @@
 # !/usr/bin/env python3
 
 import sys
+import unicodedata
 
 #inputfile = "in.svg"
 #outputfile = "out.svg"
 
 inputfile = (sys.argv[1])
 outputfile = (sys.argv[2])
+# python3 ./FFlow2TextBySed.py $i2 $i3
 
 with open(inputfile, "r+", encoding='utf-8') as fp:
     alllines = fp.readlines()
     for i in range(len(alllines)):
+        line = alllines[i]
+        alllines[i] = unicodedata.normalize('NFC', alllines[i])
         if "<g" in alllines[i]:
             line = alllines[i]
             tags = line.replace(">", "<")
@@ -94,6 +98,7 @@ with open(inputfile, "r+", encoding='utf-8') as fp:
                 "<tspan x=\""+str(tx)+"\" y=\""+str(ty)+"\" " + \
                 str(cflowParatags)+">"+str(flowParaText)+"</tspan></text>\n"
             alllines[i] = line
+        # end if "<flowRoot" in alllines[i]:
     dateiX = "".join(alllines)
     # print(dateiX)
 fp.close()
