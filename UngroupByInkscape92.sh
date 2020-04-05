@@ -69,10 +69,7 @@ do
    count=$((count+1))
    file=$(echo $fileSource | cut -d'.' -f1)
    echo $count". "$fileSource" -> "${file}u.$outputType
-  if [ "$outputType" = "png" ];then
-   read -p "With what dpi should it be exported (e.g. 300)? " dpi
-   inkscape "$fileSource" --export-$outputType=$file.$outputType --export-dpi=$dpi
-  elif [ "$outputType" = "svg" ];then
+  if [ "$outputType" = "svg" ];then
    #svgcleaner ${fileSource} ./${file}Cu.svg --join-style-attributes all --join-arcto-flags no --remove-declarations no --remove-nonsvg-elements no --paths-to-relative no --remove-unused-segments no --convert-segments no  --allow-bigger-file --indent 1 --remove-metadata no --remove-nonsvg-attributes no
    #mv ./${fileSource} ./${file}4.xml
    #cp ./${file}Cu.svg ./${file}C.xml
