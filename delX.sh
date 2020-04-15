@@ -45,15 +45,21 @@ for file in *.svg;do
 
  sed -ri "s/<circle [-[:alnum:]\"\.= \#\(\)\,\;\:_]*\/>//g" $i #delete circels 
  
- sed -ri "s/ <ellipse [-[:lower:][:digit:]\"\.= \(\)#\,:;_]*\/>//g" $i #delete ellipses
+ sed -ri "s/ <ellipse [-[:alnum:]\"\.= \(\)#\,:;_]*\/>//g" $i #delete ellipses
  
- sed -ri "s/<polyline points=\"[[:digit:]\. ]+\"\/>//g" $i #delete polylines
+ sed -ri "s/<polygon [[:alnum:].\=\" :#]*\/>//g" $i #delete polygons 
+
+# <polyline id="Line_1_" class="st27" points="1540 154 1548 154 1548 360.67"/>
+ sed -ri "s/<polyline [[:alnum:]=\"\. _]+\/>//g" $i #delete polylines
  
- sed -ri "s/<line([-[:alnum:]=\" #;:]*)\/>//g" $i #delete lines
+ #<line id="_x39__8_" class="st25" x1="1528" x2="1528" y1="410" y2="398"/>
+ sed -ri "s/<line([-[:alnum:]=\" #;:\_]*)\/>//g" $i #delete lines
+ 
  
  sed -ri "s/<image ([-[:alnum:]=\,´.\" \:\/\;\+\,#\(\)]*)>//g" $i # delete images
  
   sed -ri "s/<use [-[:alnum:]=\,\.\" \:\;#]\/>//g" $i
+
 
  
  #mv $i ${tmp}d.svg

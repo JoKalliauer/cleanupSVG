@@ -36,7 +36,18 @@ fi
 
 echo scour ${file} to $i begin, min=${minfilesize}, meta=$meta, META= $META, INDENT=$INDENT
 
-scour -i ${file} -o $i --keep-unreferenced-defs --enable-comment-stripping --remove-titles --remove-descriptions --set-precision=5 $META $INDENT --renderer-workaround --disable-style-to-xml  --set-c-precision=5  --disable-simplify-colors --create-groups #--enable-viewboxing #  
+scour -i ${file} -o $i --keep-unreferenced-defs --remove-titles --remove-descriptions --set-precision=5 $META $INDENT --renderer-workaround --disable-style-to-xml  --set-c-precision=5  --disable-simplify-colors --create-groups #--enable-viewboxing #  
+
+
+# == min == 
+# not --enable-comment-stripping # keep comments
+# not --remove-titles
+# not  --enable-id-stripping
+#no --shorten-ids 
+# no --remove-descriptions  # keep <desc>
+# use --keep-editor-data # layer
+#no  --remove-metadata
+#no  --remove-descriptive-elements
 
 #--keep-unreferenced-defs
 ## if referenced-defs are deleted: https://github.com/scour-project/scour/issues/155 --> https://github.com/scour-project/scour/issues/174
