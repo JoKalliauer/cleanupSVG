@@ -113,7 +113,6 @@ do
 		 sed -ri "s/font-family:([-[:alnum:] ,']*)'([-[:alnum:] ]*)'([-[:lower:][:upper:], ']*)/font-family:\1\2\3/g" ./${file}Ink.svg
 		elif  [ "$outputType" = "$validOutput9" ];then #png96
 		 inkscape $i --export-png=$file.png
-		 #inkscape $i --export-type="png"
 		else #eps, pdf, plain-svg and others
 		 echo $count". "$i" -> "${file}.$outputType
 		 inkscape $i --export-$outputType=$file.$outputType
