@@ -120,6 +120,10 @@ sed -ri "s/ <(g|path|text|rect) id=\"([-[:alnum:]íã:_\.]*)( |'|\(|\)|&|#|,|\/|
 sed -ri 's/<flowPara([-[:alnum:]\" \.\:\%\=\;#\(\)]*)\/>//g;s/<flowRoot([-[:alnum:]" \.:%=;]*)\/>//g' $i
 sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<flowRoot([-[:alnum:]\.=\" \:\(\)\%\#\,\';%]*)>[[:space:]]*<flowRegion([-[:alnum:]=:\" ]*)>[[:space:]]*(<path[-[:alnum:]\.=\"\ \#]*\/>|<rect( id=\"[-[:alnum:]]*\"|) x=\"([-[:digit:]\. ]+)\" y=\"([-[:digit:]\. ]+)\"([[:lower:][:digit:]=\.\" \#:]+)\/>)[[:space:]]*<\/flowRegion>[[:space:]]*(|<flowPara([-[:alnum:]\.=\" \:\#;% ]*)>([[:space:] ]*)<\/flowPara>)[[:space:]]*<\/flowRoot>//g" $i ##delete flowRoot only containing spaces
 
+#W3C (SVG1.1) there is no attribute "transform"
+#Nu: Attribute transform not allowed on SVG element marker at this point.
+##example #  <marker id="v" transform="scale(10)" overflow="visible" orient="auto">
+sed -ri 's/<marker([[:lower:]=\" ]*) transform=\"scale[[:digit:]\(\)]*\"([[:lower:]=\" ]*)>/<marker\1\2>/g' $i
 
 #W3C there is no attribute "i:knockout"
 #Nu  Adobe Illustrator 10.0 attribute knockout not allowed on SVG element path at this point.

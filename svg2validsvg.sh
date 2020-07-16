@@ -70,7 +70,7 @@ sed -ri "s/ letter-spacing=\"0([px]*)\"//g" $i
 sed -ri "s/ word-spacing=\"0([px]*)\"//g" $i
 sed -i "s/ stroke-width=\"1\"//g;s/ transform=\"scale(1)\"//g" $i
 sed -i "s/ stroke-miterlimit=\"10\"//g" $i #Bug in IncscapePDFImport 
-sed -i "s/ color-interpolation=\"auto\"//g;s/ color-interpolation=\"sRGB\"//g;s/ color-rendering=\"optimizeSpeed\"//g;s/image-rendering=\"optimizeSpeed\"//g;s/ shape-rendering=\"crispEdges\"//g;s/ text-rendering=\"optimizeSpeed\"//g;s///g" $i 
+sed -ri "s/ color-interpolation=\"auto\"//g;s/ color-interpolation=\"(s|linear)RGB\"//g;s/ color-rendering=\"(optimizeQuality|optimizeSpeed)\"//g;s/image-rendering=\"(optimizeQuality|optimizeSpeed)\"//g;s/ shape-rendering=\"crispEdges\"//g;s/ text-rendering=\"(geometricPrecision|optimizeSpeed)\"//g;s///g" $i 
 
 #s///g
 

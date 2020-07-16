@@ -49,13 +49,15 @@ do
   echo $count". "$i" -> "${file}.base64 
   sed -ri "s/iVBORw0KGgoAAAANSUhEUgAA/ \niVBORw0KGgoAAAANSUhEUgAA/g" $i #linebreak before PNG
 # sed -ri "s/\/9j\/4AAQSkZJRgABA(..)A(....)AAD\// \n\/9j\/4AAQSkZJRgABA\1A\2AAD\//g" $i #linebreak before JPG
-  sed -ri "s/\/9j\/(4AAQSkZJRgABA|7gAOQWRvYmUAZAAAAAAB)/ \n\/9j\/\1/g" $i #linebreak before JPG
+#/9j/7gAOQWRvYmUAZAAAAAAA/9sAQwASDg4ODg4VDg4VGxISEhQaGRYWGRoeFxggIBweIx4iISwiHiMhLjMzMy4hPkJCQkI+RERERERERERERERERERE
+  sed -ri "s/\/9j\/(4AAQSkZJRgABA|7gAOQWRvYmUAZAAAAAA)/ \n\/9j\/\1/g" $i #linebreak before JPG
   sed -ri "s/(AAAAAElFTkSuQmCC| QmCC|=)[ ]*\"(\/>| )/\1\n\"\2/g" $i #linebreak after end
   sed -ri "s/\r/ /" $i
   sed -ri "s/\n/ /" $i
   
   grep "iVBORw0KGgoAAAANSUhEUgAA" $i > $file.png_base64
   grep "\/9j\/7gAOQWRvYmUAZAAAAAAB/9sAxQACAgIFAgUHBQUHCAcGBwgJCQgICQkLCgoKCgoLDAsLCwsLCwwM"  $i > $file.jpeg_base64
+  grep "\/9j\/7gAOQWRvYmUAZAAAAAAA/9sAQwASDg4ODg4VDg4VGxISEhQaGRYWGRoeFxggIBweIx4iISwiHiMhLjMzMy4hPkJCQkI+RERERERERERERERERERE"  $i >> $file.jpeg_base64
   grep "\/9j\/4AAQSkZJRgABA..A....AAD\/"  $i >> $file.jpeg_base64
   
   linenumbers=$(wc -l $file.png_base64|awk '{print $1}')

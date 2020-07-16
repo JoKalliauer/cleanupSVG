@@ -39,7 +39,7 @@ for file in *.svg;do
  
  #remove objects:
 
- sed -ri "s/ <rect ([-[:alnum:]=\.\" \#\(\)\;\:\,_]+)\/>//g" $i #delete all Rectangles
+ sed -ri "s/<rect ([-[:alnum:]=\.\" \#\(\)\;\:\,_%]+)\/>//g" $i #delete all Rectangles
  
  sed -ri "s/<path ([-[:alnum:]=\.\" \#\(\)\;\:\,_]+)\/>//g" $i #delete all Path
 
@@ -49,11 +49,12 @@ for file in *.svg;do
  
  sed -ri "s/<polygon [[:alnum:].\=\" :#]*\/>//g" $i #delete polygons 
 
-# <polyline id="Line_1_" class="st27" points="1540 154 1548 154 1548 360.67"/>
- sed -ri "s/<polyline [[:alnum:]=\"\. _]+\/>//g" $i #delete polylines
+ #<polyline id="polyline809" points="133.989 230.889 108.729 245.224 146.745 259.351" style="fill:none;stroke:#000000"/>
+ sed -ri "s/<polyline [[:alnum:]=\"\. _:;#,]+\/>//g" $i #delete polylines
  
  #<line id="_x39__8_" class="st25" x1="1528" x2="1528" y1="410" y2="398"/>
- sed -ri "s/<line([-[:alnum:]=\" #;:\_]*)\/>//g" $i #delete lines
+ sed -ri "s/<line([-[:alnum:]=\" #;:.\_]*)\/>//g" $i #delete lines
+
  
  
  sed -ri "s/<image ([-[:alnum:]=\,´.\" \:\/\;\+\,#\(\)]*)>//g" $i # delete images

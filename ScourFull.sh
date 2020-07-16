@@ -38,15 +38,3 @@ echo scour $i finish
 
 done
 
-DeactivateAll=<<END
-
-scour min.svg output.svg --disable-simplify-colors --disable-style-to-xml  --disable-group-collapsing --keep-editor-data --keep-unreferenced-defs --no-renderer-workaround --protect-ids-noninkscape --disable-embed-rasters
-
-END
-
-ActivateAll=<<END
-
-scour min.svg output.svg --enable-comment-stripping --remove-titles --remove-descriptions --strip-xml-space  --create-groups --remove-metadata --remove-descriptive-elements --renderer-workaround  --enable-viewboxing --enable-id-stripping --shorten-ids 
-
-END
-
