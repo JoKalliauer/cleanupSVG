@@ -10,6 +10,8 @@
 #Input (optional)
 #6...scale preview
 
+#The input-file should preferably not contain special caracters such as e.g. !()
+
 if [ -z ${6+x} ]; then
  input6=0
 else 
@@ -39,8 +41,8 @@ sed -ri "s/ xmlns:xlink=\"([amp38;\#\&\])+ns_xlink;\"/ xmlns:xlink=\"http:\/\/ww
 #remove linebreaks
 sed -ri 's/\r/ /g' $1 #remove carriage return in the whole file
 for i in {1..14}; do
- sed -ri 's/<svg([-[:alnum:]é=\" \.\/\\:;\,\(\)_#]*)[[:space:]	]+/<svg\1 /g' $1 # convert all spaces in svg-tag to a singe normal space
- sed -ri ':a;N;$!ba;s/<svg([-[:alnum:]é=\" 	\.\/\\:;\,\(\)_#]*)\n[[:space:]]*/<svg\1 /g' $1 # replace newlines with single normal spaces
+ sed -ri 's/<svg([-[:alnum:]é=\" \.\/\\:;\,\(\)_#\+]*)[[:space:]	]+/<svg\1 /g' $1 # convert all spaces in svg-tag to a singe normal space
+ sed -ri ':a;N;$!ba;s/<svg([-[:alnum:]é=\" 	\.\/\\:;\,\(\)_#\+]*)\n[[:space:]]*/<svg\1 /g' $1 # replace newlines with single normal spaces
 done
 
 
@@ -54,14 +56,14 @@ sed -ri "s/<svg([-[:alnum:]é=\"\' 	\.\/\\:;\,\(\)_#]*) viewBox=\"([-[:digit:] \
 sed -ri "s/<svg([-[:alnum:]é=\"\' 	\.\/\\:;\,\(\)_#]*) viewBox=\"([-[:digit:] \.]+)\"([-[:alnum:]é=\"\' \.\/\\:;\,\(\)_#]*) height=\"[[:digit:].]+(px|mm|pt|pc|cm|in)*\"/<svg viewBox=\"\2\"\1\3/" $1
 
 #if no viewBox exists convert  width="[[:digit:].]+" height="[[:digit:].]+" to viewBox:
-sed -ri "s/<svg([-[:alnum:]=\"\' 	\.\/:;\,#]*) width=\"([[:digit:].]+)\" height=\"([[:digit:].]+)\"([-[:alnum:]é=\"\' \.\/\\:\,#\(\)_;]+)>/<svg viewBox=\"0 0 \2 \3\"\1\4>/" $1
+sed -ri "s/<svg([-[:alnum:]=\"\' 	\.\/:;\,#]*) width=\"([[:digit:].]+)\" height=\"([[:digit:].]+)\"([-[:alnum:]é=\"\' \.\/\\:\,#\(\)_;]+)/<svg viewBox=\"0 0 \2 \3\"\1\4/" $1
 
 if [ $input6 = 0 ]; then
  #Replace the old four numbers with the new four numbers
- sed -ri "s/<svg([-[:alnum:]=\"\' 	\.\/:;\,#]*) viewBox=\"[-[:digit:]\.]+ [-[:digit:]\.]+ [[:digit:]\.]+ [[:digit:]\.]+\"([-[:alnum:]é=\"\' \.\/\\:\,#\(\)_;]+)>/<svg viewBox=\"$2 $3 $4 $5\"\1\2>/" $1
+ sed -ri "s/<svg([-[:alnum:]=\"\' 	\.\/:;\,#]*) viewBox=\"[-[:digit:]\.]+ [-[:digit:]\.]+ [[:digit:]\.]+ [[:digit:]\.]+\"([-[:alnum:]é=\"\' \.\/\\:\,#\(\)_;]+)/<svg viewBox=\"$2 $3 $4 $5\"\1\2/" $1
 else
  #Replace the old four numbers with the new six numbers
- sed -ri "s/<svg([-[:alnum:]=\"\' 	\.\/:;\,#]*) viewBox=\"[-[:digit:]\.]+ [-[:digit:]\.]+ [[:digit:]\.]+ [[:digit:]\.]+\"([-[:alnum:]é=\"\' \.\/\\:\,#\(\)_;]+)>/<svg viewBox=\"$2 $3 $4 $5\" width=\"$www\" height=\"$hhh\"\1\2>/" $1
+ sed -ri "s/<svg([-[:alnum:]=\"\' 	\.\/:;\,#]*) viewBox=\"[-[:digit:]\.]+ [-[:digit:]\.]+ [[:digit:]\.]+ [[:digit:]\.]+\"([-[:alnum:]é=\"\' \.\/\\:\,#\(\)_;]+)/<svg viewBox=\"$2 $3 $4 $5\" width=\"$www\" height=\"$hhh\"\1\2/" $1
 fi
  
 
