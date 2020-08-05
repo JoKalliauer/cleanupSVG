@@ -117,3 +117,16 @@ cargo install svgcleaner --force --git https://github.com/RazrFalcon/svgcleaner
 sudo npm i -g npm 
 sudo npm install -g svgo
 ```
+
+## Aditional Rasteroptimizations
+### Optipng
+
+https://sourceforge.net/projects/optipng/
+
+
+### Pingo
+https://css-ig.net/pingo
+
+### PNGOUT
+Windows: http://advsys.net/ken/utils.htm
+Linux: http://www.jonof.id.au/kenutils.html
