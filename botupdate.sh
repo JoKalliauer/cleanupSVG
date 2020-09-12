@@ -22,4 +22,4 @@ cd ..
 #ln -s /data/project/svgworkaroundbot/user-config.py  /data/project/svgworkaroundbot/SVGWorkaroundBot/cleanupSVG-master/user-config.py 
 #ln -s /data/project/svgworkaroundbot/user-password.py  /data/project/svgworkaroundbot/SVGWorkaroundBot/cleanupSVG-master/user-password.py 
 
-cp /data/project/svgworkaroundbot/SVGWorkaroundBot/cleanupSVG-master/botupdate.sh ./botupdate.sh
+cp /data/project/svgworkaroundbot/SVGWorkaroundBot/cleanupSVG-master/botupdate.sh /data/project/svgworkaroundbot/SVGWorkaroundBot/botupdate.sh
