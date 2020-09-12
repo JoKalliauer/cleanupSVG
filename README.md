@@ -50,7 +50,7 @@ Similar scripts<br/>
 
 ## Install Prerequiaries:
 
-###Windows<br/>
+### Windows<br/>
 1)Inkscape<br/>
 1a)Download&Install https://inkscape.org/release/ (i.e. https://inkscape.org/de/release/inkscape-0.92.4/ or https://inkscape.org/release/inkscape-1.0beta1/ )<br/>
 2)[scour](https://github.com/scour-project/scour)<br/>
@@ -76,12 +76,16 @@ Similar scripts<br/>
 5a)Download&Install (32bit or 64bit) https://cygwin.com/install.html (in some cases you have to deactivate Virusprotection (i.e. Avast makes Problemms without reporting))<br/>
 6)cygwin.exe: `/usr/bin/python3 -m pip install scour`
 
-###Linux
+### Linux
 general see Windows
 
 ```
-python -m pip install --upgrade pip --user
-pip install --upgrade https://github.com/codedread/scour/archive/master.zip
+sudo apt install python3-pip cargo npm
+#python -m pip install --upgrade pip --user
+python3 -m pip install --upgrade pip --user
+#pip install --upgrade https://github.com/codedread/scour/archive/master.zip
+export PATH=$PATH:~/.local/bin:~/.cargo/bin
+pip3 install --upgrade https://github.com/codedread/scour/archive/master.zip
 ```
 
 ## Install cleanupSVG (portable if prerequiary exits)
