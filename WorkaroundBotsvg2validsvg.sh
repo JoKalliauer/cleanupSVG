@@ -24,7 +24,7 @@ export i=$1
 export i2=tmp.svg
 export i3=Output.svg
 
-~/.bash_profile
+#~/.bash_profile
 
 T35245tspan=YES
 
@@ -48,6 +48,10 @@ elif [ $HOSTNAME = jkalliau-Z87M-D3H ]; then
  PC=local
 elif [ $HOSTNAME = tools-sgebastion-07 ]; then
  PC=WikiMedia
+elif [ $HOSTNAME = DESKTOP-7VKND0M ]; then
+ PC=local
+else
+ echo did not recognice HOSTNAME $HOSTNAME
 fi
 
 if [ $PC = local ]; then
@@ -67,6 +71,11 @@ else
 fi
 export PATH=/data/project/svgworkaroundbot/SVGWorkaroundBot/cleanupSVG-master/:/data/project/svgworkaroundbot/prgm/svgcleaner/:$PATH
 
+if [ -z "$1" ]
+  then
+    echo "No argument supplied"
+	exit
+fi
 
 # ---- Begin ----
 
