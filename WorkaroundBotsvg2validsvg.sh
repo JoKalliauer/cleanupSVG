@@ -295,7 +295,7 @@ fi
 
 #cp -f $i $2
 
-export uploadcomment="WorkaroundForLibrsvgBugs Scour$ScourScour SVGCleaner$SVGCleaner [[User:SVGWorkaroundBot/source]]; solves bugs such as: [[phab:T55899]], [[phab:T68672]], [[phab:T43424]], reduce invalid-Errors, convert flowRoot to SVG1.1-text, please see file-description-page on commons for the actual bug"
+export uploadcomment="WorkaroundForLibrsvgBugs Scour$ScourScour SVGCleaner$SVGCleaner [[User:SVGWorkaroundBot/source]], solves bugs such as: [[phab:T55899]], [[phab:T68672]], [[phab:T43424]], reduce invalid-Errors, convert flowRoot to SVG1.1-text, please see file-description-page on commons for the actual bug"
 
 if [ $HOSTNAME = DESKTOP-7VKND0M ]; then
  echo "$uploadcomment"
