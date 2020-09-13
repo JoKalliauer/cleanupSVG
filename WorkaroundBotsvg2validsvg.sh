@@ -303,7 +303,9 @@ if [ $HOSTNAME = DESKTOP-7VKND0M ]; then
 else
  if [ $PC = WikiMedia ]; then
   #echo no upload
+  echo
   echo python3 /data/project/shared/pywikipedia/core/scripts/upload.py $i -keep -ignorewarn -noverify -descfile "$uploadcomment"
+  echo
   python3 /data/project/shared/pywikipedia/core/scripts/upload.py $i -keep -ignorewarn -noverify -descfile "$uploadcomment"
   #rm $i
  else
