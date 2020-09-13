@@ -80,7 +80,7 @@ Similar scripts<br/>
 general see Windows
 
 ```
-sudo apt install python3-pip cargo npm inkscape scour
+sudo apt install python3-pip cargo npm inkscape scour optipng 
 #python -m pip install --upgrade pip --user
 python3 -m pip install --upgrade pip --user
 #pip install --upgrade https://github.com/codedread/scour/archive/master.zip
@@ -133,12 +133,12 @@ sudo npm install -g svgo
 ## Aditional Rasteroptimizations
 ### Optipng
 
-https://sourceforge.net/projects/optipng/
-
+Windows: https://sourceforge.net/projects/optipng/<br/>
+Linux: `sudo apt install python3-pip cargo npm inkscape scour optipng`
 
 ### Pingo
 https://css-ig.net/pingo
 
 ### PNGOUT
-Windows: http://advsys.net/ken/utils.htm
+Windows: http://advsys.net/ken/utils.htm<br/>
 Linux: http://www.jonof.id.au/kenutils.html

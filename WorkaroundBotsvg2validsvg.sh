@@ -59,6 +59,9 @@ else
  echo did not recognice HOSTNAME $HOSTNAME
 fi
 
+chmod u+r *
+chmod u+rx *.sh
+
 if [ -z "$1" ]
   then
     echo "No inputfile supplied"
@@ -296,8 +299,9 @@ if [ $HOSTNAME = DESKTOP-7VKND0M ]; then
  echo "$uploadcomment"
  echo do upload manually
 else
- if [ $HOSTNAME = tools-sgebastion-07 ]; then
+ if [ $PC = WikiMedia ]; then
   #echo no upload
+  echo python3 /data/project/shared/pywikipedia/core/scripts/upload.py $i -keep -ignorewarn -noverify -descfile "$uploadcomment"
   python3 /data/project/shared/pywikipedia/core/scripts/upload.py $i -keep -ignorewarn -noverify -descfile "$uploadcomment"
   #rm $i
  else
