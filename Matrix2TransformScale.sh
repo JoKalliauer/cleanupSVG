@@ -36,6 +36,7 @@ export tmp=$(echo $new | cut -f1 -d".")
 
 #If you want to overwrite the exisiting file, without any backup, delete the following three lines
 export i=${tmp}M.svg
+chmod u+r ./"${file}"
 cp ./"${file}" $i
 mv ./"${file}" ./${tmp}1.xml
 

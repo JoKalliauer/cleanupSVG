@@ -6,7 +6,7 @@ git config --global core.eol lf
 git config core.eol lf
 git pull
 #git status
-git add . :*.svg *.xml *.xsvg
+git add .
 git reset -- *.svg *.xml *.xsvg
 git status
 

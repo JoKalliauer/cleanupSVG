@@ -49,6 +49,7 @@ do
    #svgcleaner ${fileSource} ./${file}Cu.svg --join-style-attributes all --join-arcto-flags no --remove-declarations no --remove-nonsvg-elements no --paths-to-relative no --remove-unused-segments no --convert-segments no  --allow-bigger-file --indent 1 --remove-metadata no --remove-nonsvg-attributes no
    #mv ./${fileSource} ./${file}4.xml
    #cp ./${file}Cu.svg ./${file}C.xml
+   chmod u+r ./${fileSource}
    cp ./${fileSource} ./${file}r.svg
    mv ./${fileSource} ./${file}.xml
    sed -ri "s/inkscape:version=\"0.(4[\. r[:digit:]]+|91 r13725)\"//g" ./${file}r.svg # https://bugs.launchpad.net/inkscape/+bug/1763190
