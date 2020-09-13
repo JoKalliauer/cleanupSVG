@@ -63,8 +63,8 @@ Similar scripts<br/>
 2c,ii)```pip install --upgrade https://github.com/codedread/scour/archive/master.zip```<br/>
 3)[svgcleaner](https://github.com/RazrFalcon/svgcleaner)<br/>
 3a)Download "Visual Studio Community" https://www.visualstudio.com/downloads/ (i.e. https://visualstudio.microsoft.com/de/downloads/ )<br/>
-3b)Add `Desktop development with C++`, see https://github.com/rust-lang/rust/issues/49519#issuecomment-377569726
-3c)Download&Install https://www.rust-lang.org/ (i.e. https://www.rust-lang.org/de/ )<br/>
+3b)Add `Desktop development with C++`, see https://github.com/rust-lang/rust/issues/49519#issuecomment-377569726<br/>
+3c)Download&Install https://www.rust-lang.org/ <br/>
 3d)Add "%USERPROFILE%\.cargo\bin" to enviroment variable %Path%<br/>
  -(Option-i)Run cmd.exe; type ```set PATH=%PATH%;%USERPROFILE%\.cargo\bin```<br/>
  -(Option-ii)Run Sysdm.cpl; to to the advanced-Tab; Environemt variables...; click Path, click Edit; add ```%USERPROFILE%\.cargo\bin```<br/>
@@ -80,7 +80,7 @@ Similar scripts<br/>
 general see Windows
 
 ```
-sudo apt install python3-pip cargo npm
+sudo apt install python3-pip cargo npm inkscape python-scour
 #python -m pip install --upgrade pip --user
 python3 -m pip install --upgrade pip --user
 #pip install --upgrade https://github.com/codedread/scour/archive/master.zip

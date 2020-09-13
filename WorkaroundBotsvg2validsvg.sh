@@ -80,7 +80,7 @@ else
   echo did not recognice HOSTNAME $HOSTNAME
  fi
 fi
-export PATH=/data/project/svgworkaroundbot/prgm2/pythonJK/PythonIn/bin/:/data/project/svgworkaroundbot/SVGWorkaroundBot/cleanupSVG-master/:/data/project/svgworkaroundbot/prgm/svgcleaner/:$PATH
+export PATH=/data/project/svgworkaroundbot/prgm2/pythonJK/PythonIn/bin/:/data/project/svgworkaroundbot/SVGWorkaroundBot/cleanupSVG-master/:/data/project/svgworkaroundbot/prgm/svgcleaner/:$PATH:~/bin/
 
 # ---- Begin ----
 

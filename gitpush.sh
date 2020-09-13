@@ -1,7 +1,7 @@
 #!/bin/sh
 chmod u+rx *.sh
 chmod u+r *
-rm -f *.svg
+rm -f *.svg *.xml *.xsvg
 git config --global core.eol lf
 git config core.eol lf
 git pull
