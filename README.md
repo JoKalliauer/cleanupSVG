@@ -80,7 +80,7 @@ Similar scripts<br/>
 general see Windows
 
 ```
-sudo apt install python3-pip cargo npm inkscape python-scour
+sudo apt install python3-pip cargo npm inkscape scour
 #python -m pip install --upgrade pip --user
 python3 -m pip install --upgrade pip --user
 #pip install --upgrade https://github.com/codedread/scour/archive/master.zip

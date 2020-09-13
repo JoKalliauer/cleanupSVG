@@ -1,12 +1,13 @@
 #!/bin/sh
 chmod u+rx *.sh
 chmod u+r *
-rm -f *.svg *.xml *.xsvg
+#rm -f *.svg *.xml *.xsvg
 git config --global core.eol lf
 git config core.eol lf
 git pull
 #git status
-git add .
+git add . :*.svg *.xml *.xsvg
+git reset -- *.svg *.xml *.xsvg
 git status
 
 

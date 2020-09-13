@@ -21,6 +21,7 @@
 
 for file in *.svg;do
 
+echo 
 echo $file
 
 ## == Remove scecial characters in filename ==
@@ -38,7 +39,6 @@ export i=${tmp}M.svg
 cp ./"${file}" $i
 mv ./"${file}" ./${tmp}1.xml
 
-echo 
 echo $i start:
 
 
@@ -55,11 +55,12 @@ sed -ri "s/<tspan[-[:lower:][:digit:]= \"\.]+> <\/tspan>([ ]*)//g" $i #remove u
 #<text transform="matrix\(([[:digit:]]+) 0 0 ([[:digit:]]+) 3455.7 1308.1\)">Central</text>
 #<g transform="translate(3455.7 1308.1)"><text transform="scale(4.8 4.8)">Central</text></g>
 
-sed -ri "s/<text([-[:alnum:]= #\,\"\.\(\)\;\'\:]*) transform=\"matrix\(([[:digit:]\.]+) 0 0 ([[:digit:]\.]+) ([[:digit:]\.]+) ([[:digit:]\.]+)\)\">([]\[[:alnum:]\$\^\\\_\{\}= #\,\"\.\(\)\’\&\;\/Επιβάτες¸\°\'\"\@\:−-]*)<\/text>([ ]*)/<g transform=\"translate\(\3 \4\)\"><text transform=\"scale\(\1 \2\)\">\5<\/text><\/g>/g" $i #
+#convert text-matrix to g-translate text-transform
+sed -ri "s/<text([-[:alnum:]= #\,\"\.\(\)\;\'\:]*) transform=\"matrix\(([[:digit:]\.]+) 0 0 ([[:digit:]\.]+) ([[:digit:]\.]+) ([[:digit:]\.]+)\)\">([]\[[:alnum:]\$\^\\\_\{\}= #\,\"\.\(\)\’\&\;\/Επιβάτες¸\°\'\"\@\:−-]*)<\/text>([ ]*)/<g transform=\"translate\(\4 \5\)\"><text\1 transform=\"scale\(\2 \3\)\">\6<\/text><\/g>/g" $i #
 
-
-#sed -r "s/<text transform=\"matrix\(([[:digit:]\.]+) 0 0 ([[:digit:]\.]+) ([[:digit:]\.]+) ([[:digit:]\.]+)\)\">([]\[[:alnum:]\$\^\\\_\{\}= #\,\"\.\(\)\’\&\;\/Επιβάτες¸\°\'\"\@\:−-]*)<\/text>([ ]*)/<g transform=\"translate\(\3 \4\)\"><text transform=\"scale\(\1 \2\)\">\5<\/text><\/g>/g" test.txt
-
+# <switch transform="matrix(100 0 0 100 0 170)" font-size=".88" text-anchor="middle">
+#convert switch-matrix to g-translate switch-translate
+sed -ri "s/<switch([-[:alnum:]= #\,\"\.\(\)\;\'\:]*) transform=\"matrix\(([[:digit:]\.]+) 0 0 ([[:digit:]\.]+) ([[:digit:]\.]+) ([-[:digit:]\.]+)\)\"([-[:alnum:]= #\,\"\.\(\)\;\'\:]*)>/<switch transform=\"translate\(\4 \5\) scale\(\2 \3\)\"\1\6>/g" $i #
 
 echo $i finish
 

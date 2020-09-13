@@ -19,6 +19,9 @@
 #2018-04-28 not remove stroke-width in text
 #2018-05-05 restructured
 
+chmod u+r *
+chmod u+rx *.sh
+
 for file in *.svg;do
 
 mv "$file" `echo ${file} | tr ' ' '_'` ;
