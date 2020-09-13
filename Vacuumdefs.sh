@@ -80,6 +80,7 @@ do
 
  #If you want to overwrite the exisiting file, without any backup, delete the following three lines
  export i=${tmp}.$sourceType
+ chmod u+r ./"${fileSource}"
  if [ -f "$i" ]; then
   echo no renaming
  else
@@ -97,7 +98,8 @@ do
 		
 		if [ "$outputType" = "png" ];then #png
 		 read -p "With what dpi should it be exported (e.g. 300, default: 96)? " dpi
-		 inkscape $i --vacuum-defs --export-$outputType=$file.$outputType --export-dpi=$dpi
+		 #inkscape $i --vacuum-defs --export-$outputType=$file.$outputType --export-dpi=$dpi
+		 inkscape $i --actions="FileVacuum" --export-type="svg"
 		elif [ "$outputType" = "svg" ];then #  svg
 		 inkscape $i --vacuum-defs --export-plain-$outputType=${file}n.$outputType
 		elif [ "$outputType" = "$validOutput6" ] || [ "$outputType" = "$validOutput7" ] || [ "$outputType" = "$validOutput8" ]; then #inkscape-svg

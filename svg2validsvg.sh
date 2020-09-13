@@ -20,7 +20,7 @@
 #2018-05-05 restructured
 
 for file in *.svg;do
-
+chmod u+r "${file}"
 mv "$file" `echo ${file} | tr ' ' '_'` ;
 
 ## == Remove scecial characters in filename ==
@@ -227,6 +227,7 @@ sed -ri "s/<style( id=\"[[:alnum:]]*\"|)>/<style type=\"text\/css\"\1>/" $i
 sed -i "s/ xlink:href=\"data:image\/jpg;base64,/ xlink:href=\"data:image\/jpeg;base64,/g" $i
 sed -i "s/ xlink:href=\"data:;base64,\/9j\/4AAQSkZJRgABAgAAZABkAAD\/7AARRHVja3kAAQAEAAAAHgAA/ xlink:href=\"data:image\/jpeg;base64,\/9j\/4AAQSkZJRgABAgAAZABkAAD\/7AARRHVja3kAAQAEAAAAHgAA/" $i
 sed -ri "s/ xlink:href=\"data:;base64,( |)iVBORw0KGgoAAAANSUhEUgAA/ xlink:href=\"data:image\/png;base64,iVBORw0KGgoAAAANSUhEUgAA/" $i
+sed -ri "s/ xlink:href=\"data:image\/png;base64,( |)\/9j\/4AAQSkZJRgABAQAAAQABAAD/ xlink:href=\"data:image\/jpeg;base64,\/9j\/4AAQSkZJRgABAQAAAQABAAD/" $i #png->jpeg
 
 # # #solved librsvg-Bug T194192 https://phabricator.wikimedia.org/T194192
 # # #<svg font-family="ScriptS" font-size="5" viewBox="0,0,128,128"
