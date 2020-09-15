@@ -55,6 +55,8 @@ elif [ $HOSTNAME = DESKTOP-7VKND0M ]; then
  PC=local
 elif [[ $HOSTNAME =  tools-sgewebgrid-lighttpd-* ]]; then
  PC=WikiMedia
+elif [[ $HOSTNAME =  localhost.localdomain ]]; then
+ PC=local
 else
  echo did not recognice HOSTNAME $HOSTNAME
 fi
