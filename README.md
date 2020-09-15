@@ -90,6 +90,8 @@ python3 -m pip install --upgrade pip --user
 export PATH=$PATH:~/.local/bin:~/.cargo/bin # add this to your ~/.bashrc
 pip3 install --upgrade https://github.com/codedread/scour/archive/master.zip
 cargo install svgcleaner --force --git https://github.com/RazrFalcon/svgcleaner
+sudo npm i -g npm 
+sudo npm install -g svgo
 ```
 
 ## Install cleanupSVG (portable if prerequiary exits)
