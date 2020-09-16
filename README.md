@@ -81,17 +81,12 @@ Similar scripts<br/>
 general see Windows
 
 ```
-<<<<<<< HEAD
-sudo apt install python3-pip cargo npm inkscape scour optipng librsvg2-bin
-#python -m pip install --upgrade pip --user
-=======
 if [ -f "/etc/debian_version" ]; then
- sudo apt install python3-pip cargo npm inkscape optipng scour
+ sudo apt install python3-pip cargo npm inkscape optipng scour librsvg2-bin
 fi
 if [ "$(grep -Ei 'fedora|redhat' /etc/*release)" ]; then
  sudo dnf install python3-pip cargo npm inkscape optipng python3-scour
 fi
->>>>>>> d64877a4c781d7f27fd95dc0bd03f88358d533d5
 python3 -m pip install --upgrade pip --user
 export PATH=$PATH:~/.local/bin:~/.cargo/bin # add this to your ~/.bashrc
 pip3 install --upgrade https://github.com/codedread/scour/archive/master.zip
