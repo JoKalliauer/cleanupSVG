@@ -35,6 +35,7 @@ export tmp=${new%.svg}
 
 #If you want to overwrite the exisiting file, without any backup, delete the following three lines
 export i=${tmp}_.svg
+chmod u+r ./"${file}"
 cp ./"${file}" $i
 mv ./"${file}" ./${tmp}1.xml
 
@@ -155,6 +156,7 @@ sed -i -e ':a' -e 'N' -e '$!ba' -e 's/\n\n/\n/g' $i
 
 #CorelDraw-Problem (not very common)
 #sed -i "s/ href=\"#id/ xlink:href=\"#id/g" $i
+sed -i "s/ href=\"/  xmlns:xlink=\"http:\/\/www.w3.org\/1999\/xlink\" xlink:href=\"/g" $i
 
 
 #Remove CDATA by AdobeIllustrator

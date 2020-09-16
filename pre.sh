@@ -38,6 +38,7 @@ export tmp=${new%.svg}
 
 #If you want to overwrite the exisiting file, without any backup, delete the following three lines
 export i=${tmp}p.svg
+chmod u+r ./"${file}"
 cp ./"${file}" $i
 mv ./"${file}" ./${tmp}1.xml
 

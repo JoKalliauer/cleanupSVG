@@ -40,7 +40,8 @@ export meta=0 #0 removes metadata
 
 This script is tested on<br/>
 -[Ubuntu](https://www.ubuntu.com/download/desktop) 16.04, 18.04, 20.04<br/>
--Windows with [Cygwin](https://cygwin.com/install.html)
+-Windows with [Cygwin](https://cygwin.com/install.html)<br/>
+-Windows Subsystem for Linux (Ubuntu 20.04)
 
 Similar scripts<br/>
 -[SVGOMG](https://github.com/jakearchibald/svgomg)<br/>
@@ -80,7 +81,7 @@ Similar scripts<br/>
 general see Windows
 
 ```
-sudo apt install python3-pip cargo npm inkscape scour optipng 
+sudo apt install python3-pip cargo npm inkscape scour optipng librsvg2-bin
 #python -m pip install --upgrade pip --user
 python3 -m pip install --upgrade pip --user
 #pip install --upgrade https://github.com/codedread/scour/archive/master.zip
