@@ -81,12 +81,23 @@ Similar scripts<br/>
 general see Windows
 
 ```
+<<<<<<< HEAD
 sudo apt install python3-pip cargo npm inkscape scour optipng librsvg2-bin
 #python -m pip install --upgrade pip --user
+=======
+if [ -f "/etc/debian_version" ]; then
+ sudo apt install python3-pip cargo npm inkscape optipng scour
+fi
+if [ "$(grep -Ei 'fedora|redhat' /etc/*release)" ]; then
+ sudo dnf install python3-pip cargo npm inkscape optipng python3-scour
+fi
+>>>>>>> d64877a4c781d7f27fd95dc0bd03f88358d533d5
 python3 -m pip install --upgrade pip --user
-#pip install --upgrade https://github.com/codedread/scour/archive/master.zip
-export PATH=$PATH:~/.local/bin:~/.cargo/bin
+export PATH=$PATH:~/.local/bin:~/.cargo/bin # add this to your ~/.bashrc
 pip3 install --upgrade https://github.com/codedread/scour/archive/master.zip
+cargo install svgcleaner --force --git https://github.com/RazrFalcon/svgcleaner
+sudo npm i -g npm 
+sudo npm install -g svgo
 ```
 
 ## Install cleanupSVG (portable if prerequiary exits)
@@ -106,7 +117,6 @@ Windows:
 ```cmd
 python -m pip install --upgrade pip
 pip install --upgrade pip
-#pip install --upgrade https://github.com/codedread/scour/archive/master.zip
 pip3 install --upgrade https://github.com/codedread/scour/archive/master.zip
 rustup update
 #cargo install svgcleaner --force
@@ -122,7 +132,6 @@ Linux:
 #python -m pip install --upgrade pip
 #sudo python3 -m pip install --upgrade pip
 python3 -m pip install --upgrade pip --user
-#pip install --upgrade https://github.com/codedread/scour/archive/master.zip
 #sudo pip3 install --upgrade https://github.com/codedread/scour/archive/master.zip
 pip3 install --upgrade https://github.com/codedread/scour/archive/master.zip --user
 rustup update
@@ -135,7 +144,7 @@ sudo npm install -g svgo
 ### Optipng
 
 Windows: https://sourceforge.net/projects/optipng/<br/>
-Linux: `sudo apt install python3-pip cargo npm inkscape scour optipng`
+Linux: `sudo apt install optipng` or `sudo dnf install optipng`
 
 ### Pingo
 https://css-ig.net/pingo
