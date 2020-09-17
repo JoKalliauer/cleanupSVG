@@ -300,7 +300,7 @@ sed -ri 's/ font-family=\"(Arial|MyriadPro|Myriad Pro)/ font-family=\"Liberation
 
 #cp -f $i $2
 
-export uploadcomment="WorkaroundForLibrsvgBugs Scour$ScourScour SVGCleaner$SVGCleaner [[User:SVGWorkaroundBot/source]], solves bugs such as: [[phab:T55899]], [[phab:T68672]], [[phab:T43424]], [[phab:T193929]], [[phab:T35245]] reduce invalid-Errors, convert flowRoot to SVG1.1-text, please see file-description-page on commons for the actual bug"
+export uploadcomment="WorkaroundForLibrsvgBugs Scour$ScourScour SVGCleaner$SVGCleaner Valid$validValid [[User:SVGWorkaroundBot/source]], solves bugs such as: [[phab:T55899]], [[phab:T68672]], [[phab:T43424]], [[phab:T193929]], [[phab:T35245]] reduce invalid-Errors, convert flowRoot to SVG1.1-text, please see file-description-page on commons for the actual bug"
 
 if [ $HOSTNAME = DESKTOP-7VKND0M ]; then
  echo "$uploadcomment"
