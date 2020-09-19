@@ -160,7 +160,7 @@ sed -i "s/ href=\"/  xmlns:xlink=\"http:\/\/www.w3.org\/1999\/xlink\" xlink:href
 
 
 #Remove CDATA by AdobeIllustrator
-sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<\!\[CDATA\[([[:alnum:]=+\/\t\n[:space:]@:;\(\)\"\,\'\{\}\-])*\t\]\]>[[:space:]]*//g" $i #Remove CDATA
+sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<\!\[CDATA\[([[:alnum:]=+\/\t\n[:space:]@:;\(\)\"\,\'\{\}\-])*[[:space:]]\]\]>[[:space:]]*//g" $i #Remove CDATA
 sed -ri "s/<i:pgfRef xlink:href=\"#a([[:lower:]_]*)\"\/>//" $i #Remove AI-Elemtents for CDATA
 sed -i "s/<i:pgf id=\"a\"\/>//" $i #Remove AI-Elemtents for CDATA
 sed -ri -e ':a' -e 'N' -e "s/<i:pgf[[:lower:] =\"_]*>[[:space:][:alnum:]\/=\+]*<\/i:pgf>//" $i #Remove AI-Elemtents for CDATA
