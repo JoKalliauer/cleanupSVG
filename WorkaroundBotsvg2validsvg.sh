@@ -170,7 +170,7 @@ sed -i "s/<metadata id=\"metadata8\">  <rdf:RDF>  <cc:Work rdf:about=\"\">  <dc:
 
 
 #Remove CDATA by AdobeIllustrator
-sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<\!\[CDATA\[([[:alnum:]=+\/\t\n[:space:]@:;\(\)\"\,\'\{\}\-])*\t\]\]>[[:space:]]*//g" $i #Remove CDATA
+sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<\!\[CDATA\[([[:alnum:]=+\/\t\n[:space:]@:;\(\)\"\,\'\{\}\-])*[[:space:]]\]\]>[[:space:]]*//g" $i #Remove CDATA
 sed -ri -e ':a' -e 'N' -e "s/<i:pgf[[:lower:] =\"_]*>[[:space:][:alnum:]\/=\+]*<\/i:pgf>//" $i #Remove AI-Elemtents for CDATA
 
 #remove jpg im metadata
