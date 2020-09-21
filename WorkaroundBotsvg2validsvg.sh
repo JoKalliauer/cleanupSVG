@@ -71,8 +71,8 @@ if [ -z "$1" ]
 fi
 
 if [ $PC = local ]; then
- #rm -f $1
- #wget -q https://commons.wikimedia.org/wiki/Special:FilePath/$i -O $i
+ rm -f $1
+ wget -q https://commons.wikimedia.org/wiki/Special:FilePath/$i -O $i
  export ScourJK="python3 -m scour.scour"
 else
  if [ $HOSTNAME = tools-sgebastion-07 ]; then
