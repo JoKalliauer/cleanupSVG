@@ -23,7 +23,7 @@ chmod u+r *
 chmod u+rx *.sh
 
 for file in *.svg;do
-
+chmod u+r "${file}"
 mv "$file" `echo ${file} | tr ' ' '_'` ;
 
 ## == Remove scecial characters in filename ==

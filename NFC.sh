@@ -4,8 +4,9 @@ export minfilesize=1 #1..min file size (1...no line breaks)
 export meta=0 #0 removes metadata
 export outputType="svg" #just to not get asked by Inkscape
 
+chmod u+r *
 #./svg2validsvg.sh
-./InkscapeBatchConverter.sh
+./Inkscape11BatchConverter.sh
 ./scour4compression.sh
 ./cleaner4compression.sh
 ./o4compression.sh
