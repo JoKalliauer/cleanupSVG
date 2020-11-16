@@ -4,6 +4,7 @@ chmod u+r *
 #rm -f *.svg *.xml *.xsvg
 git config --global core.eol lf
 git config core.eol lf
+git config pull.rebase false # Merge (Standard-Strategie)
 git pull
 #git status
 git add .
