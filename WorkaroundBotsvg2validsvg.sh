@@ -207,7 +207,7 @@ sed -ri "s/<style( id=\"[[:alnum:]]*\"|)>/<style type=\"text\/css\"\1>/" $i
 #solved librsvg-Bug T193929 https://phabricator.wikimedia.org/T193929
 sed -ri "s/ xlink:href=\"data:(|image\/png|image\/jpg);base64,( |)\/9j\/4AAQSkZJRgABAgAAZABkAAD\/7AARRHVja3kAAQAEAAAAHgAA/ xlink:href=\"data:image\/jpeg;base64,\/9j\/4AAQSkZJRgABAgAAZABkAAD\/7AARRHVja3kAAQAEAAAAHgAA/" $i
 sed -ri "s/ xlink:href=\"data:;base64,( |)iVBORw0KGgoAAAANSUhEUgAA/ xlink:href=\"data:image\/png;base64,iVBORw0KGgoAAAANSUhEUgAA/" $i
-sed -ri "s/ xlink:href=\"data:;base64,\/9j\/7QAsUGhvdG9zaG9wIDMuMAA4QklNA\+0AAAAAABAASAAAAAEAAQBIAAAAAQAB\/\+4AJkFkb2Jl/ xlink:href=\"data:image\/psd;base64,\/9j\/7QAsUGhvdG9zaG9wIDMuMAA4QklNA\+0AAAAAABAASAAAAAEAAQBIAAAAAQAB\/\+4AJkFkb2Jl/" $i #https://wordpress.stackexchange.com/a/212334/197645
+sed -ri "s/ xlink:href=\"data:;base64,\/9j\/7QAsUGhvdG9zaG9wIDMuMAA4QklNA\+0AAAAAABAASAAAAAEAAQBIAAAAAQAB\/\+4AJkFkb2Jl/ xlink:href=\"data:image\/jpeg;base64,\/9j\/7QAsUGhvdG9zaG9wIDMuMAA4QklNA\+0AAAAAABAASAAAAAEAAQBIAAAAAQAB\/\+4AJkFkb2Jl/" $i #https://wordpress.stackexchange.com/a/212334/197645
 
 #solved librsvg-Bug T194192 https://phabricator.wikimedia.org/T194192
 sed -ri "s/<svg([-[:alnum:]=\" ]*) viewBox=\"0,0,([[:digit:]\.]*),([[:digit:]\.]*)\"/<svg\1 viewBox=\"0 0 \2 \3\"/g" $i
