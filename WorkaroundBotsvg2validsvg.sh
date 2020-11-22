@@ -310,9 +310,9 @@ else
  if [ $PC = WikiMedia ]; then
   #echo no upload
   echo
-  echo python3 /data/project/shared/pywikipedia/core/scripts/upload.py $i -keep -ignorewarn -noverify -descfile "$uploadcomment"
+  echo python3 /data/project/shared/pywikibot/stable/scripts/upload.py $i -keep -ignorewarn -noverify -descfile "$uploadcomment"
   echo
-  python3 /data/project/shared/pywikipedia/core/scripts/upload.py $i -keep -ignorewarn -noverify -descfile "$uploadcomment"
+  python3 /data/project/shared/pywikibot/stable/scripts/upload.py $i -keep -ignorewarn -noverify -descfile "$uploadcomment"
   #rm $i
  else
   echo did not recognice HOSTNAME $HOSTNAME

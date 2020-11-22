@@ -1,4 +1,6 @@
 #!/bin/sh
+export HOME=~
+chmod go-r ~/.ssh/id_rsa
 chmod u+rx *.sh
 chmod u+r *
 #rm -f *.svg *.xml *.xsvg
