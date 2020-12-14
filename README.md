@@ -78,7 +78,7 @@ Similar scripts<br/>
 6)cygwin.exe: `/usr/bin/python3 -m pip install scour`
 
 ### Linux
-general see Windows
+
 
 ```
 if [ -f "/etc/debian_version" ]; then
@@ -90,7 +90,12 @@ fi
 python3 -m pip install --upgrade pip --user
 export PATH=$PATH:~/.local/bin:~/.cargo/bin # add this to your ~/.bashrc
 pip3 install --upgrade https://github.com/codedread/scour/archive/master.zip
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh #https://www.rust-lang.org/tools/install
 cargo install svgcleaner --force --git https://github.com/RazrFalcon/svgcleaner
+
+#wget https://nodejs.org/dist/latest/node-v15.4.0-linux-x64.tar.gz
+#tar -zxvf node-v15.4.0-linux-x64.tar.gz
+#export PATH=$PATH:~/prgm/node-v15.4.0-linux-x64/bin:
 sudo npm i -g npm 
 sudo npm install -g svgo
 ```
@@ -135,15 +140,28 @@ sudo npm i -g npm
 sudo npm install -g svgo
 ```
 
-## Aditional Rasteroptimizations
-### Optipng
+## optional additional software
+### Optipng (Rasteroptimization)
 
 Windows: https://sourceforge.net/projects/optipng/<br/>
 Linux: `sudo apt install optipng` or `sudo dnf install optipng`
 
-### Pingo
+### Pingo (Rasteroptimization)
 https://css-ig.net/pingo
 
-### PNGOUT
+### PNGOUT (Rasteroptimization)
 Windows: http://advsys.net/ken/utils.htm<br/>
 Linux: http://www.jonof.id.au/kenutils.html
+
+### librsvg (svg2png)
+
+`sudo dnf install librsvg2-tools`
+
+wihout root:
+```bash
+dnf download librsvg2-tools
+rpm2cpio librsvg2-tools-2.48.9-1.fc32.x86_64.rpm |cpio -idv
+```
+
+### resvg (svg2png)
+`git clone git@github.com:RazrFalcon/resvg.git`
