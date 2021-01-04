@@ -52,13 +52,16 @@ do
 #/9j/7gAOQWRvYmUAZAAAAAAA/9sAQwASDg4ODg4VDg4VGxISEhQaGRYWGRoeFxggIBweIx4iISwiHiMhLjMzMy4hPkJCQkI+RERERERERERERERERERE
   sed -ri "s/\/9j\/(4AAQSkZJRgABA|7gAOQWRvYmUAZAAAAAA)/ \n\/9j\/\1/g" $i #linebreak before JPG
   sed -ri "s/(AAAAAElFTkSuQmCC| QmCC|=)[ ]*\"(\/>| )/\1\n\"\2/g" $i #linebreak after end
+  sed -ri "s/\/\/Z[ ]*\"(\/>| )/p6GehnhmZmZnh5dnhmZ2Z2ZmZnpeWZ6\/\/Z\n\"\1/g" $i
   sed -ri "s/\r/ /" $i
   sed -ri "s/\n/ /" $i
   
   grep "iVBORw0KGgoAAAANSUhEUgAA" $i > $file.png_base64
   grep "\/9j\/7gAOQWRvYmUAZAAAAAAB/9sAxQACAgIFAgUHBQUHCAcGBwgJCQgICQkLCgoKCgoLDAsLCwsLCwwM"  $i > $file.jpeg_base64
   grep "\/9j\/7gAOQWRvYmUAZAAAAAAA/9sAQwASDg4ODg4VDg4VGxISEhQaGRYWGRoeFxggIBweIx4iISwiHiMhLjMzMy4hPkJCQkI+RERERERERERERERERERE"  $i >> $file.jpeg_base64
-  grep "\/9j\/4AAQSkZJRgABA..A....AAD\/"  $i >> $file.jpeg_base64
+  #grep "\/9j\/4AAQSkZJRgABA..A....AAD\/"  $i >> $file.jpeg_base64
+  grep "\/9j\/4AAQSkZJRgABA.......AAD\/"  $i >> $file.jpeg_base64
+  #            4AAQSkZJRgABAQEBgQGBAAD
   
   linenumbers=$(wc -l $file.png_base64|awk '{print $1}')
   if [ "$linenumbers" -gt 0 ]; then
@@ -76,37 +79,41 @@ do
      sed -n "${ln}p" $file.png_base64 > $file.png${ln}_base64
      sed -i "s/ /\n/g" $file.png${ln}_base64
      base64 --decode ${file}.png${ln}_base64 > ${file}_File${ln}.png
+     
+
      optipng ${file}_File${ln}.png 
      #wait
      pngout ${file}_File${ln}.png &
+     
 	done
     #sed -n '2p' $file.png_base64 > $file.png2_base64
     #sed -i "s/ /\n/g" $file.png2_base64
     #base64 --decode ${file}.png2_base64 > ${file}_File2.png
    fi #[ "$linenumbers" = 1 ]
   fi # [ "$linenumbers" -gt 0 ]
-   
   
-  sed -i "s/ /\n/g" $file.jpeg_base64
-  
-  
-  
-  #base64.exe --decode ${file}.base64 > ${file}.png
-  
-  #if [ "$outputType" = "png" ];then #png
-  
-  #elif [ "$outputType" = "jpeg" ] || [ "$outputType" = "jpg" ];then
-   base64 --decode ${file}.jpeg_base64 > ${file}.jpeg
-  #fi
-     jpegfilesize=$(wc -c ${file}.jpeg|awk '{print $1}')
-  
-  
-     if [ "$jpegfilesize" = "0" ];then
-      rm ${file}.jpeg
-     fi
-  
-  
-  
+  linenumbers=$(wc -l $file.jpeg_base64|awk '{print $1}')
+  if [ "$linenumbers" -gt 0 ]; then
+   if [ "$linenumbers" = 1 ]; then 
+    sed -i "s/ /\n/g" $file.jpeg_base64
+    base64 --decode ${file}.jpeg_base64 > ${file}.jpeg
+    jpegfilesize=$(wc -c ${file}.jpeg|awk '{print $1}')
+    if [ "$jpegfilesize" = "0" ];then
+     rm ${file}.jpeg
+    fi
+   else # [ "$linenumbers" = 1 ]
+    for ((ln=1;ln<=$linenumbers;ln++))
+	do
+	 echo $ln
+     sed -n "${ln}p" $file.jpeg_base64 > $file.jpeg${ln}_base64
+     sed -i "s/ /\n/g" $file.jpeg${ln}_base64
+     base64 --decode ${file}.jpeg${ln}_base64 > ${file}_File${ln}.jpeg
+     jpegtran -copy none -progressive ${file}_File${ln}.jpeg > ${file}_Opt${ln}.jpeg
+     rm ${file}_File${ln}.jpeg
+	done
+   fi #[ "$linenumbers" = 1 ]
+  fi # [ "$linenumbers" -gt 0 ]
+ 
  else
       echo "no file $i found!"
  fi
