@@ -137,7 +137,8 @@ pip3 install --upgrade https://github.com/codedread/scour/archive/master.zip --u
 rustup update
 cargo install svgcleaner --force --git https://github.com/RazrFalcon/svgcleaner
 sudo npm i -g npm 
-sudo npm install -g svgo
+#sudo npm install -g svgo
+npm i svgo
 ```
 
 ## optional additional software
