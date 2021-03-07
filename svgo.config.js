@@ -6,7 +6,7 @@ module.exports = {
   multipass: true,
   js2svg: {
     pretty: true,
-    indent: 2
+    indent: 1
   },
   plugins: extendDefaultPlugins([
     {
@@ -21,10 +21,9 @@ module.exports = {
       name: 'cleanupIDs',
       active: true
     },
-    {
-      name: 'cleanupListOfValues',
-      active: true
-    },
+/*    {
+      name: 'cleanupListOfValues',//https://github.com/svg/svgo/issues/1402
+    },*/
     {
       name: 'cleanupNumericValues',
       active: true

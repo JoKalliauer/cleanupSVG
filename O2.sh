@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#npm i svgo
+
 for file in *.svg;do
 # export file=min.svg
 export fileN=$(echo $file | cut -f1 -d" ")
