@@ -87,7 +87,7 @@ fi
 if [ "$(grep -Ei 'fedora|redhat' /etc/*release)" ]; then
  sudo dnf install python3-pip cargo npm inkscape optipng python3-scour
 fi
-python3 -m pip install --upgrade pip --user
+python3 -m pip install --upgrade pip # --user
 export PATH=$PATH:~/.local/bin:~/.cargo/bin # add this to your ~/.bashrc
 pip3 install --upgrade https://github.com/codedread/scour/archive/master.zip
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh #https://www.rust-lang.org/tools/install
@@ -131,9 +131,9 @@ Linux:
 ```bash
 #python -m pip install --upgrade pip
 #sudo python3 -m pip install --upgrade pip
-python3 -m pip install --upgrade pip --user
+python3 -m pip install --upgrade pip # --user
 #sudo pip3 install --upgrade https://github.com/codedread/scour/archive/master.zip
-pip3 install --upgrade https://github.com/codedread/scour/archive/master.zip --user
+pip3 install --upgrade https://github.com/codedread/scour/archive/master.zip # --user
 rustup update
 cargo install svgcleaner --force --git https://github.com/RazrFalcon/svgcleaner
 sudo npm i -g npm 

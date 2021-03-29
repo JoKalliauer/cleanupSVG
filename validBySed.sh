@@ -38,7 +38,7 @@ export i=${tmp}v.svg
 cp ./"${file}" $i
 mv ./"${file}" ./${tmp}1.xml
 
-echo 
+echo
 echo $i start:
 
 
@@ -57,23 +57,23 @@ sed -ri "s/<(text|tspan)([-[:alnum:]=\.\" \(\)\':;%#]*) line-height=\"[0123569.%
    sed -i -e ':a' -e 'N' -e '$!ba' -e 's/\?>[[:space:]]*<svg/\?>\n<\!DOCTYPE svg PUBLIC \"-\/\/W3C\/\/DTD SVG 1.0\/\/EN\" \"http:\/\/www.w3.org\/TR\/2001\/REC-SVG-20010904\/DTD\/svg10.dtd\">\n<svg /' $i
   elif grep -qE "<svg ([[:lower:][:digit:]=\"\. -]*)version=\"1\"" $i; then
    echo Version1
-   sed -ri 's/<svg ([[:lower:][:digit:]=\"\. -]*)version=\"1\"/<svg \1version=\"1.0\"/' $i 
+   sed -ri 's/<svg ([[:lower:][:digit:]=\"\. -]*)version=\"1\"/<svg \1version=\"1.0\"/' $i
    sed -i -e ':a' -e 'N' -e '$!ba' -e 's/\?>[[:space:]]*<svg/\?>\n<\!DOCTYPE svg PUBLIC \"-\/\/W3C\/\/DTD SVG 1.0\/\/EN\" \"http:\/\/www.w3.org\/TR\/2001\/REC-SVG-20010904\/DTD\/svg10.dtd\">\n<svg /' $i
   fi
- 
+
 #W3C: there is no attribute "text-align"
 #Nu: Attribute text-align not allowed on SVG element text at this point.
 ##example: <text id="text308" stroke-width=".165" text-anchor="end" x="21.91" xml:space="preserve" y="16.21" text-align="end">   <tspan id="tspan304" stroke-width=".165" text-anchor="end" x="21.91" y="16.21" text-align="end">+1</tspan><tspan id="tspan306" stroke-width=".165" text-anchor="end" x="21.91" y="17.46" text-align="end">−1</tspan></text>
 ## example:  <text id="text42" font-weight="bold" stroke-width=".165" text-anchor="middle" x="16.08" xml:space="preserve" y="22.33" text-align="center"/>
 sed -ri "s/ text-align=\"(end|center)\"//g"  ${i}
 
- 
+
 #W3C: element "rdf:RDF" undefined
 #Nu: Warning: This validator does not validate RDF. RDF subtrees go unchecked.
 # use scour/svgcleaner/svgo or https://de.wikipedia.org/wiki/Benutzer:Marsupilami/Inkscape-FAQ#Wie_erstelle_ich_eine_Datei_die_dem_Standard_SVG_1.1_entspricht?
 sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/[[:space:]\r\n]*<rdf:RDF>[[:space:]\r\n]*<cc:Work( rdf:about=\"\"|)>[[:space:]\r\n]*(<dc:format>[[:space:]\r\n]*image\/svg\+xml[[:space:]\r\n]*<\/dc:format>|<dc:format\/>)[[:space:]\r\n]*<dc:type rdf:resource=\"http:\/\/purl.org\/dc\/dcmitype\/StillImage\"\/>([[:space:]\r\n]*<dc:title\/>|)[[:space:]\r\n]*<\/cc:Work>[[:space:]\r\n]*<\/rdf:RDF>//" $i
 sed -i -e ':a' -e 'N' -e '$!ba' -e "s/<metadata( id=\"metadata[[:digit:]]*\"|)>[[:space:]\r\n]*<\/metadata>//" $i
-   
+
 
 #W3C: Error: there is no attribute "sodipodi:version"
 #W3C: Error: element "sodipodi:namedview" undefined
@@ -137,7 +137,7 @@ sed -ri 's/<marker([[:lower:]=\" ]*) transform=\"scale[[:digit:]\(\)]*\"([[:lowe
 # SVG element ellipse is missing required attribute rx
 #  required attribute "rx" not specified
 # repair with inkscape
-# not: (notscour/notcleaner/notsvgo) might contained d-data 
+# not: (notscour/notcleaner/notsvgo) might contained d-data
 
 
 #nu Error:  SVG element variableSets not allowed as child of SVG element metadata in this context. (Suppressing further errors from this subtree.)
@@ -200,7 +200,7 @@ sed -ri "s/<linearGradient([-[:alnum:]=\". _]*)( clip-rule=\"evenodd\"| fill-rul
 ################################################################################
 ## ==  https://tools.wmflabs.org/svgcheck/index.php ==
 #*Warning* foreignObject tag found.
-# 		 Since foreignObject tags refer to metadata, they usually just add to filesize, and can cause Inkscape and other editors to choke.
+#        Since foreignObject tags refer to metadata, they usually just add to filesize, and can cause Inkscape and other editors to choke.
 #Validation (svgcleaner AND svgo)
 
 echo $i finish

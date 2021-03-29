@@ -1,6 +1,6 @@
 'use strict'
 
-const { extendDefaultPlugins } = require('svgo')
+// const { extendDefaultPlugins } = require('svgo')
 
 module.exports = {
   multipass: true,
@@ -8,7 +8,7 @@ module.exports = {
     pretty: true,
     indent: 1
   },
-  plugins: extendDefaultPlugins([
+  plugins: ([
     {
       name: 'cleanupAttrs',
       active: true
