@@ -2,8 +2,8 @@
 #solves librsvg-Bug (Workarounds)
 # Input $1 ... File from Commons (downloaded, repaired and overwritten automatically)
 
-# export ScourScour=YES ; export SVGCleaner=YES ; export EinzeilTags=YES; export validValid=YES;
-# export ScourScour=NO  ; export SVGCleaner=NO  ; export EinzeilTags=NO ; export validValid=NO ;
+# export ScourScour=YES ; export SVGCleaner=YES ; export EinzeilTags=YES; export validValid=YES; export safe=YES;
+# export ScourScour=NO  ; export SVGCleaner=NO  ; export EinzeilTags=NO ; export validValid=NO ; export safe=NO;
 
 ## == Credit ==
 #Author: Johannes Kalliauer (JoKalliauer)
@@ -18,7 +18,7 @@
 ## == Programm ==
 
 
-#---- 
+#----
 
 export i=$1
 export i2=tmp.svg
@@ -40,6 +40,9 @@ if [ -z ${ScourScour+x} ]; then
 fi
 if [ -z ${validValid+x} ]; then
  validValid=NO
+fi
+if [ -z ${safe+x} ] || [ -z "$safe" ]; then
+ safe=NO
 fi
 if [ -z ${kerningKerning+x} ] || [ -z "$kerningKerning" ]; then
  kerningKerning=NO
@@ -69,7 +72,10 @@ chmod u+rx *.sh
 if [ -z "$1" ]
   then
     echo "No inputfile supplied"
-	exit
+    if [ -z "$i" ]
+    then
+	 exit
+	fi
 fi
 
 if [ $PC = local ]; then
@@ -81,9 +87,9 @@ else
   #this is needed to run bot
   rm -f $1
   rm -f *.svg
-  wget -q https://commons.wikimedia.org/wiki/Special:FilePath/$i -O $i 
+  wget -q https://commons.wikimedia.org/wiki/Special:FilePath/$i -O $i
   export ScourJK="python3 -m scour.scour"
-  
+
  else
   echo did not recognice HOSTNAME $HOSTNAME
  fi
@@ -111,6 +117,24 @@ sed -ri "s/inkscape:version=\"0.(4[\. r[:digit:]]+|91 r13725)\"//g" $i # https:/
 
  sed -i "s/ inkscape:connector-curvature=\"0\"//g" $i #https://commons.wikimedia.org/wiki/File:Royal_Monogram_of_Princess_Adityadhornkitikhun.svg
 
+if [ $safe = 'YES' ];
+ then
+ #https://commons.wikimedia.org/wiki/User:JoKalliauer/IllegalSVGPattern
+ sed -ri "s/  <d:SVGTestCase xmlns:d=\"http:\/\/www.w3.org\/2000\/02\/svg\/testsuite\/description\/\"/  <d:SVGTestCase xmlns:d=\"http:\/\/www.w3.org\/2000\/svg\" xmlnsd=\"http:\/\/www.w3.org\/2000\/02\/svg\/testsuite\/description\/\"/" $i
+ sed -ri "s/ xmlns=\"http:\/\/www.w3.org\/1999\/xhtml\"/ xmlnsDeactivated=\"http:\/\/www.w3.org\/1999\/xhtml\"/" $i
+ sed -ri  "s/ xmlns(|:bd)=\"http:\/\/(www.|)example.org\/[[[:alpha:]]*\"/ xmlns\1=\"http:\/\/www.inkscape.org\/namespaces\/inkscape\"/" $i
+ sed -ri "s/:href=(\"|')([[:lower:]\.]+)([-[:alnum:]\/\.#_:]*)(\"|')/href=\1\2\3\4/" $i
+ sed -ri "s/<(animate|set)([[:alpha:]=\"':# ]*) attributeName=(\"|')xlink:href(\"|')/<\1\2 attributeName=\3xlinkDeactivated\4/" $i
+ sed -ri "s/<set([[:alpha:] =\"]*) xlink:href=/<set\1 xlinkDeactivated=/" $i
+ sed -ri "s/<(d:testDescription) ([[:alnum:]:\"=\/. ]*)href=\"([[htp\.\/]]*)/<\1 \2hrefDeactivated=\"\3/" $i
+ sed -ri "s/<image xlink:href=\"data:image\/svg\+xml;base64,/<image xlinkhref=\"data:image\/svg+xml;base64,/" $i
+ sed -ri "s/@import url\(([[:lower:]\.\/\"]*)([-[:alnum:]\/\.#\"]*)\)/Deactivated urlDeactivated\(\1\2\)/" $i
+ sed -ri "s/(src:|@import) url\(([[:lower:]\.\/\"]*)([-[:alnum:]\/\.#\"]*)\)/\1 urlDeactivated\(\2\3\)/" $i
+ sed -ri "s/ xlink:href=\"url\(\#([[:alpha:]]*)\)\"/ xlink:href=\"\#\1\"/" $i
+ sed -ri "s/<script/<Deactivatedscript/g" $i
+ sed -ri "s/<\/script>/<\/Deactivatedscript>/g" $i
+ sed -ri "s/[[:blank:]]on([[:lower:]]+)=(\"|')([[:alpha:]]+[[:alnum:]_,' \(\)\.#;]*)/ deactivatedon\1=\2\3/g" $i
+fi
 
 if [ $validValid = 'YES' ]; then
  export scour
@@ -159,7 +183,7 @@ if [ $SVGCleaner = 'YES' ]; then
  svgcleaner $i $i2 --allow-bigger-file --indent 1 --resolve-use no --apply-transform-to-gradients yes --apply-transform-to-shapes yes --convert-shapes yes --group-by-style no --join-arcto-flags no --join-style-attributes no --merge-gradients yes --regroup-gradient-stops yes --remove-comments no --remove-declarations no --remove-default-attributes yes --remove-desc yes --remove-dupl-cmd-in-paths yes --remove-dupl-fegaussianblur yes --remove-dupl-lineargradient yes --remove-dupl-radialgradient yes --remove-gradient-attributes yes --remove-invalid-stops yes --remove-invisible-elements no --remove-metadata yes --remove-needless-attributes yes --remove-nonsvg-attributes no --remove-nonsvg-elements no --remove-text-attributes no --remove-title no --remove-unreferenced-ids no --remove-unresolved-classes yes --remove-unused-coordinates yes --remove-unused-defs yes --remove-version yes --remove-xmlns-xlink-attribute yes --simplify-transforms yes --trim-colors yes --trim-ids no --trim-paths yes --ungroup-defs yes --ungroup-groups no --use-implicit-cmds yes --list-separator comma --paths-to-relative yes --remove-unused-segments yes --convert-segments yes --apply-transform-to-paths no --coordinates-precision 2 --paths-coordinates-precision 5 --properties-precision 3 --transforms-precision 7 #--copy-on-error
  rm $i
  mv $i2 $i
-else 
+else
  echo no SVGCleaner $SVGCleaner
 fi
 if [ $validValid = 'YES' ]; then
@@ -248,7 +272,7 @@ fi
 #copied form validbySed
 sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/[[:space:]\r\n]*<rdf:RDF>[[:space:]\r\n]*<cc:Work( rdf:about=\"\"|)>[[:space:]\r\n]*<dc:format>image\/svg\+xml<\/dc:format>[[:space:]\r\n]*<dc:type rdf:resource=\"http:\/\/purl.org\/dc\/dcmitype\/StillImage\"\/>([[:space:]\r\n]*<dc:title\/>|)[[:space:]\r\n]*<\/cc:Work>[[:space:]\r\n]*<\/rdf:RDF>//" $i
 sed -i -e ':a' -e 'N' -e '$!ba' -e "s/<metadata id=\"metadata[[:digit:]]*\">[[:space:]\r\n]*<\/metadata>//" $i
-   
+
 
 #W3C: Error: there is no attribute "sodipodi:version"
 #W3C: Error: element "sodipodi:namedview" undefined
@@ -262,7 +286,7 @@ sed -i -e ':a' -e 'N' -e '$!ba' -e "s/<metadata id=\"metadata[[:digit:]]*\">[[:s
    sed -i "s/<sodipodi:namedview id=\"namedview[[:digit:]]*\" bordercolor=\"#666666\" borderopacity=\"1\" gridtolerance=\"10\" guidetolerance=\"10\" inkscape:current-layer=\"svg[[:digit:]]*\" inkscape:cx=\"[[:digit:].]*\" inkscape:cy=\"[-[:digit:].]*\" inkscape:pageopacity=\"0\" inkscape:pageshadow=\"2\" inkscape:window-height=\"480\" inkscape:window-maximized=\"0\" inkscape:window-width=\"640\" inkscape:window-x=\"0\" inkscape:window-y=\"0\" inkscape:zoom=\"0.[[:digit:]]*\" objecttolerance=\"10\" pagecolor=\"#ffffff\" showgrid=\"false\"\/>//" $i
 
    ## invalid file
-   
+
 ## fonts
 sed -ri 's/ font-family=\"(Times New Roman)\"/ font-family=\"Liberation Serif,\1\"/g' $i #as automatic
 
@@ -271,22 +295,22 @@ if [ $kerningKerning = 'YES' ]; then
 	#put viewBox at the beginning (otherwise I will have a variable to less)
 	sed -ri 's/<svg([-[:alnum:]=\" \.\/:\,\(\)_#]+) viewBox="([-[:digit:] \.]+)"([-[:alnum:]=\" \.\/:\,\(\);#]*)>/<svg viewBox="\2"\1\3>/' $i
 	sed -ri 's/\r/\n/g' $i
-	
+
     #Define file as a variable
     export h=$(sed -r 's/<svg viewBox="([-[:digit:]]+) ([-[:digit:]]+) ([[:digit:]]+)\.([[:digit:]])([[:digit:]]*) ([[:digit:]]+)\.([[:digit:]])([[:digit:]]*)"([-[:alnum:]=\" \.\/:\,\(\)_;]+)>/<svg viewBox="\1 \2 \3\4.\50 \6\7.\80"\9><g transform="scale(10)">/' $i)
-    
+
     #Reading out the relevant line
     export j=$(ls -l|grep -E "viewBox=\"[-[:digit:].]{1,8} [-[:digit:].]{1,8} [[:digit:].]{2,11} [[:digit:].]{2,11}" $i)
-    
+
     #Insert a special character to define the point of splitting
     export l=$(echo $j | sed -e "s/viewBox=\"/>/g" )
-    
+
     #split at this special character and take the part afterwards
     export m=$(echo $l | cut -f2 -d">")
-    
+
     #Multiply the four numbers by a factor of 10
     export n=$(echo $m | awk  '{printf "%f %f %f %f\n",$1*10,$2*10,$3*10,$4*10}')
-    
+
     #Replace the old four numbers with the new four numbers
     sed -ri "s/<svg([-[:alnum:]=\" \.\/:;\,#]*) viewBox=\"[-[:digit:]\.]+ [-[:digit:]\.]+ [[:digit:]\.]+ [[:digit:]\.]+\"([-[:alnum:]=\" \.\/:\,#\(\)_;]+)>/<svg\1 viewBox=\"$n\"\2>\n<g transform=\"scale(10)\">/" $i
  #----
