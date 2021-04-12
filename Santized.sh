@@ -17,10 +17,10 @@ sed -ri "s/<(animate|set)([[:alpha:]=\"':# ]*) attributeName=(\"|')xlink:href(\"
 sed -ri "s/<set([[:alpha:] =\"]*) xlink:href=/<set\1 xlinkDeactivated=/" $file
 #sed -ri "s/<set([[:alnum:]=\" :#]*) to=\"([-[:alnum:]\.\/#;\+,:]*)\"/<setDeactivated\1 toDeactivated=\"\2\"/" $file
 sed -ri "s/<(d:testDescription) ([[:alnum:]:\"=\/. ]*)href=\"([[htp\.\/]]*)/<\1 \2hrefDeactivated=\"\3/" $file
-sed -ri "s/@import url\(([[:lower:]\.\/\"]*)([-[:alnum:]\/\.#\"]*)\)/Deactivated urlDeactivated\(\1\2\)/" $file
-sed -ri "s/(src:|@import) url\(([[:lower:]\.\/\"]*)([-[:alnum:]\/\.#\"]*)\)/\1 urlDeactivated\(\2\3\)/" $file
 sed -ri "s/ xlink:href=\"url\(\#([[:alpha:]]*)\)\"/ xlink:href=\"\#\1\"/" $file
 
+sed -ri "s/ @import / import /" $file
+sed -ri "s/ url\(([[:lower:]\.\/\"]*)([-[:alnum:]\/\.#\"]*)\)/ urlDeactivated\(\1\2\)/" $file
 
 # onclick="evt.currentTarget.correspondingElement.style.fill='blue';"
 #src: url(woffs/embeded-text-text-04.woff)

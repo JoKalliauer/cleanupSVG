@@ -44,7 +44,7 @@ module.exports = {
       }
     },
     {
-      name: 'convertShapeToPath',
+      name: 'convertShapeToPath', //https://github.com/svg/svgo/issues/1466
       active: true
     },
     {
