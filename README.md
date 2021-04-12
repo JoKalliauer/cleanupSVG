@@ -96,7 +96,7 @@ cargo install svgcleaner --force --git https://github.com/RazrFalcon/svgcleaner
 #wget https://nodejs.org/dist/latest/node-v15.4.0-linux-x64.tar.gz
 #tar -zxvf node-v15.4.0-linux-x64.tar.gz
 #export PATH=$PATH:~/prgm/node-v15.4.0-linux-x64/bin:
-sudo npm i -g npm 
+sudo npm i -g npm
 sudo npm install -g svgo
 ```
 
@@ -136,7 +136,7 @@ python3 -m pip install --upgrade pip # --user
 pip3 install --upgrade https://github.com/codedread/scour/archive/master.zip # --user
 rustup update
 cargo install svgcleaner --force --git https://github.com/RazrFalcon/svgcleaner
-sudo npm i -g npm 
+sudo npm i -g npm
 npm i -g npm
 #sudo npm install -g svgo
 #npm i svgo
@@ -150,6 +150,9 @@ npm -g install svgo
 
 Windows: https://sourceforge.net/projects/optipng/<br/>
 Linux: `sudo apt install optipng` or `sudo dnf install optipng`
+
+### OXIPNG (Rasteroptimization)
+`cargo install oxipng`
 
 ### Pingo (Rasteroptimization)
 https://css-ig.net/pingo

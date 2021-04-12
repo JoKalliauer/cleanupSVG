@@ -5,11 +5,9 @@ do
 
 echo #Add a empty line to split the output
 
-#pingo $file
+pingo -s9 $file
 optipng $file
-pingo  $file
-
-#pingo $file
+oxipng -o 6 -Z "$file"
 
 done
 
