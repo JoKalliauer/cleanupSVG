@@ -58,7 +58,7 @@ elif [ $HOSTNAME = DESKTOP-7VKND0M ]; then
  PC=local
 elif  [ $HOSTNAME = localhost.localdomain ]; then
  PC=local
-elif  [ $HOSTNAME = fedora ]; then
+elif  [ $HOSTNAME = fedora ] || [ $HOSTNAME = lws84.imws.tuwien.ac.at ]; then
  PC=local
 elif [[ $HOSTNAME =  tools-sgewebgrid-lighttpd-* ]]; then
  PC=WikiMedia
@@ -213,6 +213,13 @@ sed -i "s/src: url(\"data:font\/woff;charset=utf-8;base64,data:application\/x-fo
 sed -ri "s/<mask([-[:alnum:]_ =\".]*) maskUnits=\"userSpaceOnUse\"([[:alnum:]=_\". ]*)>/<mask\1\2>/g" $i
 
 #Change spaces to , in stroke-dasharray (solves librsvg-Bug https://phabricator.wikimedia.org/T32033 )
+sed -ri 's/stroke-dasharray=\"([[:digit:]\.,]*)([[:digit:]\.]+) ([[:digit:]\., ]+)\"/stroke-dasharray=\"\1\2,\3\"/g' $i
+sed -ri 's/stroke-dasharray=\"([[:digit:]\.,]*)([[:digit:]\.]+) ([[:digit:]\., ]+)\"/stroke-dasharray=\"\1\2,\3\"/g' $i
+sed -ri 's/stroke-dasharray=\"([[:digit:]\.,]*)([[:digit:]\.]+) ([[:digit:]\., ]+)\"/stroke-dasharray=\"\1\2,\3\"/g' $i
+sed -ri 's/stroke-dasharray=\"([[:digit:]\.,]*)([[:digit:]\.]+) ([[:digit:]\., ]+)\"/stroke-dasharray=\"\1\2,\3\"/g' $i
+sed -ri 's/stroke-dasharray=\"([[:digit:]\.,]*)([[:digit:]\.]+) ([[:digit:]\., ]+)\"/stroke-dasharray=\"\1\2,\3\"/g' $i
+sed -ri 's/stroke-dasharray=\"([[:digit:]\.,]*)([[:digit:]\.]+) ([[:digit:]\., ]+)\"/stroke-dasharray=\"\1\2,\3\"/g' $i
+sed -ri 's/stroke-dasharray=\"([[:digit:]\.,]*)([[:digit:]\.]+) ([[:digit:]\., ]+)\"/stroke-dasharray=\"\1\2,\3\"/g' $i
 sed -ri 's/stroke-dasharray=\"([[:digit:]\.,]*)([[:digit:]\.]+) ([[:digit:]\., ]+)\"/stroke-dasharray=\"\1\2,\3\"/g' $i
 sed -ri 's/stroke-dasharray=\"([[:digit:]\., ]*)([[:digit:]\.]+) ([[:digit:]\.,]+)\"/stroke-dasharray=\"\1\2,\3\"/g' $i
 
