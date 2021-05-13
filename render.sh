@@ -12,6 +12,8 @@ for file in *.svg
 
  time rsvg-convert "$file" >"${file%.svg}_librsvg.png"
 
+ time /home/jokalliau/Dokumente/GitDesktop/librsvg/rsvg-convert "$file" >"${file%.svg}_librsvg251.png"
+
  #/snap/inkscape/current/bin/inkscape "$file" --export-type="png"
  time inkscape "$file" --export-type="png"
  ##inkscape "$file" --export-png="${file%.svg}_ink092.png"
