@@ -10,6 +10,8 @@ for file in *.svg
  #cargo run --manifest-path ~/Documents/GitHub/resvg/Cargo.toml --release -- "$file" "${file%.svg}_re.png"
  time ~/Dokumente/GitDesktop/resvg/target/release/resvg "$file" "${file%.svg}_rendersvg.png"
 
+ time /home/jokalliau/prgm/librsvg-2.40.21/rsvg-convert "$file" >"${file%.svg}_librsvg240.png"
+
  time rsvg-convert "$file" >"${file%.svg}_librsvg.png"
 
  time /home/jokalliau/Dokumente/GitDesktop/librsvg/rsvg-convert "$file" >"${file%.svg}_librsvg251.png"
