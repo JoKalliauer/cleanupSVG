@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "svgo": "^2.2.1",
-    "tinify": "^1.6.0-beta.2"
-  }
-}
