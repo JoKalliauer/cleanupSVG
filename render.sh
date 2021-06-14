@@ -6,9 +6,8 @@ for file in *.svg
  echo #Add a empty line to split the output
   echo $file
 
- #resvg "$file" "${file%.svg}_re0_11.png"
- #cargo run --manifest-path ~/Documents/GitHub/resvg/Cargo.toml --release -- "$file" "${file%.svg}_re.png"
- time ~/Dokumente/GitDesktop/resvg/target/release/resvg "$file" "${file%.svg}_rendersvg.png"
+ #time ~/Dokumente/GitDesktop/resvg/target/release/resvg "$file" "${file%.svg}_rendersvg.png"
+ time resvg "$file" "${file%.svg}_rendersvg.png"
 
  time rsvg-convert "$file" >"${file%.svg}_librsvg.png"
 

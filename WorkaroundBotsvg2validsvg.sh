@@ -343,7 +343,7 @@ else
   echo
   echo python3 upload.py $i -keep -ignorewarn -noverify -descfile "$uploadcomment"
   echo
-  python3 upload.py $i -keep -ignorewarn -noverify -descfile "$uploadcomment"
+  ./run.sh $i
   #rm $i
  else
   echo did not recognice HOSTNAME $HOSTNAME

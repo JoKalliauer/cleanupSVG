@@ -1,6 +1,8 @@
 {
   "dependencies": {
-    "svgo": "^2.2.1",
+    "css-what": "^5.0.1",
+    "js-yaml": "^4.1.0",
+    "svgo": "^0.7.2",
     "tinify": "^1.6.0-beta.2"
   }
 }
