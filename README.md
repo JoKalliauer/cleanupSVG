@@ -53,12 +53,12 @@ Similar scripts<br/>
 
 ### Windows<br/>
 1)Inkscape<br/>
-1a)Download&Install https://inkscape.org/release/ (i.e. https://inkscape.org/de/release/inkscape-0.92.4/ or https://inkscape.org/release/inkscape-1.0beta1/ )<br/>
+1a)Download&Install https://inkscape.org/release/ <br/>
 2)[scour](https://github.com/scour-project/scour)<br/>
-2a)Download&Install CPython 3.7: https://www.python.org/downloads/<br/>
-2b)Add "C:\Python37" and "C:\Python37\Scripts" to enviroment variable %Path%<br/>
- -(Option-i)Run cmd.exe; type ```set PYTHONPATH=C:\Python37``` and ```set PATH=%PATH%;%PYTHONPATH%;C:\Python37\Scripts```<br/>
- -(Option-ii)Run Sysdm.cpl; to to the advanced-Tab; Environemt variables...; click Path, click Edit; add ```C:\Python37``` and ```C:\Python37\Scripts```<br/>
+2a)Download&Install CPython 3: https://www.python.org/downloads/<br/>
+2b)Add "C:\Python3" and "C:\Python3\Scripts" to enviroment variable %Path%<br/>
+ -(Option-i)Run cmd.exe; type ```set PYTHONPATH=C:\Python3``` and ```set PATH=%PATH%;%PYTHONPATH%;C:\Python3\Scripts```<br/>
+ -(Option-ii)Run Sysdm.cpl; to to the advanced-Tab; Environemt variables...; click Path, click Edit; add ```C:\Python3``` and ```C:\Python3\Scripts```<br/>
 2c)Run cmd.exe as a administrator<br/>
 2c,i)```python -m pip install --upgrade pip```<br/>
 2c,ii)```pip install --upgrade https://github.com/codedread/scour/archive/master.zip```<br/>
@@ -173,4 +173,10 @@ rpm2cpio librsvg2-tools-2.48.9-1.fc32.x86_64.rpm |cpio -idv
 ```
 
 ### resvg (svg2png)
-`git clone git@github.com:RazrFalcon/resvg.git`
+```bash
+git clone git@github.com:RazrFalcon/resvg.git
+git pull
+```
+
+`cargo install resvg --force --git https://github.com/RazrFalcon/resvg/
+`

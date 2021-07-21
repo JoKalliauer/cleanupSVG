@@ -9,9 +9,9 @@ export i=${tmp}U.svg
 
 echo #Add a empty line to split the output
 
-echo cleaner ${file} to $i begin
+echo usvg ${file} to $i begin
 
-usvg "$file" $i --indent 1
+time usvg "$file" $i --indent 1
 
 #--properties-precision 2 # https://commons.wikimedia.org/wiki/File:Mn_coa_%C3%B6v%C3%B6rkhangai_aimag.svg  --properties-precision 3 https://commons.wikimedia.org/wiki/File:France_-_Density_of_Monuments_historiques_by_commune,_with_departments.svg
 #--transforms-precision 4 # https://commons.wikimedia.org/wiki/File:Mn_coa_%C3%B6v%C3%B6rkhangai_aimag.svg

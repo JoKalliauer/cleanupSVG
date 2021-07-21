@@ -49,7 +49,7 @@ echo $i start:
 
 
 
-sed -ri "s/ class=\"([[:alpha:]]*)\"/ class=\"\1\" classJK=\"\1\"/g" $i
+sed -ri "s/ class=\"([-[:alpha:] ]*)\"/ class=\"\1\" classJK=\"\1\"/g" $i
 
 
 echo $i finish

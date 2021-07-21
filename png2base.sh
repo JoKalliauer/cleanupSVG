@@ -152,6 +152,8 @@ for fileSource in *.$sourceType
 else
  convert $1 -transparent white t$1
  optipng t$1
+ pingo -s9 t$1
+ oxipng -o 6 -Z t$1
  pngout t$1
  openssl base64 -in t$1 -out t$1.txt
 fi
