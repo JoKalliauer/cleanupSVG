@@ -48,16 +48,16 @@ module.exports = {
       active: true
     },
     {
-      name: 'convertStyleToAttrs', // https://github.com/svg/svgo/issues/1509
-      active: false
+      name: 'convertStyleToAttrs',
+      active: true
     },
     {
       name: 'convertTransform',
       active: true
     },
     {
-      name: 'inlineStyles', //keep CSS
-      active: false
+      name: 'inlineStyles',
+      active: true
     },
     {
       name: 'mergePaths',
@@ -115,8 +115,8 @@ module.exports = {
       active: true
     },
     {
-      name: 'removeMetadata', //keep rdf-data
-      active: false
+      name: 'removeMetadata',
+      active: true
     },
     {
       name: 'removeNonInheritableGroupAttrs',
