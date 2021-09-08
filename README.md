@@ -51,7 +51,7 @@ Similar scripts<br/>
 
 ## Install Prerequiaries:
 
-### Windows<br/>
+### Windows (outdated)<br/>
 1)Inkscape<br/>
 1a)Download&Install https://inkscape.org/release/ <br/>
 2)[scour](https://github.com/scour-project/scour)<br/>
@@ -77,7 +77,7 @@ Similar scripts<br/>
 5a)Download&Install (32bit or 64bit) https://cygwin.com/install.html (in some cases you have to deactivate Virusprotection (i.e. Avast makes Problemms without reporting))<br/>
 6)cygwin.exe: `/usr/bin/python3 -m pip install scour`
 
-### Linux
+### Linux (for Windows use WSL from Microsoft)
 
 
 ```
@@ -90,7 +90,7 @@ fi
 python3 -m pip install --upgrade pip # --user
 export PATH=$PATH:~/.local/bin:~/.cargo/bin # add this to your ~/.bashrc
 pip3 install --upgrade https://github.com/codedread/scour/archive/master.zip
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh #https://www.rust-lang.org/tools/install
+#curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh #https://www.rust-lang.org/tools/install
 cargo install svgcleaner --force --git https://github.com/RazrFalcon/svgcleaner
 
 #wget https://nodejs.org/dist/latest/node-v15.4.0-linux-x64.tar.gz
