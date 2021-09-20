@@ -63,6 +63,7 @@ svgcleaner "$file" $i --allow-bigger-file --indent $INDENT --resolve-use no --ap
 # descriptions  --remove-desc no
 # layers --remove-nonsvg-attributes no
 # metadata  --remove-metadata no  --remove-nonsvg-elements no
+# <?xml version="1.0" encoding="UTF-8"?> --remove-declarations no 
 
 #echo mv ./${file} ./${tmp}4.xml
 mv ./${file} ./${tmp}4.xml
