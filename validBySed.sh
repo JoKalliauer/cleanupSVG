@@ -89,8 +89,10 @@ sed -i -e ':a' -e 'N' -e '$!ba' -e "s/<metadata( id=\"metadata[[:digit:]]*\"|)>[
 # use svgo
  sed -i "s/ inkscape:connector-curvature=\"0\"//g" $i
  #<sodipodi:namedview bordercolor="#666666" borderopacity="1" gridtolerance="10" guidetolerance="10" inkscape:current-layer="svg2" inkscape:cx="398.5" inkscape:cy="96.5" inkscape:pageopacity="0" inkscape:pageshadow="2" inkscape:window-height="480" inkscape:window-maximized="0" inkscape:window-width="640" inkscape:window-x="0" inkscape:window-y="0" inkscape:zoom="0.36010038" objecttolerance="10" pagecolor="#ffffff" showgrid="false"/>
-   sed -ri "s/<sodipodi:namedview( id=\"namedview[[:digit:]]*\"|) bordercolor=\"#666666\" borderopacity=\"1\" gridtolerance=\"10\" guidetolerance=\"10\" inkscape:current-layer=\"[[:digit:]svgEbene_]*\" inkscape:cx=\"[-[:digit:].]*\" inkscape:cy=\"[-[:digit:].]*\" inkscape:pageopacity=\"0\" inkscape:pageshadow=\"2\" inkscape:window-height=\"(480|1017)\" inkscape:window-maximized=\"(0|1)\" inkscape:window-width=\"(640|1920)\" inkscape:window-x=\"(0|-8)\" inkscape:window-y=\"(0|-8)\" inkscape:zoom=\"[[:digit:].]*\" objecttolerance=\"10\" pagecolor=\"#ffffff\"( showgrid=\"false\"|)\/>//" $i
+   sed -ri "s/<sodipodi:namedview( id=\"namedview[[:digit:]]*\"|) bordercolor=\"#666666\" borderopacity=\"1(.0|)\"( gridtolerance=\"10\" guidetolerance=\"10\"|) inkscape:current-layer=\"[[:digit:]svgEbene_]*\" inkscape:cx=\"[-[:digit:].]*\" inkscape:cy=\"[-[:digit:].]*\"( inkscape:pagecheckerboard=\"0\"|) inkscape:pageopacity=\"0(.0|)\" inkscape:pageshadow=\"2\" inkscape:window-height=\"(480|[0179]*)\" inkscape:window-maximized=\"(0|1)\" inkscape:window-width=\"(640|[01259]*)\" inkscape:window-x=\"(0|[-268]*)\" inkscape:window-y=\"(0|[-238]*)\" inkscape:zoom=\"[[:digit:].]*\"( objecttolerance=\"10\"|) pagecolor=\"#ffffff\"( showgrid=\"false\"|)\/>//" $i
  sed -ri "s/ sodipodi:nodetypes=\"[c]+\"//" $i
+ sed -i "s/ inkscape:version=\"1.1 (c68e22c387, 2021-05-23)\"//" $i
+ sed -i "s/ sodipodi:docname=\"[[:alnum:]_,.]*\"//" $i
 
 #W3C: Error:  there is no attribute "enable-background"
 #Nu: Error: Attribute enable-background not allowed on SVG element path at this point.

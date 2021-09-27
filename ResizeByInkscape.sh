@@ -41,7 +41,7 @@ validOutput5="plain-svg"
 for fileSource in *.$sourceType
 
 do
- if [ -f "$fileSource" ]; then    
+ if [ -f "$fileSource" ]; then
    count=$((count+1))
    file=$(echo $fileSource | cut -d'.' -f1)
    echo $count". "$fileSource" -> "${file}r.$outputType
@@ -56,23 +56,25 @@ do
    #inkscape --with-gui ./${file}r.svg --verb=DialogDocumentProperties --verb=FitCanvasToDrawing --export-plain-svg=${file}rR.svg --verb=FileSave --verb=FileClose --verb=FileQuit
    inkscape  --with-gui ./${file}r.svg --actions='DialogDocumentProperties;FitCanvasToDrawing;FileSave;FileClose;FileQuit'
 
-   
+
    scour -i ./${file}r.svg -o ./${file}rs.svg --disable-style-to-xml --keep-unreferenced-defs --indent=space --nindent=1 --keep-editor-data
-   
+
       #remove useless metadata
    sed -i -e ':a' -e 'N' -e '$!ba' -e "s/<metadata id=\"metadata[[:digit:]]*\">[[:space:]\r\n]*<rdf:RDF>[[:space:]\r\n]*<cc:Work rdf:about=\"\">[[:space:]\r\n]*<dc:format>image\/svg+xml<\/dc:format>[[:space:]\r\n]*<dc:type rdf:resource=\"http:\/\/purl.org\/dc\/dcmitype\/StillImage\"\/>[[:space:]\r\n]*<dc:title\/>[[:space:]\r\n]*<\/cc:Work>[[:space:]\r\n]*<\/rdf:RDF>[[:space:]\r\n]*<\/metadata>//" ${file}rs.svg
-   
-   # <sodipodi:namedview id="namedview12" bordercolor="#666666" borderopacity="1" gridtolerance="10" guidetolerance="10" inkscape:current-layer="svg10" inkscape:cx="-4.1992188" inkscape:cy="848.92578" inkscape:pageopacity="0" inkscape:pageshadow="2" inkscape:window-height="480" inkscape:window-maximized="0" inkscape:window-width="640" inkscape:window-x="0" inkscape:window-y="0" inkscape:zoom="2.36" objecttolerance="10" pagecolor="#ffffff" showgrid="false"/>
-   sed -i "s/<sodipodi:namedview id=\"namedview[[:digit:]]*\" bordercolor=\"#666666\" borderopacity=\"1\" gridtolerance=\"10\" guidetolerance=\"10\" inkscape:current-layer=\"svg[[:digit:]]*\" inkscape:cx=\"[-[:digit:].]*\" inkscape:cy=\"[-[:digit:].]*\" inkscape:pageopacity=\"0\" inkscape:pageshadow=\"2\" inkscape:window-height=\"480\" inkscape:window-maximized=\"0\" inkscape:window-width=\"640\" inkscape:window-x=\"0\" inkscape:window-y=\"0\" inkscape:zoom=\"[.[:digit:]]*\" objecttolerance=\"10\" pagecolor=\"#ffffff\" showgrid=\"false\"\/>//" ${file}rs.svg
-   
+
+   # see validBySed.sh
+   sed -ri "s/<sodipodi:namedview( id=\"namedview[[:digit:]]*\"|) bordercolor=\"#666666\" borderopacity=\"1(.0|)\"( gridtolerance=\"10\" guidetolerance=\"10\"|) inkscape:current-layer=\"[[:digit:]svgEbene_]*\" inkscape:cx=\"[-[:digit:].]*\" inkscape:cy=\"[-[:digit:].]*\"( inkscape:pagecheckerboard=\"0\"|) inkscape:pageopacity=\"0(.0|)\" inkscape:pageshadow=\"2\" inkscape:window-height=\"(480|[0179]*)\" inkscape:window-maximized=\"(0|1)\" inkscape:window-width=\"(640|[01259]*)\" inkscape:window-x=\"(0|[-268]*)\" inkscape:window-y=\"(0|[-238]*)\" inkscape:zoom=\"[[:digit:].]*\"( objecttolerance=\"10\"|) pagecolor=\"#ffffff\"( showgrid=\"false\"|)\/>//" ${file}rs.svg
+ sed -i "s/ inkscape:version=\"1.1 (c68e22c387, 2021-05-23)\"//" ${file}rs.svg
+ sed -i "s/ sodipodi:docname=\"[[:alnum:]_,.]*\"//" ${file}rs.svg
+
    mv ./${file}r.svg ./${file}r.xml
   fi
  else
      echo "no file $fileSource found!"
  fi
- 
- 
- 
+
+
+
 done
 
 
