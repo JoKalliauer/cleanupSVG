@@ -47,6 +47,10 @@ fi
 if [ -z ${kerningKerning+x} ] || [ -z "$kerningKerning" ]; then
  kerningKerning=NO
 fi
+if [ -z ${SvgoSvgo+x} ]; then
+ echo set SvgoSvgo to yes
+ SvgoSvgo=YES
+fi
 
 if [ $HOSTNAME = LAPTOP-K1FUMMIP ]; then
  PC=local
@@ -134,6 +138,14 @@ if [ $safe = 'YES' ];
  sed -ri "s/<script/<Deactivatedscript/g" $i
  sed -ri "s/<\/script>/<\/Deactivatedscript>/g" $i
  sed -ri "s/[[:blank:]]on([[:lower:]]+)=(\"|')([[:alpha:]]+[[:alnum:]_,' \(\)\.#;]*)/ deactivatedon\1=\2\3/g" $i
+fi
+
+
+if [ $SvgoSvgo = 'YES' ]; then
+ echo runSvgoSvgo,JK YN $SvgoSvgo, i $i ,ii $i2
+ svgo -i $i -o $i2 -p 5 --pretty --indent=1 --multipass
+ rm $i
+ mv $i2 $i
 fi
 
 if [ $validValid = 'YES' ]; then
