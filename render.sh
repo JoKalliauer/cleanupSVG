@@ -10,10 +10,11 @@ for file in *.svg
  #time ~/Dokumente/GitDesktop/resvg/target/release/resvg "$file" "${file%.svg}_rendersvg.png"
  time taskset -c 0 resvg "$file" "${file%.svg}_rendersvg.png"
 
- echo librsvg:24020,24021,system,251
+ echo c-librsvg:24020,24021,system,251
  #time taskset -c 0 /home/jokalliau/prgm/librsvg-2.40.20/rsvg-convert "$file" >"${file%.svg}_librsvg24020.png"
  time taskset -c 0 ~/prgm/librsvg-2.40.21/rsvg-convert "$file" >"${file%.svg}_librsvg24021.png"
 
+ echo system-librsvg
  time taskset -c 0 rsvg-convert "$file" >"${file%.svg}_librsvg.png"
 
  #time taskset -c 0 /home/jokalliau/Dokumente/GitDesktop/librsvg/rsvg-convert "$file" >"${file%.svg}_librsvg251.png"

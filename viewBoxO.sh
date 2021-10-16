@@ -16,7 +16,7 @@ fi
 
 echo #Add a empty line to split the output
 
- export META= 
+ export META=
 
 
 if [ $minfilesize == 0 ]; then
@@ -31,7 +31,7 @@ fi
 
 #echo scour ${file} to $i begin, min=${minfilesize}, meta=$meta, META= $META, INDENT=$INDENTs
 
-#scour -i ${file} -o $i --keep-unreferenced-defs --enable-comment-stripping --remove-titles --remove-descriptions --strip-xml-space  --set-precision=5 $META $INDENTs --renderer-workaround --disable-style-to-xml --create-groups  --set-c-precision=4 --enable-viewboxing #  
+#scour -i ${file} -o $i --keep-unreferenced-defs --enable-comment-stripping --remove-titles --remove-descriptions --strip-xml-space  --set-precision=5 $META $INDENTs --renderer-workaround --disable-style-to-xml --create-groups  --set-c-precision=4 --enable-viewboxing #
 
 #mv ./${file} ./${tmp}3.xml
 
@@ -54,7 +54,7 @@ else
  echo imput not allowed meta is $meta
 fi
 
-svgo -i ${file} -o $i $INDENTo -p 3 $META  --disable=convertStyleToAttrs --disable=convertPathData --disable=mergePaths --enable=removeScriptElement --disable=removeXMLProcInst --enable=cleanupAttrs --enable=cleanupEnableBackground --disable=cleanupIDs --enable=cleanupNumericValues --enable=convertColors --enable=inlineStyles  --enable=minifyStyles --enable=moveElemsAttrsToGroup --enable=moveGroupAttrsToElems  --enable=removeAttrs --disable=removeComments --disable=removeDesc --disable=removeEditorsNSData --enable=removeEmptyAttrs --enable=removeEmptyContainers --enable=removeEmptyText --enable=removeHiddenElems --enable=removeNonInheritableGroupAttrs --disable=removeRasterImages --disable=removeTitle --disable=removeUnusedNS --enable=removeUselessDefs --enable=removeUselessStrokeAndFill --enable=removeViewBox --enable=sortAttrs --disable=removeDoctype --enable={addAttributesToSVGElement}  --disable=removeStyleElement   --disable=removeUnknownsAndDefaults --disable=convertShapeToPath --enable=convertTransform  --disable=collapseGroups --enable=removeDimensions
+svgo -i ${file} -o $i $INDENTo -p 3 #$META  --disable=convertStyleToAttrs --disable=convertPathData --disable=mergePaths --enable=removeScriptElement --disable=removeXMLProcInst --enable=cleanupAttrs --enable=cleanupEnableBackground --disable=cleanupIDs --enable=cleanupNumericValues --enable=convertColors --enable=inlineStyles  --enable=minifyStyles --enable=moveElemsAttrsToGroup --enable=moveGroupAttrsToElems  --enable=removeAttrs --disable=removeComments --disable=removeDesc --disable=removeEditorsNSData --enable=removeEmptyAttrs --enable=removeEmptyContainers --enable=removeEmptyText --enable=removeHiddenElems --enable=removeNonInheritableGroupAttrs --disable=removeRasterImages --disable=removeTitle --disable=removeUnusedNS --enable=removeUselessDefs --enable=removeUselessStrokeAndFill --enable=removeViewBox --enable=sortAttrs --disable=removeDoctype --enable={addAttributesToSVGElement}  --disable=removeStyleElement   --disable=removeUnknownsAndDefaults --disable=convertShapeToPath --enable=convertTransform  --disable=collapseGroups --enable=removeDimensions
 
 ## == min ==
 #  --disable=removeComments #keep Comments

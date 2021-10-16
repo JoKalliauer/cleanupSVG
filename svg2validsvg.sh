@@ -19,6 +19,8 @@
 #2018-04-28 not remove stroke-width in text
 #2018-05-05 restructured
 
+#<tspan[^>]* x="
+
 for file in *.svg;do
 chmod u+r "${file}"
 mv "$file" `echo ${file} | tr ' ' '_'` ;
@@ -39,7 +41,7 @@ chmod u+r ./"${file}"
 cp ./"${file}" $i
 mv ./"${file}" ./${tmp}1.xml
 
-echo 
+echo
 echo $i start:
 
 # #Define prepost equal to zero if not defined
@@ -70,8 +72,8 @@ sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<flowRoot([-[:alnum:]\.=\" \:\(\)\%\#\,\'
 sed -ri "s/ letter-spacing=\"0([px]*)\"//g" $i
 sed -ri "s/ word-spacing=\"0([px]*)\"//g" $i
 sed -i "s/ stroke-width=\"1\"//g;s/ transform=\"scale(1)\"//g" $i
-sed -i "s/ stroke-miterlimit=\"10\"//g" $i #Bug in IncscapePDFImport 
-sed -ri "s/ color-interpolation=\"auto\"//g;s/ color-interpolation=\"(s|linear)RGB\"//g;s/ color-rendering=\"(optimizeQuality|optimizeSpeed)\"//g;s/image-rendering=\"(optimizeQuality|optimizeSpeed)\"//g;s/ shape-rendering=\"crispEdges\"//g;s/ text-rendering=\"(geometricPrecision|optimizeSpeed)\"//g;s///g" $i 
+sed -i "s/ stroke-miterlimit=\"10\"//g" $i #Bug in IncscapePDFImport
+sed -ri "s/ color-interpolation=\"auto\"//g;s/ color-interpolation=\"(s|linear)RGB\"//g;s/ color-rendering=\"(optimizeQuality|optimizeSpeed)\"//g;s/image-rendering=\"(optimizeQuality|optimizeSpeed)\"//g;s/ shape-rendering=\"crispEdges\"//g;s/ text-rendering=\"(geometricPrecision|optimizeSpeed)\"//g;s///g" $i
 
 #s///g
 
@@ -82,16 +84,16 @@ sed -i -e 's/<svg /\n<svg /' $i
 # #  #echo Metadata kept, no DOCTYPE added
 # #  meta=0
 # # fi
-# # 
-# # 
-# #  if [ $meta != 1 ]; then  
+# #
+# #
+# #  if [ $meta != 1 ]; then
 # #   #echo add DTD
 # #   if grep -qE "<svg([[:lower:][:digit:]=\"\. -]*) version=\"1.0\"" $i; then
 # #    echo Version10
 # #    sed -i -e ':a' -e 'N' -e '$!ba' -e 's/\?>[[:space:]]*<svg/\?>\n<\!DOCTYPE svg PUBLIC \"-\/\/W3C\/\/DTD SVG 1.0\/\/EN\" \"http:\/\/www.w3.org\/TR\/2001\/REC-SVG-20010904\/DTD\/svg10.dtd\">\n<svg /' $i
 # #   elif grep -qE "<svg ([[:lower:][:digit:]=\"\. -]*)version=\"1\"" $i; then
 # #    echo Version1
-# #    sed -ri 's/<svg ([[:lower:][:digit:]=\"\. -]*)version=\"1\"/<svg \1version=\"1.0\"/' $i 
+# #    sed -ri 's/<svg ([[:lower:][:digit:]=\"\. -]*)version=\"1\"/<svg \1version=\"1.0\"/' $i
 # #    sed -i -e ':a' -e 'N' -e '$!ba' -e 's/\?>[[:space:]]*<svg/\?>\n<\!DOCTYPE svg PUBLIC \"-\/\/W3C\/\/DTD SVG 1.0\/\/EN\" \"http:\/\/www.w3.org\/TR\/2001\/REC-SVG-20010904\/DTD\/svg10.dtd\">\n<svg /' $i
 # #   else
 # #    #echo noVersionDetected
@@ -101,7 +103,7 @@ sed -i -e 's/<svg /\n<svg /' $i
 # #  #else
 # #   #echo no DOCTYPE added
 # #  fi
- 
+
 # if ! grep -qE "xmlns:xlink=" $i; then
 #  sed -ri 's/<svg/<svg xmlns:xlink="http:\/\/www.w3.org\/1999\/xlink"/' $i
 # fi
@@ -133,7 +135,7 @@ sed -i "s/<g[-[:alnum:]=\"\(\)\.,_ :]*\/>/ /g" $i
 sed -i -e ':a' -e 'N' -e '$!ba' -e 's/\n\n/\n/g' $i
 
 #  #  #Inkscape doesnt handle Adobe Ilustrator xmlns right
-#  #  sed -ri "s/=\"([amp38;\#\&\])+ns_flows;\"/=\"http:\/\/ns.adobe.com\/Flows\/1.0\/\"/g" $i 
+#  #  sed -ri "s/=\"([amp38;\#\&\])+ns_flows;\"/=\"http:\/\/ns.adobe.com\/Flows\/1.0\/\"/g" $i
 #  #  sed -ri "s/ xmlns:x=\"([amp38;\#\&\])+ns_extend;\"/ xmlns:x=\"http:\/\/ns.adobe.com\/Extensibility\/1.0\/\"/" $i #Incskape doesnt handle Adobe Ilustrator xmlns right (or maybe xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml")
 #  #  sed -ri "s/=\"([amp38;\#\&\])+ns_ai;\"/=\"http:\/\/ns.adobe.com\/AdobeIllustrator\/10.0\/\"/" $i #Incskape doesnt handle Adobe Ilustrator xmlns right
 #  #  sed -ri "s/ xmlns:graph=\"([amp38;\#\&\])+ns_graphs;\"/ xmlns:graph=\"http:\/\/ns.adobe.com\/Graphs\/1.0\/\"/" $i #Incskape doesnt handle Adobe Ilustrator xmlns right
@@ -151,7 +153,7 @@ sed -i -e ':a' -e 'N' -e '$!ba' -e 's/\n\n/\n/g' $i
 #  #  #  <!ENTITY ns-ccpp-proxy 'http://www.w3.org/2000/07/04-ccpp-proxy#'>
 #  #  #  <!ENTITY ns-ccpp-client 'http://www.w3.org/2000/07/04-ccpp-client#'>
 #  #  #  <!ENTITY ns-uaprof 'http://www.wapforum.org/UAPROF/ccppschema-19991014#'>
-#  #  
+#  #
 #  #  sed -i "s/<?xpacket begin='﻿' id='/<?xpacket begin='ZeichenEingefuegtVonKalliauer' id='/g" $i
 
 #CorelDraw-Problem (not very common)
