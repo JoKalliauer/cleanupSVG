@@ -94,6 +94,10 @@ module.exports = {
       active: true
     },
     {
+      name: 'removeDimensions',
+      active: true
+    },
+    {
       name: 'removeDoctype',
       active: false
     },
