@@ -80,10 +80,7 @@ module.exports = {
     },
     {
       name: 'removeAttrs',
-      active: true,
-      params: {
-        attrs: "(stroke)"
-      }
+      active: false
     },
     {
       name: 'removeComments',
