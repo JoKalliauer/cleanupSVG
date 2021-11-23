@@ -107,8 +107,8 @@ module.exports = {
       active: true
     },
     {
-      name: 'removeEmptyContainers',
-      active: true
+      name: 'removeEmptyContainers', //https://github.com/svg/svgo/issues/1194 https://github.com/svg/svgo/issues/1618
+      active: false
     },
     {
       name: 'removeEmptyText',

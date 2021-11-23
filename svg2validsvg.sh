@@ -243,6 +243,9 @@ sed -ri "s/ xlink:href=\"data:;base64,\/9j\/7QAsUGhvdG9zaG9wIDMuMAA4QklNA\+0AAAA
 #librsvgbug https://phabricator.wikimedia.org/phab:T207506 (<code>font-weight="normal"</code> ignored)
 sed -ri "s/font-weight=\"normal\"/font-weight=\"400\"/g" $i
 
+#Svgcleanerbug with images
+# transform="matrix(.23989 0 0 .23812 28.85 97.36)"
+sed -ri 's/ height="100%" transform="matrix\(.23([[:digit:]\. ]+)\)" width="100%"/ transform="matrix\(.239\1\)"/' $i
 
 echo $i finish
 
