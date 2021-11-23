@@ -48,8 +48,8 @@ if [ -z ${kerningKerning+x} ] || [ -z "$kerningKerning" ]; then
  kerningKerning=NO
 fi
 if [ -z ${SvgoSvgo+x} ]; then
- echo set SvgoSvgo to yes
- SvgoSvgo=YES
+ echo set SvgoSvgo to NO
+ SvgoSvgo=NO
 fi
 
 if [ $HOSTNAME = LAPTOP-K1FUMMIP ]; then
