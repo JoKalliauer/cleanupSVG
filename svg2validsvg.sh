@@ -232,7 +232,7 @@ sed -ri "s/<style( id=\"[[:alnum:]]*\"|)>/<style type=\"text\/css\"\1>/" $i
 #sed -i "s/ xlink:href=\"data:;base64,\/9j\/4AAQSkZJRgABAgAAZABkAAD\/7AARRHVja3kAAQAEAAAAHgAA/ xlink:href=\"data:image\/jpeg;base64,\/9j\/4AAQSkZJRgABAgAAZABkAAD\/7AARRHVja3kAAQAEAAAAHgAA/" $i
 #sed -ri "s/ xlink:href=\"data:;base64,( |)iVBORw0KGgoAAAANSUhEUgAA/ xlink:href=\"data:image\/png;base64,iVBORw0KGgoAAAANSUhEUgAA/" $i
 #sed -ri "s/ xlink:href=\"data:image\/png;base64,( |)\/9j\/4AAQSkZJRgABAQAAAQABAAD/ xlink:href=\"data:image\/jpeg;base64,\/9j\/4AAQSkZJRgABAQAAAQABAAD/" $i #png->jpeg
-sed -ri "s/ xlink:href=\"data:(|image\/png|image\/jpg);base64,( |)\/9j\/4AAQSkZJRgABAgAAZABkAAD\/7AARRHVja3kAAQAEAAAAHgAA/ xlink:href=\"data:image\/jpeg;base64,\/9j\/4AAQSkZJRgABAgAAZABkAAD\/7AARRHVja3kAAQAEAAAAHgAA/" $i
+sed -ri "s/ xlink:href=\"data:(|image\/png|image\/jpg);base64,( |)\/9j\/4AAQSkZJRgABAgAAZABkAAD\// xlink:href=\"data:image\/jpeg;base64,\/9j\/4AAQSkZJRgABAgAAZABkAAD\//" $i
 sed -ri "s/ xlink:href=\"data:;base64,( |)iVBORw0KGgoAAAANSUhEUgAA/ xlink:href=\"data:image\/png;base64,iVBORw0KGgoAAAANSUhEUgAA/" $i
 sed -ri "s/ xlink:href=\"data:;base64,\/9j\/7QAsUGhvdG9zaG9wIDMuMAA4QklNA\+0AAAAAABAASAAAAAEAAQBIAAAAAQAB\/\+4AJkFkb2Jl/data:image\/jpeg;base64,\/9j\/7QAsUGhvdG9zaG9wIDMuMAA4QklNA\+0AAAAAABAASAAAAAEAAQBIAAAAAQAB\/\+4AJkFkb2Jl/" $i  #https://wordpress.stackexchange.com/a/212334/197645
 
