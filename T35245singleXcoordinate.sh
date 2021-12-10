@@ -30,10 +30,11 @@ echo
 echo $i start:
 
 #<tspan x="7384.68,7487.05,7589.41,7691.78,7794.14" y="-2982.47" font-family="Nimbus Sans L,Liberation Sans,Helvetica" font-size="184.11" stroke-width="18.411" sodipodi:role="line">
-sed -ri "s/<tspan([-[:alnum:]\.\"\#\ =\(\)]*) x=\"([-[:digit:]\.]+)( |,)([-[:digit:]\. ,]+)\"([-[:alnum:]\.\"\#\ =\,:]*)>/<tspan x=\"\2\"\1\5>/g" $i # remove multipe x-koordinates in text (solves librsvg-Bug)
+sed -ri "s/<tspan([-[:alnum:]\.\"\#\ =\(\)]*) x=\"([-[:digit:]\.]+)( |,)([-[:digit:]\. ,]+)\"([-[:alnum:]\.\"\#\ =\,:\\]*)>/<tspan x=\"\2\"\1\5>/g" $i # remove multipe x-koordinates in text (solves librsvg-Bug)
 
  
  sed -ri "s/ unicode-bidi=\"embed\"//g" $i
+ 
 
 echo $i finish
 

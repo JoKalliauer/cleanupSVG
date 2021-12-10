@@ -94,6 +94,9 @@ sed -ri "s/(<g[-[:alnum:]\(\)\. ,;:=\"#]*>)[[:space:]]*<text([-[:alnum:]= #\,\"\
 sed -ri "s/<text([-[:alnum:]\,\.\"\=\:\ #\(\)\']*)( font-size=\"[-[:digit:]\.\ ]+\")([-[:alnum:]\,\.\"\=\:\ #\(\)\']*) font-size=\"([-[:digit:]\.\ ]+)\"/<text\1\3 font-size=\"\4\"/g" $i
 sed -ri "s/<text([-[:alnum:]\,\.\"\=\:\ #\(\)\']*)( font-size=\"[-[:digit:]\.\ ]+\")([-[:alnum:]\,\.\"\=\:\ #\(\)\']*) font-size=\"([-[:digit:]\.\ ]+)\"/<text\1\3 font-size=\"\4\"/g" $i
 
+#remove double elements
+sed -ri "s/text-align=\"center\" text-anchor=\"middle\" text-align=\"center\" text-anchor=\"middle\"/text-align=\"center\" text-anchor=\"middle\"/g" $i
+
 echo $i finish
 
 
