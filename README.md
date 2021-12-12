@@ -12,36 +12,15 @@ Each of the files work independedly.
 
 **[cleaner4compression.sh](https://github.com/JoKalliauer/cleanupSVG/blob/master/cleaner4compression.sh)** uses [RazrFalcon/svgcleaner](https://github.com/RazrFalcon/svgcleaner)
 
-**[o4compression.sh](https://github.com/JoKalliauer/cleanupSVG/blob/master/o4compression.sh)** uses [svgo](https://github.com/svg/svgo))
+**[O2.sh](https://github.com/JoKalliauer/cleanupSVG/blob/master/O2.sh)** uses [svgo](https://github.com/svg/svgo))
 
 
-The following script can be run in shell-terminal:
-```bash
-#!/bin/bash
-
-export minfilesize=0 #1..min file size (1...no line breaks)
-export precisiondigits=2 #number of dicits for control points
-export precisiondigitsN=4 #number of dicits
-export meta=0 #0 removes metadata
-
-./svg2validsvg.sh
-
-./InkscapeBatchConverter.sh
-
-./scour4compression.sh
-./cleaner4compression.sh #only tested on Windows
-./o4compression.sh #only tested on Windows
-./cleaner4compression.sh #it is fast and makes a good readable file
-
-./svg2validsvg.sh
-
-
-```
 
 This script is tested on<br/>
+-Fedora 32,33,34,35
 -[Ubuntu](https://www.ubuntu.com/download/desktop) 16.04, 18.04, 20.04<br/>
--Windows with [Cygwin](https://cygwin.com/install.html)<br/>
 -Windows Subsystem for Linux (Ubuntu 20.04)
+-Windows with [Cygwin](https://cygwin.com/install.html) (not recommended)<br/>
 
 Similar scripts<br/>
 -[SVGOMG](https://github.com/jakearchibald/svgomg)<br/>
@@ -50,32 +29,6 @@ Similar scripts<br/>
 -[svgcleaner](https://github.com/RazrFalcon/svgcleaner)
 
 ## Install Prerequiaries:
-
-### Windows (outdated)<br/>
-1)Inkscape<br/>
-1a)Download&Install https://inkscape.org/release/ <br/>
-2)[scour](https://github.com/scour-project/scour)<br/>
-2a)Download&Install CPython 3: https://www.python.org/downloads/<br/>
-2b)Add "C:\Python3" and "C:\Python3\Scripts" to enviroment variable %Path%<br/>
- -(Option-i)Run cmd.exe; type ```set PYTHONPATH=C:\Python3``` and ```set PATH=%PATH%;%PYTHONPATH%;C:\Python3\Scripts```<br/>
- -(Option-ii)Run Sysdm.cpl; to to the advanced-Tab; Environemt variables...; click Path, click Edit; add ```C:\Python3``` and ```C:\Python3\Scripts```<br/>
-2c)Run cmd.exe as a administrator<br/>
-2c,i)```python -m pip install --upgrade pip```<br/>
-2c,ii)```pip install --upgrade https://github.com/codedread/scour/archive/master.zip```<br/>
-3)[svgcleaner](https://github.com/RazrFalcon/svgcleaner)<br/>
-3a)Download "Visual Studio Community" https://www.visualstudio.com/downloads/ (i.e. https://visualstudio.microsoft.com/de/downloads/ )<br/>
-3b)Add `Desktop development with C++`, see https://github.com/rust-lang/rust/issues/49519#issuecomment-377569726<br/>
-3c)Download&Install https://www.rust-lang.org/ <br/>
-3d)Add "%USERPROFILE%\.cargo\bin" to enviroment variable %Path%<br/>
- -(Option-i)Run cmd.exe; type ```set PATH=%PATH%;%USERPROFILE%\.cargo\bin```<br/>
- -(Option-ii)Run Sysdm.cpl; to to the advanced-Tab; Environemt variables...; click Path, click Edit; add ```%USERPROFILE%\.cargo\bin```<br/>
-3e)cmd.exe: ```cargo install svgcleaner --force --git https://github.com/RazrFalcon/svgcleaner```<br/>
-4)[svgo](https://github.com/svg/svgo)<br/>
-4a)Install node.js: https://nodejs.org/  (i.e. https://nodejs.org/de/ )<br/>
-4b)cmd.exe: ```npm install -g svgo```<br/>
-5)Cygwin<br/>
-5a)Download&Install (32bit or 64bit) https://cygwin.com/install.html (in some cases you have to deactivate Virusprotection (i.e. Avast makes Problemms without reporting))<br/>
-6)cygwin.exe: `/usr/bin/python3 -m pip install scour`
 
 ### Linux (for Windows use WSL from Microsoft)
 
@@ -96,6 +49,7 @@ cargo install svgcleaner --force --git https://github.com/RazrFalcon/svgcleaner
 #wget https://nodejs.org/dist/latest/node-v15.4.0-linux-x64.tar.gz
 #tar -zxvf node-v15.4.0-linux-x64.tar.gz
 #export PATH=$PATH:~/prgm/node-v15.4.0-linux-x64/bin:
+#curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash - 
 sudo npm i -g npm
 sudo npm install -g svgo
 ```
