@@ -53,11 +53,8 @@ sed -i "s/<tspan x=\"0\" y=\"0\">/<tspan>/g" $i #reduce options in tspan
 sed -ri "s/<tspan>([]\[[:alnum:]\$\^\\\_\{\}= #\,\"\.\(\)\’\&\;\/Επιβάτες¸\°\'\"\@\:−-]*)<\/tspan>([ ]*)/\1/g" $i #remove unnecesarry <tspan>...</tspan> without attributes
 sed -ri "s/<tspan[-[:lower:][:digit:] =\"\.]+> <\/tspan>([ ]*)//g" $i #remove useless,empty <tspan (...)> </tspan> without text
 
-#<text transform="matrix\(([[:digit:]]+) 0 0 ([[:digit:]]+) 3455.7 1308.1\)">Central</text>
-#<g transform="translate(3455.7 1308.1)"><text transform="scale(4.8 4.8)">Central</text></g>
 
 #sed -ri "s/<text transform=\"matrix\(([[:digit:]\.]+) 0 0 ([[:digit:]\.]+) ([[:digit:]\.]+) ([[:digit:]\.]+)\)\">([]\[[:alnum:]\$\^\\\_\{\}= #\,\"\.\(\)\’\&\;\/Επιβάτες¸\°\'\"\@\:−-]*)<\/text>([ ]*)/<g transform=\"translate\(\3 \4\)\"><text transform=\"scale\(\1 \2\)\">\5<\/text><\/g>/g" $i #remove unnecesarry <tspan>...</tspan> without attributes
-
 
 sed -ri "s/<g([-[:alnum:]\(\)\. ,;:=\"#]*) font-size=\"([[:digit:]\.]*)\"([-[:alnum:]\(\)\. ,;:=\"#]*)>((<text|[[:alnum:]\$\^\\\_\{\}= #\,\"\.\(\)\’\&\;\/\'\"\@\:−-]*|>|<\/text>|<tspan|<\/tspan>)*)<text/<g\1 font-size=\"\2\"\3>\4<text font-size=\"\2\"/g" $i
 
@@ -76,7 +73,7 @@ sed -ri  -e ':a' -e 'N' -e '$!ba' -e "s/<text([-[:alnum:]\,\.\"\=\:\ #\(\)]*)( x
 # <text x="116.28" y="109.74" stroke-width=".75"><tspan x="116.28" y="109.74">CH</tspan></text>
 # <text x="-.36" y="42.46" id="g" font-size="16.29" stroke-linecap="round" stroke-linejoin="round" stroke-width=".75"><tspan x="-.36" y="42.46">H C</tspan></text>
 #<text x="739.9" y="1932.4"><tspan font-style="italic" font-weight="400" x="745" y="1932.4">t<tspan baseline-shift="sub" font-size="32.104">0</tspan> +h</tspan></text>
-sed -ri  -e ':a' -e 'N' -e '$!ba' -e "s/<text( x=\"[-[:digit:]\.\ ]+\" y=\"[-[:digit:]\.\ ]+\"|)([-[:alnum:]\,\.\"\=\:\ \#\(\)\%\']*)>[[:space:]]*<tspan([-[:alnum:]\,\.\"\=\:\ \#\'\(\)]*) x=\"([-[:digit:]\.\ ]+)\" y=\"([-[:digit:]\.\ ]+)\"([-[:alnum:]\,\.\"\=\:\ #]*)>([-–[:alnum:]\.\ \,\'\♭\♯\/%≈¹²³⁴⁶⁷⁸⁹•…\{\(\)\+\ä\ü\á\…°_]*)<\/tspan>/<text x=\"\4\" y=\"\5\"\2\3\6>\7/g" $i #removes the first tspan of a text element
+sed -ri  -e ':a' -e 'N' -e '$!ba' -e "s/<text( x=\"[-[:digit:]\.\ ]+\" y=\"[-[:digit:]\.\ ]+\"|)([-[:alnum:]\,\.\"\=\:\ \#\(\)\%\']*)>[[:space:]]*<tspan([-[:alnum:]\,\.\"\=\:\ \#\'\(\)]*) x=\"([-[:digit:]\.\ ]+)\" y=\"([-[:digit:]\.\ ]+)\"([-[:alnum:]\,\.\"\=\:\ #]*)>([-–[:alnum:]\.\ \,\'\♭\♯\/%≈¹²³⁴⁶⁷⁸⁹•…\{\(\)\+\ä\ü\á\…°_$]*)<\/tspan>/<text x=\"\4\" y=\"\5\"\2\3\6>\7/g" $i #removes the first tspan of a text element
 
 
 

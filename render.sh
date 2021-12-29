@@ -12,6 +12,7 @@ for file in *.svg
 
  echo c-librsvg:24020,24021,system,251
  #time taskset -c 0 /home/jokalliau/prgm/librsvg-2.40.20/rsvg-convert "$file" >"${file%.svg}_librsvg24020.png"
+ PATH=$PATH:~/prgm/libcroco-0.6.13/src/.libs
  time taskset -c 0 ~/prgm/librsvg-2.40.21/rsvg-convert "$file" >"${file%.svg}_librsvg24021.png"
 
  echo system-librsvg
