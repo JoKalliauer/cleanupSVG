@@ -39,7 +39,7 @@ if [ -f "/etc/debian_version" ]; then
  sudo apt install python3-pip cargo npm inkscape optipng scour librsvg2-bin  python3-scour
 fi
 if [ "$(grep -Ei 'fedora|redhat' /etc/*release)" ]; then
- sudo dnf install python3-pip cargo npm inkscape optipng python3-scour
+ sudo dnf install python3-pip cargo npm inkscape optipng python3-scour libcroco
 fi
 python3 -m pip install --upgrade pip # --user
 export PATH=$PATH:~/.local/bin:~/.cargo/bin # add this to your ~/.bashrc
