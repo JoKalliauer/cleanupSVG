@@ -46,7 +46,7 @@ export PATH=$PATH:~/.local/bin:~/.cargo/bin # add this to your ~/.bashrc
 pip3 install --upgrade https://github.com/codedread/scour/archive/master.zip
 #curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh #https://www.rust-lang.org/tools/install
 cargo install svgcleaner --force --git https://github.com/RazrFalcon/svgcleaner
-argo install resvg
+cargo install resvg
 
 #wget https://nodejs.org/dist/latest/node-v15.4.0-linux-x64.tar.gz
 #tar -zxvf node-v15.4.0-linux-x64.tar.gz
