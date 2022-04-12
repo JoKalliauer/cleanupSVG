@@ -36,7 +36,7 @@ fi
 
 echo scour ${file} to $i begin, min=${minfilesize}, meta=$meta, META= $META, INDENT=$INDENT
 
-scour -i ${file} -o $i --keep-unreferenced-defs --remove-titles --remove-descriptions --set-precision=5 $META $INDENT --renderer-workaround --disable-style-to-xml  --set-c-precision=5  --disable-simplify-colors --create-groups #--enable-viewboxing #  
+scour -i ${file} -o $i --keep-unreferenced-defs --remove-titles --remove-descriptions --set-precision=5 $META $INDENT --renderer-workaround --disable-style-to-xml  --set-c-precision=5  --disable-simplify-colors --create-groups --keep-editor-data #--enable-viewboxing #  
 
 
 # == min == 
