@@ -130,6 +130,7 @@ sed -ri "s/<tspan[-[:alnum:]= \"\.#\(\);:,\'%]*>[[:space:]]*<\/tspan>([ ]*)//g" 
 
 #selfclosing groups
 sed -i "s/<g[-[:alnum:]=\"\(\)\.,_ :]*\/>/ /g" $i
+sed -i "s/<switch[-[:alnum:]=\"\(\)\.,_ :#%]*\/>/ /g" $i
 
 #two lineforward to one lineforward
 sed -i -e ':a' -e 'N' -e '$!ba' -e 's/\n\n/\n/g' $i
