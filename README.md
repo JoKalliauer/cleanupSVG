@@ -17,9 +17,9 @@ Each of the files work independedly.
 
 
 This script is tested on<br/>
--Fedora 32,33,34,35
+-Fedora 32,33,34,35,36
 -[Ubuntu](https://www.ubuntu.com/download/desktop) 16.04, 18.04, 20.04<br/>
--Windows Subsystem for Linux (Ubuntu 20.04)
+-Windows11 Subsystem for Linux (Ubuntu 20.04,22.04)
 -Windows with [Cygwin](https://cygwin.com/install.html) (not recommended)<br/>
 
 Similar scripts<br/>
