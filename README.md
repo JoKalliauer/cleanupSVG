@@ -35,8 +35,8 @@ Similar scripts<br/>
 
 ```
 if [ -f "/etc/debian_version" ]; then
- sudo add-apt-repository ppa:inkscape.dev/stable
  sudo apt install python3-pip cargo npm inkscape optipng scour librsvg2-bin  python3-scour
+ sudo apt install openjdk-18-jre-headless #any java-version other options are openjdk-11-jre-headless  default-jre openjdk-18-jre-headless openjdk-8-jre-headless openjdk-17-jre-headless
 fi
 if [ "$(grep -Ei 'fedora|redhat' /etc/*release)" ]; then
  sudo dnf install python3-pip cargo npm inkscape optipng python3-scour libcroco
