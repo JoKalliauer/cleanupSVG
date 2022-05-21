@@ -248,6 +248,9 @@ sed -ri "s/font-weight=\"normal\"/font-weight=\"400\"/g" $i
 # transform="matrix(.23989 0 0 .23812 28.85 97.36)"
 sed -ri 's/ height="100%" transform="matrix\(.23([[:digit:]\. ]+)\)" width="100%"/ transform="matrix\(.239\1\)"/' $i
 
+#https://commons.wikimedia.org/wiki/File:Wikidata_stamp.svg
+sed -i 's/="RGB(/="rgb(/g' $i
+
 echo $i finish
 
 
