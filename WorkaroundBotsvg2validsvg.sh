@@ -64,7 +64,7 @@ elif  [ $HOSTNAME = localhost.localdomain ]; then
  PC=local
 elif  [ $HOSTNAME = fedora ] || [ $HOSTNAME = lws84.imws.tuwien.ac.at ]; then
  PC=local
-elif [[ $HOSTNAME =  tools-sgewebgrid-lighttpd-* ]]; then
+elif [[ $HOSTNAME =  tools-sgewebgrid-lighttpd-* ]] || [[ $HOSTNAME = tools-sgeweblight-10-20 ]]; then
  PC=WikiMedia
 else
  echo did not recognice HOSTNAME $HOSTNAME
