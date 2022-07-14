@@ -56,7 +56,7 @@ if [ $HOSTNAME = LAPTOP-K1FUMMIP ]; then
  PC=local
 elif [ $HOSTNAME = jkalliau-Z87M-D3H ]; then
  PC=local
-elif [ $HOSTNAME = tools-sgebastion-07 ] || [ $HOSTNAME = tools-sgebastion-10 ]; then
+elif [[ $HOSTNAME = tools-sgebastion-07 ]] || [[ $HOSTNAME = tools-sgebastion-10 ]]; then
  PC=WikiMedia
 elif [ $HOSTNAME = DESKTOP-7VKND0M ]; then
  PC=local
