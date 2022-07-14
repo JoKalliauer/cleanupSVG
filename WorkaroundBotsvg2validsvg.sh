@@ -67,7 +67,7 @@ elif  [ $HOSTNAME = fedora ] || [ $HOSTNAME = lws84.imws.tuwien.ac.at ]; then
 elif [[ $HOSTNAME =  tools-sgewebgrid-lighttpd-* ]] || [[ $HOSTNAME = tools-sgeweblight-10-20 ]]; then
  PC=WikiMedia
 else
- echo did not recognice HOSTNAME $HOSTNAME
+ echo did not recognice HOSTNAME L70 $HOSTNAME
 fi
 
 chmod u+r *
@@ -87,7 +87,7 @@ if [ $PC = local ]; then
  wget -q https://commons.wikimedia.org/wiki/Special:FilePath/$i -O $i
  export ScourJK="python3 -m scour.scour"
 else
- if [ $HOSTNAME = tools-sgebastion-07 ]; then
+ if [[ $HOSTNAME = tools-sgebastion-* ]]; then
   #this is needed to run bot
   rm -f $1
   rm -f *.svg
@@ -95,7 +95,7 @@ else
   export ScourJK="python3 -m scour.scour"
 
  else
-  echo did not recognice HOSTNAME $HOSTNAME
+  echo did not recognice HOSTNAME L98 $HOSTNAME
  fi
 fi
 export PATH=/data/project/svgworkaroundbot/prgm2/pythonJK/PythonIn/bin/:/data/project/svgworkaroundbot/SVGWorkaroundBot/cleanupSVG-master/:/data/project/svgworkaroundbot/prgm/svgcleaner/:$PATH:~/bin/
@@ -362,7 +362,7 @@ else
   ./run.sh $i
   #rm $i
  else
-  echo did not recognice HOSTNAME $HOSTNAME
+  echo did not recognice HOSTNAME L365 $HOSTNAME
  fi
 fi
 
