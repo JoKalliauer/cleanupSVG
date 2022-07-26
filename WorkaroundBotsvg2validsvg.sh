@@ -35,7 +35,7 @@ if [ -z ${EinzeilTags+x} ]; then
  EinzeilTags=YES
 fi
 if [ -z ${ScourScour+x} ]; then
- echo set scour to yes
+ echo set scour to yes L38
  ScourScour=YES
 fi
 if [ -z ${validValid+x} ]; then
@@ -54,11 +54,11 @@ fi
 
 if [ $HOSTNAME = LAPTOP-K1FUMMIP ]; then
  PC=local
-elif [ $HOSTNAME = jkalliau-Z87M-D3H ]; then
+elif [ $HOSTNAME = jkalliau-Z87M-D3H ] || [ $HOSTNAME = DESKTOP-7VKND0M ]; then
  PC=local
 elif [[ $HOSTNAME = tools-sgebastion-* ]]; then
  PC=WikiMedia
-elif [ $HOSTNAME = DESKTOP-7VKND0M ]; then
+elif [ $HOSTNAME = WWS84JK ]; then
  PC=local
 elif  [ $HOSTNAME = localhost.localdomain ]; then
  PC=local
@@ -350,19 +350,19 @@ sed -ri 's/ font-family=\"(Arial|MyriadPro|Myriad Pro)/ font-family=\"Liberation
 
 export uploadcomment="WorkaroundForLibrsvgBugs Scour$ScourScour SVGCleaner$SVGCleaner Valid$validValid [[User:SVGWorkaroundBot/source]], solves bugs such as: [[phab:T55899]], [[phab:T68672]], [[phab:T43424]], [[phab:T193929]], [[phab:T35245]] reduce invalid-Errors, convert flowRoot to SVG1.1-text, please see file-description-page on commons for the actual bug"
 
-if [ $PC = local ]; then
- echo "$uploadcomment"
- echo do upload manually
-else
- if [ $PC = WikiMedia ]; then
+#if [ $PC = local ]; then
+# echo "$uploadcomment"
+# echo do upload manually
+#else
+# if [ $PC = WikiMedia ]; then
   #echo no upload
   echo
   echo python3 upload.py $i -keep -ignorewarn -noverify -descfile "$uploadcomment"
   echo
-  ./run.sh $i
+  #./run.sh $i
   #rm $i
- else
-  echo did not recognice HOSTNAME L365 $HOSTNAME
- fi
-fi
+# else
+#  echo did not recognice HOSTNAME L365 $HOSTNAME
+# fi
+#fi
 
