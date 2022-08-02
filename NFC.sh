@@ -9,7 +9,7 @@ chmod u+r *
 ./Inkscape11BatchConverter.sh
 ./scour4compression.sh
 ./cleaner4compression.sh
-./o4compression.sh
+#./o4compression.sh
 
 #./UngroupByInkscape.sh
 #./ResizeByInkscape.sh
@@ -20,7 +20,8 @@ chmod u+r *
 ./CleanerFull.sh
 #./cleaner4compression.sh
 #./o4compression.sh
-./OptimizerFull.sh
+#./OptimizerFull.sh
+./O2.sh
 #./o4compression.sh
 
 #./validBycleaner.sh
