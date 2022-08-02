@@ -35,7 +35,7 @@ if [ -z ${EinzeilTags+x} ]; then
  EinzeilTags=YES
 fi
 if [ -z ${ScourScour+x} ]; then
- echo set scour to yes
+ echo set scour to yes L38
  ScourScour=YES
 fi
 if [ -z ${validValid+x} ]; then
@@ -54,20 +54,20 @@ fi
 
 if [ $HOSTNAME = LAPTOP-K1FUMMIP ]; then
  PC=local
-elif [ $HOSTNAME = jkalliau-Z87M-D3H ]; then
+elif [ $HOSTNAME = jkalliau-Z87M-D3H ] || [ $HOSTNAME = DESKTOP-7VKND0M ]; then
  PC=local
-elif [ $HOSTNAME = tools-sgebastion-07 ]; then
+elif [[ $HOSTNAME = tools-sgebastion-* ]]; then
  PC=WikiMedia
-elif [ $HOSTNAME = DESKTOP-7VKND0M ]; then
+elif [ $HOSTNAME = WWS84JK ]; then
  PC=local
 elif  [ $HOSTNAME = localhost.localdomain ]; then
  PC=local
 elif  [ $HOSTNAME = fedora ] || [ $HOSTNAME = lws84.imws.tuwien.ac.at ]; then
  PC=local
-elif [[ $HOSTNAME =  tools-sgewebgrid-lighttpd-* ]]; then
+elif [[ $HOSTNAME =  tools-sgewebgrid-lighttpd-* ]] || [[ $HOSTNAME = tools-sgeweblight-10-20 ]]; then
  PC=WikiMedia
 else
- echo did not recognice HOSTNAME $HOSTNAME
+ echo did not recognice HOSTNAME L70 $HOSTNAME
 fi
 
 chmod u+r *
@@ -87,7 +87,7 @@ if [ $PC = local ]; then
  wget -q https://commons.wikimedia.org/wiki/Special:FilePath/$i -O $i
  export ScourJK="python3 -m scour.scour"
 else
- if [ $HOSTNAME = tools-sgebastion-07 ]; then
+ if [[ $HOSTNAME = tools-sgebastion-* ]]; then
   #this is needed to run bot
   rm -f $1
   rm -f *.svg
@@ -95,7 +95,7 @@ else
   export ScourJK="python3 -m scour.scour"
 
  else
-  echo did not recognice HOSTNAME $HOSTNAME
+  echo did not recognice HOSTNAME L98 $HOSTNAME
  fi
 fi
 export PATH=/data/project/svgworkaroundbot/prgm2/pythonJK/PythonIn/bin/:/data/project/svgworkaroundbot/SVGWorkaroundBot/cleanupSVG-master/:/data/project/svgworkaroundbot/prgm/svgcleaner/:$PATH:~/bin/
@@ -350,19 +350,19 @@ sed -ri 's/ font-family=\"(Arial|MyriadPro|Myriad Pro)/ font-family=\"Liberation
 
 export uploadcomment="WorkaroundForLibrsvgBugs Scour$ScourScour SVGCleaner$SVGCleaner Valid$validValid [[User:SVGWorkaroundBot/source]], solves bugs such as: [[phab:T55899]], [[phab:T68672]], [[phab:T43424]], [[phab:T193929]], [[phab:T35245]] reduce invalid-Errors, convert flowRoot to SVG1.1-text, please see file-description-page on commons for the actual bug"
 
-if [ $PC = local ]; then
- echo "$uploadcomment"
- echo do upload manually
-else
- if [ $PC = WikiMedia ]; then
+#if [ $PC = local ]; then
+# echo "$uploadcomment"
+# echo do upload manually
+#else
+# if [ $PC = WikiMedia ]; then
   #echo no upload
   echo
   echo python3 upload.py $i -keep -ignorewarn -noverify -descfile "$uploadcomment"
   echo
-  ./run.sh $i
+  #./run.sh $i
   #rm $i
- else
-  echo did not recognice HOSTNAME $HOSTNAME
- fi
-fi
+# else
+#  echo did not recognice HOSTNAME L365 $HOSTNAME
+# fi
+#fi
 
