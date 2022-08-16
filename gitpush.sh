@@ -11,7 +11,7 @@ git config pull.rebase false # Merge (Standard-Strategie)
 git pull
 #git status
 git add .
-git reset -- *.svg *.xml *.xsvg up3.txt  pattypan*.xls *.png *:Zone.Identifier
+git reset -- *.svg *.xml *.xsvg up3.txt  pattypan*.xls *.png *:Zone.Identifier *.pdf
 git status
 
 
