@@ -92,7 +92,7 @@ module.exports = {
     },
     {
       name: 'removeDimensions',
-      active: true
+      active: false //changes scaling of image
     },
     {
       name: 'removeDoctype',
@@ -150,7 +150,7 @@ module.exports = {
       active: true
     },
     {
-      name: 'removeViewBox',
+      name: 'removeViewBox', 
       active: true
     },
     {
