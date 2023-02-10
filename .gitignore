@@ -3,3 +3,4 @@
 *.svg
 node_modules/*
 *json
+*.xsvg

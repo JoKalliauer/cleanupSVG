@@ -17,10 +17,10 @@ module.exports = {
       name: 'cleanupEnableBackground',
       active: true
     },
-    {
+/*    {
       name: 'cleanupIDs',
       active: true
-    },
+    },*/
 /*    {
       name: 'cleanupListOfValues',//https://github.com/svg/svgo/issues/1402
     },*/
@@ -78,10 +78,10 @@ module.exports = {
       name: 'moveGroupAttrsToElems',
       active: true
     },
-    {
+/*    {
       name: 'removeAttrs',
       active: false
-    },
+    },*/
     {
       name: 'removeComments',
       active: true
