@@ -90,6 +90,10 @@ module.exports = {
       name: 'removeDesc',
       active: true
     },
+	{
+      name: 'removeDimensions',
+      active: true //changes scaling of image
+    },
     {
       name: 'removeDoctype',
       active: false

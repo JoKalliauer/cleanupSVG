@@ -54,6 +54,7 @@ cargo install resvg
 #curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash - 
 sudo npm i -g npm
 sudo npm install -g svgo
+npm i svgo
 ```
 
 ## Install cleanupSVG (portable if prerequiary exits)

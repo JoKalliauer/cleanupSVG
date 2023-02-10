@@ -230,10 +230,7 @@ sed -ri "s/<style( id=\"[[:alnum:]]*\"|)>/<style type=\"text\/css\"\1>/" $i
 
 #solved librsvg-Bug T193929 https://phabricator.wikimedia.org/T193929
 #sed -i "s/ xlink:href=\"data:image\/jpg;base64,/ xlink:href=\"data:image\/jpeg;base64,/g" $i
-#sed -i "s/ xlink:href=\"data:;base64,\/9j\/4AAQSkZJRgABAgAAZABkAAD\/7AARRHVja3kAAQAEAAAAHgAA/ xlink:href=\"data:image\/jpeg;base64,\/9j\/4AAQSkZJRgABAgAAZABkAAD\/7AARRHVja3kAAQAEAAAAHgAA/" $i
-#sed -ri "s/ xlink:href=\"data:;base64,( |)iVBORw0KGgoAAAANSUhEUgAA/ xlink:href=\"data:image\/png;base64,iVBORw0KGgoAAAANSUhEUgAA/" $i
-#sed -ri "s/ xlink:href=\"data:image\/png;base64,( |)\/9j\/4AAQSkZJRgABAQAAAQABAAD/ xlink:href=\"data:image\/jpeg;base64,\/9j\/4AAQSkZJRgABAQAAAQABAAD/" $i #png->jpeg
-sed -ri "s/ xlink:href=\"data:(|image\/png|image\/jpg);base64,( |)\/9j\/4AAQSkZJRgABAgAAZABkAAD\// xlink:href=\"data:image\/jpeg;base64,\/9j\/4AAQSkZJRgABAgAAZABkAAD\//" $i
+sed -ri "s/ xlink:href=\"data:(|image\/png|image\/jpg);base64,( |)\/9j\/4AAQSkZJRgABA/ xlink:href=\"data:image\/jpeg;base64,\/9j\/4AAQSkZJRgABA/" $i                               # xlink:href="data:image/jpg;base64, /9j/4AAQSkZJRgABAQEBJQElAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2
 sed -ri "s/ xlink:href=\"data:;base64,( |)iVBORw0KGgoAAAANSUhEUgAA/ xlink:href=\"data:image\/png;base64,iVBORw0KGgoAAAANSUhEUgAA/" $i
 sed -ri "s/ xlink:href=\"data:;base64,\/9j\/7QAsUGhvdG9zaG9wIDMuMAA4QklNA\+0AAAAAABAASAAAAAEAAQBIAAAAAQAB\/\+4AJkFkb2Jl/data:image\/jpeg;base64,\/9j\/7QAsUGhvdG9zaG9wIDMuMAA4QklNA\+0AAAAAABAASAAAAAEAAQBIAAAAAQAB\/\+4AJkFkb2Jl/" $i  #https://wordpress.stackexchange.com/a/212334/197645
 

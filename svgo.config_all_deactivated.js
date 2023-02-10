@@ -1,94 +1,102 @@
 'use strict'
 
-// const { extendDefaultPlugins } = require('svgo')
+const { extendDefaultPlugins } = require('svgo')
 
 module.exports = {
   multipass: true,
   js2svg: {
     pretty: true,
-    indent: 1
+    indent: 2
   },
-  plugins: ([
+  plugins: [
     {
       name: 'cleanupAttrs',
-      active: true
+      active: false
     },
     {
       name: 'cleanupEnableBackground',
-      active: true
+      active: false
     },
     {
-      name: 'cleanupIDs',
-      active: true
+      name: 'cleanupIds',
+      active: false
     },
-/*    {
-      name: 'cleanupListOfValues',//https://github.com/svg/svgo/issues/1402
-    },*/
+    {
+      name: 'cleanupListOfValues',
+      active: false
+    },
     {
       name: 'cleanupNumericValues',
-      active: true
+      active: false
     },
     {
       name: 'collapseGroups',
-      active: true
+      active: false
     },
     {
       name: 'convertColors',
-      active: true
+      active: false
     },
     {
       name: 'convertPathData',
-      active: true,
+      active: false,
       params: {
         noSpaceAfterFlags: false
       }
     },
     {
-      name: 'convertShapeToPath', //https://github.com/svg/svgo/issues/1466
-      active: true
+      name: 'convertShapeToPath',
+      active: false
     },
     {
       name: 'convertStyleToAttrs',
-      active: true
+      active: false
     },
     {
       name: 'convertTransform',
-      active: true
+      active: false
     },
     {
       name: 'inlineStyles',
-      active: true
+      active: false
     },
     {
       name: 'mergePaths',
-      active: true,
+      active: false,
       params: {
         noSpaceAfterFlags: false
       }
     },
     {
       name: 'minifyStyles',
-      active: true
+      active: false
     },
     {
       name: 'moveElemsAttrsToGroup',
-      active: true
+      active: false
     },
     {
       name: 'moveGroupAttrsToElems',
-      active: true
+      active: false
     },
     {
       name: 'removeAttrs',
-      active: true,
+      active: false,
+      params: {
+        attrs: [
+          'data-name',
+          'fill',
+          'clip-rule'
+        ]
+      }
     },
     {
       name: 'removeComments',
-      active: true
+      active: false
     },
     {
       name: 'removeDesc',
-      active: true
+      active: false
     },
     {
       name: 'removeDoctype',
@@ -96,58 +104,57 @@ module.exports = {
     },
     {
       name: 'removeEditorsNSData',
-      active: true
+      active: false
     },
     {
       name: 'removeEmptyAttrs',
-      active: true
+      active: false
     },
     {
       name: 'removeEmptyContainers',
-      active: true
+      active: false
     },
     {
       name: 'removeEmptyText',
-      active: true
+      active: false
     },
     {
       name: 'removeHiddenElems',
-      active: true
+      active: false
     },
     {
       name: 'removeMetadata',
-      active: true
+      active: false
     },
     {
       name: 'removeNonInheritableGroupAttrs',
-      active: true
+      active: false
     },
     {
       name: 'removeTitle',
-      active: true
+      active: false
     },
     {
       name: 'removeUnknownsAndDefaults',
-      active: true,
       params: {
         keepRoleAttr: true
       }
     },
     {
       name: 'removeUnusedNS',
-      active: true
+      active: false
     },
     {
       name: 'removeUselessDefs',
-      active: true
+      active: false
     },
     {
       name: 'removeUselessStrokeAndFill',
-      active: true
+      active: false
     },
     {
       name: 'removeViewBox',
-      active: true
+      active: false
     },
     {
       name: 'removeXMLNS',
@@ -159,7 +166,7 @@ module.exports = {
     },
     {
       name: 'sortAttrs',
-      active: true
+      active: false
     }
-  ])
+  ]
 }
