@@ -18,7 +18,7 @@ module.exports = {
       active: true
     },
     {
-      name: 'cleanupIDs',
+      name: 'cleanupIds',
       active: true
     },
 /*    {

@@ -17,10 +17,10 @@ module.exports = {
       name: 'cleanupEnableBackground',
       active: true
     },
-    {
-      name: 'cleanupIds',
+/*    {
+      name: 'cleanupIDs',
       active: true
-    },
+    },*/
 /*    {
       name: 'cleanupListOfValues',//https://github.com/svg/svgo/issues/1402
     },*/
@@ -78,13 +78,10 @@ module.exports = {
       name: 'moveGroupAttrsToElems',
       active: true
     },
-    {
+/*    {
       name: 'removeAttrs',
-      active: true,
-	  params: {
-        attrs: "(delJK|deleteJK)"
-      }
-    },
+      active: false
+    },*/
     {
       name: 'removeComments',
       active: true
@@ -93,9 +90,9 @@ module.exports = {
       name: 'removeDesc',
       active: true
     },
-	{
+    {
       name: 'removeDimensions',
-      active: true //changes scaling of image
+      active: false //changes scaling of image
     },
     {
       name: 'removeDoctype',
@@ -110,8 +107,8 @@ module.exports = {
       active: true
     },
     {
-      name: 'removeEmptyContainers',
-      active: true
+      name: 'removeEmptyContainers', //https://github.com/svg/svgo/issues/1194 https://github.com/svg/svgo/issues/1618
+      active: false
     },
     {
       name: 'removeEmptyText',
@@ -153,7 +150,7 @@ module.exports = {
       active: true
     },
     {
-      name: 'removeViewBox',
+      name: 'removeViewBox', 
       active: true
     },
     {
