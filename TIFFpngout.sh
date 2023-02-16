@@ -3,7 +3,7 @@
 echo $1
 
 if [ -z $1 ]; then
- for file in *.png
+ for file in *.tiff
   do
 
   echo $file start #Add a empty line to split the output
@@ -15,7 +15,7 @@ if [ -z $1 ]; then
   echo $file end #Add a empty line to split the output
 
   done
- for file in *.png
+ for file in *.tiff
   do
 
   echo $file oxipng start #Add a empty line to split the output
@@ -25,7 +25,7 @@ if [ -z $1 ]; then
   echo $file oxipng end #Add a empty line to split the output
 
   done
- for file in *.png
+ for file in *.tiff
   do
 
   echo $file pngout start #Add a empty line to split the output

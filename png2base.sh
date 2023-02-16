@@ -121,7 +121,8 @@ for fileSource in *.$sourceType
 		  #convert ${file} -transparent white -trim t${file}
 		  if [ "$sourceType" = "$validInput4" ];then
 		   optipng ${file}
-		   pngout ${file}
+     pingo -s9 ${file}
+		   #pngout ${file}
 		  fi
 		  openssl base64 -in ${file} -out ${file}.txt
 		 #openssl base64 -in ${file} -out ${file}.txt
