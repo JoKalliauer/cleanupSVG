@@ -232,7 +232,7 @@ sed -ri "s/<style( id=\"[[:alnum:]]*\"|)>/<style type=\"text\/css\"\1>/" $i
 #sed -i "s/ xlink:href=\"data:image\/jpg;base64,/ xlink:href=\"data:image\/jpeg;base64,/g" $i
 sed -ri "s/ xlink:href=\"data:(|image\/png|image\/jpg);base64,( |)\/9j\/4AAQSkZJRgABA/ xlink:href=\"data:image\/jpeg;base64,\/9j\/4AAQSkZJRgABA/" $i                               # xlink:href="data:image/jpg;base64, /9j/4AAQSkZJRgABAQEBJQElAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2
 sed -ri "s/ xlink:href=\"data:;base64,( |)iVBORw0KGgoAAAANSUhEUgAA/ xlink:href=\"data:image\/png;base64,iVBORw0KGgoAAAANSUhEUgAA/" $i
-sed -ri "s/ xlink:href=\"data:;base64,\/9j\/7QAsUGhvdG9zaG9wIDMuMAA4QklNA\+0AAAAAABAASAAAAAEAAQBIAAAAAQAB\/\+4AJkFkb2Jl/data:image\/jpeg;base64,\/9j\/7QAsUGhvdG9zaG9wIDMuMAA4QklNA\+0AAAAAABAASAAAAAEAAQBIAAAAAQAB\/\+4AJkFkb2Jl/" $i  #https://wordpress.stackexchange.com/a/212334/197645
+sed -ri "s/ xlink:href=\"data:;base64,\/9j\/7QA/data:image\/jpeg;base64,\/9j\/7QA/" $i  #https://wordpress.stackexchange.com/a/212334/197645
 
 # # #solved librsvg-Bug T194192 https://phabricator.wikimedia.org/T194192
 # # #<svg font-family="ScriptS" font-size="5" viewBox="0,0,128,128"
