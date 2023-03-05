@@ -26,11 +26,11 @@ module.exports = {
     },*/
     {
       name: 'cleanupNumericValues',
-      active: true
+      active: false
     },
     {
       name: 'collapseGroups',
-      active: true
+      active: false
     },
     {
       name: 'convertColors',
@@ -38,14 +38,14 @@ module.exports = {
     },
     {
       name: 'convertPathData',
-      active: true,
+      active: false,
       params: {
         noSpaceAfterFlags: false
       }
     },
     {
       name: 'convertShapeToPath', //https://github.com/svg/svgo/issues/1466
-      active: true
+      active: false
     },
     {
       name: 'convertStyleToAttrs', // https://github.com/svg/svgo/issues/1509
@@ -53,7 +53,7 @@ module.exports = {
     },
     {
       name: 'convertTransform',
-      active: true
+      active: false
     },
     {
       name: 'inlineStyles', //keep CSS
@@ -68,7 +68,7 @@ module.exports = {
     },
     {
       name: 'minifyStyles',
-      active: true
+      active: false
     },
     {
       name: 'moveElemsAttrsToGroup',
@@ -84,11 +84,11 @@ module.exports = {
     },*/
     {
       name: 'removeComments',
-      active: true
+      active: false
     },
     {
       name: 'removeDesc',
-      active: true
+      active: false
     },
     {
       name: 'removeDimensions',
@@ -100,7 +100,11 @@ module.exports = {
     },
     {
       name: 'removeEditorsNSData',
-      active: true
+      active: false
+    },
+    {
+      name: 'removeElementsByAttr',
+      active: false
     },
     {
       name: 'removeEmptyAttrs',
@@ -116,7 +120,7 @@ module.exports = {
     },
     {
       name: 'removeHiddenElems',
-      active: true
+      active: false // https://commons.wikimedia.org/wiki/Help:SVG_guidelines#Invalid_elements_that_should_be_kept
     },
     {
       name: 'removeMetadata', //keep rdf-data
@@ -127,12 +131,20 @@ module.exports = {
       active: true
     },
     {
+      name: 'removeOffCanvasPaths',
+      active: false
+    },
+    {
+      name: 'removeStyleElement',
+      active: false
+    },
+    {
       name: 'removeTitle',
-      active: true
+      active: false
     },
     {
       name: 'removeUnknownsAndDefaults',
-      active: true,
+      active: false, // https://commons.wikimedia.org/wiki/Help:SVG_guidelines#Invalid_elements_that_should_be_replaced
       params: {
         keepRoleAttr: true
       }
@@ -151,7 +163,7 @@ module.exports = {
     },
     {
       name: 'removeViewBox', 
-      active: true
+      active: false
     },
     {
       name: 'removeXMLNS',
@@ -159,6 +171,10 @@ module.exports = {
     },
     {
       name: 'removeXMLProcInst',
+      active: false
+    },
+    {
+      name: 'reusePaths',
       active: false
     },
     {
