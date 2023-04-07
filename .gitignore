@@ -4,3 +4,4 @@
 node_modules/*
 *json
 *.xsvg
+*.svg:Zone.Identifier

@@ -90,7 +90,7 @@ python3 -m pip install --upgrade pip # --user
 #sudo pip3 install --upgrade https://github.com/codedread/scour/archive/master.zip
 pip3 install --upgrade https://github.com/codedread/scour/archive/master.zip # --user
 cargo install svgcleaner --git https://github.com/RazrFalcon/svgcleaner
-cargo install usvg --version 0.27.0 # https://github.com/RazrFalcon/resvg/issues/569#issuecomment-1441953903
+cargo install usvg
 cargo install resvg
 sudo npm i -g npm
 npm install
