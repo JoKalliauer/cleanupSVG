@@ -135,3 +135,6 @@ git pull
 
 `cargo install resvg --force --git https://github.com/RazrFalcon/resvg/
 `
+
+### jpegtran (lossless optimizing jpg)
+`sudo apt-get install libjpeg-progs`
