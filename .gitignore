@@ -1,7 +1,17 @@
+# Vector-images
 *.xml
-*.png
 *.svg
+*.xsvg
+*.emf
+*.svg:Zone.Identifier
+*.svgcom.dropbox.attrs
+
+# Raster-images
+*.png
+*.png.txt
+*.svg.jpeg_base64
+*.svg.png_base64
+
+# compiling and installing files
 node_modules/*
 *json
-*.xsvg
-*.svg:Zone.Identifier

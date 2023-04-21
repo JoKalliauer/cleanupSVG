@@ -1,2 +1,9 @@
 # Declare files that will always have LF line endings on checkout.
 *.sh text eol=lf
+
+#https://github.com/desktop/desktop/issues/12482#issuecomment-865256057
+* -text
+
+#https://github.com/desktop/desktop/issues/3841#issuecomment-359423783
+* text=auto 
+*.svg text eol=lf

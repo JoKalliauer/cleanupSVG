@@ -5,6 +5,7 @@ chmod u+r *
 #rm -f *.svg *.xml *.xsvg
 # git config --global user.email "you@example.com"
 # git config --global user.name "Your Name"
+git config --global core.autocrlf false
 git config --global core.eol lf
 git config core.eol lf
 git config pull.rebase false # Merge (Standard-Strategie)

@@ -59,7 +59,6 @@ do
   grep "iVBORw0KGgoAAAANSUhEUgAA" $i > $file.png_base64
   grep "\/9j\/7gAOQWRvYmUAZAAAAAAB/9sAxQACAgIFAgUHBQUHCAcGBwgJCQgICQkLCgoKCgoLDAsLCwsLCwwM"  $i > $file.jpeg_base64
   grep "\/9j\/7gAOQWRvYmUAZAAAAAAA/9sAQwASDg4ODg4VDg4VGxISEhQaGRYWGRoeFxggIBweIx4iISwiHiMhLjMzMy4hPkJCQkI+RERERERERERERERERERE"  $i >> $file.jpeg_base64
-  #grep "\/9j\/4AAQSkZJRgABA..A....AAD\/"  $i >> $file.jpeg_base64
   grep "\/9j\/4AAQSkZJRgABA.......AAD\/"  $i >> $file.jpeg_base64
   #            4AAQSkZJRgABAQEBgQGBAAD
   
