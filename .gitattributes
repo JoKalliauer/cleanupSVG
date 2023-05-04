@@ -7,3 +7,6 @@
 #https://github.com/desktop/desktop/issues/3841#issuecomment-359423783
 * text=auto 
 *.svg text eol=lf
+
+#https://github.com/desktop/desktop/issues/3841#issuecomment-361642026
+* text eol=lf
