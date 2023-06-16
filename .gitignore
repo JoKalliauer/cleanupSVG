@@ -16,3 +16,6 @@
 # compiling and installing files
 node_modules/*
 *json
+
+#Subsystem for Windos
+*Zone.Identifier
