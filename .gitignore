@@ -11,6 +11,7 @@
 *.png.txt
 *.svg.jpeg_base64
 *.svg.png_base64
+*.jpg
 
 # compiling and installing files
 node_modules/*
