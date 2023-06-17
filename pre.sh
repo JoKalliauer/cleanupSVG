@@ -22,6 +22,10 @@
 chmod u+r *
 chmod u+rx *.sh
 
+for file in *.png; do
+mv "$file" `echo ${file} | tr ' ' '_'` ;
+done
+
 for file in *.svg;do
 chmod u+r "${file}" #for running in cygwin
 mv "$file" `echo ${file} | tr ' ' '_'` ;
