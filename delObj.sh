@@ -47,23 +47,17 @@ for file in *.svg;do
  
  sed -ri "s/ <ellipse [-[:alnum:]\"\.= \(\)#\,:;_]*\/>//g" $i #delete ellipses
  
-
- sed -ri "s/<polygon [[:alnum:].\=\" :#]*\/>//g" $i #delete polygons 
+ sed -ri "s/<polygon [-[:alnum:].\=\" :#\(\);]*\/>//g" $i #delete polygons 
  
- #<polyline fill="none" stroke="#000000" points="133.989,230.889 108.729,245.224 146.745,259.351 " id="polyline3807"/>
- sed -ri "s/<polyline [[:alnum:]=\"\. _:;#,]+\/>//g" $i #delete polylines
+ sed -ri "s/<polyline [-[:alnum:]=\"\. _:;#,]+\/>//g" $i #delete polylines
  
- #   <line id="Bund-0" y1="60" y2="160" style="stroke-width:5;stroke:#000000"/>
  sed -ri "s/<line([-[:alnum:]=\" #;:.\_]*)\/>//g" $i #delete lines
- 
-
  
  sed -ri "s/<image ([-[:alnum:]=\,´.\" \:\/\;\+\,#\(\)_]*)>//g" $i # delete images
 
  sed -ri "s/<use [-[:alnum:]=\,\.\" \:\;#\(\)]*\/>//g" $i
  
  sed -ri "s/<switch[-[:alnum:]\"\.= #,]*\/>//g" $i #delte selfclosing switch
- #<switch fill="#231f20" font-family="Liberation Sans,ArialMT" font-size="10"/>
  
  sed -ri -e ':a' -e 'N' -e '$!ba' -e  "s/<g[-[:lower:][:digit:]\"\.= #\(\)\:\,\;]*>[[:space:]]*<\/g>//g" $i #delete empty groups
  sed -ri -e ':a' -e 'N' -e '$!ba' -e  "s/<switch[-[:alnum:]\"\.= #\(\)\:\,\;]*>[[:space:]]*<\/switch>//g" $i #delete empty switch
