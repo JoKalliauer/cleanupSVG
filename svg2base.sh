@@ -50,7 +50,9 @@ do
   sed -ri "s/iVBORw0KGgoAAAANSUhEUgAA/ \niVBORw0KGgoAAAANSUhEUgAA/g" $i #linebreak before PNG
 # sed -ri "s/\/9j\/4AAQSkZJRgABA(..)A(....)AAD\// \n\/9j\/4AAQSkZJRgABA\1A\2AAD\//g" $i #linebreak before JPG
 #/9j/7gAOQWRvYmUAZAAAAAAA/9sAQwASDg4ODg4VDg4VGxISEhQaGRYWGRoeFxggIBweIx4iISwiHiMhLjMzMy4hPkJCQkI+RERERERERERERERERERE
-  sed -ri "s/\/9j\/(4AAQSkZJRgABA|7gAOQWRvYmUAZAAAAAA)/ \n\/9j\/\1/g" $i #linebreak before JPG
+               #/9j/4S..RXhpZgAATU0AKgAAAAgADAEAAAMAAAABGsIAAAEBAAMAAAABGsIAAAECAAMAAAADAAAA
+			   #/9j/4S..RXhpZgAATU0AKgAAAAgADAEAAAMAAAABGsIAAAEBAAMAAAABGsIAAAECAAMAAAADAAAA
+  sed -ri "s/\/9j\/(4AAQSkZJRgABA|4S..RXhpZgAATU0AKgAAAAgADAEAAAMAAAABGsIAAAEBAAMAAAABGsIAAAECAAMAAAADAAAA|7gAOQWRvYmUAZAAAAAA)/ \n\/9j\/\1/g" $i #linebreak before JPG
   sed -ri "s/(AAAAAElFTkSuQmCC| QmCC|=)[ ]*\"(\/>| )/\1\n\"\2/g" $i #linebreak after end
   sed -ri "s/\/\/Z[ ]*\"(\/>| )/p6GehnhmZmZnh5dnhmZ2Z2ZmZnpeWZ6\/\/Z\n\"\1/g" $i
   sed -ri "s/\r/ /" $i
@@ -60,6 +62,7 @@ do
   grep "\/9j\/7gAOQWRvYmUAZAAAAAAB/9sAxQACAgIFAgUHBQUHCAcGBwgJCQgICQkLCgoKCgoLDAsLCwsLCwwM"  $i > $file.jpeg_base64
   grep "\/9j\/7gAOQWRvYmUAZAAAAAAA/9sAQwASDg4ODg4VDg4VGxISEhQaGRYWGRoeFxggIBweIx4iISwiHiMhLjMzMy4hPkJCQkI+RERERERERERERERERERE"  $i >> $file.jpeg_base64
   grep "\/9j\/4AAQSkZJRgABA.......AAD\/"  $i >> $file.jpeg_base64
+  grep "\/9j\/4S..RXhpZgAATU0AKgAAAAgADAEAAAMAAAABGsIAAAEBAAMAAAABGsIAAAECAAMAAAADAAAA"  $i >> $file.jpeg_base64
   #            4AAQSkZJRgABAQEBgQGBAAD
   
   linenumbers=$(wc -l $file.png_base64|awk '{print $1}')
@@ -75,19 +78,16 @@ do
     for ((ln=1;ln<=$linenumbers;ln++))
 	do
 	 	echo $ln
-     sed -n "${ln}p" $file.png_base64 > $file.png${ln}_base64
-     sed -i "s/ /\n/g" $file.png${ln}_base64
-     base64 --decode ${file}.png${ln}_base64 > ${file}_File${ln}.png
+     #sed -n "${ln}p" $file.png_base64 > $file.png${ln}_base64
+     #sed -i "s/ /\n/g" $file.png${ln}_base64
+     #base64 --decode ${file}.png${ln}_base64 > ${file}_File${ln}.png
      
 
-     optipng ${file}_File${ln}.png 
-     #wait
-     pngout ${file}_File${ln}.png &
+     #optipng ${file}_File${ln}.png 
+     ##wait
+     #pngout ${file}_File${ln}.png &
      
 	done
-    #sed -n '2p' $file.png_base64 > $file.png2_base64
-    #sed -i "s/ /\n/g" $file.png2_base64
-    #base64 --decode ${file}.png2_base64 > ${file}_File2.png
    fi #[ "$linenumbers" = 1 ]
   fi # [ "$linenumbers" -gt 0 ]
   
