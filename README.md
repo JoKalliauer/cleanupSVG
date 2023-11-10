@@ -45,13 +45,13 @@ python3 -m pip install --upgrade pip # --user
 export PATH=$PATH:~/.local/bin:~/.cargo/bin # add this to your ~/.bashrc
 pip3 install --upgrade https://github.com/codedread/scour/archive/master.zip
 #curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh #https://www.rust-lang.org/tools/install
-cargo install svgcleaner --force --git https://github.com/RazrFalcon/svgcleaner
+cargo install svgcleaner --git https://github.com/RazrFalcon/svgcleaner
 cargo install resvg
 
-#wget https://nodejs.org/dist/latest/node-v15.4.0-linux-x64.tar.gz
-#tar -zxvf node-v15.4.0-linux-x64.tar.gz
-#export PATH=$PATH:~/prgm/node-v15.4.0-linux-x64/bin:
-#curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash - 
+#nvm list-remote
+#nvm install v18.18.2
+#nvm list
+#nvm use v18.18.2 
 sudo npm i -g npm
 sudo npm install -g svgo
 npm i svgo
