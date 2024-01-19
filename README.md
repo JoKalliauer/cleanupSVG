@@ -92,6 +92,9 @@ pip3 install --upgrade https://github.com/codedread/scour/archive/master.zip # -
 cargo install svgcleaner --git https://github.com/RazrFalcon/svgcleaner
 cargo install usvg
 cargo install resvg
+#sudo npm cache clean -f #https://askubuntu.com/a/480642/676490
+sudo npm install -g n #https://askubuntu.com/a/480642/676490
+#sudo n stable #https://askubuntu.com/a/480642/676490
 sudo npm i -g npm
 npm install
 #sudo npm install -g svgo
