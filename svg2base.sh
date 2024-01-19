@@ -78,14 +78,14 @@ do
     for ((ln=1;ln<=$linenumbers;ln++))
 	do
 	 	echo $ln
-     #sed -n "${ln}p" $file.png_base64 > $file.png${ln}_base64
-     #sed -i "s/ /\n/g" $file.png${ln}_base64
-     #base64 --decode ${file}.png${ln}_base64 > ${file}_File${ln}.png
+     sed -n "${ln}p" $file.png_base64 > $file.png${ln}_base64
+     sed -i "s/ /\n/g" $file.png${ln}_base64
+     base64 --decode ${file}.png${ln}_base64 > ${file}_File${ln}.png
      
 
-     #optipng ${file}_File${ln}.png 
-     ##wait
-     #pngout ${file}_File${ln}.png &
+     optipng ${file}_File${ln}.png 
+     #wait
+     pngout ${file}_File${ln}.png &
      
 	done
    fi #[ "$linenumbers" = 1 ]

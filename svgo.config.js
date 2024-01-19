@@ -164,6 +164,10 @@ module.exports = {
       name: 'removeXMLProcInst',
       active: false
     },
+	{
+      name: 'reusePaths',
+      active: true
+    },
     {
       name: 'sortAttrs',
       active: true
