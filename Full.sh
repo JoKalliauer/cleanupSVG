@@ -34,7 +34,7 @@ export i=min.svg # just used for debugging
 ./CleanerFull.sh
 #./cleaner4compression.sh
 #./o4compression.sh
-./RasterOptimizer.sh
+./O2.sh
 #./OptimizerFull.sh
 
 ./validByo4compression.sh

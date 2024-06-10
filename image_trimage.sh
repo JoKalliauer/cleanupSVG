@@ -30,6 +30,18 @@ if [ -z $1 ]; then
   trimage -f "$file" &
   echo $file end #Add a empty line to split the output
  done
+ for file in *.tiff
+  do
+  echo $file start #Add a empty line to split the output
+  trimage -f "$file" &
+  echo $file end #Add a empty line to split the output
+ done
+ for file in *.tif
+  do
+  echo $file start #Add a empty line to split the output
+  trimage -f "$file" &
+  echo $file end #Add a empty line to split the output
+ done
  
 else
 
