@@ -36,7 +36,6 @@ Similar scripts<br/>
 ```
 if [ -f "/etc/debian_version" ]; then
  sudo apt install python3-pip cargo npm inkscape optipng scour librsvg2-bin  python3-scour
- sudo apt install openjdk-18-jre-headless #any java-version other options are openjdk-11-jre-headless  default-jre openjdk-18-jre-headless openjdk-8-jre-headless openjdk-17-jre-headless
 fi
 if [ "$(grep -Ei 'fedora|redhat' /etc/*release)" ]; then
  sudo dnf install python3-pip cargo npm inkscape optipng python3-scour libcroco
@@ -58,9 +57,10 @@ npm i svgo
 ```
 
 ## Install cleanupSVG (portable if prerequiary exits)
-wget https://github.com/JoKalliauer/cleanupSVG/archive/master.zip
-unzip master.zip
-cd cleanupSVG-master/
+```bash
+git clone git@github.com:JoKalliauer/cleanupSVG.git
+cd cleanupSVG
+```
 
 Copy your svgs into this folder and then run:
 - `./save.sh` if you want to run it safly
