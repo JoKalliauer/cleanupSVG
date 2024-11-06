@@ -2,30 +2,26 @@
 
 echo $1
 
+
+
 if [ -z $1 ]; then
- for file in *.tiff
+tifFiles=$(find . -type f -name "*.tiff" -o -name "*.tif" -o -name "*.TIFF")
+ for file in $tifFiles
   do
 
   echo $file start #Add a empty line to split the output
 
   #pingo $file
   optipng "$file"
-  pingo -s9 "$file"
+  #pingo -s9 "$file"
   
   echo $file end #Add a empty line to split the output
 
   done
- for file in *.tiff
-  do
 
-  echo $file oxipng start #Add a empty line to split the output
+  #oxipng -o 6 -Z  "$file" https://github.com/shssoichiro/oxipng/issues/643
 
-  oxipng -o 6 -Z  "$file"
-  
-  echo $file oxipng end #Add a empty line to split the output
-
-  done
- for file in *.tiff
+ for file in $tifFiles
   do
 
   echo $file pngout start #Add a empty line to split the output
