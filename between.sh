@@ -51,6 +51,10 @@ sed -ri "s/font-family=\"([-[:alnum:] ,']*)'([-[:alnum:] ]*)'([-[:lower:][:upper
 
 # ->svgo
 sed -ri "s/ xlink:href=\"/ xmlns:xlink=\"http:\/\/www.w3.org\/1999\/xlink\" xlink:href=\"/" $i
+sed -ri "s/ xmlns:xlink=\"http:\/\/www.w3.org\/1999\/xlink\" xmlns:xlink=\"http:\/\/www.w3.org\/1999\/xlink\" / xmlns:xlink=\"http:\/\/www.w3.org\/1999\/xlink\" /" $i
+
+#after svgo
+sed -ri "s/<svg xmlns:xlink=\"http:\/\/www.w3.org\/1999\/xlink\" /<svg xmlns=\"http:\/\/www.w3.org\/2000\/svg\" xmlns:xlink=\"http:\/\/www.w3.org\/1999\/xlink\" /" $i
 
 
 
