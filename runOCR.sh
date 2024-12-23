@@ -27,7 +27,7 @@ export outputfile=${tmp}_ocrmypdf.pdf
 echo converting ocrmypdf --optimize 01 -l deu+eng "${file}" $outputfile # --skip-text
 
 #if outputfile exist, it might be overwritten without warning
-ocrmypdf --optimize 01 -l deu+eng "${file}" $outputfile # --skip-text #https://www.heise.de/ratgeber/Durchsuchbare-PDF-Dokumente-mit-OCRmyPDF-erstellen-4607592.html?seite=2
+ocrmypdf --optimize 01 -l deu+eng "${file}" $outputfile --skip-text --output-type pdf # #https://www.heise.de/ratgeber/Durchsuchbare-PDF-Dokumente-mit-OCRmyPDF-erstellen-4607592.html?seite=2
 #--optimize : 00... no optimization; 01 ... lossless optimization; 02...hardly visible optimization; 03...lossy file size reduction
 #-l deu+eng : deu... German ; eng... Englisch
 
