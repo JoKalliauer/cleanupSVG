@@ -35,7 +35,9 @@ Similar scripts<br/>
 
 ```
 if [ -f "/etc/debian_version" ]; then
- sudo apt install python3-pip cargo npm inkscape optipng scour librsvg2-bin  python3-scour
+ curl -fsSL https://deb.nodesource.com/setup_22.x -o nodesource_setup.sh
+sudo -E bash nodesource_setup.sh
+ sudo apt install python3-pip cargo inkscape optipng scour librsvg2-bin  python3-scour curl nodejs
 fi
 if [ "$(grep -Ei 'fedora|redhat' /etc/*release)" ]; then
  sudo dnf install python3-pip cargo npm inkscape optipng python3-scour libcroco
@@ -47,10 +49,6 @@ pip3 install --upgrade https://github.com/codedread/scour/archive/master.zip
 cargo install svgcleaner --git https://github.com/RazrFalcon/svgcleaner
 cargo install resvg
 
-#nvm list-remote
-#nvm install v18.18.2
-#nvm list
-#nvm use v18.18.2 
 sudo npm i -g npm
 sudo npm install -g svgo
 npm i svgo
