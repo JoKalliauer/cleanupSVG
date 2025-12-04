@@ -64,7 +64,7 @@ sed -ri "s/<g([-[:alnum:]\(\)\. ,;:=\"#]*) font-size=\"([[:digit:]\.]*)\"([-[:al
 #  fi
 
 #tspan in tspan
-sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<tspan([-[:alnum:]\,\.\"\=\:\ #]*) x=\"([-[:digit:]\.\ ]+)\" y=\"([-[:digit:]\.\ ]+)\"([-[:alnum:]\,\.\"\=\:\ #]*)>[[:space:]]*<tspan([-[:alnum:]\,\.\"\=\:\ #]*) x=\"([-[:digit:]\.\ ]+)\" y=\"([-[:digit:]\.\ ]+)\"([-[:alnum:]\,\.\"\=\:\ #\(\)]*)>([- [:alnum:]\.\,\(\)\/@%]*)<\/tspan>/<tspan x=\"\6\" y=\"\7\"\1\4\5\8>\9/g" $i #with x,y
+sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<tspan([-[:alnum:]\,\.\"\=\:\ #]*) x=\"([-[:digit:]\.\ ]+)\" y=\"([-[:digit:]\.\ ]+)\"([-[:alnum:]\,\.\"\=\:\ #]*)>[[:space:]]*<tspan([-[:alnum:]\,\.\"\=\:\ #]*) x=\"([-[:digit:]\.\ ]+)\" y=\"([-[:digit:]\.\ ]+)\"([-[:alnum:]\,\.\"\=\:\ #\(\)]*)>([- [:alnum:]\.\,\(\)\/@%:]*)<\/tspan>/<tspan x=\"\6\" y=\"\7\"\1\4\5\8>\9/g" $i #with x,y
 #<text x="25.44" y="89.7"><tspan x="25.44" y="89.7"><tspan>5 %</tspan></tspan></text>
 sed -ri -e ':a' -e 'N' -e '$!ba' -e "s/<tspan([-[:alnum:]\,\.\"\=\:\ #]*) x=\"([-[:digit:]\.\ ]+)\" y=\"([-[:digit:]\.\ ]+)\"([-[:alnum:]\,\.\"\=\:\ #]*)>[[:space:]]*<tspan([-[:alnum:]\,\.\"\=\:\ #\(\)]*)>([- [:alnum:]\.\,\(\)\ä\ü\…\/@% ]*)<\/tspan>/<tspan x=\"\2\" y=\"\3\"\1\4\5>\6/g" $i #without x,y
 #tspan to text
