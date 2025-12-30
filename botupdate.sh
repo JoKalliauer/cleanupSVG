@@ -11,7 +11,7 @@ wget -q https://github.com/JoKalliauer/cleanupSVG/archive/master.zip -O master.z
 
 unzip -qo master.zip
 
-chmod a+x cleanupSVG-master/SVG/WorkaroundBotsvg2validsvg.sh
+chmod a+x cleanupSVG-master/SVG/WorkaroundBot.sh
 
 cd /data/project/svgworkaroundbot/SVGWorkaroundBot/cleanupSVG-master/SVG/
 
