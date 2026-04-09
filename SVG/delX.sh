@@ -41,7 +41,7 @@ for file in *.svg;do
 
  sed -ri "s/<rect ([-[:alnum:]=\.\" \#\(\)\;\:\,_%]+)\/>//g" $i #delete all Rectangles
  
- sed -ri "s/<path ([-[:alnum:]=\.\" \#\(\)\;\:\,_]+)\/>//g" $i #delete all Path
+ sed -ri "s/<path ([-[:alnum:]=\.\" \#\(\)\;\:\%\,_]+)\/>//g" $i #delete all Path
 
  sed -ri "s/<circle [-[:alnum:]\"\.= \#\(\)\,\;\:_]*\/>//g" $i #delete circels 
  

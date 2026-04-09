@@ -112,7 +112,7 @@ sed -i -e 's/<svg /\n<svg /' $i
 sed -ri 's/ font-family=\"(s|S)ans\"/ font-family=\"DejaVu Sans,sans-serif,Sans\"/g' $i #as automatic
 sed -ri 's/ font-family=\"(s|S)erif\"/ font-family=\"DejaVu Serif,serif\"/g' $i #as automatic
 sed -ri 's/ font-family=\"(s|S)ans-(s|S)erif\"/ font-family=\"DejaVu Sans,sans-serif\"/g' $i #as automatic
-sed -i 's/ font-family=\"Arial/ font-family=\"Liberation Sans,Arial/g' $i #as automatic
+#sed -i 's/ font-family=\"Arial/ font-family=\"Liberation Sans,Arial/g' $i #as automatic
 sed -i 's/ font-family=\"Times New Roman\"/ font-family=\"Liberation Serif,Times New Roman\"/g' $i #as automatic
 
 
