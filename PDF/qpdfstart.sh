@@ -14,7 +14,7 @@ if [ -z $1 ]; then
   
   mv "$file" $mvfile
   
-  qpdf --qdf $mvfile - | python strip_page_group.py | fix-qdf > $outfile
+  qpdf --qdf $mvfile - | python3 strip_page_group.py | fix-qdf > $outfile
   rm $mvfile
 
   done
@@ -24,7 +24,7 @@ else
   export filename=${file%.pdf}
   export outfile=${filename}_.pdf
   
-  qpdf --qdf "$file" - | python strip_page_group.py | fix-qdf > $outfile
+  qpdf --qdf "$file" - | python3 strip_page_group.py | fix-qdf > $outfile
 
 fi
 
