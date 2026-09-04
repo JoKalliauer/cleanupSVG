@@ -40,6 +40,7 @@ validOutput7="inkscapesvg"
 validOutput8="ink-svg"
 validOutput9="png96"
 validOutput0="emf"
+validOutput10="wmf"
 
 
 
@@ -51,7 +52,7 @@ while [ "$valid" != "1" ]
 do
     echo "Allowed file types for output: $validOutput1, $validOutput2, $validOutput3, $validOutput4 (plain), $validOutput5, $validOutput8"
 	read -p "What file type do you want to convert to? " outputType
-    if [ "$outputType" = "$validOutput1" ] || [ "$outputType" = "$validOutput2" ] || [ "$outputType" = "$validOutput3" ] || [ "$outputType" = "$validOutput4" ] || [ "$outputType" = "$validOutput5" ] || [ "$outputType" = "$validOutput6" ] || [ "$outputType" = "$validOutput7" ] || [ "$outputType" = "$validOutput8" ] || [ "$outputType" = "$validOutput9" ] || [ "$outputType" = "$validOutput0" ]; then
+    if [ "$outputType" = "$validOutput1" ] || [ "$outputType" = "$validOutput2" ] || [ "$outputType" = "$validOutput3" ] || [ "$outputType" = "$validOutput4" ] || [ "$outputType" = "$validOutput5" ] || [ "$outputType" = "$validOutput6" ] || [ "$outputType" = "$validOutput7" ] || [ "$outputType" = "$validOutput8" ] || [ "$outputType" = "$validOutput9" ] || [ "$outputType" = "$validOutput0" ] || [ "$outputType" = "$validOutput10" ]; then
         valid=1
     else
         echo "Invalid input! Please use one of the following: $validOutput1, $validOutput2, $validOutput3, $validOutput4, $validOutput0"
